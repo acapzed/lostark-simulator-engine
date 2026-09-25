@@ -1,0 +1,235 @@
+{
+  "class_id": 202,
+  "class_eng": "Arcana",
+  "purpose": "Simulator-facing test dataset for manual Arcana phase decisions.",
+  "cases": [
+    {
+      "id": "evoke_activation_phase",
+      "description": "이보크를 설치 phase와 격발 phase로 분리할 수 있는지 확인한다.",
+      "request": {
+        "character": {
+          "name": "arcana_phase_test",
+          "className": "아르카나",
+          "stats": { "maxhp": 100000 },
+          "skills": [
+            { "name": "이보크", "level": 1, "rune": null, "tripods": [] }
+          ],
+          "equipments": [],
+          "accessories": [],
+          "bracelet": null,
+          "stone": null,
+          "gems": [],
+          "engravings": [],
+          "arkPassive": null,
+          "arkGrids": null,
+          "arkPassiveKarma": null
+        },
+        "aplConfig": "",
+        "skillData": [
+          {
+            "name": "이보크",
+            "skillControlType": "Chain",
+            "skillSlot": "Normal",
+            "maxPhase": 2,
+            "cooldown": 24.0,
+            "castTimesMs": [100, 100],
+            "hits": [
+              {
+                "damageRatio": [0.0],
+                "fixedDamage": [100.0],
+                "phase": 1,
+                "identityGain": null
+              }
+            ],
+            "resourceCost": null,
+            "identityGain": null,
+            "properties": { "attackType": "", "element": "" }
+          }
+        ]
+      },
+      "expect": {
+        "skill": "이보크",
+        "skillType": "Chain",
+        "lastPhase": 1,
+        "hitPhases": [1],
+        "durationMs": 500,
+        "minCasts": 2,
+        "damageEvents": 1
+      }
+    },
+    {
+      "id": "return_damage_combo_phase",
+      "description": "리턴의 1타/2타 피해를 phase 0/1로 분리할 수 있는지 확인한다.",
+      "request": {
+        "character": {
+          "name": "arcana_phase_test",
+          "className": "아르카나",
+          "stats": { "maxhp": 100000 },
+          "skills": [
+            { "name": "리턴", "level": 1, "rune": null, "tripods": [] }
+          ],
+          "equipments": [],
+          "accessories": [],
+          "bracelet": null,
+          "stone": null,
+          "gems": [],
+          "engravings": [],
+          "arkPassive": null,
+          "arkGrids": null,
+          "arkPassiveKarma": null
+        },
+        "aplConfig": "",
+        "skillData": [
+          {
+            "name": "리턴",
+            "skillControlType": "Combo",
+            "skillSlot": "Normal",
+            "maxPhase": 2,
+            "cooldown": 12.0,
+            "castTimesMs": [100, 100],
+            "hits": [
+              {
+                "damageRatio": [0.0],
+                "fixedDamage": [10.0],
+                "phase": 0,
+                "identityGain": null
+              },
+              {
+                "damageRatio": [0.0],
+                "fixedDamage": [20.0],
+                "phase": 1,
+                "identityGain": null
+              }
+            ],
+            "resourceCost": null,
+            "identityGain": null,
+            "properties": { "attackType": "", "element": "" }
+          }
+        ]
+      },
+      "expect": {
+        "skill": "리턴",
+        "skillType": "Combo",
+        "lastPhase": 1,
+        "hitPhases": [0, 1],
+        "durationMs": 500,
+        "minCasts": 2,
+        "damageEvents": 2
+      }
+    },
+    {
+      "id": "dancing_utility_combo_phase",
+      "description": "댄싱의 재입력을 피해 없는 utility phase로 둘 수 있는지 확인한다.",
+      "request": {
+        "character": {
+          "name": "arcana_phase_test",
+          "className": "아르카나",
+          "stats": { "maxhp": 100000 },
+          "skills": [
+            { "name": "댄싱 오브 스파인플라워", "level": 1, "rune": null, "tripods": [] }
+          ],
+          "equipments": [],
+          "accessories": [],
+          "bracelet": null,
+          "stone": null,
+          "gems": [],
+          "engravings": [],
+          "arkPassive": null,
+          "arkGrids": null,
+          "arkPassiveKarma": null
+        },
+        "aplConfig": "",
+        "skillData": [
+          {
+            "name": "댄싱 오브 스파인플라워",
+            "skillControlType": "Combo",
+            "skillSlot": "Normal",
+            "maxPhase": 2,
+            "cooldown": 20.0,
+            "castTimesMs": [100, 100],
+            "hits": [
+              {
+                "damageRatio": [0.0],
+                "fixedDamage": [10.0],
+                "phase": 0,
+                "identityGain": null
+              }
+            ],
+            "resourceCost": null,
+            "identityGain": null,
+            "properties": { "attackType": "", "element": "" }
+          }
+        ]
+      },
+      "expect": {
+        "skill": "댄싱 오브 스파인플라워",
+        "skillType": "Combo",
+        "lastPhase": 1,
+        "hitPhases": [0],
+        "durationMs": 500,
+        "minCasts": 2,
+        "damageEvents": 1
+      }
+    },
+    {
+      "id": "spiral_edge_chain_phase",
+      "description": "스파이럴 엣지의 체인 phase에 같은 hit가 복제되는지 확인한다.",
+      "request": {
+        "character": {
+          "name": "arcana_phase_test",
+          "className": "아르카나",
+          "stats": { "maxhp": 100000 },
+          "skills": [
+            { "name": "스파이럴 엣지", "level": 1, "rune": null, "tripods": [] }
+          ],
+          "equipments": [],
+          "accessories": [],
+          "bracelet": null,
+          "stone": null,
+          "gems": [],
+          "engravings": [],
+          "arkPassive": null,
+          "arkGrids": null,
+          "arkPassiveKarma": null
+        },
+        "aplConfig": "",
+        "skillData": [
+          {
+            "name": "스파이럴 엣지",
+            "skillControlType": "Chain",
+            "skillSlot": "Normal",
+            "maxPhase": 2,
+            "cooldown": 14.0,
+            "castTimesMs": [100, 100],
+            "hits": [
+              {
+                "damageRatio": [0.0],
+                "fixedDamage": [10.0],
+                "phase": 0,
+                "identityGain": null
+              },
+              {
+                "damageRatio": [0.0],
+                "fixedDamage": [10.0],
+                "phase": 1,
+                "identityGain": null
+              }
+            ],
+            "resourceCost": null,
+            "identityGain": null,
+            "properties": { "attackType": "", "element": "" }
+          }
+        ]
+      },
+      "expect": {
+        "skill": "스파이럴 엣지",
+        "skillType": "Chain",
+        "lastPhase": 1,
+        "hitPhases": [0, 1],
+        "durationMs": 500,
+        "minCasts": 2,
+        "damageEvents": 2
+      }
+    }
+  ]
+}

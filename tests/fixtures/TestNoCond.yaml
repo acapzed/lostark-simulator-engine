@@ -1,0 +1,68 @@
+name: "아르카나 테스트 빌드 (조건 없음)"
+class: "arcana"
+build: "emperor"
+
+# 테스트용 APL - 모든 스킬을 쿨타임마다 사용 (조건 없음)
+
+skills:
+  - "운명의 부름"
+  - "스크래치 딜러"
+  - "스파이럴 엣지"
+  - "스트림 오브 엣지"
+  - "셀레스티얼 레인"
+  - "포 카드"
+  - "세렌디피티"
+  - "시크릿 가든"
+
+card_actions:
+  - card: "삼두사"
+  - card: "광기"
+  - card: "부식"
+  - card: "환희"
+  - card: "뒤틀린 운명"
+  - card: "유령"
+  - card: "도태"
+  - card: "균형"
+  - card: "심판"
+  - card: "달"
+  - card: "별"
+  - card: "로열"
+  - card: "운명의 수레바퀴"
+  - card: "황제"
+  - card: "재상"
+  - card: "제후"
+  - card: "황후의 기사"
+  - card: "광대"
+
+actions:
+  - skill: "운명의 부름"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "스크래치 딜러"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "스파이럴 엣지"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "스트림 오브 엣지"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "셀레스티얼 레인"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "포 카드"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "세렌디피티"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "시크릿 가든"
+    conditions:
+      - type: "cooldown_ready"

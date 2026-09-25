@@ -1,0 +1,253 @@
+name: "뭉트림 황후 아르카나 - 인콤스"
+class: "arcana"
+build: "empress-blunt-thorn-incoms"
+
+# 뭉툭한 가시 + 스트림 오브 엣지를 쓰는 황후 아르카나 APL.
+# 인콤스: 인피니티 덱 + 엣지 콤보 + 스트림 오브 엣지.
+#
+# 치명타 피해 증가 버프 id는 트라이포드 value에 따라 동적으로 생성되므로 버프 id 조건으로 묶지 않는다.
+#
+# 운용 의도:
+# - 일반 상황은 반드시 4스택 후 루인.
+# - 인콤스 루인 우선순위: 더 데빌 > 셀레스티얼 레인 > 시크릿 가든 > 포 카드 > 세렌디피티.
+# - 스트림은 3+2 구조의 준상시 버프/인콤스 수급기로 우선 사용하되,
+#   더 데빌이 곧 돌아오면 스트림을 아껴 더 데빌 창에 맞춘다.
+# - 운명의 부름은 치명타 피해 증가 버프용으로 루인 직전에 배치한다.
+
+skills:
+  - "스트림 오브 엣지"
+  - "스크래치 딜러"
+  - "스파이럴 엣지"
+  - "운명의 부름"
+  - "더 데빌"
+  - "셀레스티얼 레인"
+  - "시크릿 가든"
+  - "포 카드"
+  - "세렌디피티"
+
+# 도태·심판·운수·뒤운은 더 데빌에 맞추고, 광대·로열은 가치 있는 카드 직후 우선 사용한다.
+# 카드 사용은 스킬 시전 시간을 소비하지 않는다.
+card_actions:
+  - card: "삼두사"
+  - card: "광기"
+  - card: "부식"
+  - card: "환희"
+  - card: "뒤틀린 운명"
+    conditions:
+      - type: "next_skill"
+        skill: "더 데빌"
+  - card: "유령"
+  - card: "균형"
+  - card: "달"
+  - card: "별"
+  - card: "운명의 수레바퀴"
+    conditions:
+      - type: "next_skill"
+        skill: "더 데빌"
+  - card: "광대"
+    conditions:
+      - type: "buff_active"
+        buff: "190950"
+  - card: "로열"
+    conditions:
+      - type: "buff_active"
+        buff: "190950"
+  - card: "황제"
+  - card: "재상"
+  - card: "제후"
+  - card: "황후의 기사"
+  - card: "도태"
+    conditions:
+      - type: "card_held"
+        card: "심판"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+  - card: "심판"
+    conditions:
+      - type: "buff_active"
+        buff: "192810"
+  - card: "도태"
+    conditions:
+      - type: "next_skill"
+        skill: "더 데빌"
+  - card: "심판"
+    conditions:
+      - type: "next_skill"
+        skill: "더 데빌"
+  - card: "광대"
+    conditions:
+      - type: "buff_active"
+        buff: "190980"
+  - card: "광대"
+    conditions:
+      - type: "buff_active"
+        buff: "192810"
+  # 광대가 조건부 카드를 복사해 두 슬롯을 막으면 한 장을 소비해 추첨을 재개한다.
+  - card: "도태"
+    conditions:
+      - type: "card_count"
+        card: "도태"
+        operator: ">="
+        value: 2
+  - card: "심판"
+    conditions:
+      - type: "card_count"
+        card: "심판"
+        operator: ">="
+        value: 2
+  # 조건부 카드만 두 장 남아 추첨이 멈추면 낮은 우선순위로 손패를 비운다.
+  - card: "광대"
+  - card: "로열"
+
+actions:
+  # 종료 직전에는 준비를 줄이고 가능한 4스택 루인을 강한 순서대로 턴다.
+  - skill: "더 데빌"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "time_remaining"
+        operator: "<="
+        value: 8
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "셀레스티얼 레인"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "time_remaining"
+        operator: "<="
+        value: 8
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "시크릿 가든"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "time_remaining"
+        operator: "<="
+        value: 8
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "포 카드"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "time_remaining"
+        operator: "<="
+        value: 8
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "세렌디피티"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "time_remaining"
+        operator: "<="
+        value: 8
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  # 인콤스는 스트림 자체 가치가 높다. 단 더 데빌이 10초 안에 오면 스트림을 보존한다.
+  - skill: "스트림 오브 엣지"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "skill_cooldown_remaining"
+        skill: "더 데빌"
+        operator: ">"
+        value: 10
+
+  # 루인 직전 치명타 피해 증가 버프 준비. 버프 id 조건은 불안정하므로 cooldown 기준만 사용한다.
+  - skill: "운명의 부름"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  # 4스택 루인 소모. 인콤스 기준 우선순위.
+  - skill: "더 데빌"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "셀레스티얼 레인"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "시크릿 가든"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "포 카드"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  - skill: "세렌디피티"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 4
+
+  # 4스택 미만이면 스택트 스킬로 4스택을 만든다.
+  # 이동속도 버프/돌격대장 활용을 위해 엣지 계열을 우선한다.
+  - skill: "스트림 오브 엣지"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: "<"
+        value: 4
+
+  - skill: "스크래치 딜러"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: "<"
+        value: 4
+      - type: "combo_phase"
+        skill: "스크래치 딜러"
+        operator: "<"
+        value: 2
+
+  - skill: "스파이럴 엣지"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: "<"
+        value: 4
+
+  # filler: 버프/카운터 계열은 루인 스택이 부족하지 않을 때만 쓴다.
+  - skill: "운명의 부름"
+    conditions:
+      - type: "cooldown_ready"
