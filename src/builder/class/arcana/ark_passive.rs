@@ -159,13 +159,13 @@ fn apply_runtime_class_node(
         "충전된 분노" => add_charged_fury(global_triggers, req, first_value(node) / 100.0),
         "황후의 은총" => add_ruin_mana_refund(skill_pipelines, req, value(node, 0) / 100.0),
         "황후의 탐욕" => {
-            crate::builder::register::sim_effects::apply_card_gauge_multiplier_for_skill_group(
+            super::apply_card_gauge_multiplier_for_skill_group(
                 skill_pipelines,
                 req,
                 2190402,
                 value(node, 1),
             );
-            crate::builder::register::sim_effects::apply_card_gauge_multiplier_for_skill_group(
+            super::apply_card_gauge_multiplier_for_skill_group(
                 skill_pipelines,
                 req,
                 2190401,

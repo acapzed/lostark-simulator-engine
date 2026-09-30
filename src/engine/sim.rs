@@ -178,6 +178,7 @@ fn simulate_one_inner(
                         let skill = &profiles.skills[idx];
                         t.casts.push(CastEvent {
                             time: time_ms as f64 / 1000.0,
+                            cast_id: result.cast_count,
                             skill_id: id,
                             skill_name: skill.name.clone(),
                             is_awakening: matches!(
@@ -208,6 +209,7 @@ fn simulate_one_inner(
             }
             EventData::SkillHit {
                 skill_id,
+                cast_id,
                 hit_index,
                 snap,
             } => {
@@ -215,6 +217,7 @@ fn simulate_one_inner(
                     on_skill_hit(
                         profiles,
                         &profiles.skills[idx],
+                        cast_id,
                         hit_index,
                         &snap,
                         &mut state,
@@ -235,6 +238,7 @@ fn simulate_one_inner(
             EventData::DotTick {
                 dot_id,
                 skill_id,
+                cast_id,
                 hit,
                 remaining_ticks,
                 tick_interval_ms,
@@ -249,6 +253,7 @@ fn simulate_one_inner(
                             trace,
                             DamageTraceEvent {
                                 time: time_ms as f64 / 1000.0,
+                                cast_id,
                                 skill_id,
                                 skill_name: skill.name.clone(),
                                 hit_index: 0,
@@ -276,6 +281,7 @@ fn simulate_one_inner(
                         data: EventData::DotTick {
                             dot_id,
                             skill_id,
+                            cast_id,
                             hit,
                             remaining_ticks: remaining_ticks - 1,
                             tick_interval_ms,
@@ -494,6 +500,7 @@ fn apply_card_effect(
                     trace,
                     DamageTraceEvent {
                         time: time_ms as f64 / 1000.0,
+                        cast_id: None,
                         skill_id: card_id,
                         skill_name: card_name.to_string(),
                         hit_index: 0,
@@ -586,6 +593,7 @@ fn on_action_check(
         // 캐스트 카운트
         *state.skill_use_counts.entry(skill_id).or_default() += 1;
         result.cast_count += 1;
+        let cast_id = result.cast_count;
         result.skill_stats.entry(skill_id).or_default().count += 1;
 
         // 현재 페이즈에 해당하는 히트 이벤트 스케줄
@@ -610,6 +618,7 @@ fn on_action_check(
                 priority: priority::SKILL_HIT,
                 data: EventData::SkillHit {
                     skill_id,
+                    cast_id,
                     hit_index,
                     snap: snap.clone(),
                 },
@@ -789,6 +798,7 @@ fn traced_hit_resource_gains(hit: &crate::profile::skill::SkillHit) -> Vec<Resou
 fn on_skill_hit(
     profiles: &CharacterProfiles,
     skill: &SkillProfile,
+    cast_id: u32,
     hit_index: usize,
     snap: &CastSnapshot,
     state: &mut ActorState,
@@ -820,6 +830,7 @@ fn on_skill_hit(
             trace,
             DamageTraceEvent {
                 time: time_ms as f64 / 1000.0,
+                cast_id: Some(cast_id),
                 skill_id: skill.skill_id,
                 skill_name: skill.name.clone(),
                 hit_index,
@@ -867,6 +878,7 @@ fn on_skill_hit(
         if apply_trigger_damage_effect(
             &trigger.effect,
             skill,
+            cast_id,
             hit_index,
             skill.skill_id,
             snap,
@@ -896,13 +908,14 @@ fn on_skill_hit(
         time_ms,
     );
 
-    update_cast_trace_state(trace, profiles, skill.skill_id, state, time_ms);
-    update_hit_trace_cards(trace, profiles, skill.skill_id, hit_index, state);
+    update_cast_trace_state(trace, profiles, cast_id, state, time_ms);
+    update_hit_trace_cards(trace, profiles, cast_id, hit_index, state);
 }
 
 fn apply_trigger_damage_effect(
     effect: &TriggerEffect,
     skill: &SkillProfile,
+    cast_id: u32,
     hit_index: usize,
     skill_id: u32,
     snap: &CastSnapshot,
@@ -950,6 +963,7 @@ fn apply_trigger_damage_effect(
                     trace,
                     DamageTraceEvent {
                         time: time_ms as f64 / 1000.0,
+                        cast_id: Some(cast_id),
                         skill_id,
                         skill_name: skill.name.clone(),
                         hit_index,
@@ -983,6 +997,7 @@ fn apply_trigger_damage_effect(
                     trace,
                     DamageTraceEvent {
                         time: time_ms as f64 / 1000.0,
+                        cast_id: Some(cast_id),
                         skill_id,
                         skill_name: skill.name.clone(),
                         hit_index,
@@ -1022,7 +1037,7 @@ fn apply_trigger_damage_effect(
             tick_count,
             refresh,
         } => {
-            schedule_dot(queue, dot_id, skill_id, hit, *first_tick_ms, *tick_interval_ms, *tick_count, *refresh, time_ms);
+            schedule_dot(queue, dot_id, skill_id, Some(cast_id), hit, *first_tick_ms, *tick_interval_ms, *tick_count, *refresh, time_ms);
             true
         }
         _ => false,
@@ -1038,7 +1053,7 @@ fn push_damage_trace(trace: &mut Option<TraceData>, event: DamageTraceEvent) {
 fn update_cast_trace_state(
     trace: &mut Option<TraceData>,
     profiles: &CharacterProfiles,
-    skill_id: u32,
+    cast_id: u32,
     state: &ActorState,
     time_ms: u64,
 ) {
@@ -1049,7 +1064,7 @@ fn update_cast_trace_state(
         .casts
         .iter_mut()
         .rev()
-        .find(|cast| cast.skill_id == skill_id)
+        .find(|cast| cast.cast_id == cast_id)
     else {
         return;
     };
@@ -1063,12 +1078,12 @@ fn update_cast_trace_state(
 fn update_hit_trace_cards(
     trace: &mut Option<TraceData>,
     profiles: &CharacterProfiles,
-    skill_id: u32,
+    cast_id: u32,
     hit_index: usize,
     state: &ActorState,
 ) {
     let Some(event) = trace.as_mut().and_then(|trace| trace.damage_events.iter_mut().rev().find(
-        |event| event.skill_id == skill_id
+        |event| event.cast_id == Some(cast_id)
             && event.hit_index == hit_index
             && event.damage_source == "skill_hit"
     )) else {
@@ -1253,6 +1268,8 @@ fn choose_apl_action(
     if !profiles.apl_actions.is_empty() {
         return profiles.apl_actions.iter().find_map(|action| {
             let idx = *skill_index.get(&action.skill_id)?;
+            let (skill_id, idx) =
+                arcana_stance_selection(profiles, action.skill_id, idx, state, time_ms);
             let skill = &profiles.skills[idx];
             if is_castable(skill, state, time_ms)
                 && apl_action_conditions_match(
@@ -1264,7 +1281,7 @@ fn choose_apl_action(
                     max_time_ms,
                 )
             {
-                Some((action.skill_id, idx))
+                Some((skill_id, idx))
             } else {
                 None
             }
@@ -1273,9 +1290,33 @@ fn choose_apl_action(
 
     profiles.apl_order.iter().find_map(|&skill_id| {
         let idx = *skill_index.get(&skill_id)?;
+        let (skill_id, idx) = arcana_stance_selection(profiles, skill_id, idx, state, time_ms);
         let skill = &profiles.skills[idx];
         is_castable(skill, state, time_ms).then_some((skill_id, idx))
     })
+}
+
+fn arcana_stance_selection(
+    profiles: &CharacterProfiles,
+    skill_id: u32,
+    idx: usize,
+    state: &ActorState,
+    time_ms: u64,
+) -> (u32, usize) {
+    // 삼두사 Buff→stance=1은 툴팁과 19000의 변경 조건을 결합한 추론이다.
+    if profiles.skills[idx].tags.contains(&SkillTag::SkillId(19000))
+        && state.buff_manager.is_active("190970", time_ms)
+    {
+        if let Some((idx, skill)) = profiles
+            .skills
+            .iter()
+            .enumerate()
+            .find(|(_, skill)| skill.tags.contains(&SkillTag::SkillId(19270)))
+        {
+            return (skill.skill_id, idx);
+        }
+    }
+    (skill_id, idx)
 }
 
 fn is_castable(skill: &SkillProfile, state: &ActorState, time_ms: u64) -> bool {
@@ -1358,6 +1399,29 @@ fn apl_condition_matches(
             let stacks = state.target_buff_manager.stacks(debuff_id, time_ms) as f64;
             operator.compare(stacks, *value)
         }
+        AplCondition::SkillTargetStackGain {
+            debuff_id,
+            operator,
+            value,
+        } => skill_by_id(current_skill_id, skill_index, skills).is_some_and(|skill| {
+            let gain = skill
+                .hits
+                .iter()
+                .flat_map(|hit| &hit.triggers)
+                .filter_map(|trigger| match &trigger.effect {
+                    TriggerEffect::ApplyTargetBuffStacks { spec, stacks }
+                        if spec.id == *debuff_id
+                            && matches!(trigger.on, HitTriggerOn::OnHit)
+                            && trigger.chance == 1.0 =>
+                    {
+                        Some(*stacks)
+                    }
+                    _ => None,
+                })
+                .max()
+                .unwrap_or(0);
+            operator.compare(gain as f64, *value)
+        }),
         AplCondition::ComboPhase {
             skill_id,
             operator,
@@ -1432,7 +1496,7 @@ fn create_actor_state(profiles: &CharacterProfiles) -> ActorState {
             profiles.arcana_card_pool.clone(),
         )),
         "버서커" => Box::new(BerserkerState::new(max_mp, 200.0)),
-        _ => Box::new(ArcanaState::new(max_mp, 0.0, Vec::new())),
+        other => panic!("지원하지 않는 직업 상태: {other}"),
     };
     ActorState::new(profiles.max_hp, class_state)
 }
@@ -1512,7 +1576,6 @@ fn fire_global_triggers(
                 resource,
                 threshold,
             } => state.get_resource(resource) >= *threshold,
-            TriggerCondition::AfterSkill(_) => false, // TODO
             TriggerCondition::BuffAtMaxStacks(id) => {
                 state.buff_manager.is_at_max_stacks(id, time_ms)
             }
@@ -1746,7 +1809,7 @@ fn apply_trigger_effect(
             // on_skill_hit에서 snapshot/result/대상 Buff를 함께 처리한다.
         }
         TriggerEffect::ScheduleDot { dot_id, hit, first_tick_ms, tick_interval_ms, tick_count, refresh } => {
-            schedule_dot(queue, dot_id, skill_id, hit, *first_tick_ms, *tick_interval_ms, *tick_count, *refresh, time_ms);
+            schedule_dot(queue, dot_id, skill_id, None, hit, *first_tick_ms, *tick_interval_ms, *tick_count, *refresh, time_ms);
         }
     }
 }
@@ -1770,6 +1833,7 @@ fn schedule_dot(
     queue: &mut EventQueue,
     dot_id: &str,
     skill_id: u32,
+    cast_id: Option<u32>,
     hit: &crate::profile::RuntimeDamageSpec,
     first_tick_ms: u32,
     tick_interval_ms: u32,
@@ -1789,6 +1853,7 @@ fn schedule_dot(
         data: EventData::DotTick {
             dot_id: dot_id.to_string(),
             skill_id,
+            cast_id,
             hit: hit.clone(),
             remaining_ticks: tick_count,
             tick_interval_ms,

@@ -1,0 +1,153 @@
+name: "셔플댄스 황제 아르카나 (검증 중)"
+class: "arcana"
+build: "emperor-shuffle-dance"
+
+# 이보크·다크 리저렉션으로 카드를 수급하고, 스트림·리턴 뒤 주력기를 사용한다.
+# 이보크 중첩 마법진의 수동 격발은 리턴·다크 리저렉션 뒤에 시도한다.
+# 트라이포드·아크그리드 선택은 캐릭터 설정을 따르며 이 APL에서 강제하지 않는다.
+skills:
+  - "스트림 오브 엣지"
+  - "이보크"
+  - "리턴"
+  - "다크 리저렉션"
+  - "더 썬"
+  - "언리미티드 셔플"
+  - "댄싱 오브 스파인플라워"
+  - "신비한 쇄도"
+  - "운명의 부름"
+
+card_actions:
+  - card: "삼두사"
+  - card: "광기"
+  - card: "부식"
+  - card: "환희"
+  - card: "유령"
+  - card: "균형"
+  - card: "달"
+  - card: "별"
+  - card: "황제"
+  - card: "재상"
+  - card: "황후의 기사"
+  - card: "운명의 수레바퀴"
+    conditions:
+      - type: "next_skill"
+        skill: "더 썬"
+  - card: "도태"
+    conditions:
+      - type: "next_skill"
+        skill: "더 썬"
+  - card: "제후"
+    conditions:
+      - type: "next_skill"
+        skill: "더 썬"
+  - card: "뒤틀린 운명"
+    conditions:
+      - type: "next_skill"
+        skill: "더 썬"
+  - card: "운명의 수레바퀴"
+    conditions:
+      - type: "next_skill"
+        skill: "언리미티드 셔플"
+  - card: "도태"
+    conditions:
+      - type: "next_skill"
+        skill: "언리미티드 셔플"
+  - card: "제후"
+    conditions:
+      - type: "next_skill"
+        skill: "언리미티드 셔플"
+  - card: "뒤틀린 운명"
+    conditions:
+      - type: "next_skill"
+        skill: "언리미티드 셔플"
+  - card: "운명의 수레바퀴"
+    conditions:
+      - type: "next_skill"
+        skill: "댄싱 오브 스파인플라워"
+  - card: "도태"
+    conditions:
+      - type: "next_skill"
+        skill: "댄싱 오브 스파인플라워"
+  - card: "제후"
+    conditions:
+      - type: "next_skill"
+        skill: "댄싱 오브 스파인플라워"
+  - card: "뒤틀린 운명"
+    conditions:
+      - type: "next_skill"
+        skill: "댄싱 오브 스파인플라워"
+  - card: "심판"
+  - card: "로열"
+  # 광대로 복사한 같은 카드 두 장이 손패를 잠그면 하나를 소비한다.
+  - card: "운명의 수레바퀴"
+    conditions:
+      - type: "card_count"
+        card: "운명의 수레바퀴"
+        operator: ">="
+        value: 2
+  - card: "도태"
+    conditions:
+      - type: "card_count"
+        card: "도태"
+        operator: ">="
+        value: 2
+  - card: "제후"
+    conditions:
+      - type: "card_count"
+        card: "제후"
+        operator: ">="
+        value: 2
+  - card: "뒤틀린 운명"
+    conditions:
+      - type: "card_count"
+        card: "뒤틀린 운명"
+        operator: ">="
+        value: 2
+  - card: "광대"
+
+actions:
+  - skill: "스트림 오브 엣지"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "이보크"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "chain_phase"
+        operator: "=="
+        value: 0
+
+  - skill: "리턴"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "다크 리저렉션"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "이보크"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "chain_phase"
+        operator: ">="
+        value: 1
+
+  - skill: "더 썬"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "언리미티드 셔플"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "댄싱 오브 스파인플라워"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "신비한 쇄도"
+    conditions:
+      - type: "cooldown_ready"
+
+  - skill: "운명의 부름"
+    conditions:
+      - type: "cooldown_ready"

@@ -1,6 +1,9 @@
 use crate::builder::dto::BuildRequest;
+use crate::builder::skill::add_hit_damage_increase;
 use crate::builder::skill::SkillPipelineMap;
 use crate::builder::stat::StatBuilder;
+use crate::profile::TriggerEffect;
+use hashbrown::HashMap;
 
 /// EFTable_ItemGradeOptionRandom의 Type 5(피해), Value / 10000.
 const LEGACY_DAMAGE_VALUES: [f64; 10] =
@@ -51,6 +54,42 @@ fn base_ap_gem_value(gem_type: &str, level: u32) -> f64 {
     }
 }
 
+fn is_damage_gem(gem_type: &str, skill_effect: &str) -> bool {
+    matches!(gem_type, "겁화" | "멸화")
+        || (!matches!(gem_type, "겁화" | "멸화" | "작열" | "홍염")
+            && skill_effect.contains("피해"))
+}
+
+/// 황제 보석의 KeyIndex=19282는 카드 스킬 ID이며, 실제 피해는 카드 런타임 효과에서 발생한다.
+pub fn register_arcana_card_damage(effects: &mut HashMap<u32, TriggerEffect>, req: &BuildRequest) {
+    let Some(effect) = effects.get_mut(&19282) else { return };
+    for gem in &req.character.gems {
+        if gem.level == 0
+            || gem.skill_id != Some(19282) && (gem.skill_id.is_some() || gem.skill_name != "황제")
+            || !is_damage_gem(&gem.gem_type, &gem.skill_effect)
+        {
+            continue;
+        }
+        add_runtime_damage_increase(effect, damage_gem_value(&gem.gem_type, gem.level));
+    }
+}
+
+fn add_runtime_damage_increase(effect: &mut TriggerEffect, bonus: f64) {
+    match effect {
+        TriggerEffect::Sequence(effects) | TriggerEffect::RandomChoice(effects) => {
+            for effect in effects { add_runtime_damage_increase(effect, bonus); }
+        }
+        TriggerEffect::WeightedRandomChoice(effects) => {
+            for (_, effect) in effects { add_runtime_damage_increase(effect, bonus); }
+        }
+        TriggerEffect::Chance { effect, .. } | TriggerEffect::Schedule { effect, .. } => {
+            add_runtime_damage_increase(effect, bonus);
+        }
+        TriggerEffect::DealRuntimeDamage(hit) => hit.damage_increase += bonus,
+        _ => {}
+    }
+}
+
 /// 보석 효과를 StatBuilder 및 SkillPipeline에 등록한다.
 ///
 /// - 겁화/멸화 → 해당 스킬의 모든 히트 damage_increase 누적
@@ -79,8 +118,7 @@ pub fn register(
         };
 
         let known_type = matches!(gem.gem_type.as_str(), "겁화" | "멸화" | "작열" | "홍염");
-        let is_damage = matches!(gem.gem_type.as_str(), "겁화" | "멸화")
-            || (!known_type && gem.skill_effect.contains("피해"));
+        let is_damage = is_damage_gem(&gem.gem_type, &gem.skill_effect);
         let is_cooldown = matches!(gem.gem_type.as_str(), "작열" | "홍염")
             || (!known_type
                 && (gem.skill_effect.contains("쿨타임")
@@ -88,9 +126,7 @@ pub fn register(
         if is_damage {
             let bonus = damage_gem_value(&gem.gem_type, gem.level);
             pipeline.add_stats(move |skill| {
-                for hit in &mut skill.hits {
-                    hit.damage_increase += bonus;
-                }
+                add_hit_damage_increase(skill, bonus);
                 Ok(())
             });
         } else if is_cooldown {

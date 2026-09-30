@@ -94,8 +94,6 @@ pub enum StackType {
     Refresh,
     /// 시간 연장
     Extend,
-    /// 각 스택이 독립적으로 시간 관리
-    Independent,
 }
 
 /// 버프의 완전한 명세 — 프로필에 self-contained로 포함된다.
@@ -299,7 +297,6 @@ pub enum TriggerCondition {
     Chance(f64),
     BuffActive(String),
     ResourceAbove { resource: String, threshold: f64 },
-    AfterSkill(u32),
     /// 지정 버프가 최대 중첩에 도달했을 때
     BuffAtMaxStacks(String),
 }

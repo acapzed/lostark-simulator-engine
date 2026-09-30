@@ -1,7 +1,7 @@
 use hashbrown::HashMap;
 use serde::Deserialize;
 
-use crate::builder::dto::ArcanaCardInput;
+use crate::builder::dto::{ArcanaCardInput, BuffMetadataInput};
 use crate::profile::{AplAction, AplCondition, CardAplAction, CompareOperator, SkillProfile};
 
 #[derive(Debug)]
@@ -73,6 +73,7 @@ pub fn build(
     apl_config: &str,
     skills: &[SkillProfile],
     cards: &[ArcanaCardInput],
+    buffs: &[BuffMetadataInput],
 ) -> Result<BuiltApl, String> {
     let default_order: Vec<u32> = skills.iter().map(|s| s.skill_id).collect();
     let trimmed = apl_config.trim();
@@ -120,7 +121,7 @@ pub fn build(
         let conditions = raw_action
             .conditions
             .iter()
-            .map(|condition| compile_condition(condition, skill_id, &name_to_id, &card_name_to_id))
+            .map(|condition| compile_condition(condition, skill_id, &name_to_id, &card_name_to_id, buffs))
             .collect::<Result<Vec<_>, _>>()?;
         actions.push(AplAction {
             skill_id,
@@ -142,7 +143,7 @@ pub fn build(
                 conditions: raw_action
                     .conditions
                     .iter()
-                    .map(|condition| compile_condition(condition, 0, &name_to_id, &card_name_to_id))
+                    .map(|condition| compile_condition(condition, 0, &name_to_id, &card_name_to_id, buffs))
                     .collect::<Result<Vec<_>, String>>()?,
             })
         })
@@ -183,6 +184,7 @@ fn compile_condition(
     current_skill_id: u32,
     name_to_id: &HashMap<&str, u32>,
     card_name_to_id: &HashMap<&str, u32>,
+    buffs: &[BuffMetadataInput],
 ) -> Result<AplCondition, String> {
     let op = || {
         if raw.operator.is_empty() {
@@ -211,7 +213,7 @@ fn compile_condition(
             }
         }
         "resource" => AplCondition::Resource {
-            resource: normalize_resource(required_field(raw, "name", &raw.name)?),
+            resource: normalize_resource(required_field(raw, "name", &raw.name)?)?,
             operator: op()?,
             value: raw.value,
         },
@@ -237,17 +239,22 @@ fn compile_condition(
             return Err("APL next_skill 조건은 card_actions에서만 사용할 수 있습니다".to_string())
         }
         "buff_active" => {
-            AplCondition::BuffActive(normalize_buff_id(required_field(raw, "buff", &raw.buff)?))
+            AplCondition::BuffActive(resolve_buff_id(required_field(raw, "buff", &raw.buff)?, buffs)?)
         }
         "buff_inactive" => {
-            AplCondition::BuffInactive(normalize_buff_id(required_field(raw, "buff", &raw.buff)?))
+            AplCondition::BuffInactive(resolve_buff_id(required_field(raw, "buff", &raw.buff)?, buffs)?)
         }
         "buff_remaining" => AplCondition::BuffRemaining {
-            buff_id: normalize_buff_id(required_field(raw, "buff", &raw.buff)?),
+            buff_id: resolve_buff_id(required_field(raw, "buff", &raw.buff)?, buffs)?,
             operator: op()?,
             value_ms: seconds_to_ms(raw.value),
         },
         "target_debuff_stacks" => AplCondition::TargetDebuffStacks {
+            debuff_id: normalize_target_debuff_id(required_field(raw, "debuff", &raw.debuff)?),
+            operator: op()?,
+            value: raw.value,
+        },
+        "skill_target_stack_gain" => AplCondition::SkillTargetStackGain {
             debuff_id: normalize_target_debuff_id(required_field(raw, "debuff", &raw.debuff)?),
             operator: op()?,
             value: raw.value,
@@ -300,17 +307,34 @@ fn seconds_to_ms(value: f64) -> u64 {
     (value.max(0.0) * 1000.0).round() as u64
 }
 
-fn normalize_resource(name: &str) -> String {
-    match name {
+fn normalize_resource(name: &str) -> Result<String, String> {
+    let resource = match name {
         "hp" => "Hp",
         "mp" => "Mp",
         other => other,
+    };
+    if !matches!(resource, "Hp" | "MaxHp" | "Mp" | "CardGauge" | "UltimatePoint") {
+        return Err(format!("APL에 알 수 없는 자원: {name}"));
     }
-    .to_string()
+    Ok(resource.to_string())
 }
 
-fn normalize_buff_id(id: &str) -> String {
-    id.to_string()
+fn resolve_buff_id(value: &str, buffs: &[BuffMetadataInput]) -> Result<String, String> {
+    if buffs.iter().any(|buff| buff.id == value) {
+        return Ok(value.to_string());
+    }
+    let mut matches = buffs.iter().filter(|buff| buff.name == value).map(|buff| buff.id.as_str());
+    let Some(id) = matches.next() else {
+        return if value.is_ascii() {
+            Ok(value.to_string()) // 기존 내부 문자열 ID도 허용한다.
+        } else {
+            Err(format!("APL에 존재하지 않는 버프: {value}"))
+        };
+    };
+    if matches.any(|other| other != id) {
+        return Err(format!("APL에 이름이 중복된 버프: {value}"));
+    }
+    Ok(id.to_string())
 }
 
 fn normalize_target_debuff_id(id: &str) -> String {
@@ -368,6 +392,7 @@ actions:
 "#,
             &skills,
             &[],
+            &[],
         )
         .unwrap();
 
@@ -382,10 +407,20 @@ actions:
     #[test]
     fn keeps_json_name_array_compatibility() {
         let skills = vec![skill(10, "A"), skill(20, "B")];
-        let apl = build(r#"["B", "A"]"#, &skills, &[]).unwrap();
+        let apl = build(r#"["B", "A"]"#, &skills, &[], &[]).unwrap();
 
         assert_eq!(apl.order, vec![20, 10]);
         assert!(apl.actions.is_empty());
+    }
+
+    #[test]
+    fn rejects_unknown_resource_condition() {
+        let skills = vec![skill(10, "A")];
+        let apl = "actions:\n  - skill: A\n    conditions:\n      - type: resource\n        name: UnknownGauge\n        value: 1";
+        assert_eq!(
+            build(apl, &skills, &[], &[]).unwrap_err(),
+            "APL에 알 수 없는 자원: UnknownGauge"
+        );
     }
 
     #[test]
@@ -404,6 +439,7 @@ actions:
             "card_actions:\n  - card: 심판\n    conditions:\n      - type: card_held\n        card: 도태\n      - type: card_count\n        card: 심판\n        operator: '>='\n        value: 2",
             &[],
             &cards,
+            &[],
         ).unwrap();
 
         assert_eq!(apl.card_actions[0].card_id, 19098);
@@ -416,7 +452,48 @@ actions:
     }
 
     #[test]
-    fn arcana_empress_presets_compile_every_action_and_condition() {
+    fn resolves_named_buffs_for_all_buff_conditions_and_keeps_ids() {
+        let skills = vec![skill(10, "A")];
+        let buffs = vec![BuffMetadataInput {
+            id: "190950".to_string(),
+            name: "운명의 수레바퀴".to_string(),
+            icon: String::new(),
+            source: String::new(),
+        }];
+        let apl = build(
+            "actions:\n  - skill: A\n    conditions:\n      - type: buff_active\n        buff: 운명의 수레바퀴\n      - type: buff_inactive\n        buff: '190950'\n      - type: buff_remaining\n        buff: 운명의 수레바퀴\n        operator: '>='\n        value: 2",
+            &skills,
+            &[],
+            &buffs,
+        ).unwrap();
+        let conditions = &apl.actions[0].conditions;
+        assert!(matches!(&conditions[0], AplCondition::BuffActive(id) if id == "190950"));
+        assert!(matches!(&conditions[1], AplCondition::BuffInactive(id) if id == "190950"));
+        assert!(matches!(&conditions[2], AplCondition::BuffRemaining { buff_id, value_ms, .. } if buff_id == "190950" && *value_ms == 2000));
+    }
+
+    #[test]
+    fn rejects_ambiguous_or_unknown_display_buff_names() {
+        let skills = vec![skill(10, "A")];
+        let buffs = ["190913", "190914"].map(|id| BuffMetadataInput {
+            id: id.to_string(),
+            name: "뒤틀린 운명".to_string(),
+            icon: String::new(),
+            source: String::new(),
+        });
+        let yaml = |name| format!("actions:\n  - skill: A\n    conditions:\n      - type: buff_active\n        buff: '{name}'");
+        assert_eq!(
+            build(&yaml("뒤틀린 운명"), &skills, &[], &buffs).unwrap_err(),
+            "APL에 이름이 중복된 버프: 뒤틀린 운명"
+        );
+        assert_eq!(
+            build(&yaml("없는 버프"), &skills, &[], &buffs).unwrap_err(),
+            "APL에 존재하지 않는 버프: 없는 버프"
+        );
+    }
+
+    #[test]
+    fn arcana_presets_compile_every_action_and_condition() {
         let skills = [
             "스트림 오브 엣지",
             "스크래치 딜러",
@@ -427,6 +504,13 @@ actions:
             "시크릿 가든",
             "포 카드",
             "세렌디피티",
+            "이보크",
+            "리턴",
+            "다크 리저렉션",
+            "언리미티드 셔플",
+            "댄싱 오브 스파인플라워",
+            "신비한 쇄도",
+            "더 썬",
         ]
         .iter()
         .enumerate()
@@ -462,19 +546,28 @@ actions:
             runtime_effects: Vec::new(),
         })
         .collect::<Vec<_>>();
+        let buff_json: serde_json::Value = serde_json::from_str(include_str!(
+            "../../skill-data/arcana/backend/buffs.json"
+        )).unwrap();
+        let buffs: Vec<BuffMetadataInput> = serde_json::from_value(buff_json["buffs"].clone()).unwrap();
         let presets = [
             (
-                include_str!("../../tests/fixtures/BluntThornStream.yaml"),
+                include_str!("../../skill-data/arcana/backend/apl/BluntThornStream.yaml"),
+                17,
+                26,
+            ),
+            (
+                include_str!("../../skill-data/arcana/backend/apl/BluntThornStreamInpulma.yaml"),
                 16,
                 26,
             ),
             (
-                include_str!("../../tests/fixtures/BluntThornStreamInpulma.yaml"),
-                15,
-                26,
+                include_str!("../../skill-data/arcana/backend/apl/EmperorShuffleDance.yaml"),
+                10,
+                30,
             ),
             (
-                include_str!("../../tests/fixtures/TestNoCond.yaml"),
+                include_str!("../../skill-data/arcana/backend/apl/TestNoCond.yaml"),
                 8,
                 18,
             ),
@@ -486,7 +579,12 @@ actions:
                 assert_eq!(raw.skills.len(), 9); // 일반 스킬 8개 + 초각성 스킬 더 데빌
                 assert!(!raw.skills.iter().any(|skill| skill == "리턴"));
             }
-            let apl = build(preset, &skills, &cards).unwrap();
+            if raw._build == "emperor-shuffle-dance" {
+                assert_eq!(raw.skills.len(), 9); // 일반 스킬 8개 + 초각성 스킬 더 썬
+                assert!(raw.skills.iter().any(|skill| skill == "더 썬"));
+                assert!(!raw.skills.iter().any(|skill| skill == "시크릿 가든"));
+            }
+            let apl = build(preset, &skills, &cards, &buffs).unwrap();
             assert_eq!(apl.actions.len(), expected_actions);
             assert_eq!(apl.card_actions.len(), expected_card_actions);
             if raw._build.starts_with("empress-") {
@@ -505,13 +603,14 @@ actions:
         let skills = vec![skill(10, "A")];
 
         assert_eq!(
-            build("actions:\n  - skill: 없는 스킬", &skills, &[]).unwrap_err(),
+            build("actions:\n  - skill: 없는 스킬", &skills, &[], &[]).unwrap_err(),
             "APL에 존재하지 않는 스킬: 없는 스킬"
         );
         assert_eq!(
             build(
                 "actions:\n  - skill: A\n    conditions:\n      - type: invented",
                 &skills,
+                &[],
                 &[],
             )
             .unwrap_err(),
@@ -522,6 +621,7 @@ actions:
                 "actions:\n  - skill: A\n    conditions:\n      - type: time_remaining\n        operator: ~=\n        value: 1",
                 &skills,
                 &[],
+                &[],
             )
             .unwrap_err(),
             "APL에 지원하지 않는 비교 연산자: ~="
@@ -531,6 +631,7 @@ actions:
                 "actions:\n  - skill: A\n    conditions:\n      - type: next_skill\n        skill: A",
                 &skills,
                 &[],
+                &[],
             )
             .unwrap_err(),
             "APL next_skill 조건은 card_actions에서만 사용할 수 있습니다"
@@ -538,6 +639,7 @@ actions:
         assert!(build(
             "actions:\n  - skill: A\n    conditions:\n      - type: time_remaining\n        operators: '<='\n        value: 1",
             &skills,
+            &[],
             &[],
         )
         .unwrap_err()

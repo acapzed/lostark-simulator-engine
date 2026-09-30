@@ -23,15 +23,65 @@ use crate::profile::StatField;
 /// ## 값 단위
 /// - `kind == "stat"` / tag modifier: 퍼센트 단위 (15.0 = 15%), register에서 /100 처리
 /// - `kind == "flat"`: 절대값 그대로 (치명 500 → s.crit += 500.0)
-pub fn apply_effect_list(
+pub fn is_generic_kind(kind: &str) -> bool {
+    matches!(kind, "stat" | "flat" | "conditional" | "stack_trigger" | "on_hit_dot" | "on_hit_target_debuff")
+}
+
+pub fn apply_effect_list<'a>(
     stat: &mut StatBuilder,
     modifier_mgr: &mut ModifierManager,
     global_triggers: &mut Vec<GlobalTrigger>,
     req: &BuildRequest,
-    effects: &[SimEffect],
+    effects: impl IntoIterator<Item = &'a SimEffect>,
     source: &str,
-) {
+) -> Result<(), String> {
     for effect in effects {
+        let invalid = |detail: &str| format!("{source}: 알 수 없는 효과 {detail}");
+        if !is_generic_kind(&effect.kind) {
+            return Err(invalid(&effect.kind));
+        }
+        if effect.kind == "stack_trigger" {
+            if effect.max_stacks.is_none() || effect.stack_duration.is_none() || effect.per_stack.is_none() {
+                return Err(invalid("stack_trigger 필수값"));
+            }
+            for nested in effect.per_stack.iter().flatten().chain(effect.on_max_stack.iter().flatten()) {
+                if str_to_stat_field(&nested.field).is_none() {
+                    return Err(invalid(&format!("field={}", nested.field)));
+                }
+            }
+        }
+        if effect.kind == "on_hit_dot" && (effect.dot_id.is_empty() || effect.tick_count == 0) {
+            return Err(invalid("on_hit_dot 필수값"));
+        }
+        if effect.kind == "on_hit_target_debuff"
+            && (effect.duration_ms.is_none() || str_to_stat_field(&effect.field).is_none())
+        {
+            return Err(invalid("on_hit_target_debuff 필수값"));
+        }
+        if let Some(tag) = &effect.tag {
+            if str_to_skill_tag(tag).is_none()
+                || !matches!(effect.field.as_str(), "damage_increase" | "cooldown_reduction")
+            {
+                return Err(invalid(&format!("tag={tag}")));
+            }
+        } else if let Some(condition) = &effect.condition {
+            if !matches!(condition.as_str(), "hp_below_50" | "hp_above_65") {
+                return Err(invalid(&format!("condition={condition}")));
+            }
+            if str_to_stat_field(&effect.field).is_none() {
+                return Err(invalid(&format!("field={}", effect.field)));
+            }
+        } else if matches!(effect.kind.as_str(), "stat" | "conditional")
+            && str_to_stat_field(&effect.field).is_none()
+        {
+            return Err(invalid(&format!("field={}", effect.field)));
+        } else if effect.kind == "flat" && !matches!(effect.field.as_str(),
+            "crit" | "specialization" | "swiftness" | "domination" | "endurance"
+            | "expertise" | "base_main_stat" | "base_vitality" | "base_attack_power"
+            | "max_mana" | "on_crit_damage_bonus" | "weapon_ap_mul" | "weapon_attack_power"
+        ) {
+            return Err(invalid(&format!("field={}", effect.field)));
+        }
         if effect.kind == "stack_trigger" {
             build_stack_triggers(global_triggers, effect, source);
         } else if effect.kind == "on_hit_dot" {
@@ -68,6 +118,7 @@ pub fn apply_effect_list(
             apply_stat(stat, effect, source);
         }
     }
+    Ok(())
 }
 
 // ---------------------------------------------------------------------------
@@ -111,45 +162,6 @@ fn apply_flat_stat(stat: &mut StatBuilder, effect: &SimEffect, source: &str) {
     }
 }
 
-pub fn apply_card_gauge_multiplier(
-    skill_pipelines: &mut SkillPipelineMap,
-    req: &BuildRequest,
-    percent: f64,
-) {
-    apply_card_gauge_multiplier_for_skill_group(skill_pipelines, req, 0, percent);
-}
-
-pub fn apply_card_gauge_multiplier_for_skill_group(
-    skill_pipelines: &mut SkillPipelineMap,
-    req: &BuildRequest,
-    skill_group_id: u32,
-    percent: f64,
-) {
-    let multiplier = 1.0 + percent / 100.0;
-    for skill in &req.skill_data {
-        if skill_group_id != 0 && !skill.properties.skill_group_ids.contains(&skill_group_id) {
-            continue;
-        }
-        let Some(pipeline) = skill_pipelines.get_mut(&skill.name) else {
-            continue;
-        };
-        pipeline.add_trigger(move |profile| {
-            if let Some(amount) = profile.resource_gains.get_mut("CardGauge") {
-                *amount *= multiplier;
-            }
-            for hit in &mut profile.hits {
-                for trigger in &mut hit.triggers {
-                    if let TriggerEffect::GainResource { resource, amount } = &mut trigger.effect {
-                        if resource == "CardGauge" {
-                            *amount *= multiplier;
-                        }
-                    }
-                }
-            }
-            Ok(())
-        });
-    }
-}
 
 pub fn apply_normal_skill_cooldown_reduction(
     skill_pipelines: &mut SkillPipelineMap,

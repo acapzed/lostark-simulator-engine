@@ -58,9 +58,97 @@ impl SkillPipelineMap {
             let data = data_by_name
                 .get(char_skill.name.as_str())
                 .ok_or_else(|| format!("스킬 데이터 없음: {}", char_skill.name))?;
+            if char_skill.level == 0 {
+                return Err(format!("{}: 스킬 레벨은 1 이상이어야 함", char_skill.name));
+            }
 
             // 레벨은 1-indexed → 0-indexed 변환
-            let level_idx = char_skill.level.saturating_sub(1) as usize;
+            let level_idx = (char_skill.level - 1) as usize;
+            let check_level = |field: &str, values: &[f64]| -> Result<(), String> {
+                if !values.is_empty() && level_idx >= values.len() {
+                    return Err(format!(
+                        "{}: 레벨 {}의 {} 계수 없음 ({}개)",
+                        char_skill.name, char_skill.level, field, values.len()
+                    ));
+                }
+                Ok(())
+            };
+            let check_resource = |field: &str, name: &str| -> Result<(), String> {
+                if !matches!(name, "Mp" | "CardGauge" | "UltimatePoint" | "Hp") {
+                    return Err(format!("{}: {}의 알 수 없는 자원: {}", char_skill.name, field, name));
+                }
+                Ok(())
+            };
+            if let Some(cost) = &data.resource_cost {
+                check_level("자원 소모", &cost.cost)?;
+                check_resource("자원 소모", &cost.name)?;
+            }
+            if let Some(gain) = &data.identity_gain {
+                check_resource("시전 자원 획득", &gain.name)?;
+            }
+            if let Some(gain) = data.target_buff_consume_preserve.as_ref()
+                .and_then(|preserve| preserve.preserve_identity_gain.as_ref()) {
+                check_resource("스택 보존 자원 획득", &gain.name)?;
+            }
+            for (index, hit) in data.hits.iter().enumerate() {
+                check_level(&format!("{}타 피해", index + 1), &hit.damage_ratio)?;
+                check_level(&format!("{}타 고정 피해", index + 1), &hit.fixed_damage)?;
+                if let Some(additional) = &hit.additional_damage {
+                    if additional.damage_ratio.is_empty() && additional.fixed_damage.is_empty() {
+                        return Err(format!(
+                            "{}: {}타 추가 피해 계수 없음",
+                            char_skill.name, index + 1
+                        ));
+                    }
+                    check_level("추가 피해", &additional.damage_ratio)?;
+                    check_level("추가 고정 피해", &additional.fixed_damage)?;
+                }
+                if let Some(dot) = &hit.dot {
+                    if dot.damage_ratio.is_empty() && dot.fixed_damage.is_empty() {
+                        return Err(format!(
+                            "{}: {}타 지속 피해 계수 없음",
+                            char_skill.name, index + 1
+                        ));
+                    }
+                    check_level("지속 피해", &dot.damage_ratio)?;
+                    check_level("지속 고정 피해", &dot.fixed_damage)?;
+                }
+                if let Some(gain) = &hit.identity_gain {
+                    check_resource(&format!("{}타 자원 획득", index + 1), &gain.name)?;
+                }
+            }
+            for row in &data.runtime_damage_by_target_buff_stacks {
+                if row.target_buff_id.is_empty() || row.stack == 0 {
+                    return Err(format!(
+                        "{}: 스택별 피해의 대상 버프 ID와 1 이상의 스택이 필요함",
+                        char_skill.name
+                    ));
+                }
+                if row.damage_ratio.is_empty() && row.fixed_damage.is_empty() {
+                    return Err(format!(
+                        "{}: {}스택 피해 계수 없음",
+                        char_skill.name, row.stack
+                    ));
+                }
+                check_level("스택별 피해", &row.damage_ratio)?;
+                check_level("스택별 고정 피해", &row.fixed_damage)?;
+            }
+            for stack in &data.runtime_skill_damage_stacks {
+                if !matches!(stack.trigger_on.as_str(), "hit" | "crit") {
+                    return Err(format!(
+                        "{}: 스택 피해의 알 수 없는 발동 조건: {}",
+                        char_skill.name, stack.trigger_on
+                    ));
+                }
+            }
+            for bonus in &data.runtime_target_damage_bonuses {
+                if !data.hits.iter().any(|hit| hit.effect_id == bonus.trigger_effect_id) {
+                    return Err(format!(
+                        "{}: 대상 피해 증가의 발동 Effect {} 없음",
+                        char_skill.name, bonus.trigger_effect_id
+                    ));
+                }
+            }
 
             // 해당 스킬의 파이프라인 (없으면 빈 파이프라인)
             let pipeline = self
@@ -69,7 +157,7 @@ impl SkillPipelineMap {
                 .unwrap_or_else(SkillPipeline::new);
 
             let mut profile =
-                build_base_profile(skill_id as u32, &char_skill.name, data, level_idx);
+                build_base_profile(skill_id as u32, &char_skill.name, data, level_idx)?;
             pipeline.run(&mut profile)?;
             profiles.push(profile);
         }
@@ -84,7 +172,7 @@ fn build_base_profile(
     name: &str,
     data: &SkillDataInput,
     level_idx: usize,
-) -> SkillProfile {
+) -> Result<SkillProfile, String> {
     let phase_timeout_ms = if data.phase_timeout_ms > 0 {
         data.phase_timeout_ms
     } else {
@@ -101,14 +189,17 @@ fn build_base_profile(
         },
         "Holding" => SkillType::Holding { max_hold_ms: 0 },
         "Point" => SkillType::Point,
-        _ => SkillType::Normal,
+        // Charge currently uses the normal cast path; the charge tag is applied below.
+        "Normal" | "Charge" | "" => SkillType::Normal,
+        other => return Err(format!("{name}: 알 수 없는 스킬 조작 방식: {other}")),
     };
 
     let slot = match data.skill_slot.as_str() {
         "Awakening" => SkillSlot::Awakening,
         "HyperAwakeningTechniques" => SkillSlot::HyperAwakeningTechniques,
         "SuperAwakening" => SkillSlot::SuperAwakening,
-        _ => SkillSlot::Normal,
+        "Normal" | "" => SkillSlot::Normal,
+        other => return Err(format!("{name}: 알 수 없는 스킬 슬롯: {other}")),
     };
 
     let mut resource_costs = HashMap::new();
@@ -517,7 +608,7 @@ fn build_base_profile(
         _ => {}
     };
 
-    SkillProfile {
+    Ok(SkillProfile {
         skill_id,
         name: name.to_string(),
         skill_type,
@@ -537,7 +628,7 @@ fn build_base_profile(
         cast_buff_crit_rate_bonuses: Vec::new(),
         evolution_damage_bonuses: Vec::new(),
         hits,
-    }
+    })
 }
 
 fn runtime_damage_specs_by_target_buff(
@@ -634,9 +725,7 @@ pub fn apply_modifiers(skills: &mut Vec<SkillProfile>, compiled: &CompiledModifi
         }
 
         if (dmg_multiplier - 1.0).abs() > f64::EPSILON {
-            for hit in &mut skill.hits {
-                hit.damage_increase += dmg_multiplier - 1.0;
-            }
+            update_hit_damage(skill, |value| (1.0 + value) * dmg_multiplier - 1.0);
         }
 
         if (cd_multiplier - 1.0).abs() > f64::EPSILON {
@@ -645,6 +734,25 @@ pub fn apply_modifiers(skills: &mut Vec<SkillProfile>, compiled: &CompiledModifi
         if (cast_multiplier - 1.0).abs() > f64::EPSILON {
             for duration in &mut skill.cast_times_ms {
                 *duration = (*duration as f64 * cast_multiplier).round() as u32;
+            }
+        }
+    }
+}
+
+pub(crate) fn add_hit_damage_increase(skill: &mut SkillProfile, bonus: f64) {
+    update_hit_damage(skill, |value| value + bonus);
+}
+
+fn update_hit_damage(skill: &mut SkillProfile, update: impl Fn(f64) -> f64) {
+    for hit in &mut skill.hits {
+        hit.damage_increase = update(hit.damage_increase);
+        for trigger in &mut hit.triggers {
+            if let TriggerEffect::DealDamageByTargetBuffStacks { hits_by_stack, .. } =
+                &mut trigger.effect
+            {
+                for ruin in hits_by_stack {
+                    ruin.damage_increase = update(ruin.damage_increase);
+                }
             }
         }
     }
@@ -683,49 +791,6 @@ pub fn apply_triggers(
         .collect()
 }
 
-/// 확정된 Arcana raw 특화 공식을 카드 게이지와 루인 스택 피해에 적용한다.
-pub fn apply_arcana_specialization(skills: &mut [SkillProfile], specialization: f64) {
-    let card_gauge_multiplier = 1.0 + specialization / 699.0 * 0.25;
-    let ruin_damage_multiplier = 1.0 + specialization / 699.0 * 0.35;
-    let awakening_damage_multiplier = 1.0 + specialization / 699.0 * 0.1528;
-    for skill in skills {
-        if skill.slot == SkillSlot::Awakening {
-            for hit in &mut skill.hits {
-                hit.damage_increase =
-                    (1.0 + hit.damage_increase) * awakening_damage_multiplier - 1.0;
-            }
-        }
-        if let Some(amount) = skill.resource_gains.get_mut("CardGauge") {
-            *amount *= card_gauge_multiplier;
-        }
-        for hit in &mut skill.hits {
-            for trigger in &mut hit.triggers {
-                match &mut trigger.effect {
-                    TriggerEffect::GainResource { resource, amount }
-                        if resource == "CardGauge" =>
-                    {
-                        *amount *= card_gauge_multiplier;
-                    }
-                    TriggerEffect::ConsumeTargetBuff {
-                        preserve_resource_gain: Some((resource, amount)),
-                        ..
-                    } if resource == "CardGauge" => {
-                        *amount *= card_gauge_multiplier;
-                    }
-                    TriggerEffect::DealDamageByTargetBuffStacks { hits_by_stack, .. }
-                        if skill.category == SkillCategory::Ruin =>
-                    {
-                        for runtime_hit in hits_by_stack {
-                            runtime_hit.damage_increase =
-                                (1.0 + runtime_hit.damage_increase) * ruin_damage_multiplier - 1.0;
-                        }
-                    }
-                    _ => {}
-                }
-            }
-        }
-    }
-}
 
 // ---------------------------------------------------------------------------
 // SkillPipeline

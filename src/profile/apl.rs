@@ -46,6 +46,11 @@ pub enum AplCondition {
         operator: CompareOperator,
         value: f64,
     },
+    SkillTargetStackGain {
+        debuff_id: String,
+        operator: CompareOperator,
+        value: f64,
+    },
     ComboPhase {
         skill_id: u32,
         operator: CompareOperator,

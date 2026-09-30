@@ -48,10 +48,6 @@ impl BuffManager {
                 entry.stacks = (entry.stacks + stacks_to_add).min(max_stacks);
                 entry.expire_time = entry.expire_time.max(expire_time);
             }
-            StackType::Independent => {
-                entry.stacks = stacks_to_add;
-                entry.expire_time = expire_time;
-            }
         }
         entry.spec = spec;
         entry.expire_time

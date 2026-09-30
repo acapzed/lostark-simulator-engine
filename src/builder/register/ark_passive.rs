@@ -15,9 +15,9 @@ pub fn register(
     global_triggers: &mut Vec<GlobalTrigger>,
     skill_pipelines: &mut SkillPipelineMap,
     req: &BuildRequest,
-) {
+) -> Result<(), String> {
     let Some(input) = &req.character.ark_passive else {
-        return;
+        return Ok(());
     };
 
     // ── 공통 노드 (진화 + 도약 공통) — 데이터 드리븐, 레벨 기반 선택 ─────
@@ -76,7 +76,7 @@ pub fn register(
                     }
                 }),
                 "identity_gain_multiplier" => {
-                    sim_effects::apply_card_gauge_multiplier(skill_pipelines, req, value)
+                    class::arcana::apply_card_gauge_multiplier(skill_pipelines, req, value)
                 }
                 "on_crit_damage_bonus" => {
                     let delta = value / 100.0;
@@ -133,7 +133,8 @@ pub fn register(
                 }),
                 "mana_furnace" => mana_furnace = Some(value),
                 "mana_furnace_cap" => mana_furnace_cap = value,
-                _ => {}
+                kind if sim_effects::is_generic_kind(kind) => {}
+                kind => return Err(format!("{source}: 알 수 없는 효과 {kind}")),
             }
         }
         if let Some(per_ten) = mana_furnace {
@@ -165,9 +166,9 @@ pub fn register(
             modifier_manager,
             global_triggers,
             req,
-            effects,
+            effects.iter().filter(|effect| sim_effects::is_generic_kind(&effect.kind)),
             &source,
-        );
+        )?;
     }
 
     // ── 클래스 노드 (깨달음 + 도약 클래스) — 클래스 코드 위임 ─────────────
@@ -179,6 +180,7 @@ pub fn register(
         &input.class_nodes,
         req,
     );
+    Ok(())
 }
 
 fn for_each_skill(

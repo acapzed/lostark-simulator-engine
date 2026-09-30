@@ -274,6 +274,8 @@ pub struct GemInput {
     pub level: u32,
     #[serde(rename = "type", default)]
     pub gem_type: String,
+    #[serde(default)]
+    pub skill_id: Option<u32>,
     pub skill_name: String,
     pub skill_effect: String,
 }

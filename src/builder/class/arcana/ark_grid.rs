@@ -619,7 +619,7 @@ fn apply_card_gauge_gain(
     if effect.kind != "card_gauge_gain_multiplier" {
         return;
     }
-    crate::builder::register::sim_effects::apply_card_gauge_multiplier(
+    super::apply_card_gauge_multiplier(
         skill_pipelines,
         req,
         effect.value_percent,

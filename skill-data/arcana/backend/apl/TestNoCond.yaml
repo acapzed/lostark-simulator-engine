@@ -1,6 +1,6 @@
 name: "아르카나 테스트 빌드 (조건 없음)"
 class: "arcana"
-build: "emperor"
+build: "test-no-conditions"
 
 # 테스트용 APL - 모든 스킬을 쿨타임마다 사용 (조건 없음)
 

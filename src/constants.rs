@@ -97,6 +97,7 @@ pub struct HeldCardTrace {
 pub struct CastEvent {
     /// 캐스트 시각 (초)
     pub time: f64,
+    pub cast_id: u32,
     pub skill_id: u32,
     pub skill_name: String,
     pub is_awakening: bool,
@@ -124,6 +125,7 @@ pub struct CardUseEvent {
 pub struct DamageTraceEvent {
     /// 타격 시각 (초)
     pub time: f64,
+    pub cast_id: Option<u32>,
     pub skill_id: u32,
     pub skill_name: String,
     /// 스킬 hits 배열 기준 0-indexed 타수

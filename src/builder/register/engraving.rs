@@ -18,6 +18,7 @@ fn raw_percent(values: &[f64], index: usize) -> f64 {
 
 fn raw_grade(grade: &str) -> Option<u32> {
     match grade {
+        "고급" => Some(1),
         "희귀" => Some(2),
         "영웅" => Some(3),
         "전설" => Some(4),
@@ -670,7 +671,7 @@ pub fn register(
     global_triggers: &mut Vec<GlobalTrigger>,
     skill_pipelines: &mut SkillPipelineMap,
     req: &BuildRequest,
-) {
+) -> Result<(), String> {
     for engraving in &req.character.engravings {
         let source = format!("engraving:{}:L{}", engraving.name, engraving.level);
         if let Some(feature) = selected_feature(engraving) {
@@ -758,7 +759,7 @@ pub fn register(
         // 각인 레벨 효과 (L1/L2/L3)
         let level_idx = engraving.level.saturating_sub(1) as usize;
         if let Some(effects) = grade_effects.levels.get(level_idx) {
-            sim_effects::apply_effect_list(stat, modifier, global_triggers, req, effects, &source);
+            sim_effects::apply_effect_list(stat, modifier, global_triggers, req, effects, &source)?;
         }
 
         // 어빌리티 스톤 활성화 효과 — stone.engravings에서 이름 매칭
@@ -781,11 +782,12 @@ pub fn register(
                         req,
                         effects,
                         &source,
-                    );
+                    )?;
                 }
             }
         }
     }
+    Ok(())
 }
 
 #[cfg(test)]
@@ -847,6 +849,16 @@ mod tests {
 
         assert_eq!(feature.feature_type, 10);
         assert_eq!(feature.values, vec![2325.0, 2000.0]);
+
+        let basic: crate::builder::dto::EngravingInput = serde_json::from_value(
+            serde_json::json!({
+                "name": "원한", "grade": "고급", "level": 4,
+                "featureData": {"grades": [{"grade": 1, "stages": [
+                    {"stage": 4, "featureType": 10, "values": [1725, 2000]}
+                ]}]}
+            }),
+        ).expect("basic engraving should deserialize");
+        assert_eq!(selected_feature(&basic).unwrap().values, vec![1725.0, 2000.0]);
     }
 
     #[test]
@@ -875,7 +887,7 @@ mod tests {
                 &mut Vec::new(),
                 &mut SkillPipelineMap::new(Vec::<String>::new()),
                 &req,
-            );
+            ).unwrap();
             modifiers.compile().get_multiplier(&SkillTag::All, "DamageMultiplier")
         }
 
@@ -916,7 +928,7 @@ mod tests {
                 &mut Vec::new(),
                 &mut SkillPipelineMap::new(Vec::<String>::new()),
                 &req,
-            );
+            ).unwrap();
             modifiers.compile().get_multiplier(&SkillTag::All, "DamageMultiplier")
         }
 

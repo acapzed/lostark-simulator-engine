@@ -10,6 +10,7 @@ pub enum EventData {
     /// 스킬 Hit — 캐스트 시점 snapshot을 inline(내부)에 보유함.
     SkillHit {
         skill_id: u32,
+        cast_id: u32,
         hit_index: usize,
         snap: CastSnapshot,
     },
@@ -29,6 +30,7 @@ pub enum EventData {
     DotTick {
         dot_id: String,
         skill_id: u32,
+        cast_id: Option<u32>,
         hit: RuntimeDamageSpec,
         remaining_ticks: u32,
         tick_interval_ms: u32,
@@ -59,38 +61,47 @@ pub struct Event {
     pub data: EventData,
 }
 
-impl PartialEq for Event {
+struct QueuedEvent {
+    event: Event,
+    sequence: u64,
+}
+
+impl PartialEq for QueuedEvent {
     fn eq(&self, other: &Self) -> bool {
-        self.time_ms == other.time_ms && self.priority == other.priority
+        self.event.time_ms == other.event.time_ms
+            && self.event.priority == other.event.priority
+            && self.sequence == other.sequence
     }
 }
 
-impl Eq for Event {}
+impl Eq for QueuedEvent {}
 
-impl PartialOrd for Event {
+impl PartialOrd for QueuedEvent {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Event {
+impl Ord for QueuedEvent {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // BinaryHeap은 max-heap → 역순 비교로 min-heap (시간 오름차순)
-        other.time_ms.cmp(&self.time_ms)
-            .then(other.priority.cmp(&self.priority))
+        other.event.time_ms.cmp(&self.event.time_ms)
+            .then(other.event.priority.cmp(&self.event.priority))
+            .then(other.sequence.cmp(&self.sequence))
     }
 }
 
 /// 우선순위 이벤트 큐 (min-heap: 시간 오름차순)
-pub struct EventQueue(BinaryHeap<Event>);
+pub struct EventQueue(BinaryHeap<QueuedEvent>, u64);
 
 impl EventQueue {
     pub fn new() -> Self {
-        Self(BinaryHeap::new())
+        Self(BinaryHeap::new(), 0)
     }
 
     pub fn push(&mut self, event: Event) {
-        self.0.push(event);
+        self.0.push(QueuedEvent { event, sequence: self.1 });
+        self.1 += 1;
     }
 
     pub fn schedule_action_check(&mut self, time_ms: u64) {
@@ -98,14 +109,14 @@ impl EventQueue {
         let earliest = self
             .0
             .iter()
-            .filter_map(|event| {
-                matches!(event.data, EventData::ActionCheck).then_some(event.time_ms)
+            .filter_map(|queued| {
+                matches!(queued.event.data, EventData::ActionCheck).then_some(queued.event.time_ms)
             })
             .min()
             .map_or(time_ms, |queued| queued.min(time_ms));
         self.0
-            .retain(|event| !matches!(event.data, EventData::ActionCheck));
-        self.0.push(Event {
+            .retain(|queued| !matches!(queued.event.data, EventData::ActionCheck));
+        self.push(Event {
             time_ms: earliest,
             priority: priority::ACTION_CHECK,
             data: EventData::ActionCheck,
@@ -113,16 +124,16 @@ impl EventQueue {
     }
 
     pub fn pop(&mut self) -> Option<Event> {
-        self.0.pop()
+        self.0.pop().map(|queued| queued.event)
     }
 
     pub fn peek_time(&self) -> Option<u64> {
-        self.0.peek().map(|event| event.time_ms)
+        self.0.peek().map(|queued| queued.event.time_ms)
     }
 
     pub fn remove_dot(&mut self, dot_id: &str) {
-        self.0.retain(|event| !matches!(
-            &event.data,
+        self.0.retain(|queued| !matches!(
+            &queued.event.data,
             EventData::DotTick { dot_id: queued, .. } if queued == dot_id
         ));
     }
@@ -145,5 +156,22 @@ mod tests {
 
         assert_eq!(queue.pop().unwrap().time_ms, 50);
         assert!(queue.pop().is_none());
+    }
+
+    #[test]
+    fn keeps_insertion_order_for_equal_time_and_priority() {
+        let mut queue = EventQueue::new();
+        for skill_id in [1, 2, 3] {
+            queue.push(Event {
+                time_ms: 100,
+                priority: priority::CHARGE_RECOVERY,
+                data: EventData::ChargeRecovery { skill_id },
+            });
+        }
+        let ids: Vec<_> = (0..3).map(|_| match queue.pop().unwrap().data {
+            EventData::ChargeRecovery { skill_id } => skill_id,
+            _ => unreachable!(),
+        }).collect();
+        assert_eq!(ids, [1, 2, 3]);
     }
 }

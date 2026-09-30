@@ -16,7 +16,7 @@ A high-performance, event-driven combat simulation engine for [Lost Ark Simulato
 - **Output:** Aggregate results or a single-run trace
 - **Runtime:** Rust compiled to WebAssembly
 
-The web application and full game data are maintained separately. Files in `tests/fixtures/` are small examples used by the engine tests.
+The web application and full game data are maintained separately. `fixtures/` contains prepared example requests; `skill-data/` contains only the selected rows and presets needed by tests, not a complete game-data export.
 
 ## Test
 
@@ -25,7 +25,7 @@ cargo check --locked
 cargo test --locked
 ```
 
-The current snapshot has 5 known failing trace assertions (174 of 179 tests pass).
+The current snapshot passes 215 library tests.
 
 ## License
 

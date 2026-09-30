@@ -45,11 +45,11 @@ card_actions:
   - card: "광대"
     conditions:
       - type: "buff_active"
-        buff: "190950"
+        buff: "운명의 수레바퀴"
   - card: "로열"
     conditions:
       - type: "buff_active"
-        buff: "190950"
+        buff: "운명의 수레바퀴"
   - card: "황제"
   - card: "재상"
   - card: "제후"
@@ -65,7 +65,7 @@ card_actions:
   - card: "심판"
     conditions:
       - type: "buff_active"
-        buff: "192810"
+        buff: "도태"
   - card: "도태"
     conditions:
       - type: "next_skill"
@@ -77,11 +77,11 @@ card_actions:
   - card: "광대"
     conditions:
       - type: "buff_active"
-        buff: "190980"
+        buff: "심판"
   - card: "광대"
     conditions:
       - type: "buff_active"
-        buff: "192810"
+        buff: "도태"
   # 광대가 조건부 카드를 복사해 두 슬롯을 막으면 한 장을 소비해 추첨을 재개한다.
   - card: "도태"
     conditions:
@@ -154,6 +154,23 @@ actions:
       - type: "target_debuff_stacks"
         debuff: "ruin"
         operator: ">="
+        value: 4
+
+  # 페이크 플립이 2스택을 주면 추가 스택트 스킬 없이 4스택을 완성한다.
+  - skill: "운명의 부름"
+    conditions:
+      - type: "cooldown_ready"
+      - type: "skill_target_stack_gain"
+        debuff: "ruin"
+        operator: ">="
+        value: 2
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: ">="
+        value: 2
+      - type: "target_debuff_stacks"
+        debuff: "ruin"
+        operator: "<"
         value: 4
 
   # 루인 직전 치명타 피해 증가 버프 준비.
