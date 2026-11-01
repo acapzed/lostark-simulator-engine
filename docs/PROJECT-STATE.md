@@ -10,12 +10,14 @@ Rust 소스66개·Cargo2개·fixture12개·정적 입력26개를 명시적 스�
 
 ## 다음 행동과 완료 조건
 
-1. 검증·관리표: 로컬 검사 완료 후 master에 커밋·push하고 새 독립 CI를 확인한다. 완료 조건: 원격 CI 통과와 SHA 일치.
-2. 일반 빌드·화면: 엔진 변경을 요청받으면 명시적 앱 소스 커밋을 지정해 export한다. 완료 조건: 지문·회귀 통과 및 출처 기록 갱신. 제품 배포와는 별개다.
+1. 일반 빌드·화면: 새 엔진 변경 요청이 있을 때 기준 앱 커밋에서 명시적으로 export한다. 완료 조건: 지문·native·WASM 타깃 및 출처 기록 갱신. 이번 최신화와 원격 CI 확인은 완료했다.
+2. 검증·관리표: 앱·research와 소유권 구분을 유지한다. 완료 조건: 자동 동기화나 보관 원본 변경 없이 요청한 스냅샷만 검증/반영. 제품 배포와는 별개다.
 3. 검증·관리표: 브라우저 shared-memory/WASM 패키징 검증은 앱 배포 작업에서 수행한다. 이번 WASM 타깃 검사는 실제 브라우저 병렬 실행 완료를 뜻하지 않는다.
 
 ## 검증·미커밋 상태
 
-소스 export106개 지문, cargo check --locked, native496개, wasm32-unknown-unknown 타깃 검사, Python 문법·include 의존성·문서 링크·diff 검사 통과. 기존 unused/dead-code 경고는 유지한다. 원본 APL의 기존 끝 빈 줄은 바이트 보존을 위해 해당 파일의 whitespace 속성에 명시했다. 원격 CI는 push 후 확인한다. 이번 변경 외 기존 사용자 미커밋은 없었다. 앱·research의 미추적 사용자 자료와 비밀 파일은 가져오지 않았다. 공개 승인 범위는 이 엔진 소스와 빌드·회귀에 필요한 입력이다.
+소스 export106개 지문, cargo check --locked, native496개, wasm32-unknown-unknown 타깃 검사, Python 문법·include 의존성·문서 링크·diff 검사 통과. 기존 unused/dead-code 경고는 유지한다. 원본 APL의 기존 끝 빈 줄은 바이트 보존을 위해 해당 파일의 whitespace 속성에 명시했다. 공개 master `5f6be89`의 Engine CI `41290108027`에서106지문·native check/496회귀·WASM타깃 모두 성공했다. 이번 마감 문서의 완료 커밋은 최신 이력 참조. 이번 변경 외 기존 사용자 미커밋은 없었다. 앱·research의 미추적 사용자 자료와 비밀 파일은 가져오지 않았다. 공개 승인 범위는 이 엔진 소스와 빌드·회귀에 필요한 입력이다.
 
 로컬 Docker 검사: 사용자 방침에 따라 생략.
+
+원격 검증: [Engine CI 성공](https://github.com/acapzed/lostark-simulator-engine/actions/runs/41290108027). 이 확인 이후 문서만 수정한 커밋은 로컬 링크/diff 검증 후 CI 재실행을 생략한다.
