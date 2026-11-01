@@ -268,3 +268,4 @@ actions:
   - skill: "운명의 부름"
     conditions:
       - type: "cooldown_ready"
+

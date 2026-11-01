@@ -1,0 +1,23 @@
+# WEB-THIRST-LOOP: 스톰으로 열고 페이탈 뒤 급습을 굴리는 운용의 우선순위 변환.
+name: "웹 참고 갈증 스톰 선행 회귀 APL"
+class: "reaper"
+build: "thirst"
+actions:
+  - skill: "디스토션"
+    conditions:
+      - type: resource
+        name: ReaperChaosRemaining
+        operator: "<="
+        value: 3
+  - skill: "쉐도우 스톰"
+    conditions:
+      - type: skill_cooldown_ready
+        skill: "페이탈 스텝"
+  - skill: "페이탈 스텝"
+  - skill: "레이지 스피어"
+  - skill: "쉐도우 닷"
+  - skill: "댄싱 오브 퓨리"
+  - skill: "사일런트 스매셔"
+  - skill: "라스트 그래피티"
+  - skill: "쉐도우 나이프"
+  - skill: "쉐도우 트랩"

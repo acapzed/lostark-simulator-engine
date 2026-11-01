@@ -103,6 +103,9 @@ pub struct CastEvent {
     pub is_awakening: bool,
     pub active_buffs: Vec<String>,
     pub target_debuffs: Vec<String>,
+    /// 활성 대상 감속의 최댓값. 이동/AI는 계산하지 않는 상태 기록이다.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub target_movement_speed_reduction: Option<f64>,
     pub active_buff_details: Vec<BuffDebuffTraceDetail>,
     pub target_debuff_details: Vec<BuffDebuffTraceDetail>,
     pub active_buff_details_after_hit: Vec<BuffDebuffTraceDetail>,
@@ -133,6 +136,11 @@ pub struct DamageTraceEvent {
     pub hit_id: String,
     pub hit_name: String,
     pub damage_source: String,
+    /// Landed level only; no conversion to destruction points or target break state.
+    #[serde(default, skip_serializing_if = "is_zero")]
+    pub destruction_level: u32,
+    #[serde(default, skip_serializing_if = "is_zero_f64")]
+    pub raw_stagger_points: f64,
     pub result_damage: f64,
     pub is_crit: bool,
     pub resource_gains: Vec<ResourceGainTrace>,
@@ -192,10 +200,53 @@ pub struct DamageSourceTrace {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct TraceData {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub incoming_damage_events: Vec<IncomingDamageTrace>,
     pub casts: Vec<CastEvent>,
     pub card_uses: Vec<CardUseEvent>,
     pub damage_events: Vec<DamageTraceEvent>,
+    #[serde(default)]
+    pub class_events: Vec<ReaperStateTrace>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub valkyrie_events: Vec<ValkyrieStateTrace>,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ReaperStateTrace {
+    pub time: f64,
+    pub event: String,
+    pub game_skill_id: u32,
+    pub hit_id: String,
+    pub dark: f64,
+    pub heat: f64,
+    pub persona: bool,
+    pub chaos_remaining: f64,
+    pub fatal_remaining: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub nightmare_remaining: Option<f64>,
+    pub weakness: u32,
+    pub blade: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ValkyrieStateTrace {
+    pub time: f64,
+    pub event: String,
+    pub game_skill_id: u32,
+    pub light: u32,
+    pub light_swords: u32,
+    pub lost_light_sword: bool,
+    pub finale_ready: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub last_light: Option<bool>,
+    #[serde(default,skip_serializing_if="Option::is_none")]
+    pub cores:Option<ValkyrieCoreStateTrace>,
+}
+#[derive(Debug,Clone,Serialize,Deserialize)]
+#[serde(rename_all="camelCase")]
+pub struct ValkyrieCoreStateTrace {pub destiny_count:u32,pub origin_stacks:u32,pub finale_boost:bool,pub whisper_boost:bool,pub mp:f64}
 
 /// 스킬 단위 집계
 /// TODO: Stage 6에서 results/collector.rs 로 이동 예정
@@ -205,6 +256,17 @@ pub struct SkillStat {
     pub total_damage: f64,
     pub hit_count: u32,
     pub crit_count: u32,
+    #[serde(default, skip_serializing_if = "std::collections::BTreeMap::is_empty")]
+    pub destruction_hits: std::collections::BTreeMap<u32, u32>,
+    #[serde(default, skip_serializing_if = "is_zero_f64")]
+    pub raw_stagger_points: f64,
     /// Damage Per Cast
     pub dpc: f64,
 }
+
+fn is_zero(value: &u32) -> bool { *value == 0 }
+fn is_zero_f64(value: &f64) -> bool { *value == 0.0 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct IncomingDamageTrace { pub time: f64, pub input_damage: f64, pub applied_damage: f64, pub hp_before: f64, pub hp_after: f64 }

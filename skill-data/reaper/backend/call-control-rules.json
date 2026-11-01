@@ -1,0 +1,20 @@
+{
+  "sourceArtifact": "research/call-control-source-audit.json",
+  "effectIds": [
+    265420,
+    265421,
+    265422,
+    265435,
+    265436,
+    265437
+  ],
+  "markBuffId": "reaper:call:mark",
+  "fearBuffId": "reaper:call:fear",
+  "durationMs": 2000,
+  "maxStacks": 5,
+  "slowPerStack": 0.05,
+  "fearDurationMs": 2000,
+  "rawFearOverlap": 0,
+  "rawUniqueGroup": 265418,
+  "policy": "Provisional fixed target: either explicit slow/fear eligibility enables landed callback counter; refresh2s, slow eligibility adds5% per stack, at5 attempt eligible singleton fear2s then consume counter even if fear ineligible. Natural expiry never causes fear. Raw Overlap0/UniqueGroup preserved; native stacking, immunity, removal, ordering and target movement/AI/game calibration unverified."
+}

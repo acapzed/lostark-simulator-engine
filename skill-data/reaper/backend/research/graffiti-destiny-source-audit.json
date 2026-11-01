@@ -1,0 +1,1116 @@
+{
+  "status": "raw_graffiti_destiny_pair_pending_whole_runtime_contract",
+  "rawGameBuild": null,
+  "gameObservations": "0/24",
+  "sourceArtifact": "research/order-cores.json",
+  "rowsRaw": {
+    "ArkGridCore": {
+      "base_raw": {
+        "ClassifyType": 0,
+        "ClassifyIndex": 0,
+        "PrimaryKey": 673002423,
+        "Attr": 0,
+        "CoreType": 0,
+        "GroupId": 673002423,
+        "Grade": 0,
+        "GemSlotPoint": 9,
+        "Option1": 3261000,
+        "ReqOptionPoint1": 10,
+        "Option2": 0,
+        "ReqOptionPoint2": 0,
+        "Option3": 0,
+        "ReqOptionPoint3": 0,
+        "Option4": 0,
+        "ReqOptionPoint4": 0,
+        "Option5": 0,
+        "ReqOptionPoint5": 0,
+        "Option6": 0,
+        "ReqOptionPoint6": 0,
+        "CoreBookCategoryString": "sys.arkgrid.core_order_sun",
+        "CoreBookString": "tip.name.core_673002423",
+        "Icon": "Use_13",
+        "IconIndex": 96,
+        "PCClass": 404,
+        "BattlePointStatId": 1,
+        "SourceRow": 1681,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 673002424,
+          "Grade": 1,
+          "GemSlotPoint": 12,
+          "Option2": 3261100,
+          "ReqOptionPoint2": 14,
+          "SourceRow": 1682
+        },
+        {
+          "PrimaryKey": 673002425,
+          "Grade": 2,
+          "GemSlotPoint": 15,
+          "Option2": 3261100,
+          "ReqOptionPoint2": 14,
+          "Option3": 3261200,
+          "ReqOptionPoint3": 17,
+          "Option4": 3261400,
+          "ReqOptionPoint4": 18,
+          "Option5": 3261401,
+          "ReqOptionPoint5": 19,
+          "Option6": 3261402,
+          "ReqOptionPoint6": 20,
+          "SourceRow": 1683
+        },
+        {
+          "PrimaryKey": 673002426,
+          "Grade": 3,
+          "GemSlotPoint": 17,
+          "Option2": 3261100,
+          "ReqOptionPoint2": 14,
+          "Option3": 3261300,
+          "ReqOptionPoint3": 17,
+          "Option4": 3261400,
+          "ReqOptionPoint4": 18,
+          "Option5": 3261401,
+          "ReqOptionPoint5": 19,
+          "Option6": 3261402,
+          "ReqOptionPoint6": 20,
+          "SourceRow": 1684
+        },
+        {
+          "PrimaryKey": 673012423,
+          "CoreType": 1,
+          "GroupId": 673012423,
+          "Option1": 3264000,
+          "CoreBookCategoryString": "sys.arkgrid.core_order_moon",
+          "CoreBookString": "tip.name.core_673012423",
+          "IconIndex": 97,
+          "SourceRow": 1705
+        },
+        {
+          "PrimaryKey": 673012424,
+          "CoreType": 1,
+          "GroupId": 673012423,
+          "Grade": 1,
+          "GemSlotPoint": 12,
+          "Option1": 3264000,
+          "Option2": 3264100,
+          "ReqOptionPoint2": 14,
+          "CoreBookCategoryString": "sys.arkgrid.core_order_moon",
+          "CoreBookString": "tip.name.core_673012423",
+          "IconIndex": 97,
+          "SourceRow": 1706
+        },
+        {
+          "PrimaryKey": 673012425,
+          "CoreType": 1,
+          "GroupId": 673012423,
+          "Grade": 2,
+          "GemSlotPoint": 15,
+          "Option1": 3264000,
+          "Option2": 3264100,
+          "ReqOptionPoint2": 14,
+          "Option3": 3264200,
+          "ReqOptionPoint3": 17,
+          "Option4": 3264400,
+          "ReqOptionPoint4": 18,
+          "Option5": 3264401,
+          "ReqOptionPoint5": 19,
+          "Option6": 3264402,
+          "ReqOptionPoint6": 20,
+          "CoreBookCategoryString": "sys.arkgrid.core_order_moon",
+          "CoreBookString": "tip.name.core_673012423",
+          "IconIndex": 97,
+          "SourceRow": 1707
+        },
+        {
+          "PrimaryKey": 673012426,
+          "CoreType": 1,
+          "GroupId": 673012423,
+          "Grade": 3,
+          "GemSlotPoint": 17,
+          "Option1": 3264000,
+          "Option2": 3264100,
+          "ReqOptionPoint2": 14,
+          "Option3": 3264300,
+          "ReqOptionPoint3": 17,
+          "Option4": 3264400,
+          "ReqOptionPoint4": 18,
+          "Option5": 3264401,
+          "ReqOptionPoint5": 19,
+          "Option6": 3264402,
+          "ReqOptionPoint6": 20,
+          "CoreBookCategoryString": "sys.arkgrid.core_order_moon",
+          "CoreBookString": "tip.name.core_673012423",
+          "IconIndex": 97,
+          "SourceRow": 1708
+        }
+      ]
+    },
+    "ArkGridCoreOption": {
+      "base_raw": {
+        "ClassifyType": 1,
+        "ClassifyIndex": 600000,
+        "PrimaryKey": 3261000,
+        "Name": "",
+        "Desc": "tip.desc.arkgrid_3261000",
+        "IncludeEffectNodeId": 2260500,
+        "AddonOption0": 4,
+        "AddonOptionStat0": 0,
+        "AddonOptionIndex0": 3261000,
+        "AddonOptionValue0": 0,
+        "AddonOption1": 0,
+        "AddonOptionStat1": 0,
+        "AddonOptionIndex1": 0,
+        "AddonOptionValue1": 0,
+        "AddonOption2": 0,
+        "AddonOptionStat2": 0,
+        "AddonOptionIndex2": 0,
+        "AddonOptionValue2": 0,
+        "AddonOption3": 0,
+        "AddonOptionStat3": 0,
+        "AddonOptionIndex3": 0,
+        "AddonOptionValue3": 0,
+        "SourceRow": 151,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 3261100,
+          "Desc": "tip.desc.arkgrid_3261100",
+          "AddonOption0": 28,
+          "AddonOptionIndex0": 3261100,
+          "AddonOptionValue0": 1,
+          "SourceRow": 152
+        },
+        {
+          "PrimaryKey": 3261200,
+          "Desc": "tip.desc.arkgrid_3261200",
+          "AddonOption0": 28,
+          "AddonOptionIndex0": 3261200,
+          "AddonOptionValue0": 1,
+          "SourceRow": 153
+        },
+        {
+          "PrimaryKey": 3261300,
+          "Desc": "tip.desc.arkgrid_3261300",
+          "AddonOption0": 28,
+          "AddonOptionIndex0": 3261200,
+          "AddonOptionValue0": 2,
+          "SourceRow": 154
+        },
+        {
+          "PrimaryKey": 3261400,
+          "Desc": "tip.desc.arkgrid_3261400",
+          "AddonOptionIndex0": 3261400,
+          "SourceRow": 155
+        },
+        {
+          "PrimaryKey": 3261401,
+          "Desc": "tip.desc.arkgrid_3261401",
+          "AddonOptionIndex0": 3261401,
+          "SourceRow": 156
+        },
+        {
+          "PrimaryKey": 3261402,
+          "Desc": "tip.desc.arkgrid_3261402",
+          "AddonOptionIndex0": 3261402,
+          "SourceRow": 157
+        },
+        {
+          "PrimaryKey": 3264000,
+          "Desc": "tip.desc.arkgrid_3264000",
+          "AddonOptionIndex0": 3264000,
+          "SourceRow": 193
+        },
+        {
+          "PrimaryKey": 3264100,
+          "Desc": "tip.desc.arkgrid_3264100",
+          "AddonOption0": 28,
+          "AddonOptionIndex0": 3264100,
+          "AddonOptionValue0": 1,
+          "SourceRow": 194
+        },
+        {
+          "PrimaryKey": 3264200,
+          "Desc": "tip.desc.arkgrid_3264200",
+          "AddonOption0": 32,
+          "AddonOptionIndex0": 3264200,
+          "AddonOption1": 4,
+          "AddonOptionIndex1": 3264200,
+          "SourceRow": 195
+        },
+        {
+          "PrimaryKey": 3264300,
+          "Desc": "tip.desc.arkgrid_3264300",
+          "AddonOption0": 32,
+          "AddonOptionIndex0": 3264300,
+          "AddonOption1": 4,
+          "AddonOptionIndex1": 3264300,
+          "SourceRow": 196
+        },
+        {
+          "PrimaryKey": 3264400,
+          "Desc": "tip.desc.arkgrid_3264400",
+          "AddonOptionIndex0": 3264400,
+          "SourceRow": 197
+        },
+        {
+          "PrimaryKey": 3264401,
+          "Desc": "tip.desc.arkgrid_3264401",
+          "AddonOptionIndex0": 3264401,
+          "SourceRow": 198
+        },
+        {
+          "PrimaryKey": 3264402,
+          "Desc": "tip.desc.arkgrid_3264402",
+          "AddonOptionIndex0": 3264402,
+          "SourceRow": 199
+        }
+      ]
+    },
+    "ArkPassive": {
+      "base_raw": {
+        "ClassifyType": 1,
+        "ClassifyIndex": 520000,
+        "PrimaryKey": 2260500,
+        "SecondaryKey": 1,
+        "Name": "tip.name.arkpassive_22605002",
+        "Desc": "tip.desc.arkpassive_22605002_1",
+        "PCClass": 404,
+        "Group": 1,
+        "Tier": 3,
+        "ActivatePoint": 8,
+        "MaxActivateLevel": 3,
+        "ExclusiveId": 0,
+        "TierPointUseLimit": 0,
+        "PrecedeTierPointReq": 24,
+        "PrecedeNodeId0": 2260300,
+        "PrecedeNodeLevel0": 3,
+        "PrecedeNodeId1": 0,
+        "PrecedeNodeLevel1": 0,
+        "PrecedeNodeId2": 0,
+        "PrecedeNodeLevel2": 0,
+        "PrecedeNodeId3": 0,
+        "PrecedeNodeLevel3": 0,
+        "PrecedeNodeId4": 0,
+        "PrecedeNodeLevel4": 0,
+        "Icon": "Ark_Passive_RP",
+        "IconIndex": 4,
+        "BorderType": 0,
+        "TierPosition": 1,
+        "ZoneAdjustable": 0,
+        "SubstituteString": "",
+        "SourceRow": 209,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "SecondaryKey": 2,
+          "Desc": "tip.desc.arkpassive_22605002_2",
+          "SourceRow": 210
+        },
+        {
+          "SecondaryKey": 3,
+          "Desc": "tip.desc.arkpassive_22605002_3",
+          "SourceRow": 211
+        }
+      ]
+    },
+    "AbilityFeature": {
+      "base_raw": {
+        "PrimaryKey": 3261100,
+        "SecondaryKey": 1,
+        "Type": 220,
+        "Value00": 1,
+        "Value01": 26800,
+        "Value02": 0,
+        "Value03": 0,
+        "Value04": 1000,
+        "Value05": 3261100,
+        "Value06": 0,
+        "Value07": 1,
+        "Value08": 2,
+        "Value09": 0,
+        "Value10": 0,
+        "BaseRatio": 0.0,
+        "MaxRatio": 0.0,
+        "Interval": 0,
+        "Cooldown": 0,
+        "AbilityText": "",
+        "AbilitySound": "",
+        "AbilityTextMonopolyTime": 0,
+        "FontColor": 0,
+        "TextBroadCastType": 0,
+        "PCClass": 0,
+        "ClassifyType": 1,
+        "ClassifyIndex": 600000,
+        "SourceRow": 168,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 3261200,
+          "Type": 219,
+          "Value01": 0,
+          "Value02": 3261200,
+          "Value04": 0,
+          "Value05": 0,
+          "Value07": 0,
+          "Value08": 0,
+          "SourceRow": 169
+        },
+        {
+          "PrimaryKey": 3261200,
+          "SecondaryKey": 2,
+          "Type": 219,
+          "Value01": 0,
+          "Value02": 3261210,
+          "Value04": 0,
+          "Value05": 0,
+          "Value07": 0,
+          "Value08": 0,
+          "SourceRow": 170
+        },
+        {
+          "PrimaryKey": 3264100,
+          "Type": 216,
+          "Value03": 1,
+          "Value04": 0,
+          "Value05": 0,
+          "Value07": 0,
+          "Value08": 0,
+          "AbilityText": "com.AbilityMSG.AG_DESTINY",
+          "FontColor": 12558070,
+          "TextBroadCastType": 1,
+          "PCClass": 404,
+          "SourceRow": 182
+        }
+      ]
+    },
+    "AddonSkillFeature": {
+      "base_raw": {
+        "PrimaryKey": 3264200,
+        "SecondaryKey": 0,
+        "Name": "[리퍼][AG][베타-C-3] 급습 및 그림자 공속증가",
+        "Desc": "",
+        "SkillId": 0,
+        "SkillGroupId": 3264200,
+        "SkillTierIndex": 0,
+        "Target": 0,
+        "SkillFeature": 31,
+        "ParamType": 1,
+        "ParamName0": "",
+        "ParamName1": "",
+        "Param0": 10,
+        "Param1": 0,
+        "Param2": 0,
+        "Param3": 0,
+        "Param4": 0,
+        "Param5": 0,
+        "Param6": 0,
+        "Param7": 0,
+        "Param8": 0,
+        "Param9": 0,
+        "Param10": 0,
+        "Param11": 0,
+        "Param12": 0,
+        "Param13": 0,
+        "Param14": 0,
+        "Param15": 0,
+        "Param16": 0,
+        "Param17": 0,
+        "ClassifyType": 1,
+        "ClassifyIndex": 600000,
+        "SourceRow": 124,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 3264300,
+          "Name": "[리퍼][AG][베타-C-3.5] 급습 및 그림자 공속증가",
+          "SourceRow": 125
+        }
+      ]
+    },
+    "CombatEffect": {
+      "base_raw": {
+        "PrimaryKey": 3261000,
+        "SecondaryKey": 0,
+        "Desc": "",
+        "Ratio": 10000,
+        "Cooldown": 0,
+        "Condition0Type": 25,
+        "Condition0Actor": 3,
+        "Condition0Arg": 2260200,
+        "Condition1Type": 0,
+        "Condition1Actor": 0,
+        "Condition1Arg": 0,
+        "Condition2Type": 0,
+        "Condition2Actor": 0,
+        "Condition2Arg": 0,
+        "Action0Type": 1,
+        "Action0Actor": 2,
+        "Action0ArgA": 160,
+        "Action0ArgB": 0,
+        "Action0ArgC": 0,
+        "Action0ArgD": 0,
+        "Action0ArgE": 0,
+        "Action0ArgF": 0,
+        "Action1Type": 0,
+        "Action1Actor": 0,
+        "Action1ArgA": 0,
+        "Action1ArgB": 0,
+        "Action1ArgC": 0,
+        "Action1ArgD": 0,
+        "Action1ArgE": 0,
+        "Action1ArgF": 0,
+        "UniqueGroupId": 0,
+        "BraceletOptionGrade": 0,
+        "GradeColorStringOption": 0,
+        "ClassifyType": 0,
+        "ClassifyIndex": 0,
+        "SourceRow": 147,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 3261200,
+          "Action0ArgA": 550,
+          "SourceRow": 148
+        },
+        {
+          "PrimaryKey": 3261210,
+          "Action0ArgA": 630,
+          "SourceRow": 149
+        },
+        {
+          "PrimaryKey": 3261400,
+          "Action0ArgA": 17,
+          "SourceRow": 150
+        },
+        {
+          "PrimaryKey": 3261401,
+          "Action0ArgA": 17,
+          "SourceRow": 151
+        },
+        {
+          "PrimaryKey": 3261402,
+          "Action0ArgA": 17,
+          "SourceRow": 152
+        },
+        {
+          "PrimaryKey": 3264000,
+          "SourceRow": 183
+        },
+        {
+          "PrimaryKey": 3264200,
+          "Condition0Type": 1,
+          "Condition0Arg": 26800,
+          "Action0ArgA": 2000,
+          "SourceRow": 184
+        },
+        {
+          "PrimaryKey": 3264300,
+          "Condition0Type": 1,
+          "Condition0Arg": 26800,
+          "Action0ArgA": 2400,
+          "SourceRow": 185
+        },
+        {
+          "PrimaryKey": 3264400,
+          "Action0ArgA": 17,
+          "SourceRow": 186
+        },
+        {
+          "PrimaryKey": 3264401,
+          "Action0ArgA": 17,
+          "SourceRow": 187
+        },
+        {
+          "PrimaryKey": 3264402,
+          "Action0ArgA": 17,
+          "SourceRow": 188
+        }
+      ]
+    },
+    "SkillEffect": {
+      "base_raw": {
+        "PrimaryKey": 3261200,
+        "SecondaryKey": 1,
+        "Comment": "",
+        "GroupIndex": 0,
+        "AreaOverlapFirst": 0,
+        "Key": 7,
+        "ValueA": 3261200,
+        "ValueB": 0,
+        "ValueC": 0,
+        "ValueD": 0,
+        "ValueE": 0,
+        "ValueF": 0,
+        "ValueG": 0,
+        "ValueH": 0,
+        "ValueI": 0,
+        "ValueJ": 0,
+        "ValueK": 0,
+        "ValueL": 0,
+        "ValueM": 0,
+        "ValueN": 0,
+        "ValueO": 0,
+        "ValueP": 0,
+        "ValueQ": 0,
+        "CostMp": 0,
+        "CostIgauge0": 0,
+        "PushType": 0,
+        "PushMinRange": 0,
+        "PushMaxRange": 0,
+        "PushMinTime": 0,
+        "PushMaxTime": 0,
+        "FreezeTime": 0,
+        "FreezeBlendInTime": 0,
+        "FreezeBlendOutTime": 0,
+        "FreezeSkillCancel": 0,
+        "PvpFreezeBlendInTime": 0,
+        "PvpFreezeBlendOutTime": 0,
+        "PvpFreezeSkillCancel": 0,
+        "HitType": 1,
+        "PvpHitType": 1,
+        "HitPercent": 0.0,
+        "HitTypeDistMin": 0,
+        "HitTypeDistMax": 0,
+        "HitTypeTimeMin": 0,
+        "HitTypeTimeMax": 0,
+        "HitTypeDownMin": 0,
+        "HitTypeDownMax": 0,
+        "HitTypeHeightMin": 0,
+        "HitTypeHeightMax": 0,
+        "PartsAttackTypeLevel": 0,
+        "Target": 0,
+        "AmITarget": 1,
+        "TargetFace": 0,
+        "IgnoreTargetableSubIncludeComa": 0,
+        "AreaType": 0,
+        "AreaRange": 0,
+        "AreaRemoveRange": 0,
+        "AreaAngle": 0,
+        "AreaOrigin": 0,
+        "AreaOriginOption": 0,
+        "AreaOriginOption1": 0,
+        "AreaOriginOption2": 0,
+        "AreaAffectDir": 1,
+        "AreaHeight": 0,
+        "AreaOffsetX": 0,
+        "AreaOffsetY": 0,
+        "AreaOffsetZ": 0,
+        "AreaOffsetAngle": 0,
+        "AreaOffsetAngleRandom": 0,
+        "AreaDirectional": 0,
+        "MaxAmount": 0,
+        "SortType": 0,
+        "UniqueTargetPerStage": 0,
+        "IncludingSummonNpc": 1,
+        "MultiHitCount": 0,
+        "MultiHitTime": 0,
+        "DamageDivisonType": 0,
+        "IdentityKey": 0,
+        "Identity2Key": 0,
+        "PvPIdentityKey": 0,
+        "PvPIdentity2Key": 0,
+        "ChainType": 0,
+        "ChainIndex": 0,
+        "ChainRate": 0,
+        "ChainType1": 0,
+        "ChainIndex1": 0,
+        "ChainRate1": 0,
+        "ChainCombatEffectIndex": 0,
+        "ChainCombatEffectMaxTarget": 0,
+        "HittedSetSoundUseType": 0,
+        "HittedSetSoundSkillKey": "",
+        "HittedSetUseType": 0,
+        "HittedSetSkillKey": "",
+        "HittedSetScale": 1.0,
+        "SkipHitTesting": 0,
+        "DirectionSync": 0,
+        "AiPointMin": 0,
+        "AiPointMax": 0,
+        "HitStrengthX": 0,
+        "HitStrengthZ": 0,
+        "ShowDamageFont": 1,
+        "GlobalShowDamageFont": 0,
+        "DmgFontScale": 0,
+        "BackAttack": 0,
+        "DirectionalAttackMask": 0,
+        "CounterAttack": 0,
+        "IgnorePvPAdjustment": 0,
+        "DamageAimOffsetProbability": 30,
+        "MaxRepeatCount": 0,
+        "PvPDamageCoefficient": 10000,
+        "DamageAimOffsetStrength": 0,
+        "FallDown": 0,
+        "ClassifyType": 0,
+        "ClassifyIndex": 0,
+        "IgnoreTakeDamageCondition": 0,
+        "AchievementSkillEffectGroupId": 0,
+        "ShowCasterLog": "",
+        "UltimatePointMin": 0,
+        "UltimatePointMax": 0,
+        "HittedSetOpacityRate": 1.0,
+        "SourceRow": 6480,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 3261210,
+          "ValueA": 3261210,
+          "SourceRow": 6481
+        }
+      ]
+    },
+    "SkillBuff": {
+      "base_raw": {
+        "PrimaryKey": 3261100,
+        "SecondaryKey": 1,
+        "Name": "tip.name.skillbuff_3261100",
+        "Comment": "",
+        "Tip": "",
+        "Desc": "tip.desc.skillbuff_3261100",
+        "DescPvp": "",
+        "Category": 0,
+        "AniIndex": 0,
+        "Archetype": "AG_Destiny_02",
+        "FXGroup": 0,
+        "FXOrder": 0,
+        "Icon": "Buff",
+        "IconIndex": 884,
+        "IconShow": 3,
+        "Duration": -1,
+        "DurationUI": 0,
+        "FontShow": 0,
+        "FontColor": 0,
+        "Removable": 1,
+        "RealTime": 0,
+        "PersistentOverComa": 0,
+        "PersistentOverDeath": 0,
+        "PersistentOverFeverChain": 1,
+        "ZoneKeep": 0,
+        "BuffZoneGroupKeep": 0,
+        "ApplyCategory": 1,
+        "Overlap": 0,
+        "UniqueGroup": 0,
+        "Key": 0,
+        "ValueA": 0,
+        "ValueB": 0,
+        "ValueC": 0,
+        "ValueD": 0,
+        "ValueE": 0,
+        "ValueF": 0,
+        "ValueG": 0,
+        "ValueH": 0,
+        "ValueI": 0,
+        "ValueJ": 0,
+        "ValueK": 0,
+        "PassiveOptionType0": 0,
+        "PassiveOptionKeyStat0": 0,
+        "PassiveOptionKeyIndex0": 0,
+        "PassiveOptionValue0": 0,
+        "PassiveOptionDuplex0": -1,
+        "PassiveOptionType1": 0,
+        "PassiveOptionKeyStat1": 0,
+        "PassiveOptionKeyIndex1": 0,
+        "PassiveOptionValue1": 0,
+        "PassiveOptionDuplex1": -1,
+        "PassiveOptionType2": 0,
+        "PassiveOptionKeyStat2": 0,
+        "PassiveOptionKeyIndex2": 0,
+        "PassiveOptionValue2": 0,
+        "PassiveOptionDuplex2": -1,
+        "PassiveOptionType3": 0,
+        "PassiveOptionKeyStat3": 0,
+        "PassiveOptionKeyIndex3": 0,
+        "PassiveOptionValue3": 0,
+        "PassiveOptionDuplex3": -1,
+        "Interval": 0,
+        "FirstInterval": 0,
+        "AreaRange": 0,
+        "ImmuneIndex": 0,
+        "ExpiredReasonType0": 0,
+        "ExpiredChainSkillEffectId0": 0,
+        "ExpiredReasonType1": 0,
+        "ExpiredChainSkillEffectId1": 0,
+        "ExpiredReasonType2": 0,
+        "ExpiredChainSkillEffectId2": 0,
+        "ExpiredReasonType3": 0,
+        "ExpiredChainSkillEffectId3": 0,
+        "OverlapSkillEffectCount": 0,
+        "OverlapSkillEffectId": 0,
+        "ApplySkillEffectId": 0,
+        "ApplySkillEffectId1": 0,
+        "Transition": 0,
+        "VisibleFilterType": 4,
+        "VisibleFilterValue": 1,
+        "Cooldown": 0,
+        "CooldownType": 0,
+        "SyncClient": 2,
+        "BuffFXApply": 1,
+        "SkillEffectCasterSelf": 0,
+        "AbilityFeatureType": 0,
+        "IgnoreImmune": 0,
+        "DmgFontName": "tip.name.skillBuffDmgFont_3261100",
+        "DmgFontComment": "0",
+        "PvPDamageCoefficient": 10000,
+        "PvPAdjustStatCoefficient": 10000,
+        "TargetTooltipType": 0,
+        "PartyBuffBubbleData": 0,
+        "FontShowTarget": 0,
+        "ClassifyType": 0,
+        "ClassifyIndex": 0,
+        "FXApplyRefColumnIconShow": 0,
+        "FXOption": 0,
+        "VibrationType": 0,
+        "ShowValueFont": 1,
+        "FixedDuration": 0,
+        "AchievementBuffGroupId": 0,
+        "BuffIconCategory": 12,
+        "ShowDuration": 1,
+        "TransitionBuffBubbleData": 0,
+        "ShowCasterLog": "",
+        "FilterGroup": 0,
+        "ConstraintText": "",
+        "DamageFontScale": 0,
+        "BuffFontScale": 0,
+        "UltimateConditionType": 0,
+        "UltimatePointMin": 0,
+        "UltimatePointMax": 0,
+        "ExpireTimeDecreaseStack": 0,
+        "ShowTooltipRemainTime": 0,
+        "SourceRow": 698,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 3261200,
+          "Name": "tip.name.skillbuff_3261200",
+          "Desc": "tip.desc.skillbuff_3261200",
+          "Archetype": "AG_Destiny_11_01",
+          "IconIndex": 885,
+          "Duration": 20000,
+          "PassiveOptionType0": 4,
+          "PassiveOptionKeyIndex0": 3261200,
+          "DmgFontName": "tip.name.skillBuffDmgFont_3261200",
+          "SourceRow": 699
+        },
+        {
+          "PrimaryKey": 3261210,
+          "Name": "tip.name.skillbuff_3261210",
+          "Desc": "tip.desc.skillbuff_3261210",
+          "Archetype": "AG_Destiny_11_01",
+          "IconIndex": 885,
+          "Duration": 20000,
+          "PassiveOptionType0": 4,
+          "PassiveOptionKeyIndex0": 3261210,
+          "DmgFontName": "tip.name.skillBuffDmgFont_3261210",
+          "SourceRow": 700
+        }
+      ]
+    },
+    "SkillGroup": {
+      "base_raw": {
+        "PrimaryKey": 26800,
+        "GroupId": 2260200,
+        "Name": "",
+        "Desc": "",
+        "Icon": "",
+        "IconIndex": 0,
+        "UseTooltip": 1,
+        "AuctionOption": 0,
+        "AuctionDamage": 0,
+        "AuctionCoolDown": 0,
+        "AuctionSupportEffect": 0,
+        "IsSkill": 0,
+        "SourceRow": 75,
+        "Milestone": ""
+      },
+      "row_deltas_raw": [
+        {},
+        {
+          "PrimaryKey": 26810,
+          "SourceRow": 76
+        },
+        {
+          "PrimaryKey": 26820,
+          "SourceRow": 77
+        },
+        {
+          "PrimaryKey": 26830,
+          "SourceRow": 78
+        },
+        {
+          "PrimaryKey": 26970,
+          "SourceRow": 79
+        },
+        {
+          "PrimaryKey": 26310,
+          "GroupId": 3264200,
+          "SourceRow": 754
+        },
+        {
+          "PrimaryKey": 26320,
+          "GroupId": 3264200,
+          "SourceRow": 755
+        },
+        {
+          "PrimaryKey": 26330,
+          "GroupId": 3264200,
+          "SourceRow": 756
+        },
+        {
+          "PrimaryKey": 26340,
+          "GroupId": 3264200,
+          "SourceRow": 757
+        },
+        {
+          "PrimaryKey": 26500,
+          "GroupId": 3264200,
+          "SourceRow": 758
+        },
+        {
+          "PrimaryKey": 26510,
+          "GroupId": 3264200,
+          "SourceRow": 759
+        },
+        {
+          "PrimaryKey": 26511,
+          "GroupId": 3264200,
+          "SourceRow": 760
+        },
+        {
+          "PrimaryKey": 26520,
+          "GroupId": 3264200,
+          "SourceRow": 761
+        },
+        {
+          "PrimaryKey": 26530,
+          "GroupId": 3264200,
+          "SourceRow": 762
+        },
+        {
+          "PrimaryKey": 26540,
+          "GroupId": 3264200,
+          "SourceRow": 763
+        },
+        {
+          "PrimaryKey": 26610,
+          "GroupId": 3264200,
+          "SourceRow": 764
+        },
+        {
+          "PrimaryKey": 26620,
+          "GroupId": 3264200,
+          "SourceRow": 765
+        },
+        {
+          "PrimaryKey": 26550,
+          "GroupId": 3264200,
+          "SourceRow": 766
+        },
+        {
+          "PrimaryKey": 26560,
+          "GroupId": 3264200,
+          "SourceRow": 767
+        },
+        {
+          "PrimaryKey": 26570,
+          "GroupId": 3264200,
+          "SourceRow": 768
+        },
+        {
+          "PrimaryKey": 26590,
+          "GroupId": 3264200,
+          "SourceRow": 769
+        },
+        {
+          "PrimaryKey": 26600,
+          "GroupId": 3264200,
+          "SourceRow": 770
+        },
+        {
+          "GroupId": 3264200,
+          "SourceRow": 771
+        },
+        {
+          "PrimaryKey": 26810,
+          "GroupId": 3264200,
+          "SourceRow": 772
+        },
+        {
+          "PrimaryKey": 26820,
+          "GroupId": 3264200,
+          "SourceRow": 773
+        },
+        {
+          "PrimaryKey": 26830,
+          "GroupId": 3264200,
+          "SourceRow": 774
+        },
+        {
+          "PrimaryKey": 26960,
+          "GroupId": 3264200,
+          "SourceRow": 775
+        },
+        {
+          "PrimaryKey": 26970,
+          "GroupId": 3264200,
+          "SourceRow": 776
+        }
+      ]
+    }
+  },
+  "enumsRaw": [
+    {
+      "Type": "abilityfeaturetype",
+      "Name": "ag_beta_use_skill",
+      "Index": "216"
+    },
+    {
+      "Type": "abilityfeaturetype",
+      "Name": "ag_alpha_instant_skilleffect",
+      "Index": "219"
+    },
+    {
+      "Type": "abilityfeaturetype",
+      "Name": "ag_alpha_next_skill_enhance",
+      "Index": "220"
+    },
+    {
+      "Type": "combateffectconditiontype",
+      "Name": "current_skill",
+      "Index": "1"
+    },
+    {
+      "Type": "combateffectconditiontype",
+      "Name": "current_skill_group",
+      "Index": "25"
+    },
+    {
+      "Type": "skilleffecttype",
+      "Name": "add_status_effect",
+      "Index": "7"
+    },
+    {
+      "Type": "skillfeaturetype",
+      "Name": "change_attack_stage_speed",
+      "Index": "31"
+    }
+  ],
+  "messagesRaw": [
+    {
+      "KEY": "tip.desc.arkgrid_3261100",
+      "MSG": "<FONT COLOR='#bf9ef6'>'운명'</FONT> 발동 시 <FONT COLOR='#bf9ef6'>'운명: 데들리 컷'</FONT> 효과를 획득한다.\n<FONT COLOR='#bf9ef6'>'운명: 데들리 컷'</FONT> : 다음 사용하는 라스트 그래피티의 치명타 적중률이 <FONT COLOR='#ffff99'><$TABLE_ABILITYFEATURE Value07 3261100 1 /></FONT>회 동안 <FONT COLOR='#99ff99'><$CALC %1 <$TABLE_ABILITYFEATURE Value04 3261100 1 />/100/>%</FONT> 증가하고 어떤 곳에서 적중해도 백어택으로 적중된다.",
+      "ANA": "",
+      "CHAT": "",
+      "CHATFILTER": "",
+      "DIALOG": "",
+      "REPEATFILTER": "",
+      "SOUND": "",
+      "EXPOSURE": "",
+      "REPLACE": "",
+      "ENCRYPTION": ""
+    },
+    {
+      "KEY": "tip.desc.arkgrid_3264200",
+      "MSG": "라스트 그래피티의 피해량이 <FONT COLOR='#99ff99'><$CALC %1 <$TABLE_COMBATEFFECT Action0ArgA 3264200/>/100/>%</FONT> 증가하고 급습 및 그림자 스킬의 시전 속도가 <FONT COLOR='#99ff99'><$CALC %1 <$TABLE_ADDONSKILLFEATURE Param0 3264200/>/>%</FONT> 증가한다.",
+      "ANA": "",
+      "CHAT": "",
+      "CHATFILTER": "",
+      "DIALOG": "",
+      "REPEATFILTER": "",
+      "SOUND": "",
+      "EXPOSURE": "",
+      "REPLACE": "",
+      "ENCRYPTION": ""
+    },
+    {
+      "KEY": "tip.desc.arkgrid_3264300",
+      "MSG": "라스트 그래피티의 피해량이 <FONT COLOR='#99ff99'><$CALC %1 <$TABLE_COMBATEFFECT Action0ArgA 3264300/>/100/>%</FONT> 증가하고 급습 및 그림자 스킬의 시전 속도가 <FONT COLOR='#99ff99'><$CALC %1 <$TABLE_ADDONSKILLFEATURE Param0 3264300/>/>%</FONT> 증가한다.",
+      "ANA": "",
+      "CHAT": "",
+      "CHATFILTER": "",
+      "DIALOG": "",
+      "REPEATFILTER": "",
+      "SOUND": "",
+      "EXPOSURE": "",
+      "REPLACE": "",
+      "ENCRYPTION": ""
+    }
+  ],
+  "sourceCandidates": {
+    "sourceSkillId": 26800,
+    "usesBeforeDestiny": 1,
+    "eventChannel": 1,
+    "nextGraffiti": {
+      "critRatePercent": 10,
+      "uses": 1,
+      "buffId": 3261100,
+      "durationMs": -1,
+      "forceBackAttack": true,
+      "rawEnhanceMode": 2
+    },
+    "timedRushBuff": {
+      "durationMs": 20000,
+      "relicDamagePercent": 5.5,
+      "ancientDamagePercent": 6.3
+    },
+    "graffitiDamagePercent": {
+      "relic": 20,
+      "ancient": 24
+    },
+    "attackStageSpeedPercent": 10,
+    "rushSkillIds": [
+      26800,
+      26810,
+      26820,
+      26830,
+      26970
+    ],
+    "stageSpeedSkillIds": [
+      26310,
+      26320,
+      26330,
+      26340,
+      26500,
+      26510,
+      26511,
+      26520,
+      26530,
+      26540,
+      26610,
+      26620,
+      26550,
+      26560,
+      26570,
+      26590,
+      26600,
+      26800,
+      26810,
+      26820,
+      26830,
+      26960,
+      26970
+    ]
+  },
+  "summary": {
+    "coreFamilies": 2,
+    "coreGrades": 8,
+    "rawRows": 76,
+    "rawTables": 9,
+    "runtimePromotions": 0
+  },
+  "policy": "Whole pair only: next Graffiti cast gets10% crit AND forced back attack, timed rush damage lasts20seconds, stage speed targets23 raw group members. Value08=2 is preserved; forced-back semantics come from original tooltip, not an invented enum. Reuse normal back-attack build consumers (tripods, engravings, class bonuses), freeze consumed effects for all hits, exclude unrelated/independent hits, verify refresh/expiry, grades, group exclusions and slot order before promotion. Game order, geometry and owner inheritance unmeasured."
+}

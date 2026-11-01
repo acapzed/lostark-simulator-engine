@@ -1,0 +1,38 @@
+{
+  "character": {
+    "name": "리퍼 달의 소리 임시 참고",
+    "className": "리퍼",
+    "stats": {"maxhp": 100000},
+    "skills": [
+      {"name": "쉐도우 닷", "level": 1, "tripods": []},
+      {"name": "페르소나", "level": 1, "tripods": []},
+      {"name": "레이지 스피어", "level": 1, "tripods": []}
+    ]
+  },
+  "reaperReference": {"scenario": "dark_shadow_dot_legacy"},
+  "aplConfig": "actions:\n  - skill: 레이지 스피어\n    conditions:\n      - {type: resource, name: ReaperPersona, operator: '>=', value: 1}\n  - skill: 페르소나\n    conditions:\n      - {type: skill_cooldown_ready, skill: 레이지 스피어}\n  - skill: 쉐도우 닷\n    conditions:\n      - {type: resource, name: ReaperPersona, operator: '==', value: 0}\n",
+  "skillData": [
+    {
+      "name": "쉐도우 닷", "gameSkillId": 26070, "identityCategory": 43,
+      "skillControlType": "Normal", "skillSlot": "Normal", "cooldown": 7,
+      "castTimesMs": [1333], "properties": {"attackType": "백 어택"},
+      "hits": [
+        {"effectId": 260701, "hitId": "dot:1", "name": "첫 타격", "fixedDamage": [145.5], "damageRatio": [2.415], "actionDelayMs": 270},
+        {"effectId": 260702, "hitId": "dot:2", "name": "두 번째 타격", "fixedDamage": [145.5], "damageRatio": [2.415], "actionDelayMs": 420}
+      ]
+    },
+    {
+      "name": "페르소나", "gameSkillId": 26040, "identityCategory": 41,
+      "skillControlType": "Normal", "skillSlot": "Normal", "cooldown": 0.5,
+      "castTimesMs": [1067], "hits": []
+    },
+    {
+      "name": "레이지 스피어", "gameSkillId": 26810, "identityCategory": 45,
+      "skillControlType": "Normal", "skillSlot": "Normal", "cooldown": 25,
+      "castTimesMs": [2067], "properties": {"attackType": "백 어택"},
+      "hits": [
+        {"effectId": 268100, "hitId": "rage:1", "name": "찌르기", "fixedDamage": [931], "damageRatio": [15.525], "actionDelayMs": 800}
+      ]
+    }
+  ]
+}

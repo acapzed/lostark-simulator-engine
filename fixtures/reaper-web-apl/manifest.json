@@ -1,0 +1,130 @@
+{
+  "status": "web_informed_test_adaptation",
+  "researchedAt": "2026-10-20",
+  "sources": [
+    {
+      "id": "WEB-MOON-222",
+      "url": "https://www.inven.co.kr/board/lostark/5647/130025",
+      "title": "(7/22) 달소 222 빌드 3종 가이드 (스킬코드 / 사이클 / 허수영상 ) - 재업",
+      "author": "파란빛레몬",
+      "publishedAt": "2026-07-22",
+      "reportedUpdate": "2026-08-14",
+      "adopted": "사일런트 스매셔·라스트 그래피티의 2급습과 콜옵·스피닝 충전형 수급 구성을 테스트한다.",
+      "notAdopted": "이미지로만 제시된 개별 사이클과 전체 스탯·룬·보석 배분은 복원하지 않는다. 특화컷·분당 그림자 칼날·게임 DPS를 기대값으로 사용하지 않는다."
+    },
+    {
+      "id": "WEB-MOON-PRIORITY",
+      "url": "https://www.inven.co.kr/board/lostark/5647/130096",
+      "title": "222 콜옵+스피닝 아덴 우선순위 메모",
+      "author": "fun7079",
+      "publishedAt": "2026-07-23",
+      "adopted": "수급 후보 중 블랙 미스트→쉐도우 스톰→트랩/콜옵/스피닝 순서를 참고한다.",
+      "notAdopted": "현재 APL에 충전 잔량 조건과 직전 스킬 기억이 없어 2스택 우선 소모 및 서로 다른 두 수급기를 묶는 조건은 재현하지 않는다. 닷 최우선은 테스트에서 추가한 정책이다."
+    },
+    {
+      "id": "WEB-THIRST-PAIRED",
+      "url": "https://www.inven.co.kr/board/lostark/5647/128153",
+      "title": "갈증 악악치 절충 사이클",
+      "author": "내가너였다면",
+      "publishedAt": "2026-06-07",
+      "adopted": "페이탈 뒤 쉐도우 나이프를 먼저 쓰는 운용과 4급습·닷·스톰·트랩 구성을 참고한다.",
+      "notAdopted": "고정 스킬열과 9급습 주장을 재생하거나 검증하지 않는다. 준비된 스킬을 다시 평가하는 우선순위로 변환한다."
+    },
+    {
+      "id": "WEB-THIRST-LOOP",
+      "url": "https://www.inven.co.kr/board/lostark/5647/127880",
+      "title": "재업) 전부 외워서 치면 되는 갈증 악악치 사이클 (퓨리 9작+ 고대 치연)",
+      "author": "와플달떡",
+      "publishedAt": "2026-05-11",
+      "adopted": "스톰 선행→페이탈 이후 급습, 닷을 반복하는 운용과 퓨리·닷 9작/나머지 8작 조건을 참고한다.",
+      "notAdopted": "작성자가 나열한 고정 순환 전체를 보장하지 않는다. 라스트 스피어 달 코어 교체는 웹 추천이 아닌 코어 조합 회귀용 변형이다."
+    }
+  ],
+  "assumptions": {
+    "target": "고정 단일 PvE 레이드 대상, 모든 타격 성공, 원래 백어택 스킬은 백어택 성공",
+    "identity": "명시적 테스트용 타격별 수급. 닷은 기존 1/18 참고값, 나머지는 아래 입력값이며 특화·풍요로 교정한 게임 수급표가 아니다.",
+    "timeRates": "자연 어둠 수급·페르소나 감소·혼돈 축적 감소는 테스트에서 0으로 둔다.",
+    "loadout": "현재 지원 트라이포드 최대 효과, 룬·외부 파티 강화·확률 속행 없음. 1660 생성 장비와 테스트 스탯으로 고정하며 원문 캐릭터 복제가 아니다.",
+    "grades": "off, legend14P, relic17P, ancient20P. 질서 코어 3개만 연결하고 젬 부가 수치는 비운다.",
+    "interpretation": "소프트웨어 회귀 기대값. 원문 순서의 정확한 재생·최적 APL·실게임 DPS·직업 간 성능 비교를 의미하지 않는다."
+  },
+  "cases": [
+    {
+      "id": "moon-222",
+      "build": "dark_shadow_dot_legacy",
+      "apl": "moon-222.yaml",
+      "sources": ["WEB-MOON-222", "WEB-MOON-PRIORITY"],
+      "orderCores": ["달의 낙하", "사일런트", "암살자의 그림자"],
+      "combatStats": {"crit": 600, "specialization": 1800, "swiftness": 100},
+      "initialChaosSeconds": 0,
+      "optionalMaintenanceSkills": [],
+      "skills": [
+        ["쉐도우 닷", ["독 : 부식", "빠른 준비", "급습 활성"]],
+        ["스피닝 대거", ["독 : 부식", "회전력 강화", "끝없는 춤"]],
+        ["콜 오브 나이프", ["그림자 강탈", "지속되는 부름", "절망의 부름"]],
+        ["블랙 미스트", ["넓은 안개", "퍼지는 안개", "거짓 안개"]],
+        ["쉐도우 스톰", ["그림자 충전", "빠른 준비", "검은 폭풍"]],
+        ["쉐도우 트랩", ["날렵한 몸놀림", "그림자 늪", "그림자 활성"]],
+        ["라스트 그래피티", ["범위 증가", "급습 강화", "유언"]],
+        ["사일런트 스매셔", ["가벼운 동작", "그림자 잔상", "지면 강타"]]
+      ],
+      "skillGains": {"26070": {"dark": 0.05555555555555555, "heat": 0}, "26050": {"dark": 0.08, "heat": 0}, "26550": {"dark": 0.08, "heat": 0}, "26560": {"dark": 0.10, "heat": 0}, "26600": {"dark": 0.06, "heat": 0}, "26570": {"dark": 0.15, "heat": 0}},
+      "cooldownGemLevel": 8
+    },
+    {
+      "id": "thirst-nightmare",
+      "build": "thirst_chaos_sustain",
+      "apl": "thirst-paired.yaml",
+      "sources": ["WEB-THIRST-PAIRED"],
+      "orderCores": ["갈증의 악몽", "치명적 악몽", "치명적 연계"],
+      "combatStats": {"crit": 600, "specialization": 600, "swiftness": 1200},
+      "initialChaosSeconds": 15,
+      "optionalMaintenanceSkills": ["디스토션"],
+      "skills": [
+        ["쉐도우 닷", ["독 : 부식", "빠른 준비", "급습 활성"]],
+        ["디스토션", ["빠른 준비", "순풍"]],
+        ["쉐도우 스톰", ["그림자 충전", "빠른 준비", "검은 폭풍"]],
+        ["쉐도우 트랩", ["덫 강화", "그림자 늪", "그림자 활성"]],
+        ["레이지 스피어", ["은밀한 암살", "집중 공격", "치명적인 단검"]],
+        ["라스트 그래피티", ["범위 증가", "혼돈 강화", "유언"]],
+        ["사일런트 스매셔", ["가벼운 동작", "그림자 잔상", "지면 강타"]],
+        ["댄싱 오브 퓨리", ["날렵한 움직임", "혼돈 강화", "절제된 동작"]],
+        ["쉐도우 나이프", []]
+      ],
+      "skillGains": {},
+      "cooldownGemLevel": 8,
+      "cooldownGemOverrides": {"쉐도우 닷": 9, "댄싱 오브 퓨리": 9}
+    },
+    {
+      "id": "thirst-last-spear",
+      "inherits": "thirst-nightmare",
+      "apl": "thirst-storm.yaml",
+      "sources": ["WEB-THIRST-LOOP"],
+      "orderCores": ["갈증의 악몽", "라스트 스피어", "치명적 연계"],
+      "adaptation": "같은 갈증 4급습 구성에서 달 코어를 교체하는 회귀용 변형"
+    },
+    {
+      "id": "thirst-blood-dagger",
+      "build": "thirst_chaos_sustain",
+      "apl": "thirst-dagger.yaml",
+      "sources": ["WEB-THIRST-PAIRED"],
+      "adaptation": "웹의 닷·급습·혼돈 유지 원리를 단검4개·출혈 조합에 적용한 테스트 전용 구성. 원문 추천 단검 빌드가 아니다.",
+      "orderCores": ["피의 갈증", "출혈독", "다가오는 죽음"],
+      "combatStats": {"crit": 600, "specialization": 600, "swiftness": 1200},
+      "initialChaosSeconds": 15,
+      "optionalMaintenanceSkills": ["디스토션", "쉐도우 트랩"],
+      "skills": [
+        ["쉐도우 닷", ["독 : 출혈", "빠른 준비", "급습 활성"]],
+        ["스피닝 대거", ["독 : 출혈", "치명적인 단검", "끝없는 춤"]],
+        ["이블리스토", ["독 : 출혈", "날카로운 단검", "속전속결"]],
+        ["샤벨 스팅거", ["독 : 출혈", "두개의 그림자", "낙인 활성"]],
+        ["디스토션", ["빠른 준비", "순풍"]],
+        ["쉐도우 트랩", ["덫 강화", "그림자 늪", "그림자 활성"]],
+        ["레이지 스피어", ["은밀한 암살", "집중 공격", "치명적인 단검"]],
+        ["사일런트 스매셔", ["가벼운 동작", "그림자 잔상", "지면 강타"]]
+      ],
+      "skillGains": {},
+      "cooldownGemLevel": 8
+    }
+  ]
+}

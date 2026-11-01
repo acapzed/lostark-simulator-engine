@@ -1,0 +1,26 @@
+# 웹 갈증의 혼돈 유지/닷 운용을 단검 코어 검사용으로 변형한 테스트 전용 APL.
+# 출혈 단검 4개를 순환하며 과다출혈과 혈액폭발을 함께 검증한다.
+name: "갈증 피의 갈증 단검 조합 회귀 APL"
+class: "reaper"
+build: "thirst"
+actions:
+  - skill: "디스토션"
+    conditions:
+      - type: resource
+        name: ReaperChaosRemaining
+        operator: "<="
+        value: 3
+  - skill: "쉐도우 트랩"
+    conditions:
+      - type: resource
+        name: ReaperChaosRemaining
+        operator: "<="
+        value: 3
+  - skill: "페이탈 스텝"
+  - skill: "쉐도우 닷"
+  - skill: "레이지 스피어"
+  - skill: "사일런트 스매셔"
+  - skill: "스피닝 대거"
+  - skill: "이블리스토"
+  - skill: "샤벨 스팅거"
+  - skill: "쉐도우 트랩"

@@ -194,6 +194,7 @@ fn build_on_hit_dot(global_triggers: &mut Vec<GlobalTrigger>, effect: &SimEffect
         effect: TriggerEffect::ScheduleDot {
             dot_id: effect.dot_id.clone(),
             hit: crate::profile::RuntimeDamageSpec {
+                destruction: effect.destruction,
                 hit_id: effect.hit_id.clone(),
                 name: effect.name.clone(),
                 base_damage: effect.fixed_damage,
@@ -210,8 +211,9 @@ fn build_on_hit_dot(global_triggers: &mut Vec<GlobalTrigger>, effect: &SimEffect
             tick_interval_ms: effect.tick_interval_ms,
             tick_count: effect.tick_count,
             refresh: true,
+            independent: effect.independent,
         },
-        cooldown_ms: None,
+        cooldown_ms: effect.cooldown_ms,
     };
     if let Some(existing) = global_triggers.iter_mut().find(|candidate| matches!(
         &candidate.effect,

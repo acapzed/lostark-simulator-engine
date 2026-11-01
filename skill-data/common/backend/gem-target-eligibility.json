@@ -1,0 +1,3127 @@
+{
+  "schema": 1,
+  "classes": {
+    "아르카나": 202,
+    "리퍼": 404,
+    "발키리": 113,
+    "슬레이어": 112,
+    "버서커": 102,
+    "소서리스": 205
+  },
+  "skills": {
+    "16000": {
+      "classId": 102,
+      "name": "기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "16010": {
+      "classId": 102,
+      "name": "맨손 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "16020": {
+      "classId": 102,
+      "name": "폭주 기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "16021": {
+      "classId": 102,
+      "name": "폭주 기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "16030": {
+      "classId": 102,
+      "name": "파워 브레이크",
+      "damage": true,
+      "cooldown": true
+    },
+    "16040": {
+      "classId": 102,
+      "name": "덤블링",
+      "damage": false,
+      "cooldown": false
+    },
+    "16041": {
+      "classId": 102,
+      "name": "쇄도",
+      "damage": false,
+      "cooldown": false
+    },
+    "16045": {
+      "classId": 102,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "16046": {
+      "classId": 102,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "16050": {
+      "classId": 102,
+      "name": "크라임 해저드",
+      "damage": true,
+      "cooldown": true
+    },
+    "16060": {
+      "classId": 102,
+      "name": "숄더 차지",
+      "damage": true,
+      "cooldown": true
+    },
+    "16061": {
+      "classId": 102,
+      "name": "숄더 차지",
+      "damage": false,
+      "cooldown": false
+    },
+    "16070": {
+      "classId": 102,
+      "name": "휠윈드",
+      "damage": true,
+      "cooldown": true
+    },
+    "16080": {
+      "classId": 102,
+      "name": "헬 블레이드",
+      "damage": true,
+      "cooldown": true
+    },
+    "16100": {
+      "classId": 102,
+      "name": "더블 슬래쉬",
+      "damage": true,
+      "cooldown": true
+    },
+    "16110": {
+      "classId": 102,
+      "name": "어설트 블레이드",
+      "damage": true,
+      "cooldown": true
+    },
+    "16120": {
+      "classId": 102,
+      "name": "레드 더스트",
+      "damage": true,
+      "cooldown": true
+    },
+    "16130": {
+      "classId": 102,
+      "name": "폭주",
+      "damage": false,
+      "cooldown": false
+    },
+    "16131": {
+      "classId": 102,
+      "name": "광기",
+      "damage": false,
+      "cooldown": false
+    },
+    "16132": {
+      "classId": 102,
+      "name": "광기 해제",
+      "damage": false,
+      "cooldown": false
+    },
+    "16133": {
+      "classId": 102,
+      "name": "폭주 해제",
+      "damage": false,
+      "cooldown": false
+    },
+    "16140": {
+      "classId": 102,
+      "name": "블러디 러쉬",
+      "damage": false,
+      "cooldown": false
+    },
+    "16141": {
+      "classId": 102,
+      "name": "다크 러쉬",
+      "damage": true,
+      "cooldown": true
+    },
+    "16145": {
+      "classId": 102,
+      "name": "블러디 러쉬",
+      "damage": false,
+      "cooldown": false
+    },
+    "16146": {
+      "classId": 102,
+      "name": "블러디 러쉬",
+      "damage": false,
+      "cooldown": false
+    },
+    "16147": {
+      "classId": 102,
+      "name": "블러디 러쉬",
+      "damage": false,
+      "cooldown": false
+    },
+    "16150": {
+      "classId": 102,
+      "name": "모아치기",
+      "damage": false,
+      "cooldown": false
+    },
+    "16160": {
+      "classId": 102,
+      "name": "연출용 전투 전환",
+      "damage": false,
+      "cooldown": false
+    },
+    "16190": {
+      "classId": 102,
+      "name": "템페스트 슬래쉬",
+      "damage": true,
+      "cooldown": true
+    },
+    "16210": {
+      "classId": 102,
+      "name": "다이빙 슬래쉬",
+      "damage": true,
+      "cooldown": true
+    },
+    "16220": {
+      "classId": 102,
+      "name": "마운틴 크래쉬",
+      "damage": true,
+      "cooldown": true
+    },
+    "16300": {
+      "classId": 102,
+      "name": "피니쉬 스트라이크",
+      "damage": true,
+      "cooldown": true
+    },
+    "16500": {
+      "classId": 102,
+      "name": "체인 소드",
+      "damage": true,
+      "cooldown": true
+    },
+    "16600": {
+      "classId": 102,
+      "name": "소드 스톰",
+      "damage": true,
+      "cooldown": true
+    },
+    "16610": {
+      "classId": 102,
+      "name": "윈드 블레이드",
+      "damage": true,
+      "cooldown": true
+    },
+    "16620": {
+      "classId": 102,
+      "name": "메일스톰",
+      "damage": true,
+      "cooldown": true
+    },
+    "16630": {
+      "classId": 102,
+      "name": "브레이브 슬래쉬",
+      "damage": true,
+      "cooldown": true
+    },
+    "16640": {
+      "classId": 102,
+      "name": "오버드라이브",
+      "damage": true,
+      "cooldown": true
+    },
+    "16650": {
+      "classId": 102,
+      "name": "퓨리 메소드",
+      "damage": false,
+      "cooldown": false
+    },
+    "16660": {
+      "classId": 102,
+      "name": "블러드 슬래시",
+      "damage": false,
+      "cooldown": false
+    },
+    "16700": {
+      "classId": 102,
+      "name": "체인 오브 벤전스",
+      "damage": false,
+      "cooldown": false
+    },
+    "16710": {
+      "classId": 102,
+      "name": "버서크 퓨리",
+      "damage": false,
+      "cooldown": false
+    },
+    "16720": {
+      "classId": 102,
+      "name": "블러디 버스트",
+      "damage": false,
+      "cooldown": false
+    },
+    "16730": {
+      "classId": 102,
+      "name": "레이지 블레이드",
+      "damage": false,
+      "cooldown": false
+    },
+    "16900": {
+      "classId": 102,
+      "name": "기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "16910": {
+      "classId": 102,
+      "name": "저스트 가드",
+      "damage": false,
+      "cooldown": false
+    },
+    "16920": {
+      "classId": 102,
+      "name": "기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "16930": {
+      "classId": 102,
+      "name": "기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "19000": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "19010": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "19020": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "19030": {
+      "classId": 202,
+      "name": "이보크",
+      "damage": true,
+      "cooldown": true
+    },
+    "19040": {
+      "classId": 202,
+      "name": "체크메이트",
+      "damage": true,
+      "cooldown": true
+    },
+    "19050": {
+      "classId": 202,
+      "name": "다크 리저렉션",
+      "damage": true,
+      "cooldown": true
+    },
+    "19090": {
+      "classId": 202,
+      "name": "유령",
+      "damage": false,
+      "cooldown": false
+    },
+    "19091": {
+      "classId": 202,
+      "name": "뒤틀린 운명",
+      "damage": false,
+      "cooldown": false
+    },
+    "19092": {
+      "classId": 202,
+      "name": "달",
+      "damage": false,
+      "cooldown": false
+    },
+    "19093": {
+      "classId": 202,
+      "name": "부식",
+      "damage": false,
+      "cooldown": false
+    },
+    "19094": {
+      "classId": 202,
+      "name": "별",
+      "damage": false,
+      "cooldown": false
+    },
+    "19095": {
+      "classId": 202,
+      "name": "운명의 수레바퀴",
+      "damage": false,
+      "cooldown": false
+    },
+    "19096": {
+      "classId": 202,
+      "name": "로열",
+      "damage": false,
+      "cooldown": false
+    },
+    "19097": {
+      "classId": 202,
+      "name": "삼두사",
+      "damage": false,
+      "cooldown": false
+    },
+    "19098": {
+      "classId": 202,
+      "name": "심판",
+      "damage": false,
+      "cooldown": false
+    },
+    "19099": {
+      "classId": 202,
+      "name": "균형",
+      "damage": false,
+      "cooldown": false
+    },
+    "19100": {
+      "classId": 202,
+      "name": "배니싱",
+      "damage": false,
+      "cooldown": false
+    },
+    "19105": {
+      "classId": 202,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "19106": {
+      "classId": 202,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "19110": {
+      "classId": 202,
+      "name": "프리즈매틱 미러",
+      "damage": false,
+      "cooldown": false
+    },
+    "19120": {
+      "classId": 202,
+      "name": "언리미티드 셔플",
+      "damage": true,
+      "cooldown": true
+    },
+    "19140": {
+      "classId": 202,
+      "name": "셀레스티얼 레인",
+      "damage": true,
+      "cooldown": true
+    },
+    "19150": {
+      "classId": 202,
+      "name": "스트림 오브 엣지",
+      "damage": true,
+      "cooldown": true
+    },
+    "19160": {
+      "classId": 202,
+      "name": "포 카드",
+      "damage": true,
+      "cooldown": true
+    },
+    "19170": {
+      "classId": 202,
+      "name": "쿼드라 엑셀레이트",
+      "damage": true,
+      "cooldown": true
+    },
+    "19180": {
+      "classId": 202,
+      "name": "운명의 부름",
+      "damage": true,
+      "cooldown": true
+    },
+    "19190": {
+      "classId": 202,
+      "name": "스파이럴 엣지",
+      "damage": true,
+      "cooldown": true
+    },
+    "19195": {
+      "classId": 202,
+      "name": "스파이럴 엣지",
+      "damage": false,
+      "cooldown": false
+    },
+    "19200": {
+      "classId": 202,
+      "name": "댄싱 오브 스파인플라워",
+      "damage": true,
+      "cooldown": true
+    },
+    "19210": {
+      "classId": 202,
+      "name": "신비한 쇄도",
+      "damage": true,
+      "cooldown": true
+    },
+    "19215": {
+      "classId": 202,
+      "name": "신비한 쇄도",
+      "damage": false,
+      "cooldown": false
+    },
+    "19230": {
+      "classId": 202,
+      "name": "백 플러쉬",
+      "damage": true,
+      "cooldown": true
+    },
+    "19240": {
+      "classId": 202,
+      "name": "세렌디피티",
+      "damage": true,
+      "cooldown": true
+    },
+    "19260": {
+      "classId": 202,
+      "name": "리턴",
+      "damage": true,
+      "cooldown": true
+    },
+    "19270": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "19280": {
+      "classId": 202,
+      "name": "광기",
+      "damage": false,
+      "cooldown": false
+    },
+    "19281": {
+      "classId": 202,
+      "name": "도태",
+      "damage": false,
+      "cooldown": false
+    },
+    "19282": {
+      "classId": 202,
+      "name": "황제",
+      "damage": true,
+      "cooldown": false
+    },
+    "19283": {
+      "classId": 202,
+      "name": "황후",
+      "damage": false,
+      "cooldown": false
+    },
+    "19284": {
+      "classId": 202,
+      "name": "광대",
+      "damage": false,
+      "cooldown": false
+    },
+    "19285": {
+      "classId": 202,
+      "name": "환희",
+      "damage": false,
+      "cooldown": false
+    },
+    "19286": {
+      "classId": 202,
+      "name": "재상",
+      "damage": false,
+      "cooldown": false
+    },
+    "19287": {
+      "classId": 202,
+      "name": "제후",
+      "damage": false,
+      "cooldown": false
+    },
+    "19288": {
+      "classId": 202,
+      "name": "황후의 기사",
+      "damage": false,
+      "cooldown": false
+    },
+    "19290": {
+      "classId": 202,
+      "name": "이보크",
+      "damage": false,
+      "cooldown": false
+    },
+    "19300": {
+      "classId": 202,
+      "name": "이보크",
+      "damage": false,
+      "cooldown": false
+    },
+    "19310": {
+      "classId": 202,
+      "name": "시크릿 가든",
+      "damage": true,
+      "cooldown": true
+    },
+    "19320": {
+      "classId": 202,
+      "name": "스크래치 딜러",
+      "damage": true,
+      "cooldown": true
+    },
+    "19330": {
+      "classId": 202,
+      "name": "죽음의 운명",
+      "damage": false,
+      "cooldown": false
+    },
+    "19340": {
+      "classId": 202,
+      "name": "더 썬",
+      "damage": false,
+      "cooldown": false
+    },
+    "19350": {
+      "classId": 202,
+      "name": "더 데빌",
+      "damage": false,
+      "cooldown": false
+    },
+    "19360": {
+      "classId": 202,
+      "name": "더 타워",
+      "damage": false,
+      "cooldown": false
+    },
+    "19370": {
+      "classId": 202,
+      "name": "데스",
+      "damage": false,
+      "cooldown": false
+    },
+    "19900": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "19910": {
+      "classId": 202,
+      "name": "저스트 가드",
+      "damage": false,
+      "cooldown": false
+    },
+    "19920": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26000": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26010": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26020": {
+      "classId": 404,
+      "name": "쉐도우 스텝",
+      "damage": false,
+      "cooldown": false
+    },
+    "26030": {
+      "classId": 404,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "26031": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26040": {
+      "classId": 404,
+      "name": "페르소나",
+      "damage": false,
+      "cooldown": false
+    },
+    "26050": {
+      "classId": 404,
+      "name": "스피닝 대거",
+      "damage": true,
+      "cooldown": true
+    },
+    "26060": {
+      "classId": 404,
+      "name": "스피릿 캐치",
+      "damage": true,
+      "cooldown": true
+    },
+    "26070": {
+      "classId": 404,
+      "name": "쉐도우 닷",
+      "damage": true,
+      "cooldown": true
+    },
+    "26080": {
+      "classId": 404,
+      "name": "이블리스토",
+      "damage": true,
+      "cooldown": true
+    },
+    "26090": {
+      "classId": 404,
+      "name": "나이트메어",
+      "damage": true,
+      "cooldown": true
+    },
+    "26100": {
+      "classId": 404,
+      "name": "나이트메어",
+      "damage": false,
+      "cooldown": false
+    },
+    "26110": {
+      "classId": 404,
+      "name": "샤벨 스팅거",
+      "damage": true,
+      "cooldown": true
+    },
+    "26120": {
+      "classId": 404,
+      "name": "데스 사이드",
+      "damage": true,
+      "cooldown": true
+    },
+    "26140": {
+      "classId": 404,
+      "name": "팬텀 댄서",
+      "damage": true,
+      "cooldown": true
+    },
+    "26150": {
+      "classId": 404,
+      "name": "팬텀 댄서",
+      "damage": false,
+      "cooldown": false
+    },
+    "26200": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26210": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26220": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26230": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26240": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26250": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26260": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26270": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26280": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26290": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26310": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26320": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26330": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26340": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26500": {
+      "classId": 404,
+      "name": "다크니스 서클",
+      "damage": false,
+      "cooldown": false
+    },
+    "26510": {
+      "classId": 404,
+      "name": "디스토션",
+      "damage": true,
+      "cooldown": true
+    },
+    "26511": {
+      "classId": 404,
+      "name": "디스토션",
+      "damage": false,
+      "cooldown": false
+    },
+    "26520": {
+      "classId": 404,
+      "name": "블링크",
+      "damage": true,
+      "cooldown": true
+    },
+    "26530": {
+      "classId": 404,
+      "name": "블링크",
+      "damage": false,
+      "cooldown": false
+    },
+    "26540": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26550": {
+      "classId": 404,
+      "name": "콜 오브 나이프",
+      "damage": true,
+      "cooldown": true
+    },
+    "26560": {
+      "classId": 404,
+      "name": "블랙 미스트",
+      "damage": true,
+      "cooldown": true
+    },
+    "26570": {
+      "classId": 404,
+      "name": "쉐도우 트랩",
+      "damage": true,
+      "cooldown": true
+    },
+    "26590": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26600": {
+      "classId": 404,
+      "name": "쉐도우 스톰",
+      "damage": true,
+      "cooldown": true
+    },
+    "26610": {
+      "classId": 404,
+      "name": "블링크",
+      "damage": false,
+      "cooldown": false
+    },
+    "26620": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26700": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26710": {
+      "classId": 404,
+      "name": "저스트 가드",
+      "damage": false,
+      "cooldown": false
+    },
+    "26720": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "26800": {
+      "classId": 404,
+      "name": "라스트 그래피티",
+      "damage": true,
+      "cooldown": true
+    },
+    "26810": {
+      "classId": 404,
+      "name": "레이지 스피어",
+      "damage": true,
+      "cooldown": true
+    },
+    "26820": {
+      "classId": 404,
+      "name": "사일런트 스매셔",
+      "damage": true,
+      "cooldown": true
+    },
+    "26830": {
+      "classId": 404,
+      "name": "댄싱 오브 퓨리",
+      "damage": true,
+      "cooldown": true
+    },
+    "26900": {
+      "classId": 404,
+      "name": "월식 : 카덴차",
+      "damage": false,
+      "cooldown": false
+    },
+    "26910": {
+      "classId": 404,
+      "name": "일식 : 레퀴엠",
+      "damage": false,
+      "cooldown": false
+    },
+    "26920": {
+      "classId": 404,
+      "name": "일식 : 레퀴엠",
+      "damage": false,
+      "cooldown": false
+    },
+    "26930": {
+      "classId": 404,
+      "name": "일식 : 레퀴엠",
+      "damage": false,
+      "cooldown": false
+    },
+    "26940": {
+      "classId": 404,
+      "name": "카덴차 델 루나",
+      "damage": false,
+      "cooldown": false
+    },
+    "26950": {
+      "classId": 404,
+      "name": "레퀴엠 델 솔",
+      "damage": false,
+      "cooldown": false
+    },
+    "26960": {
+      "classId": 404,
+      "name": "쉐도우 나이프",
+      "damage": false,
+      "cooldown": false
+    },
+    "26970": {
+      "classId": 404,
+      "name": "피니쉬 스텝",
+      "damage": false,
+      "cooldown": false
+    },
+    "26980": {
+      "classId": 404,
+      "name": "페이탈 스텝",
+      "damage": false,
+      "cooldown": false
+    },
+    "37000": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "37010": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "37020": {
+      "classId": 205,
+      "name": "위상 도약",
+      "damage": false,
+      "cooldown": false
+    },
+    "37030": {
+      "classId": 205,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "37040": {
+      "classId": 205,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "37100": {
+      "classId": 205,
+      "name": "마력 방출",
+      "damage": false,
+      "cooldown": false
+    },
+    "37101": {
+      "classId": 205,
+      "name": "마력 방출",
+      "damage": false,
+      "cooldown": false
+    },
+    "37102": {
+      "classId": 205,
+      "name": "마력 방출 종료",
+      "damage": false,
+      "cooldown": false
+    },
+    "37110": {
+      "classId": 205,
+      "name": "점멸",
+      "damage": false,
+      "cooldown": false
+    },
+    "37200": {
+      "classId": 205,
+      "name": "블레이즈",
+      "damage": true,
+      "cooldown": true
+    },
+    "37210": {
+      "classId": 205,
+      "name": "라이트닝 볼텍스",
+      "damage": true,
+      "cooldown": true
+    },
+    "37211": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "37220": {
+      "classId": 205,
+      "name": "서릿발",
+      "damage": true,
+      "cooldown": true
+    },
+    "37230": {
+      "classId": 205,
+      "name": "인페르노",
+      "damage": true,
+      "cooldown": true
+    },
+    "37240": {
+      "classId": 205,
+      "name": "에너지 방출",
+      "damage": true,
+      "cooldown": true
+    },
+    "37250": {
+      "classId": 205,
+      "name": "아이스 애로우",
+      "damage": true,
+      "cooldown": true
+    },
+    "37260": {
+      "classId": 205,
+      "name": "엘리멘탈 리액트",
+      "damage": true,
+      "cooldown": true
+    },
+    "37270": {
+      "classId": 205,
+      "name": "천벌",
+      "damage": true,
+      "cooldown": true
+    },
+    "37280": {
+      "classId": 205,
+      "name": "리버스 그래비티",
+      "damage": true,
+      "cooldown": true
+    },
+    "37290": {
+      "classId": 205,
+      "name": "엘레기안의 손길",
+      "damage": false,
+      "cooldown": true
+    },
+    "37291": {
+      "classId": 205,
+      "name": "엘레기안의 손길",
+      "damage": false,
+      "cooldown": false
+    },
+    "37300": {
+      "classId": 205,
+      "name": "라이트닝 볼트",
+      "damage": true,
+      "cooldown": true
+    },
+    "37310": {
+      "classId": 205,
+      "name": "돌풍",
+      "damage": true,
+      "cooldown": true
+    },
+    "37320": {
+      "classId": 205,
+      "name": "숭고한 해일",
+      "damage": true,
+      "cooldown": true
+    },
+    "37330": {
+      "classId": 205,
+      "name": "익스플로전",
+      "damage": true,
+      "cooldown": true
+    },
+    "37340": {
+      "classId": 205,
+      "name": "혹한의 부름",
+      "damage": true,
+      "cooldown": true
+    },
+    "37341": {
+      "classId": 205,
+      "name": "혹한의 부름",
+      "damage": false,
+      "cooldown": false
+    },
+    "37350": {
+      "classId": 205,
+      "name": "종말의 날",
+      "damage": true,
+      "cooldown": true
+    },
+    "37360": {
+      "classId": 205,
+      "name": "엔비스카의 권능",
+      "damage": false,
+      "cooldown": false
+    },
+    "37370": {
+      "classId": 205,
+      "name": "종말의 부름",
+      "damage": false,
+      "cooldown": false
+    },
+    "37380": {
+      "classId": 205,
+      "name": "초월자의 심판",
+      "damage": false,
+      "cooldown": false
+    },
+    "37390": {
+      "classId": 205,
+      "name": "아포칼립스",
+      "damage": false,
+      "cooldown": false
+    },
+    "37400": {
+      "classId": 205,
+      "name": "라바 블래스트",
+      "damage": false,
+      "cooldown": false
+    },
+    "37410": {
+      "classId": 205,
+      "name": "러닝 글레이셔",
+      "damage": false,
+      "cooldown": false
+    },
+    "37900": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "37910": {
+      "classId": 205,
+      "name": "저스트 가드",
+      "damage": false,
+      "cooldown": false
+    },
+    "37920": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "45000": {
+      "classId": 112,
+      "name": "기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "45001": {
+      "classId": 112,
+      "name": "폭주 기본 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "45002": {
+      "classId": 112,
+      "name": "맨손 공격",
+      "damage": false,
+      "cooldown": false
+    },
+    "45003": {
+      "classId": 112,
+      "name": "폭주",
+      "damage": false,
+      "cooldown": false
+    },
+    "45004": {
+      "classId": 112,
+      "name": "블러드러스트",
+      "damage": true,
+      "cooldown": true
+    },
+    "45006": {
+      "classId": 112,
+      "name": "폭주 해제",
+      "damage": false,
+      "cooldown": false
+    },
+    "45010": {
+      "classId": 112,
+      "name": "대시",
+      "damage": false,
+      "cooldown": false
+    },
+    "45011": {
+      "classId": 112,
+      "name": "와일드 대시",
+      "damage": false,
+      "cooldown": false
+    },
+    "45020": {
+      "classId": 112,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "45021": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "45050": {
+      "classId": 112,
+      "name": "퓨리 블레이드",
+      "damage": true,
+      "cooldown": true
+    },
+    "45060": {
+      "classId": 112,
+      "name": "와일드 러시",
+      "damage": true,
+      "cooldown": true
+    },
+    "45070": {
+      "classId": 112,
+      "name": "허리케인 소드",
+      "damage": true,
+      "cooldown": true
+    },
+    "45080": {
+      "classId": 112,
+      "name": "볼케이노 이럽션",
+      "damage": true,
+      "cooldown": true
+    },
+    "45100": {
+      "classId": 112,
+      "name": "크로스 블레이드",
+      "damage": true,
+      "cooldown": true
+    },
+    "45110": {
+      "classId": 112,
+      "name": "플래시 블레이드",
+      "damage": true,
+      "cooldown": true
+    },
+    "45160": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "45190": {
+      "classId": 112,
+      "name": "파이널 블로",
+      "damage": true,
+      "cooldown": true
+    },
+    "45210": {
+      "classId": 112,
+      "name": "플라잉 스트라이크",
+      "damage": true,
+      "cooldown": true
+    },
+    "45220": {
+      "classId": 112,
+      "name": "와일드 스톰프",
+      "damage": true,
+      "cooldown": true
+    },
+    "45300": {
+      "classId": 112,
+      "name": "페이탈 소드",
+      "damage": true,
+      "cooldown": true
+    },
+    "45600": {
+      "classId": 112,
+      "name": "마운틴 클리브",
+      "damage": true,
+      "cooldown": true
+    },
+    "45610": {
+      "classId": 112,
+      "name": "스피닝 소드",
+      "damage": true,
+      "cooldown": true
+    },
+    "45620": {
+      "classId": 112,
+      "name": "그라운드 스매시",
+      "damage": true,
+      "cooldown": true
+    },
+    "45700": {
+      "classId": 112,
+      "name": "퍼니싱 드로",
+      "damage": true,
+      "cooldown": true
+    },
+    "45710": {
+      "classId": 112,
+      "name": "퓨리어스 클로",
+      "damage": true,
+      "cooldown": true
+    },
+    "45720": {
+      "classId": 112,
+      "name": "길로틴",
+      "damage": true,
+      "cooldown": true
+    },
+    "45730": {
+      "classId": 112,
+      "name": "브루탈 임팩트",
+      "damage": true,
+      "cooldown": true
+    },
+    "45740": {
+      "classId": 112,
+      "name": "크루얼 피어스",
+      "damage": true,
+      "cooldown": true
+    },
+    "45750": {
+      "classId": 112,
+      "name": "스파이럴 블레이드",
+      "damage": false,
+      "cooldown": false
+    },
+    "45760": {
+      "classId": 112,
+      "name": "플레임 블레이드",
+      "damage": false,
+      "cooldown": false
+    },
+    "45800": {
+      "classId": 112,
+      "name": "익스큐션",
+      "damage": false,
+      "cooldown": false
+    },
+    "45810": {
+      "classId": 112,
+      "name": "라그나 브레이크",
+      "damage": false,
+      "cooldown": false
+    },
+    "45820": {
+      "classId": 112,
+      "name": "레이지 슬래셔",
+      "damage": false,
+      "cooldown": false
+    },
+    "45830": {
+      "classId": 112,
+      "name": "라그나 블레이드",
+      "damage": false,
+      "cooldown": false
+    },
+    "45900": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "45910": {
+      "classId": 112,
+      "name": "저스트 가드",
+      "damage": false,
+      "cooldown": false
+    },
+    "45920": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "48000": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "48010": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "48020": {
+      "classId": 113,
+      "name": "진입",
+      "damage": false,
+      "cooldown": false
+    },
+    "48030": {
+      "classId": 113,
+      "name": "기상기",
+      "damage": false,
+      "cooldown": false
+    },
+    "48040": {
+      "classId": 113,
+      "name": "빛의 해방",
+      "damage": false,
+      "cooldown": false
+    },
+    "48041": {
+      "classId": 113,
+      "name": "빛의 해방",
+      "damage": false,
+      "cooldown": false
+    },
+    "48042": {
+      "classId": 113,
+      "name": "빛의 해방",
+      "damage": false,
+      "cooldown": false
+    },
+    "48050": {
+      "classId": 113,
+      "name": "신념의 빛",
+      "damage": false,
+      "cooldown": false
+    },
+    "48051": {
+      "classId": 113,
+      "name": "신념의 빛",
+      "damage": false,
+      "cooldown": false
+    },
+    "48052": {
+      "classId": 113,
+      "name": "신념의 빛",
+      "damage": false,
+      "cooldown": false
+    },
+    "48053": {
+      "classId": 113,
+      "name": "신념의 빛",
+      "damage": false,
+      "cooldown": false
+    },
+    "48054": {
+      "classId": 113,
+      "name": "신념의 빛",
+      "damage": false,
+      "cooldown": false
+    },
+    "48060": {
+      "classId": 113,
+      "name": "빛의 기사",
+      "damage": false,
+      "cooldown": false
+    },
+    "48070": {
+      "classId": 113,
+      "name": "종언의 빛",
+      "damage": true,
+      "cooldown": false
+    },
+    "48100": {
+      "classId": 113,
+      "name": "간파 베기",
+      "damage": true,
+      "cooldown": true
+    },
+    "48110": {
+      "classId": 113,
+      "name": "유성 찌르기",
+      "damage": true,
+      "cooldown": true
+    },
+    "48120": {
+      "classId": 113,
+      "name": "전진 찌르기",
+      "damage": true,
+      "cooldown": true
+    },
+    "48130": {
+      "classId": 113,
+      "name": "단죄의 쇄도",
+      "damage": true,
+      "cooldown": true
+    },
+    "48140": {
+      "classId": 113,
+      "name": "단죄의 성흔",
+      "damage": true,
+      "cooldown": true
+    },
+    "48150": {
+      "classId": 113,
+      "name": "단죄의 속삭임",
+      "damage": true,
+      "cooldown": true
+    },
+    "48160": {
+      "classId": 113,
+      "name": "계시의 검",
+      "damage": true,
+      "cooldown": true
+    },
+    "48170": {
+      "classId": 113,
+      "name": "계시의 진격",
+      "damage": true,
+      "cooldown": true
+    },
+    "48180": {
+      "classId": 113,
+      "name": "계시의 집행",
+      "damage": true,
+      "cooldown": true
+    },
+    "48190": {
+      "classId": 113,
+      "name": "안식의 폭풍",
+      "damage": true,
+      "cooldown": true
+    },
+    "48200": {
+      "classId": 113,
+      "name": "안식의 비",
+      "damage": true,
+      "cooldown": true
+    },
+    "48210": {
+      "classId": 113,
+      "name": "안식의 재",
+      "damage": true,
+      "cooldown": true
+    },
+    "48220": {
+      "classId": 113,
+      "name": "진리의 선고",
+      "damage": true,
+      "cooldown": true
+    },
+    "48230": {
+      "classId": 113,
+      "name": "진리의 륜",
+      "damage": true,
+      "cooldown": true
+    },
+    "48240": {
+      "classId": 113,
+      "name": "구원의 터",
+      "damage": true,
+      "cooldown": true
+    },
+    "48250": {
+      "classId": 113,
+      "name": "숭고한 맹세",
+      "damage": true,
+      "cooldown": true
+    },
+    "48260": {
+      "classId": 113,
+      "name": "구원의 은총",
+      "damage": true,
+      "cooldown": true
+    },
+    "48270": {
+      "classId": 113,
+      "name": "숭고한 도약",
+      "damage": true,
+      "cooldown": true
+    },
+    "48500": {
+      "classId": 113,
+      "name": "개벽",
+      "damage": false,
+      "cooldown": false
+    },
+    "48510": {
+      "classId": 113,
+      "name": "신의 증명",
+      "damage": false,
+      "cooldown": false
+    },
+    "48520": {
+      "classId": 113,
+      "name": "브뢴디아의 계시",
+      "damage": false,
+      "cooldown": false
+    },
+    "48530": {
+      "classId": 113,
+      "name": "브뢴디아의 의식",
+      "damage": false,
+      "cooldown": false
+    },
+    "48540": {
+      "classId": 113,
+      "name": "브뢴디아의 화신",
+      "damage": false,
+      "cooldown": false
+    },
+    "48550": {
+      "classId": 113,
+      "name": "브뢴디아의 성역",
+      "damage": false,
+      "cooldown": false
+    },
+    "48900": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "48910": {
+      "classId": 113,
+      "name": "저스트 가드",
+      "damage": false,
+      "cooldown": false
+    },
+    "48920": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745060": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745080": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745190": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745300": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745710": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745720": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745730": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745740": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745760": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9745810": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816010": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816011": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816012": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816040": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816045": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816060": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816120": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816190": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816210": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816220": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816300": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816600": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816620": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9816710": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819010": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819011": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819012": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819050": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819120": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819140": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819150": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819180": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819190": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819200": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9819320": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826010": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826011": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826012": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826060": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826080": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826090": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826100": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826570": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826600": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826810": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826820": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9826830": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837010": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837011": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837012": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837020": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837040": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837210": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837220": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837230": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837250": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837260": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837270": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837280": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837320": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837330": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837340": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837350": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9837360": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9845010": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9845011": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9845012": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9849010": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9849011": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9849012": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916000": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916002": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916003": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916004": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916010": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916020": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916040": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916045": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916046": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916060": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916100": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916110": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916120": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916130": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916140": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916160": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916170": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916190": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916210": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916220": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916300": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916500": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916600": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916610": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916620": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916700": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9916710": {
+      "classId": 102,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9917001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9918001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919000": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919002": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919003": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919004": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919010": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919020": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919050": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919090": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919091": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919092": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919093": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919094": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919095": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919096": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919097": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919098": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919099": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919100": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919105": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919106": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919110": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919120": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919140": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919150": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919160": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919180": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919190": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919210": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919240": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919260": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919270": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919280": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919281": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919282": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919283": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919310": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919320": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9919330": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9920001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9921001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9922001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9923001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9924001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9925001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926000": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926002": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926003": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926004": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926010": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926020": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926030": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926031": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926040": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926050": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926060": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926080": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926140": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926550": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926570": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926600": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9926810": {
+      "classId": 404,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9927001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9928001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9929003": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9930001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9934002": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9936002": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937000": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937002": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937003": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937004": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937010": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937020": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937030": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937040": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937100": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937101": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937102": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937110": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937200": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937210": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937220": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937230": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937240": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937250": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937270": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937280": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937310": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937320": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937330": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937340": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937350": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937360": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9937370": {
+      "classId": 205,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9938003": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9939001": {
+      "classId": 202,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945000": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945001": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945002": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945003": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945004": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945005": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945006": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945007": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945010": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945011": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945020": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945021": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945060": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945160": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945300": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945600": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945610": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945700": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945710": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945720": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945740": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945800": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9945810": {
+      "classId": 112,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948020": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948030": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948110": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948120": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948140": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948150": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948170": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948180": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948200": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9948210": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    },
+    "9949003": {
+      "classId": 113,
+      "name": "",
+      "damage": false,
+      "cooldown": false
+    }
+  },
+  "groups": {
+    "11010": {
+      "classId": 102,
+      "name": "블러디 러쉬",
+      "damage": true,
+      "cooldown": false,
+      "members": [
+        16140,
+        16145,
+        16146,
+        16147
+      ]
+    },
+    "11011": {
+      "classId": 102,
+      "name": "블러디 러쉬",
+      "damage": false,
+      "cooldown": true,
+      "members": [
+        16140,
+        16145,
+        16146,
+        16147
+      ]
+    },
+    "16000": {
+      "classId": 113,
+      "name": "신앙 스킬",
+      "damage": true,
+      "cooldown": false,
+      "members": [
+        48040,
+        48041,
+        48042,
+        48050,
+        48051,
+        48052,
+        48053,
+        48054
+      ]
+    }
+  }
+}

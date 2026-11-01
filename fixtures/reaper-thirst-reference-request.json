@@ -1,0 +1,51 @@
+{
+  "character": {
+    "name": "리퍼 갈증 임시 참고",
+    "className": "리퍼",
+    "stats": {"maxhp": 100000},
+    "skills": [
+      {"name": "쉐도우 닷", "level": 1, "tripods": []},
+      {"name": "디스토션", "level": 1, "tripods": []},
+      {"name": "레이지 스피어", "level": 1, "tripods": []},
+      {"name": "페이탈 스텝", "level": 1, "tripods": []}
+    ]
+  },
+  "reaperReference": {"scenario": "thirst_chaos_sustain"},
+  "aplConfig": "actions:\n  - skill: 디스토션\n    conditions:\n      - {type: resource, name: ReaperChaosRemaining, operator: '<=', value: 5}\n  - skill: 페이탈 스텝\n  - skill: 레이지 스피어\n  - skill: 쉐도우 닷\n",
+  "skillData": [
+    {
+      "name": "쉐도우 닷", "gameSkillId": 26070, "identityCategory": 43,
+      "skillControlType": "Normal", "skillSlot": "Normal", "cooldown": 7,
+      "castTimesMs": [1333], "properties": {"attackType": "백 어택"},
+      "hits": [
+        {"effectId": 260701, "hitId": "dot:1", "name": "첫 타격", "fixedDamage": [145.5], "damageRatio": [2.415], "actionDelayMs": 270},
+        {"effectId": 260702, "hitId": "dot:2", "name": "두 번째 타격", "fixedDamage": [145.5], "damageRatio": [2.415], "actionDelayMs": 420}
+      ]
+    },
+    {
+      "name": "디스토션", "gameSkillId": 26510, "identityCategory": 44,
+      "skillControlType": "Normal", "skillSlot": "Normal", "cooldown": 12,
+      "castTimesMs": [500], "properties": {"attackType": ""},
+      "hits": [
+        {"effectId": 265108, "hitId": "distortion:1", "name": "그림자 첫 타격", "fixedDamage": [48], "damageRatio": [0.789], "actionDelayMs": 284},
+        {"effectId": 265108, "hitId": "distortion:2", "name": "그림자 두 번째 타격", "fixedDamage": [48], "damageRatio": [0.789], "actionDelayMs": 333}
+      ]
+    },
+    {
+      "name": "레이지 스피어", "gameSkillId": 26810, "identityCategory": 45,
+      "skillControlType": "Normal", "skillSlot": "Normal", "cooldown": 25,
+      "castTimesMs": [2067], "properties": {"attackType": "백 어택"},
+      "hits": [
+        {"effectId": 268100, "hitId": "rage:1", "name": "찌르기", "fixedDamage": [931], "damageRatio": [15.525], "actionDelayMs": 800}
+      ]
+    },
+    {
+      "name": "페이탈 스텝", "gameSkillId": 26980, "identityCategory": 41,
+      "skillControlType": "Normal", "skillSlot": "Normal", "cooldown": 40,
+      "castTimesMs": [1233], "properties": {"attackType": "백 어택"},
+      "hits": [
+        {"effectId": 2261000, "hitId": "fatal:1", "name": "페이탈 타격", "fixedDamage": [2046.5], "damageRatio": [13.655], "actionDelayMs": 400}
+      ]
+    }
+  ]
+}

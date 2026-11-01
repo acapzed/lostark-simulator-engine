@@ -9,6 +9,7 @@ pub fn register(
     skill_pipelines: &mut SkillPipelineMap,
     req: &BuildRequest,
 ) -> Result<(), String> {
+    if req.character.class_name == "리퍼" { return Ok(()); }
     let Some(grids) = &req.character.ark_grids else { return Ok(()) };
 
     // ── 젬 (공통) — 데이터 드리븐, 레벨 기반 선택 ──────────────────────

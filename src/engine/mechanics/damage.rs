@@ -10,7 +10,7 @@ pub struct HitResult {
 
 /// 단일 히트 데미지 계산.
 ///
-/// 공식 (docs/damage-formula.md 기준):
+/// 공식 (docs/reference/damage-formula.md 기준):
 /// ```text
 /// 1. base_damage + skill_modifier × attack_power
 /// 2. × hit.damage_increase          // 스킬 고유 피해 증가 (modifier bake-in 포함)
@@ -43,6 +43,8 @@ pub fn calculate_hit_with_runtime_damage_bonus(
         effective_crit_and_evolution(snap, hit.crit_chance_bonus);
     damage *= evolution_damage;
     damage *= snap.damage_increase;
+    damage *= snap.valkyrie_passive_damage;
+    damage *= snap.source_damage_multiplier;
     damage *= snap.movement_speed_damage;
     damage *= snap.target_damage_increase;
     damage *= snap.type_damage;
@@ -63,6 +65,9 @@ pub fn calculate_hit_with_runtime_damage_bonus(
         // 치명타 적중 시 피해 증가 (팔찌 등)
         if snap.on_crit_damage_bonus > 0.0 {
             damage *= 1.0 + snap.on_crit_damage_bonus;
+        }
+        if snap.target_on_crit_damage_taken > 0.0 {
+            damage *= 1.0 + snap.target_on_crit_damage_taken;
         }
     }
 
@@ -126,6 +131,8 @@ pub fn calculate_runtime_damage(
         effective_crit_and_evolution(snap, spec.crit_chance_bonus);
     damage *= evolution_damage;
     damage *= snap.damage_increase;
+    damage *= snap.valkyrie_passive_damage;
+    damage *= snap.source_damage_multiplier;
     damage *= snap.movement_speed_damage;
     damage *= snap.target_damage_increase;
     damage *= snap.type_damage;
@@ -142,6 +149,9 @@ pub fn calculate_runtime_damage(
         damage *= snap.crit_damage + spec.crit_damage_bonus;
         if snap.on_crit_damage_bonus > 0.0 {
             damage *= 1.0 + snap.on_crit_damage_bonus;
+        }
+        if snap.target_on_crit_damage_taken > 0.0 {
+            damage *= 1.0 + snap.target_on_crit_damage_taken;
         }
     }
 
@@ -217,6 +227,8 @@ fn calculate_with_trace(
         }
     }
     damage *= snap.damage_increase;
+    damage *= snap.valkyrie_passive_damage;
+    damage *= snap.source_damage_multiplier;
     damage *= snap.movement_speed_damage;
     damage *= snap.target_damage_increase;
     damage *= snap.type_damage;
@@ -273,18 +285,31 @@ fn calculate_with_trace(
         if snap.on_crit_damage_bonus > 0.0 {
             let multiplier = 1.0 + snap.on_crit_damage_bonus;
             damage *= multiplier;
-            on_crit_damage_multiplier = Some(multiplier);
+            on_crit_damage_multiplier = Some(on_crit_damage_multiplier.unwrap_or(1.)*multiplier);
             factors.push(DamageFactorTrace {
                 name: "onCritDamage".to_string(),
                 value: multiplier,
                 operation: "multiplier".to_string(),
                 sources: vec![DamageSourceTrace {
                     source: "stat.on_crit_damage_bonus".to_string(),
-                    value: snap.on_crit_damage_bonus,
+                    value: snap.on_crit_damage_bonus-snap.valkyrie_core_crit_damage,
                     stacks: None,
                 }],
             });
+            if snap.valkyrie_core_crit_damage>0. {
+                factors.last_mut().unwrap().sources.push(DamageSourceTrace {source:"ark_grid:발키리:치명타".into(),value:snap.valkyrie_core_crit_damage,stacks:None});
+            }
         }
+        if snap.target_on_crit_damage_taken > 0.0 {
+            let multiplier = 1.0 + snap.target_on_crit_damage_taken;
+            damage *= multiplier;
+            on_crit_damage_multiplier = Some(on_crit_damage_multiplier.unwrap_or(1.0) * multiplier);
+            factors.push(DamageFactorTrace {
+                name: "targetOnCritDamage".into(), value: multiplier, operation: "multiplier".into(),
+                sources: vec![DamageSourceTrace { source: "target.on_crit_damage_taken".into(), value: snap.target_on_crit_damage_taken, stacks: None }],
+            });
+        }
+
     }
 
     let random_damage_multiplier = random_damage_multiplier(snap, rng);

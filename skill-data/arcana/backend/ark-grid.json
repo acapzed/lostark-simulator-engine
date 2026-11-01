@@ -1,1 +1,1886 @@
-{"class_id":202,"class_kor":"아르카나","source":{"core":"data/data2/EFGame_Extra/ClientData/TableData/EFTable_ArkGridCore.db","option":"data/data2/EFGame_Extra/ClientData/TableData/EFTable_ArkGridCoreOption.db","combat_effect":"data/data2/EFGame_Extra/ClientData/TableData/EFTable_CombatEffect.db","ability_feature":"data/data2/EFGame_Extra/ClientData/TableData/EFTable_AbilityFeature.db","skill_group":"data/data2/EFGame_Extra/ClientData/TableData/EFTable_SkillGroup.db"},"cores":[{"grade":"relic","name":"인피니티 덱","raw_core_id":673001315,"raw_group_id":673001313,"options":[{"pointRequirement":10,"description":"루인 스킬의 피해량이 1.6% 증가한다.","rawOptionId":3190500,"rawAddonOptions":[{"type":4,"index":3190500,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190402,"valuePercent":1.6}]},{"pointRequirement":14,"description":"'운명' 발동 시 아이덴티티 카드를 1장 획득한다.","rawOptionId":3190600,"rawAddonOptions":[{"type":28,"index":3190600,"value":1}],"runtimeEffects":[{"kind":"on_destiny_draw_cards","cards":1}]},{"pointRequirement":17,"description":"심판 카드 사용 시 6초 뒤 루인 스킬 재사용 대기시간이 15% 감소하고, 균형 카드 사용 시 30초 동안 루인 스킬 피해량이 2% 증가한다.","rawOptionId":3190700,"rawAddonOptions":[{"type":4,"index":3190700,"value":0},{"type":4,"index":3190701,"value":0}],"runtimeEffects":[{"kind":"on_card_use_delayed_skill_group_cooldown_reduction","cardId":19098,"skillGroupId":2190902,"delayMs":6000,"cooldownReductionPercent":15},{"kind":"on_card_use_skill_group_buff","cardId":19099,"skillGroupId":2190902,"buffId":3190700,"durationMs":30000,"valuePercent":2}]},{"pointRequirement":18,"description":"루인 스킬의 피해량이 0.15% 증가한다.","rawOptionId":3190900,"rawAddonOptions":[{"type":4,"index":3190900,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190402,"valuePercent":0.15}]},{"pointRequirement":19,"description":"루인 스킬의 피해량이 0.15% 증가한다.","rawOptionId":3190901,"rawAddonOptions":[{"type":4,"index":3190901,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190402,"valuePercent":0.15}]},{"pointRequirement":20,"description":"루인 스킬의 피해량이 0.15% 증가한다.","rawOptionId":3190902,"rawAddonOptions":[{"type":4,"index":3190902,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190402,"valuePercent":0.15}]}]},{"grade":"relic","name":"엣지 콤보","raw_core_id":673010315,"raw_group_id":673010313,"options":[{"pointRequirement":10,"description":"공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.","rawOptionId":3193000,"rawAddonOptions":[{"type":4,"index":3193000,"value":0}],"runtimeEffects":[{"kind":"static_on_crit_damage","valuePercent":2}]},{"pointRequirement":14,"description":"스트림 오브 엣지 사용 시 '운명'이 발동한다.","rawOptionId":3193100,"rawAddonOptions":[{"type":28,"index":3193100,"value":1}],"runtimeEffects":[{"kind":"destiny_on_skill_cast","skillId":19150,"chancePercent":100}]},{"pointRequirement":17,"description":"스트림 오브 엣지 사용 시 8초 동안 루인 스킬의 피해량이 5% 증가한다.","rawOptionId":3193200,"rawAddonOptions":[{"type":4,"index":3193200,"value":0}],"runtimeEffects":[{"kind":"on_skill_cast_skill_group_buff","skillId":19150,"skillGroupId":2190902,"buffId":3193200,"durationMs":8000,"valuePercent":5}]},{"pointRequirement":18,"description":"공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.","rawOptionId":3193400,"rawAddonOptions":[{"type":4,"index":3193400,"value":0}],"runtimeEffects":[{"kind":"static_on_crit_damage","valuePercent":0.2}]},{"pointRequirement":19,"description":"공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.","rawOptionId":3193401,"rawAddonOptions":[{"type":4,"index":3193401,"value":0}],"runtimeEffects":[{"kind":"static_on_crit_damage","valuePercent":0.2}]},{"pointRequirement":20,"description":"공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.","rawOptionId":3193402,"rawAddonOptions":[{"type":4,"index":3193402,"value":0}],"runtimeEffects":[{"kind":"static_on_crit_damage","valuePercent":0.2}]}]},{"grade":"relic","name":"황제의 심장","raw_core_id":673013315,"raw_group_id":673013313,"options":[{"pointRequirement":10,"description":"마나를 사용하는 스킬의 피해량이 2% 증가한다.","rawOptionId":3194500,"rawAddonOptions":[{"type":4,"index":3194500,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190905,"valuePercent":2}]},{"pointRequirement":14,"description":"스택트 및 일반 스킬 사용 시 18% 확률로 '운명'이 발동한다.","rawOptionId":3194600,"rawAddonOptions":[{"type":28,"index":3194600,"value":1}],"runtimeEffects":[{"kind":"destiny_on_skill_group_cast","skillGroupId":2192001,"chancePercent":18}]},{"pointRequirement":17,"description":"황제 카드의 피해량이 15% 증가한다.","rawOptionId":3194700,"rawAddonOptions":[{"type":4,"index":3194700,"value":0}],"runtimeEffects":[{"kind":"card_damage_multiplier","cardId":19282,"valuePercent":15}]},{"pointRequirement":18,"description":"마나를 사용하는 스킬의 피해량이 0.2% 증가한다.","rawOptionId":3194900,"rawAddonOptions":[{"type":4,"index":3194900,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190905,"valuePercent":0.2}]},{"pointRequirement":19,"description":"마나를 사용하는 스킬의 피해량이 0.2% 증가한다.","rawOptionId":3194901,"rawAddonOptions":[{"type":4,"index":3194901,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190905,"valuePercent":0.2}]},{"pointRequirement":20,"description":"마나를 사용하는 스킬의 피해량이 0.2% 증가한다.","rawOptionId":3194902,"rawAddonOptions":[{"type":4,"index":3194902,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190905,"valuePercent":0.2}]}]},{"grade":"relic","name":"페이탈 핸드","raw_core_id":673021315,"raw_group_id":673021313,"options":[{"pointRequirement":10,"description":"뒤틀린 운명 카드의 피해 미증가 확률이 대폭 감소하고 지속 시간이 2초 증가한다.","rawOptionId":3196500,"rawAddonOptions":[{"type":32,"index":3196500,"value":0}],"runtimeEffects":[{"kind":"twisted_fate_override","cardId":19091,"durationMs":6000}]},{"pointRequirement":14,"description":"도태 카드의 치명타 피해량 증가 효과가 20% 증가한다.","rawOptionId":3196600,"rawAddonOptions":[{"type":32,"index":3196600,"value":0}],"runtimeEffects":[{"kind":"card_crit_damage_bonus","cardId":19281,"valuePercent":20}]},{"pointRequirement":17,"description":"부식 카드의 자신에게 받는 피해 증가량을 12%로 변경한다.","rawOptionId":3196700,"rawAddonOptions":[{"type":32,"index":3196700,"value":0}],"runtimeEffects":[{"kind":"card_target_damage_override","cardId":19093,"targetBuffId":"190931","valuePercent":12}]},{"pointRequirement":18,"description":"루인 스킬의 피해량이 0.15% 증가한다.","rawOptionId":3196900,"rawAddonOptions":[{"type":4,"index":3196900,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190402,"valuePercent":0.15}]},{"pointRequirement":19,"description":"루인 스킬의 피해량이 0.15% 증가한다.","rawOptionId":3196901,"rawAddonOptions":[{"type":4,"index":3196901,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190402,"valuePercent":0.15}]},{"pointRequirement":20,"description":"루인 스킬의 피해량이 0.15% 증가한다.","rawOptionId":3196902,"rawAddonOptions":[{"type":4,"index":3196902,"value":0}],"runtimeEffects":[{"kind":"static_skill_group_damage","skillGroupId":2190402,"valuePercent":0.15}]}]}]}
+{
+  "class_id": 202,
+  "class_kor": "아르카나",
+  "source": {
+    "core": "data/data2/EFGame_Extra/ClientData/TableData/EFTable_ArkGridCore.db",
+    "option": "data/data2/EFGame_Extra/ClientData/TableData/EFTable_ArkGridCoreOption.db",
+    "combat_effect": "data/data2/EFGame_Extra/ClientData/TableData/EFTable_CombatEffect.db",
+    "ability_feature": "data/data2/EFGame_Extra/ClientData/TableData/EFTable_AbilityFeature.db",
+    "skill_group": "data/data2/EFGame_Extra/ClientData/TableData/EFTable_SkillGroup.db"
+  },
+  "cores": [
+    {
+      "grade": "hero",
+      "name": "엣지 오브 페이트",
+      "raw_core_id": 673000313,
+      "raw_group_id": 673000313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3190000,
+          "rawAddonOptions": [{ "type": 4, "index": 3190000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "엣지 오브 페이트",
+      "raw_core_id": 673000314,
+      "raw_group_id": 673000313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3190000,
+          "rawAddonOptions": [{ "type": 4, "index": 3190000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 후 스킬 사용 시 중첩을 소비해 피해량을 증가시키는 효과를 3중첩 획득한다.",
+          "rawOptionId": 3190100,
+          "rawAddonOptions": [
+            { "type": 28, "index": 3190100, "value": 1 },
+            { "type": 28, "index": 3190101, "value": 1 }
+          ],
+          "runtimeEffects": [{ "kind": "on_destiny_ruin_consumable_damage", "skillGroupId": 2190902, "buffId": 3190100, "stacks": 3, "maxStacks": 3, "valuePercent": 8 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "엣지 오브 페이트",
+      "raw_core_id": 673000315,
+      "raw_group_id": 673000313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3190000,
+          "rawAddonOptions": [{ "type": 4, "index": 3190000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 후 스킬 사용 시 중첩을 소비해 피해량을 증가시키는 효과를 3중첩 획득한다.",
+          "rawOptionId": 3190100,
+          "rawAddonOptions": [
+            { "type": 28, "index": 3190100, "value": 1 },
+            { "type": 28, "index": 3190101, "value": 1 }
+          ],
+          "runtimeEffects": [{ "kind": "on_destiny_ruin_consumable_damage", "skillGroupId": 2190902, "buffId": 3190100, "stacks": 3, "maxStacks": 3, "valuePercent": 8 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "운명 효과의 최대 중첩을 5로 늘리고 루인 스킬 피해 증가량을 13%로 변경한다.",
+          "rawOptionId": 3190200,
+          "rawAddonOptions": [
+            { "type": 28, "index": 3190100, "value": 2 },
+            { "type": 28, "index": 3190101, "value": 2 }
+          ],
+          "runtimeEffects": [{ "kind": "on_destiny_ruin_consumable_damage", "skillGroupId": 2190902, "buffId": 3190200, "stacks": 5, "maxStacks": 5, "valuePercent": 13 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3190400,
+          "rawAddonOptions": [{ "type": 4, "index": 3190400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3190401,
+          "rawAddonOptions": [{ "type": 4, "index": 3190401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3190402,
+          "rawAddonOptions": [{ "type": 4, "index": 3190402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "엣지 오브 페이트",
+      "raw_core_id": 673000316,
+      "raw_group_id": 673000313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3190000,
+          "rawAddonOptions": [{ "type": 4, "index": 3190000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 후 스킬 사용 시 중첩을 소비해 피해량을 증가시키는 효과를 3중첩 획득한다.",
+          "rawOptionId": 3190100,
+          "rawAddonOptions": [
+            { "type": 28, "index": 3190100, "value": 1 },
+            { "type": 28, "index": 3190101, "value": 1 }
+          ],
+          "runtimeEffects": [{ "kind": "on_destiny_ruin_consumable_damage", "skillGroupId": 2190902, "buffId": 3190100, "stacks": 3, "maxStacks": 3, "valuePercent": 8 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "운명 효과의 최대 중첩을 5로 늘리고 루인 스킬 피해 증가량을 14.5%로 변경한다.",
+          "rawOptionId": 3190300,
+          "rawAddonOptions": [
+            { "type": 28, "index": 3190100, "value": 3 },
+            { "type": 28, "index": 3190101, "value": 3 }
+          ],
+          "runtimeEffects": [{ "kind": "on_destiny_ruin_consumable_damage", "skillGroupId": 2190902, "buffId": 3190300, "stacks": 5, "maxStacks": 5, "valuePercent": 14.5 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3190400,
+          "rawAddonOptions": [{ "type": 4, "index": 3190400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3190401,
+          "rawAddonOptions": [{ "type": 4, "index": 3190401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3190402,
+          "rawAddonOptions": [{ "type": 4, "index": 3190402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "인피니티 덱",
+      "raw_core_id": 673001313,
+      "raw_group_id": 673001313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3190500,
+          "rawAddonOptions": [{ "type": 4, "index": 3190500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "인피니티 덱",
+      "raw_core_id": 673001314,
+      "raw_group_id": 673001313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3190500,
+          "rawAddonOptions": [{ "type": 4, "index": 3190500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 아이덴티티 카드를 1장 획득한다.",
+          "rawOptionId": 3190600,
+          "rawAddonOptions": [{ "type": 28, "index": 3190600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_draw_cards", "cards": 1 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "인피니티 덱",
+      "raw_core_id": 673001315,
+      "raw_group_id": 673001313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3190500,
+          "rawAddonOptions": [{ "type": 4, "index": 3190500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 아이덴티티 카드를 1장 획득한다.",
+          "rawOptionId": 3190600,
+          "rawAddonOptions": [{ "type": 28, "index": 3190600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_draw_cards", "cards": 1 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "심판 카드 사용 시 6초 뒤 루인 스킬 재사용 대기시간이 15% 감소하고, 균형 카드 사용 시 30초 동안 루인 스킬 피해량이 2% 증가한다.",
+          "rawOptionId": 3190700,
+          "rawAddonOptions": [
+            { "type": 4, "index": 3190700, "value": 0 },
+            { "type": 4, "index": 3190701, "value": 0 }
+          ],
+          "runtimeEffects": [
+            { "kind": "on_card_use_delayed_skill_group_cooldown_reduction", "cardId": 19098, "skillGroupId": 2190902, "delayMs": 6000, "cooldownReductionPercent": 15 },
+            { "kind": "on_card_use_skill_group_buff", "cardId": 19099, "skillGroupId": 2190902, "buffId": 3190700, "durationMs": 30000, "valuePercent": 2 }
+          ]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3190900,
+          "rawAddonOptions": [{ "type": 4, "index": 3190900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3190901,
+          "rawAddonOptions": [{ "type": 4, "index": 3190901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3190902,
+          "rawAddonOptions": [{ "type": 4, "index": 3190902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "인피니티 덱",
+      "raw_core_id": 673001316,
+      "raw_group_id": 673001313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3190500,
+          "rawAddonOptions": [{ "type": 4, "index": 3190500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 아이덴티티 카드를 1장 획득한다.",
+          "rawOptionId": 3190600,
+          "rawAddonOptions": [{ "type": 28, "index": 3190600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_draw_cards", "cards": 1 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "심판 카드 사용 시 6초 뒤 루인 스킬 재사용 대기시간이 15% 감소하고, 균형 카드 사용 시 30초 동안 루인 스킬 피해량이 3% 증가한다.",
+          "rawOptionId": 3190800,
+          "rawAddonOptions": [
+            { "type": 4, "index": 3190800, "value": 0 },
+            { "type": 4, "index": 3190701, "value": 0 }
+          ],
+          "runtimeEffects": [
+            { "kind": "on_card_use_delayed_skill_group_cooldown_reduction", "cardId": 19098, "skillGroupId": 2190902, "delayMs": 6000, "cooldownReductionPercent": 15 },
+            { "kind": "on_card_use_skill_group_buff", "cardId": 19099, "skillGroupId": 2190902, "buffId": 3190800, "durationMs": 30000, "valuePercent": 3 }
+          ]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3190900,
+          "rawAddonOptions": [{ "type": 4, "index": 3190900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3190901,
+          "rawAddonOptions": [{ "type": 4, "index": 3190901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3190902,
+          "rawAddonOptions": [{ "type": 4, "index": 3190902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "루인 서브셋",
+      "raw_core_id": 673002313,
+      "raw_group_id": 673002313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3191000,
+          "rawAddonOptions": [{ "type": 4, "index": 3191000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "루인 서브셋",
+      "raw_core_id": 673002314,
+      "raw_group_id": 673002313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3191000,
+          "rawAddonOptions": [{ "type": 4, "index": 3191000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 20초 동안 초각성 스킬을 제외한 루인 스킬의 재사용 대기시간이 8% 감소한다.",
+          "rawOptionId": 3191100,
+          "rawAddonOptions": [{ "type": 28, "index": 3191100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190904, "buffId": 3191100, "durationMs": 20000, "cooldownReductionPercent": 8 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "루인 서브셋",
+      "raw_core_id": 673002315,
+      "raw_group_id": 673002313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3191000,
+          "rawAddonOptions": [{ "type": 4, "index": 3191000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 20초 동안 초각성 스킬을 제외한 루인 스킬의 재사용 대기시간이 8% 감소한다.",
+          "rawOptionId": 3191100,
+          "rawAddonOptions": [{ "type": 28, "index": 3191100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190904, "buffId": 3191100, "durationMs": 20000, "cooldownReductionPercent": 8 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명: 루인 서브셋'에 초각성 스킬을 제외한 루인 스킬 피해량 7% 증가 효과를 추가한다.",
+          "rawOptionId": 3191200,
+          "rawAddonOptions": [{ "type": 28, "index": 3191100, "value": 2 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190904, "buffId": 3191200, "durationMs": 20000, "cooldownReductionPercent": 8, "valuePercent": 7 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3191400,
+          "rawAddonOptions": [{ "type": 4, "index": 3191400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3191401,
+          "rawAddonOptions": [{ "type": 4, "index": 3191401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3191402,
+          "rawAddonOptions": [{ "type": 4, "index": 3191402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "루인 서브셋",
+      "raw_core_id": 673002316,
+      "raw_group_id": 673002313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3191000,
+          "rawAddonOptions": [{ "type": 4, "index": 3191000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 20초 동안 초각성 스킬을 제외한 루인 스킬의 재사용 대기시간이 8% 감소한다.",
+          "rawOptionId": 3191100,
+          "rawAddonOptions": [{ "type": 28, "index": 3191100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190904, "buffId": 3191100, "durationMs": 20000, "cooldownReductionPercent": 8 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명: 루인 서브셋'에 초각성 스킬을 제외한 루인 스킬 피해량 9% 증가 효과를 추가한다.",
+          "rawOptionId": 3191300,
+          "rawAddonOptions": [{ "type": 28, "index": 3191100, "value": 3 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190904, "buffId": 3191300, "durationMs": 20000, "cooldownReductionPercent": 8, "valuePercent": 9 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3191400,
+          "rawAddonOptions": [{ "type": 4, "index": 3191400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3191401,
+          "rawAddonOptions": [{ "type": 4, "index": 3191401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3191402,
+          "rawAddonOptions": [{ "type": 4, "index": 3191402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "엣지 콤보",
+      "raw_core_id": 673010313,
+      "raw_group_id": 673010313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3193000,
+          "rawAddonOptions": [{ "type": 4, "index": 3193000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "엣지 콤보",
+      "raw_core_id": 673010314,
+      "raw_group_id": 673010313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3193000,
+          "rawAddonOptions": [{ "type": 4, "index": 3193000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "스트림 오브 엣지 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3193100,
+          "rawAddonOptions": [{ "type": 28, "index": 3193100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_cast", "skillId": 19150, "chancePercent": 100 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "엣지 콤보",
+      "raw_core_id": 673010315,
+      "raw_group_id": 673010313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3193000,
+          "rawAddonOptions": [{ "type": 4, "index": 3193000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "스트림 오브 엣지 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3193100,
+          "rawAddonOptions": [{ "type": 28, "index": 3193100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_cast", "skillId": 19150, "chancePercent": 100 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "스트림 오브 엣지 사용 시 8초 동안 루인 스킬의 피해량이 5% 증가한다.",
+          "rawOptionId": 3193200,
+          "rawAddonOptions": [{ "type": 4, "index": 3193200, "value": 0 }],
+          "runtimeEffects": [{ "kind": "on_skill_cast_skill_group_buff", "skillId": 19150, "skillGroupId": 2190902, "buffId": 3193200, "durationMs": 8000, "valuePercent": 5 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3193400,
+          "rawAddonOptions": [{ "type": 4, "index": 3193400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3193401,
+          "rawAddonOptions": [{ "type": 4, "index": 3193401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3193402,
+          "rawAddonOptions": [{ "type": 4, "index": 3193402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "엣지 콤보",
+      "raw_core_id": 673010316,
+      "raw_group_id": 673010313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 2% 증가한다.",
+          "rawOptionId": 3193000,
+          "rawAddonOptions": [{ "type": 4, "index": 3193000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "스트림 오브 엣지 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3193100,
+          "rawAddonOptions": [{ "type": 28, "index": 3193100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_cast", "skillId": 19150, "chancePercent": 100 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "스트림 오브 엣지 사용 시 8초 동안 루인 스킬의 피해량이 6% 증가한다.",
+          "rawOptionId": 3193300,
+          "rawAddonOptions": [{ "type": 4, "index": 3193300, "value": 0 }],
+          "runtimeEffects": [{ "kind": "on_skill_cast_skill_group_buff", "skillId": 19150, "skillGroupId": 2190902, "buffId": 3193300, "durationMs": 8000, "valuePercent": 6 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3193400,
+          "rawAddonOptions": [{ "type": 4, "index": 3193400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3193401,
+          "rawAddonOptions": [{ "type": 4, "index": 3193401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "공격이 치명타로 적중 시 적에게 주는 피해가 0.2% 증가한다.",
+          "rawOptionId": 3193402,
+          "rawAddonOptions": [{ "type": 4, "index": 3193402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_on_crit_damage", "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "하이 템포",
+      "raw_core_id": 673003313,
+      "raw_group_id": 673003313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3191500,
+          "rawAddonOptions": [{ "type": 4, "index": 3191500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "하이 템포",
+      "raw_core_id": 673003314,
+      "raw_group_id": 673003313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3191500,
+          "rawAddonOptions": [{ "type": 4, "index": 3191500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 15초 동안 마나를 사용하는 스킬의 재사용 대기시간이 8% 감소한다.",
+          "rawOptionId": 3191600,
+          "rawAddonOptions": [{ "type": 28, "index": 3191600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190905, "buffId": 3191600, "durationMs": 15000, "cooldownReductionPercent": 8 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "하이 템포",
+      "raw_core_id": 673003315,
+      "raw_group_id": 673003313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3191500,
+          "rawAddonOptions": [{ "type": 4, "index": 3191500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 15초 동안 마나를 사용하는 스킬의 재사용 대기시간이 8% 감소한다.",
+          "rawOptionId": 3191600,
+          "rawAddonOptions": [{ "type": 28, "index": 3191600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190905, "buffId": 3191600, "durationMs": 15000, "cooldownReductionPercent": 8 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명: 하이 템포'에 마나를 사용하는 스킬의 피해량 4% 증가 효과를 추가한다.",
+          "rawOptionId": 3191700,
+          "rawAddonOptions": [{ "type": 28, "index": 3191600, "value": 2 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190905, "buffId": 3191700, "durationMs": 15000, "cooldownReductionPercent": 8, "valuePercent": 4 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3191900,
+          "rawAddonOptions": [{ "type": 4, "index": 3191900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3191901,
+          "rawAddonOptions": [{ "type": 4, "index": 3191901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3191902,
+          "rawAddonOptions": [{ "type": 4, "index": 3191902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "하이 템포",
+      "raw_core_id": 673003316,
+      "raw_group_id": 673003313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3191500,
+          "rawAddonOptions": [{ "type": 4, "index": 3191500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 15초 동안 마나를 사용하는 스킬의 재사용 대기시간이 8% 감소한다.",
+          "rawOptionId": 3191600,
+          "rawAddonOptions": [{ "type": 28, "index": 3191600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190905, "buffId": 3191600, "durationMs": 15000, "cooldownReductionPercent": 8 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명: 하이 템포'에 마나를 사용하는 스킬의 피해량 5% 증가 효과를 추가한다.",
+          "rawOptionId": 3191800,
+          "rawAddonOptions": [{ "type": 28, "index": 3191600, "value": 3 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_buff", "skillGroupId": 2190905, "buffId": 3191800, "durationMs": 15000, "cooldownReductionPercent": 8, "valuePercent": 5 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3191900,
+          "rawAddonOptions": [{ "type": 4, "index": 3191900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3191901,
+          "rawAddonOptions": [{ "type": 4, "index": 3191901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3191902,
+          "rawAddonOptions": [{ "type": 4, "index": 3191902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "황제의 심장",
+      "raw_core_id": 673013313,
+      "raw_group_id": 673013313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3194500,
+          "rawAddonOptions": [{ "type": 4, "index": 3194500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "황제의 심장",
+      "raw_core_id": 673013314,
+      "raw_group_id": 673013313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3194500,
+          "rawAddonOptions": [{ "type": 4, "index": 3194500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "스택트 및 일반 스킬 사용 시 18% 확률로 '운명'이 발동한다.",
+          "rawOptionId": 3194600,
+          "rawAddonOptions": [{ "type": 28, "index": 3194600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_group_cast", "skillGroupId": 2192001, "chancePercent": 18 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "황제의 심장",
+      "raw_core_id": 673013315,
+      "raw_group_id": 673013313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3194500,
+          "rawAddonOptions": [{ "type": 4, "index": 3194500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "스택트 및 일반 스킬 사용 시 18% 확률로 '운명'이 발동한다.",
+          "rawOptionId": 3194600,
+          "rawAddonOptions": [{ "type": 28, "index": 3194600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_group_cast", "skillGroupId": 2192001, "chancePercent": 18 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "황제 카드의 피해량이 15% 증가한다.",
+          "rawOptionId": 3194700,
+          "rawAddonOptions": [{ "type": 4, "index": 3194700, "value": 0 }],
+          "runtimeEffects": [{ "kind": "card_damage_multiplier", "cardId": 19282, "valuePercent": 15 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3194900,
+          "rawAddonOptions": [{ "type": 4, "index": 3194900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3194901,
+          "rawAddonOptions": [{ "type": 4, "index": 3194901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3194902,
+          "rawAddonOptions": [{ "type": 4, "index": 3194902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "황제의 심장",
+      "raw_core_id": 673013316,
+      "raw_group_id": 673013313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "마나를 사용하는 스킬의 피해량이 2% 증가한다.",
+          "rawOptionId": 3194500,
+          "rawAddonOptions": [{ "type": 4, "index": 3194500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 2 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "스택트 및 일반 스킬 사용 시 18% 확률로 '운명'이 발동한다.",
+          "rawOptionId": 3194600,
+          "rawAddonOptions": [{ "type": 28, "index": 3194600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_group_cast", "skillGroupId": 2192001, "chancePercent": 18 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "황제 카드의 피해량이 20% 증가한다.",
+          "rawOptionId": 3194800,
+          "rawAddonOptions": [{ "type": 4, "index": 3194800, "value": 0 }],
+          "runtimeEffects": [{ "kind": "card_damage_multiplier", "cardId": 19282, "valuePercent": 20 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3194900,
+          "rawAddonOptions": [{ "type": 4, "index": 3194900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3194901,
+          "rawAddonOptions": [{ "type": 4, "index": 3194901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "마나를 사용하는 스킬의 피해량이 0.2% 증가한다.",
+          "rawOptionId": 3194902,
+          "rawAddonOptions": [{ "type": 4, "index": 3194902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 0.2 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "노말 인핸스",
+      "raw_core_id": 673004313,
+      "raw_group_id": 673004313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3192000,
+          "rawAddonOptions": [{ "type": 4, "index": 3192000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "노말 인핸스",
+      "raw_core_id": 673004314,
+      "raw_group_id": 673004313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3192000,
+          "rawAddonOptions": [{ "type": 4, "index": 3192000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 스택트 스킬과 일반 스킬의 재사용 대기시간이 10% 즉시 감소한다.",
+          "rawOptionId": 3192100,
+          "rawAddonOptions": [{ "type": 28, "index": 3192100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_cooldown_reduction", "skillGroupId": 2192001, "cooldownReductionPercent": 10 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "노말 인핸스",
+      "raw_core_id": 673004315,
+      "raw_group_id": 673004313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3192000,
+          "rawAddonOptions": [{ "type": 4, "index": 3192000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 스택트 스킬과 일반 스킬의 재사용 대기시간이 10% 즉시 감소한다.",
+          "rawOptionId": 3192100,
+          "rawAddonOptions": [{ "type": 28, "index": 3192100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_cooldown_reduction", "skillGroupId": 2192001, "cooldownReductionPercent": 10 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명' 발동 시 16초 동안 일반 스킬의 피해량이 3.8% 증가한다.",
+          "rawOptionId": 3192200,
+          "rawAddonOptions": [{ "type": 28, "index": 3192100, "value": 2 }],
+          "runtimeEffects": [{ "kind": "on_destiny_identity_category_damage_buff", "identityCategory": 28, "buffId": 3192200, "durationMs": 16000, "valuePercent": 3.8 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3192400,
+          "rawAddonOptions": [{ "type": 4, "index": 3192400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3192401,
+          "rawAddonOptions": [{ "type": 4, "index": 3192401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3192402,
+          "rawAddonOptions": [{ "type": 4, "index": 3192402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "노말 인핸스",
+      "raw_core_id": 673004316,
+      "raw_group_id": 673004313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3192000,
+          "rawAddonOptions": [{ "type": 4, "index": 3192000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 스택트 스킬과 일반 스킬의 재사용 대기시간이 10% 즉시 감소한다.",
+          "rawOptionId": 3192100,
+          "rawAddonOptions": [{ "type": 28, "index": 3192100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_skill_group_cooldown_reduction", "skillGroupId": 2192001, "cooldownReductionPercent": 10 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명' 발동 시 16초 동안 일반 스킬의 피해량이 5% 증가한다.",
+          "rawOptionId": 3192300,
+          "rawAddonOptions": [{ "type": 28, "index": 3192100, "value": 3 }],
+          "runtimeEffects": [{ "kind": "on_destiny_identity_category_damage_buff", "identityCategory": 28, "buffId": 3192300, "durationMs": 16000, "valuePercent": 5 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3192400,
+          "rawAddonOptions": [{ "type": 4, "index": 3192400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3192401,
+          "rawAddonOptions": [{ "type": 4, "index": 3192401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3192402,
+          "rawAddonOptions": [{ "type": 4, "index": 3192402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "스택 홀드",
+      "raw_core_id": 673014313,
+      "raw_group_id": 673014313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3195000,
+          "rawAddonOptions": [{ "type": 4, "index": 3195000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "스택 홀드",
+      "raw_core_id": 673014314,
+      "raw_group_id": 673014313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3195000,
+          "rawAddonOptions": [{ "type": 4, "index": 3195000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "아이덴티티 카드 2회 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3195100,
+          "rawAddonOptions": [{ "type": 28, "index": 3195100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_after_card_uses", "hitCount": 2 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "스택 홀드",
+      "raw_core_id": 673014315,
+      "raw_group_id": 673014313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3195000,
+          "rawAddonOptions": [{ "type": 4, "index": 3195000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "아이덴티티 카드 2회 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3195100,
+          "rawAddonOptions": [{ "type": 28, "index": 3195100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_after_card_uses", "hitCount": 2 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "스택트 중첩 중인 적에게 주는 일반 스킬의 피해량이 3% 증가한다.",
+          "rawOptionId": 3195200,
+          "rawAddonOptions": [{ "type": 4, "index": 3195200, "value": 0 }],
+          "runtimeEffects": [{ "kind": "conditional_target_stack_damage", "identityCategory": 28, "targetBuffId": "arcana_ruin_stack", "minimumStacks": 1, "valuePercent": 3 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3195400,
+          "rawAddonOptions": [{ "type": 4, "index": 3195400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3195401,
+          "rawAddonOptions": [{ "type": 4, "index": 3195401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3195402,
+          "rawAddonOptions": [{ "type": 4, "index": 3195402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "스택 홀드",
+      "raw_core_id": 673014316,
+      "raw_group_id": 673014313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "일반 스킬의 피해량이 1.7% 증가한다.",
+          "rawOptionId": 3195000,
+          "rawAddonOptions": [{ "type": 4, "index": 3195000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 1.7 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "아이덴티티 카드 2회 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3195100,
+          "rawAddonOptions": [{ "type": 28, "index": 3195100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_after_card_uses", "hitCount": 2 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "스택트 중첩 중인 적에게 주는 일반 스킬의 피해량이 4% 증가한다.",
+          "rawOptionId": 3195300,
+          "rawAddonOptions": [{ "type": 4, "index": 3195300, "value": 0 }],
+          "runtimeEffects": [{ "kind": "conditional_target_stack_damage", "identityCategory": 28, "targetBuffId": "arcana_ruin_stack", "minimumStacks": 1, "valuePercent": 4 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3195400,
+          "rawAddonOptions": [{ "type": 4, "index": 3195400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3195401,
+          "rawAddonOptions": [{ "type": 4, "index": 3195401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "일반 스킬의 피해량이 0.16% 증가한다.",
+          "rawOptionId": 3195402,
+          "rawAddonOptions": [{ "type": 4, "index": 3195402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_identity_category_damage", "identityCategory": 28, "valuePercent": 0.16 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "임팩트 메이트",
+      "raw_core_id": 673005313,
+      "raw_group_id": 673005313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3192500,
+          "rawAddonOptions": [{ "type": 4, "index": 3192500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "임팩트 메이트",
+      "raw_core_id": 673005314,
+      "raw_group_id": 673005313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3192500,
+          "rawAddonOptions": [{ "type": 4, "index": 3192500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 5초 동안 적에게 주는 피해가 10% 증가한다.",
+          "rawOptionId": 3192600,
+          "rawAddonOptions": [{ "type": 28, "index": 3192600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_damage_buff", "buffId": 3192600, "durationMs": 5000, "valuePercent": 10 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "임팩트 메이트",
+      "raw_core_id": 673005315,
+      "raw_group_id": 673005313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3192500,
+          "rawAddonOptions": [{ "type": 4, "index": 3192500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 5초 동안 적에게 주는 피해가 10% 증가한다.",
+          "rawOptionId": 3192600,
+          "rawAddonOptions": [{ "type": 28, "index": 3192600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_damage_buff", "buffId": 3192600, "durationMs": 5000, "valuePercent": 10 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명: 임팩트 메이트'의 피해 증가량을 15%로 변경한다.",
+          "rawOptionId": 3192700,
+          "rawAddonOptions": [{ "type": 28, "index": 3192600, "value": 2 }],
+          "runtimeEffects": [{ "kind": "on_destiny_damage_buff", "buffId": 3192700, "durationMs": 5000, "valuePercent": 15 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3192900,
+          "rawAddonOptions": [{ "type": 4, "index": 3192900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3192901,
+          "rawAddonOptions": [{ "type": 4, "index": 3192901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3192902,
+          "rawAddonOptions": [{ "type": 4, "index": 3192902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "임팩트 메이트",
+      "raw_core_id": 673005316,
+      "raw_group_id": 673005313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3192500,
+          "rawAddonOptions": [{ "type": 4, "index": 3192500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "'운명' 발동 시 5초 동안 적에게 주는 피해가 10% 증가한다.",
+          "rawOptionId": 3192600,
+          "rawAddonOptions": [{ "type": 28, "index": 3192600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "on_destiny_damage_buff", "buffId": 3192600, "durationMs": 5000, "valuePercent": 10 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "'운명: 임팩트 메이트'의 피해 증가량을 17%로 변경한다.",
+          "rawOptionId": 3192800,
+          "rawAddonOptions": [{ "type": 28, "index": 3192600, "value": 3 }],
+          "runtimeEffects": [{ "kind": "on_destiny_damage_buff", "buffId": 3192800, "durationMs": 5000, "valuePercent": 17 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3192900,
+          "rawAddonOptions": [{ "type": 4, "index": 3192900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3192901,
+          "rawAddonOptions": [{ "type": 4, "index": 3192901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3192902,
+          "rawAddonOptions": [{ "type": 4, "index": 3192902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "다크 메이트",
+      "raw_core_id": 673015313,
+      "raw_group_id": 673015313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3195500,
+          "rawAddonOptions": [{ "type": 4, "index": 3195500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "다크 메이트",
+      "raw_core_id": 673015314,
+      "raw_group_id": 673015313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3195500,
+          "rawAddonOptions": [{ "type": 4, "index": 3195500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "체크메이트 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3195600,
+          "rawAddonOptions": [{ "type": 28, "index": 3195600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_cast", "skillId": 19040, "chancePercent": 100 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "다크 메이트",
+      "raw_core_id": 673015315,
+      "raw_group_id": 673015313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3195500,
+          "rawAddonOptions": [{ "type": 4, "index": 3195500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "체크메이트 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3195600,
+          "rawAddonOptions": [{ "type": 28, "index": 3195600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_cast", "skillId": 19040, "chancePercent": 100 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "다크 리저렉션의 피해량이 20% 증가한다.",
+          "rawOptionId": 3195700,
+          "rawAddonOptions": [{ "type": 4, "index": 3195700, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19050, "valuePercent": 20 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3195900,
+          "rawAddonOptions": [{ "type": 4, "index": 3195900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3195901,
+          "rawAddonOptions": [{ "type": 4, "index": 3195901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3195902,
+          "rawAddonOptions": [{ "type": 4, "index": 3195902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "다크 메이트",
+      "raw_core_id": 673015316,
+      "raw_group_id": 673015313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "체크메이트의 피해량이 12% 증가한다.",
+          "rawOptionId": 3195500,
+          "rawAddonOptions": [{ "type": 4, "index": 3195500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 12 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "체크메이트 사용 시 '운명'이 발동한다.",
+          "rawOptionId": 3195600,
+          "rawAddonOptions": [{ "type": 28, "index": 3195600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_skill_cast", "skillId": 19040, "chancePercent": 100 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "다크 리저렉션의 피해량이 25% 증가한다.",
+          "rawOptionId": 3195800,
+          "rawAddonOptions": [{ "type": 4, "index": 3195800, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19050, "valuePercent": 25 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3195900,
+          "rawAddonOptions": [{ "type": 4, "index": 3195900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3195901,
+          "rawAddonOptions": [{ "type": 4, "index": 3195901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "체크메이트의 피해량이 0.8% 증가한다.",
+          "rawOptionId": 3195902,
+          "rawAddonOptions": [{ "type": 4, "index": 3195902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "체인 드로우",
+      "raw_core_id": 673011313,
+      "raw_group_id": 673011313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3193500,
+          "rawAddonOptions": [{ "type": 4, "index": 3193500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "체인 드로우",
+      "raw_core_id": 673011314,
+      "raw_group_id": 673011313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3193500,
+          "rawAddonOptions": [{ "type": 4, "index": 3193500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "아이덴티티 카드 사용 시 25% 확률로 '운명'이 발동한다.",
+          "rawOptionId": 3193600,
+          "rawAddonOptions": [{ "type": 28, "index": 3193600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_card_use", "cardSkillGroupId": 2190903, "chancePercent": 25 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "체인 드로우",
+      "raw_core_id": 673011315,
+      "raw_group_id": 673011313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3193500,
+          "rawAddonOptions": [{ "type": 4, "index": 3193500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "아이덴티티 카드 사용 시 25% 확률로 '운명'이 발동한다.",
+          "rawOptionId": 3193600,
+          "rawAddonOptions": [{ "type": 28, "index": 3193600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_card_use", "cardSkillGroupId": 2190903, "chancePercent": 25 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "스킬 적중으로 획득하는 덱 게이지가 15% 증가한다.",
+          "rawOptionId": 3193700,
+          "rawAddonOptions": [{ "type": 52, "index": 0, "value": 1500 }],
+          "runtimeEffects": [{ "kind": "card_gauge_gain_multiplier", "valuePercent": 15 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3193900,
+          "rawAddonOptions": [{ "type": 4, "index": 3193900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3193901,
+          "rawAddonOptions": [{ "type": 4, "index": 3193901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3193902,
+          "rawAddonOptions": [{ "type": 4, "index": 3193902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "체인 드로우",
+      "raw_core_id": 673011316,
+      "raw_group_id": 673011313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "루인 스킬의 피해량이 1.6% 증가한다.",
+          "rawOptionId": 3193500,
+          "rawAddonOptions": [{ "type": 4, "index": 3193500, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 1.6 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "아이덴티티 카드 사용 시 25% 확률로 '운명'이 발동한다.",
+          "rawOptionId": 3193600,
+          "rawAddonOptions": [{ "type": 28, "index": 3193600, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_on_card_use", "cardSkillGroupId": 2190903, "chancePercent": 25 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "스킬 적중으로 획득하는 덱 게이지가 17% 증가한다.",
+          "rawOptionId": 3193800,
+          "rawAddonOptions": [{ "type": 52, "index": 0, "value": 1700 }],
+          "runtimeEffects": [{ "kind": "card_gauge_gain_multiplier", "valuePercent": 17 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3193900,
+          "rawAddonOptions": [{ "type": 4, "index": 3193900, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3193901,
+          "rawAddonOptions": [{ "type": 4, "index": 3193901, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "루인 스킬의 피해량이 0.15% 증가한다.",
+          "rawOptionId": 3193902,
+          "rawAddonOptions": [{ "type": 4, "index": 3193902, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero",
+      "name": "루인 풀셋",
+      "raw_core_id": 673012313,
+      "raw_group_id": 673012313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3194000,
+          "rawAddonOptions": [{ "type": 4, "index": 3194000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        }
+      ]
+    },
+    {
+      "grade": "legend",
+      "name": "루인 풀셋",
+      "raw_core_id": 673012314,
+      "raw_group_id": 673012313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3194000,
+          "rawAddonOptions": [{ "type": 4, "index": 3194000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "루인 스킬 4회 적중 시 '운명'이 발동한다.",
+          "rawOptionId": 3194100,
+          "rawAddonOptions": [{ "type": 28, "index": 3194100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_after_skill_group_hits", "skillGroupId": 2190402, "hitCount": 4 }]
+        }
+      ]
+    },
+    {
+      "grade": "relic",
+      "name": "루인 풀셋",
+      "raw_core_id": 673012315,
+      "raw_group_id": 673012313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3194000,
+          "rawAddonOptions": [{ "type": 4, "index": 3194000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "루인 스킬 4회 적중 시 '운명'이 발동한다.",
+          "rawOptionId": 3194100,
+          "rawAddonOptions": [{ "type": 28, "index": 3194100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_after_skill_group_hits", "skillGroupId": 2190402, "hitCount": 4 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "마나를 사용하는 스킬의 피해량이 4.5% 증가한다.",
+          "rawOptionId": 3194200,
+          "rawAddonOptions": [{ "type": 4, "index": 3194200, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 4.5 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3194400,
+          "rawAddonOptions": [{ "type": 4, "index": 3194400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3194401,
+          "rawAddonOptions": [{ "type": 4, "index": 3194401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3194402,
+          "rawAddonOptions": [{ "type": 4, "index": 3194402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        }
+      ]
+    },
+    {
+      "grade": "ancient",
+      "name": "루인 풀셋",
+      "raw_core_id": 673012316,
+      "raw_group_id": 673012313,
+      "options": [
+        {
+          "pointRequirement": 10,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 2.8% 증가한다.",
+          "rawOptionId": 3194000,
+          "rawAddonOptions": [{ "type": 4, "index": 3194000, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 2.8 }]
+        },
+        {
+          "pointRequirement": 14,
+          "description": "루인 스킬 4회 적중 시 '운명'이 발동한다.",
+          "rawOptionId": 3194100,
+          "rawAddonOptions": [{ "type": 28, "index": 3194100, "value": 1 }],
+          "runtimeEffects": [{ "kind": "destiny_after_skill_group_hits", "skillGroupId": 2190402, "hitCount": 4 }]
+        },
+        {
+          "pointRequirement": 17,
+          "description": "마나를 사용하는 스킬의 피해량이 5.5% 증가한다.",
+          "rawOptionId": 3194300,
+          "rawAddonOptions": [{ "type": 4, "index": 3194300, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190905, "valuePercent": 5.5 }]
+        },
+        {
+          "pointRequirement": 18,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3194400,
+          "rawAddonOptions": [{ "type": 4, "index": 3194400, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 19,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3194401,
+          "rawAddonOptions": [{ "type": 4, "index": 3194401, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        },
+        {
+          "pointRequirement": 20,
+          "description": "초각성 스킬을 제외한 루인 스킬의 피해량이 0.3% 증가한다.",
+          "rawOptionId": 3194402,
+          "rawAddonOptions": [{ "type": 4, "index": 3194402, "value": 0 }],
+          "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190904, "valuePercent": 0.3 }]
+        }
+      ]
+    },
+    {
+      "grade": "hero", "name": "루인 마이너셋", "raw_core_id": 673022313, "raw_group_id": 673022313,
+      "options": [
+        { "pointRequirement": 10, "description": "스파이럴 엣지의 재사용 대기시간이 2초 감소한다.", "rawOptionId": 3197000, "rawAddonOptions": [{ "type": 32, "index": 3197000, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_cooldown_change", "skillId": 19190, "valueMs": -2000 }] }
+      ]
+    },
+    {
+      "grade": "legend", "name": "루인 마이너셋", "raw_core_id": 673022314, "raw_group_id": 673022313,
+      "options": [
+        { "pointRequirement": 10, "description": "스파이럴 엣지의 재사용 대기시간이 2초 감소한다.", "rawOptionId": 3197000, "rawAddonOptions": [{ "type": 32, "index": 3197000, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_cooldown_change", "skillId": 19190, "valueMs": -2000 }] },
+        { "pointRequirement": 14, "description": "세렌디피티의 시전 속도가 15% 증가하고 피해량이 20% 증가한다.", "rawOptionId": 3197100, "rawAddonOptions": [{ "type": 4, "index": 3197100, "value": 0 }, { "type": 32, "index": 3197100, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19240, "valuePercent": 20 }, { "kind": "static_skill_cast_speed", "skillId": 19240, "valuePercent": 15 }] }
+      ]
+    },
+    {
+      "grade": "relic", "name": "루인 마이너셋", "raw_core_id": 673022315, "raw_group_id": 673022313,
+      "options": [
+        { "pointRequirement": 10, "description": "스파이럴 엣지의 재사용 대기시간이 2초 감소한다.", "rawOptionId": 3197000, "rawAddonOptions": [{ "type": 32, "index": 3197000, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_cooldown_change", "skillId": 19190, "valueMs": -2000 }] },
+        { "pointRequirement": 14, "description": "세렌디피티의 시전 속도가 15% 증가하고 피해량이 20% 증가한다.", "rawOptionId": 3197100, "rawAddonOptions": [{ "type": 4, "index": 3197100, "value": 0 }, { "type": 32, "index": 3197100, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19240, "valuePercent": 20 }, { "kind": "static_skill_cast_speed", "skillId": 19240, "valuePercent": 15 }] },
+        { "pointRequirement": 17, "description": "포 카드의 피해량이 20% 증가한다.", "rawOptionId": 3197200, "rawAddonOptions": [{ "type": 4, "index": 3197200, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 20 }] },
+        { "pointRequirement": 18, "description": "포 카드의 피해량이 2% 증가한다.", "rawOptionId": 3197400, "rawAddonOptions": [{ "type": 4, "index": 3197400, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 2 }] },
+        { "pointRequirement": 19, "description": "포 카드의 피해량이 2% 증가한다.", "rawOptionId": 3197401, "rawAddonOptions": [{ "type": 4, "index": 3197401, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 2 }] },
+        { "pointRequirement": 20, "description": "포 카드의 피해량이 2% 증가한다.", "rawOptionId": 3197402, "rawAddonOptions": [{ "type": 4, "index": 3197402, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 2 }] }
+      ]
+    },
+    {
+      "grade": "ancient", "name": "루인 마이너셋", "raw_core_id": 673022316, "raw_group_id": 673022313,
+      "options": [
+        { "pointRequirement": 10, "description": "스파이럴 엣지의 재사용 대기시간이 2초 감소한다.", "rawOptionId": 3197000, "rawAddonOptions": [{ "type": 32, "index": 3197000, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_cooldown_change", "skillId": 19190, "valueMs": -2000 }] },
+        { "pointRequirement": 14, "description": "세렌디피티의 시전 속도가 15% 증가하고 피해량이 20% 증가한다.", "rawOptionId": 3197100, "rawAddonOptions": [{ "type": 4, "index": 3197100, "value": 0 }, { "type": 32, "index": 3197100, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19240, "valuePercent": 20 }, { "kind": "static_skill_cast_speed", "skillId": 19240, "valuePercent": 15 }] },
+        { "pointRequirement": 17, "description": "포 카드의 피해량이 30% 증가한다.", "rawOptionId": 3197300, "rawAddonOptions": [{ "type": 4, "index": 3197300, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 30 }] },
+        { "pointRequirement": 18, "description": "포 카드의 피해량이 2% 증가한다.", "rawOptionId": 3197400, "rawAddonOptions": [{ "type": 4, "index": 3197400, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 2 }] },
+        { "pointRequirement": 19, "description": "포 카드의 피해량이 2% 증가한다.", "rawOptionId": 3197401, "rawAddonOptions": [{ "type": 4, "index": 3197401, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 2 }] },
+        { "pointRequirement": 20, "description": "포 카드의 피해량이 2% 증가한다.", "rawOptionId": 3197402, "rawAddonOptions": [{ "type": 4, "index": 3197402, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19160, "valuePercent": 2 }] }
+      ]
+    },
+    {
+      "grade": "hero", "name": "다크 콜렉션", "raw_core_id": 673023313, "raw_group_id": 673023313,
+      "options": [
+        { "pointRequirement": 10, "description": "다크 리저렉션의 피해량이 6% 증가한다.", "rawOptionId": 3197500, "rawAddonOptions": [{ "type": 4, "index": 3197500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19050, "valuePercent": 6 }] }
+      ]
+    },
+    {
+      "grade": "legend", "name": "다크 콜렉션", "raw_core_id": 673023314, "raw_group_id": 673023313,
+      "options": [
+        { "pointRequirement": 10, "description": "다크 리저렉션의 피해량이 6% 증가한다.", "rawOptionId": 3197500, "rawAddonOptions": [{ "type": 4, "index": 3197500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19050, "valuePercent": 6 }] },
+        { "pointRequirement": 14, "description": "다크 리저렉션의 '죽음의 공포' 중독 피해량이 70% 증가한다.", "rawOptionId": 3197600, "rawAddonOptions": [{ "type": 32, "index": 3197600, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_effect_damage", "skillId": 19050, "targetEffectId": 190509, "valuePercent": 70 }] }
+      ]
+    },
+    {
+      "grade": "relic", "name": "다크 콜렉션", "raw_core_id": 673023315, "raw_group_id": 673023313,
+      "options": [
+        { "pointRequirement": 10, "description": "다크 리저렉션의 피해량이 6% 증가한다.", "rawOptionId": 3197500, "rawAddonOptions": [{ "type": 4, "index": 3197500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19050, "valuePercent": 6 }] },
+        { "pointRequirement": 14, "description": "다크 리저렉션의 '죽음의 공포' 중독 피해량이 70% 증가한다.", "rawOptionId": 3197600, "rawAddonOptions": [{ "type": 32, "index": 3197600, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_effect_damage", "skillId": 19050, "targetEffectId": 190509, "valuePercent": 70 }] },
+        { "pointRequirement": 17, "description": "이보크의 피해량이 15% 증가한다.", "rawOptionId": 3197700, "rawAddonOptions": [{ "type": 4, "index": 3197700, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 15 }] },
+        { "pointRequirement": 18, "description": "이보크의 피해량이 1.5% 증가한다.", "rawOptionId": 3197900, "rawAddonOptions": [{ "type": 4, "index": 3197900, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 1.5 }] },
+        { "pointRequirement": 19, "description": "이보크의 피해량이 1.5% 증가한다.", "rawOptionId": 3197901, "rawAddonOptions": [{ "type": 4, "index": 3197901, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 1.5 }] },
+        { "pointRequirement": 20, "description": "이보크의 피해량이 1.5% 증가한다.", "rawOptionId": 3197902, "rawAddonOptions": [{ "type": 4, "index": 3197902, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 1.5 }] }
+      ]
+    },
+    {
+      "grade": "ancient", "name": "다크 콜렉션", "raw_core_id": 673023316, "raw_group_id": 673023313,
+      "options": [
+        { "pointRequirement": 10, "description": "다크 리저렉션의 피해량이 6% 증가한다.", "rawOptionId": 3197500, "rawAddonOptions": [{ "type": 4, "index": 3197500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19050, "valuePercent": 6 }] },
+        { "pointRequirement": 14, "description": "다크 리저렉션의 '죽음의 공포' 중독 피해량이 70% 증가한다.", "rawOptionId": 3197600, "rawAddonOptions": [{ "type": 32, "index": 3197600, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_effect_damage", "skillId": 19050, "targetEffectId": 190509, "valuePercent": 70 }] },
+        { "pointRequirement": 17, "description": "이보크의 피해량이 20% 증가한다.", "rawOptionId": 3197800, "rawAddonOptions": [{ "type": 4, "index": 3197800, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 20 }] },
+        { "pointRequirement": 18, "description": "이보크의 피해량이 1.5% 증가한다.", "rawOptionId": 3197900, "rawAddonOptions": [{ "type": 4, "index": 3197900, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 1.5 }] },
+        { "pointRequirement": 19, "description": "이보크의 피해량이 1.5% 증가한다.", "rawOptionId": 3197901, "rawAddonOptions": [{ "type": 4, "index": 3197901, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 1.5 }] },
+        { "pointRequirement": 20, "description": "이보크의 피해량이 1.5% 증가한다.", "rawOptionId": 3197902, "rawAddonOptions": [{ "type": 4, "index": 3197902, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190906, "valuePercent": 1.5 }] }
+      ]
+    },
+    {
+      "grade": "hero", "name": "스트림 오브 엣지", "raw_core_id": 673020313, "raw_group_id": 673020313,
+      "options": [{ "pointRequirement": 10, "description": "스트림 오브 엣지가 최대 2회 충전되고, 사용 시 8초 동안 공격 속도가 8% 증가한다.", "rawOptionId": 3196000, "rawAddonOptions": [{ "type": 4, "index": 3196000, "value": 0 }, { "type": 32, "index": 3196000, "value": 0 }], "runtimeEffects": [{ "kind": "skill_charge_and_speed_buff", "skillId": 19150, "maxCharges": 2, "rechargeMs": 24000, "valueMs": -23000, "durationMs": 8000, "valuePercent": 8 }] }]
+    },
+    {
+      "grade": "legend", "name": "스트림 오브 엣지", "raw_core_id": 673020314, "raw_group_id": 673020313,
+      "options": [
+        { "pointRequirement": 10, "description": "스트림 오브 엣지가 최대 2회 충전되고, 사용 시 8초 동안 공격 속도가 8% 증가한다.", "rawOptionId": 3196000, "rawAddonOptions": [{ "type": 4, "index": 3196000, "value": 0 }, { "type": 32, "index": 3196000, "value": 0 }], "runtimeEffects": [{ "kind": "skill_charge_and_speed_buff", "skillId": 19150, "maxCharges": 2, "rechargeMs": 24000, "valueMs": -23000, "durationMs": 8000, "valuePercent": 8 }] },
+        { "pointRequirement": 14, "description": "셀레스티얼 레인의 피해량이 8% 증가한다.", "rawOptionId": 3196100, "rawAddonOptions": [{ "type": 4, "index": 3196100, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 8 }] }
+      ]
+    },
+    {
+      "grade": "relic", "name": "스트림 오브 엣지", "raw_core_id": 673020315, "raw_group_id": 673020313,
+      "options": [
+        { "pointRequirement": 10, "description": "스트림 오브 엣지가 최대 2회 충전되고, 사용 시 8초 동안 공격 속도가 8% 증가한다.", "rawOptionId": 3196000, "rawAddonOptions": [{ "type": 4, "index": 3196000, "value": 0 }, { "type": 32, "index": 3196000, "value": 0 }], "runtimeEffects": [{ "kind": "skill_charge_and_speed_buff", "skillId": 19150, "maxCharges": 2, "rechargeMs": 24000, "valueMs": -23000, "durationMs": 8000, "valuePercent": 8 }] },
+        { "pointRequirement": 14, "description": "셀레스티얼 레인의 피해량이 8% 증가한다.", "rawOptionId": 3196100, "rawAddonOptions": [{ "type": 4, "index": 3196100, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 8 }] },
+        { "pointRequirement": 17, "description": "다크니스 엣지의 치명타 적중률 버프 중첩당 치명타 피해가 1.6% 증가한다.", "rawOptionId": 3196200, "rawAddonOptions": [{ "type": 32, "index": 3196200, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_buff_crit_damage_per_stack", "skillId": 19150, "requiredTripodName": "다크니스 엣지", "sourceBuffId": 191542, "buffId": 3196200, "maxStacks": 5, "valuePercent": 1.6, "durationMs": 3000 }] },
+        { "pointRequirement": 18, "description": "셀레스티얼 레인의 피해량이 0.8% 증가한다.", "rawOptionId": 3196400, "rawAddonOptions": [{ "type": 4, "index": 3196400, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 0.8 }] },
+        { "pointRequirement": 19, "description": "셀레스티얼 레인의 피해량이 0.8% 증가한다.", "rawOptionId": 3196401, "rawAddonOptions": [{ "type": 4, "index": 3196401, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 0.8 }] },
+        { "pointRequirement": 20, "description": "셀레스티얼 레인의 피해량이 0.8% 증가한다.", "rawOptionId": 3196402, "rawAddonOptions": [{ "type": 4, "index": 3196402, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 0.8 }] }
+      ]
+    },
+    {
+      "grade": "ancient", "name": "스트림 오브 엣지", "raw_core_id": 673020316, "raw_group_id": 673020313,
+      "options": [
+        { "pointRequirement": 10, "description": "스트림 오브 엣지가 최대 2회 충전되고, 사용 시 8초 동안 공격 속도가 8% 증가한다.", "rawOptionId": 3196000, "rawAddonOptions": [{ "type": 4, "index": 3196000, "value": 0 }, { "type": 32, "index": 3196000, "value": 0 }], "runtimeEffects": [{ "kind": "skill_charge_and_speed_buff", "skillId": 19150, "maxCharges": 2, "rechargeMs": 24000, "valueMs": -23000, "durationMs": 8000, "valuePercent": 8 }] },
+        { "pointRequirement": 14, "description": "셀레스티얼 레인의 피해량이 8% 증가한다.", "rawOptionId": 3196100, "rawAddonOptions": [{ "type": 4, "index": 3196100, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 8 }] },
+        { "pointRequirement": 17, "description": "다크니스 엣지의 치명타 적중률 버프 중첩당 치명타 피해가 2.2% 증가한다.", "rawOptionId": 3196300, "rawAddonOptions": [{ "type": 32, "index": 3196300, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_buff_crit_damage_per_stack", "skillId": 19150, "requiredTripodName": "다크니스 엣지", "sourceBuffId": 191542, "buffId": 3196300, "maxStacks": 5, "valuePercent": 2.2, "durationMs": 3000 }] },
+        { "pointRequirement": 18, "description": "셀레스티얼 레인의 피해량이 0.8% 증가한다.", "rawOptionId": 3196400, "rawAddonOptions": [{ "type": 4, "index": 3196400, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 0.8 }] },
+        { "pointRequirement": 19, "description": "셀레스티얼 레인의 피해량이 0.8% 증가한다.", "rawOptionId": 3196401, "rawAddonOptions": [{ "type": 4, "index": 3196401, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 0.8 }] },
+        { "pointRequirement": 20, "description": "셀레스티얼 레인의 피해량이 0.8% 증가한다.", "rawOptionId": 3196402, "rawAddonOptions": [{ "type": 4, "index": 3196402, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19140, "valuePercent": 0.8 }] }
+      ]
+    },
+    {
+      "grade": "hero", "name": "페이탈 핸드", "raw_core_id": 673021313, "raw_group_id": 673021313,
+      "options": [{ "pointRequirement": 10, "description": "뒤틀린 운명 카드의 피해 미증가 확률이 대폭 감소하고 지속 시간이 2초 증가한다.", "rawOptionId": 3196500, "rawAddonOptions": [{ "type": 32, "index": 3196500, "value": 0 }], "runtimeEffects": [{ "kind": "twisted_fate_override", "cardId": 19091, "durationMs": 6000 }] }]
+    },
+    {
+      "grade": "legend", "name": "페이탈 핸드", "raw_core_id": 673021314, "raw_group_id": 673021313,
+      "options": [
+        { "pointRequirement": 10, "description": "뒤틀린 운명 카드의 피해 미증가 확률이 대폭 감소하고 지속 시간이 2초 증가한다.", "rawOptionId": 3196500, "rawAddonOptions": [{ "type": 32, "index": 3196500, "value": 0 }], "runtimeEffects": [{ "kind": "twisted_fate_override", "cardId": 19091, "durationMs": 6000 }] },
+        { "pointRequirement": 14, "description": "도태 카드의 치명타 피해량 증가 효과가 20% 증가한다.", "rawOptionId": 3196600, "rawAddonOptions": [{ "type": 32, "index": 3196600, "value": 0 }], "runtimeEffects": [{ "kind": "card_crit_damage_bonus", "cardId": 19281, "valuePercent": 20 }] }
+      ]
+    },
+    {
+      "grade": "relic", "name": "페이탈 핸드", "raw_core_id": 673021315, "raw_group_id": 673021313,
+      "options": [
+        { "pointRequirement": 10, "description": "뒤틀린 운명 카드의 피해 미증가 확률이 대폭 감소하고 지속 시간이 2초 증가한다.", "rawOptionId": 3196500, "rawAddonOptions": [{ "type": 32, "index": 3196500, "value": 0 }], "runtimeEffects": [{ "kind": "twisted_fate_override", "cardId": 19091, "durationMs": 6000 }] },
+        { "pointRequirement": 14, "description": "도태 카드의 치명타 피해량 증가 효과가 20% 증가한다.", "rawOptionId": 3196600, "rawAddonOptions": [{ "type": 32, "index": 3196600, "value": 0 }], "runtimeEffects": [{ "kind": "card_crit_damage_bonus", "cardId": 19281, "valuePercent": 20 }] },
+        { "pointRequirement": 17, "description": "부식 카드의 자신에게 받는 피해 증가량을 12%로 변경한다.", "rawOptionId": 3196700, "rawAddonOptions": [{ "type": 32, "index": 3196700, "value": 0 }], "runtimeEffects": [{ "kind": "card_target_damage_override", "cardId": 19093, "targetBuffId": "190931", "valuePercent": 12 }] },
+        { "pointRequirement": 18, "description": "루인 스킬의 피해량이 0.15% 증가한다.", "rawOptionId": 3196900, "rawAddonOptions": [{ "type": 4, "index": 3196900, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }] },
+        { "pointRequirement": 19, "description": "루인 스킬의 피해량이 0.15% 증가한다.", "rawOptionId": 3196901, "rawAddonOptions": [{ "type": 4, "index": 3196901, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }] },
+        { "pointRequirement": 20, "description": "루인 스킬의 피해량이 0.15% 증가한다.", "rawOptionId": 3196902, "rawAddonOptions": [{ "type": 4, "index": 3196902, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }] }
+      ]
+    },
+    {
+      "grade": "ancient", "name": "페이탈 핸드", "raw_core_id": 673021316, "raw_group_id": 673021313,
+      "options": [
+        { "pointRequirement": 10, "description": "뒤틀린 운명 카드의 피해 미증가 확률이 대폭 감소하고 지속 시간이 2초 증가한다.", "rawOptionId": 3196500, "rawAddonOptions": [{ "type": 32, "index": 3196500, "value": 0 }], "runtimeEffects": [{ "kind": "twisted_fate_override", "cardId": 19091, "durationMs": 6000 }] },
+        { "pointRequirement": 14, "description": "도태 카드의 치명타 피해량 증가 효과가 20% 증가한다.", "rawOptionId": 3196600, "rawAddonOptions": [{ "type": 32, "index": 3196600, "value": 0 }], "runtimeEffects": [{ "kind": "card_crit_damage_bonus", "cardId": 19281, "valuePercent": 20 }] },
+        { "pointRequirement": 17, "description": "부식 카드의 자신에게 받는 피해 증가량을 13%로 변경한다.", "rawOptionId": 3196800, "rawAddonOptions": [{ "type": 32, "index": 3196800, "value": 0 }], "runtimeEffects": [{ "kind": "card_target_damage_override", "cardId": 19093, "targetBuffId": "190931", "valuePercent": 13 }] },
+        { "pointRequirement": 18, "description": "루인 스킬의 피해량이 0.15% 증가한다.", "rawOptionId": 3196900, "rawAddonOptions": [{ "type": 4, "index": 3196900, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }] },
+        { "pointRequirement": 19, "description": "루인 스킬의 피해량이 0.15% 증가한다.", "rawOptionId": 3196901, "rawAddonOptions": [{ "type": 4, "index": 3196901, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }] },
+        { "pointRequirement": 20, "description": "루인 스킬의 피해량이 0.15% 증가한다.", "rawOptionId": 3196902, "rawAddonOptions": [{ "type": 4, "index": 3196902, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_group_damage", "skillGroupId": 2190402, "valuePercent": 0.15 }] }
+      ]
+    },
+    {
+      "grade": "hero", "name": "셔플 댄스", "raw_core_id": 673024313, "raw_group_id": 673024313,
+      "options": [{ "pointRequirement": 10, "description": "댄싱 오브 스파인플라워의 페이크 플립 재사용 대기시간이 20초 증가하지만 치명적 가시 피해량이 115% 증가한다.", "rawOptionId": 3198000, "rawAddonOptions": [{ "type": 32, "index": 3198000, "value": 0 }, { "type": 32, "index": 3198001, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_cooldown_and_effect_damage", "skillId": 19200, "tripodSlot": 8, "valueMs": 20000, "targetEffectId": 192011, "valuePercent": 115 }] }]
+    },
+    {
+      "grade": "legend", "name": "셔플 댄스", "raw_core_id": 673024314, "raw_group_id": 673024313,
+      "options": [
+        { "pointRequirement": 10, "description": "댄싱 오브 스파인플라워의 페이크 플립 재사용 대기시간이 20초 증가하지만 치명적 가시 피해량이 115% 증가한다.", "rawOptionId": 3198000, "rawAddonOptions": [{ "type": 32, "index": 3198000, "value": 0 }, { "type": 32, "index": 3198001, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_cooldown_and_effect_damage", "skillId": 19200, "tripodSlot": 8, "valueMs": 20000, "targetEffectId": 192011, "valuePercent": 115 }] },
+        { "pointRequirement": 14, "description": "페이크 플립의 치명적 가시 중첩이 2씩 증가하고 적중 시 33% 확률로 아이덴티티 카드 1장을 획득한다.", "rawOptionId": 3198100, "rawAddonOptions": [{ "type": 32, "index": 3198100, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_stack_and_card_draw", "skillId": 19200, "tripodSlot": 8, "targetEffectId": 192011, "stacks": 2, "chancePercent": 33, "cards": 1 }] }
+      ]
+    },
+    {
+      "grade": "relic", "name": "셔플 댄스", "raw_core_id": 673024315, "raw_group_id": 673024313,
+      "options": [
+        { "pointRequirement": 10, "description": "댄싱 오브 스파인플라워의 페이크 플립 재사용 대기시간이 20초 증가하지만 치명적 가시 피해량이 115% 증가한다.", "rawOptionId": 3198000, "rawAddonOptions": [{ "type": 32, "index": 3198000, "value": 0 }, { "type": 32, "index": 3198001, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_cooldown_and_effect_damage", "skillId": 19200, "tripodSlot": 8, "valueMs": 20000, "targetEffectId": 192011, "valuePercent": 115 }] },
+        { "pointRequirement": 14, "description": "페이크 플립의 치명적 가시 중첩이 2씩 증가하고 적중 시 33% 확률로 아이덴티티 카드 1장을 획득한다.", "rawOptionId": 3198100, "rawAddonOptions": [{ "type": 32, "index": 3198100, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_stack_and_card_draw", "skillId": 19200, "tripodSlot": 8, "targetEffectId": 192011, "stacks": 2, "chancePercent": 33, "cards": 1 }] },
+        { "pointRequirement": 17, "description": "언리미티드 셔플의 재사용 대기시간이 20초 증가하지만 피해량이 80% 증가한다.", "rawOptionId": 3198200, "rawAddonOptions": [{ "type": 32, "index": 3198200, "value": 0 }, { "type": 4, "index": 3198200, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19120, "valuePercent": 80 }, { "kind": "static_skill_cooldown_change", "skillId": 19120, "valueMs": 20000 }] },
+        { "pointRequirement": 18, "description": "댄싱 오브 스파인플라워의 피해량이 1.6% 증가한다.", "rawOptionId": 3198400, "rawAddonOptions": [{ "type": 4, "index": 3198400, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19200, "valuePercent": 1.6 }] },
+        { "pointRequirement": 19, "description": "댄싱 오브 스파인플라워의 피해량이 1.6% 증가한다.", "rawOptionId": 3198401, "rawAddonOptions": [{ "type": 4, "index": 3198401, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19200, "valuePercent": 1.6 }] },
+        { "pointRequirement": 20, "description": "댄싱 오브 스파인플라워의 피해량이 1.6% 증가한다.", "rawOptionId": 3198402, "rawAddonOptions": [{ "type": 4, "index": 3198402, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19200, "valuePercent": 1.6 }] }
+      ]
+    },
+    {
+      "grade": "ancient", "name": "셔플 댄스", "raw_core_id": 673024316, "raw_group_id": 673024313,
+      "options": [
+        { "pointRequirement": 10, "description": "댄싱 오브 스파인플라워의 페이크 플립 재사용 대기시간이 20초 증가하지만 치명적 가시 피해량이 115% 증가한다.", "rawOptionId": 3198000, "rawAddonOptions": [{ "type": 32, "index": 3198000, "value": 0 }, { "type": 32, "index": 3198001, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_cooldown_and_effect_damage", "skillId": 19200, "tripodSlot": 8, "valueMs": 20000, "targetEffectId": 192011, "valuePercent": 115 }] },
+        { "pointRequirement": 14, "description": "페이크 플립의 치명적 가시 중첩이 2씩 증가하고 적중 시 33% 확률로 아이덴티티 카드 1장을 획득한다.", "rawOptionId": 3198100, "rawAddonOptions": [{ "type": 32, "index": 3198100, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_stack_and_card_draw", "skillId": 19200, "tripodSlot": 8, "targetEffectId": 192011, "stacks": 2, "chancePercent": 33, "cards": 1 }] },
+        { "pointRequirement": 17, "description": "언리미티드 셔플의 재사용 대기시간이 20초 증가하지만 피해량이 90% 증가한다.", "rawOptionId": 3198300, "rawAddonOptions": [{ "type": 32, "index": 3198200, "value": 0 }, { "type": 4, "index": 3198300, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19120, "valuePercent": 90 }, { "kind": "static_skill_cooldown_change", "skillId": 19120, "valueMs": 20000 }] },
+        { "pointRequirement": 18, "description": "댄싱 오브 스파인플라워의 피해량이 1.6% 증가한다.", "rawOptionId": 3198400, "rawAddonOptions": [{ "type": 4, "index": 3198400, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19200, "valuePercent": 1.6 }] },
+        { "pointRequirement": 19, "description": "댄싱 오브 스파인플라워의 피해량이 1.6% 증가한다.", "rawOptionId": 3198401, "rawAddonOptions": [{ "type": 4, "index": 3198401, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19200, "valuePercent": 1.6 }] },
+        { "pointRequirement": 20, "description": "댄싱 오브 스파인플라워의 피해량이 1.6% 증가한다.", "rawOptionId": 3198402, "rawAddonOptions": [{ "type": 4, "index": 3198402, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19200, "valuePercent": 1.6 }] }
+      ]
+    },
+    {
+      "grade": "hero", "name": "스피드 메이트", "raw_core_id": 673025313, "raw_group_id": 673025313,
+      "options": [{ "pointRequirement": 10, "description": "체크메이트 사용 중 피격 이상에 면역이 되고 홀딩 속도가 30% 증가한다.", "rawOptionId": 3198500, "rawAddonOptions": [{ "type": 32, "index": 3198500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_holding_speed", "skillId": 19040, "valuePercent": 30 }] }]
+    },
+    {
+      "grade": "legend", "name": "스피드 메이트", "raw_core_id": 673025314, "raw_group_id": 673025313,
+      "options": [
+        { "pointRequirement": 10, "description": "체크메이트 사용 중 피격 이상에 면역이 되고 홀딩 속도가 30% 증가한다.", "rawOptionId": 3198500, "rawAddonOptions": [{ "type": 32, "index": 3198500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_holding_speed", "skillId": 19040, "valuePercent": 30 }] },
+        { "pointRequirement": 14, "description": "이보크의 재사용 대기시간이 10초 증가하지만 마나 중독 피해량이 100% 증가한다.", "rawOptionId": 3198600, "rawAddonOptions": [{ "type": 32, "index": 3198600, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_cooldown_and_effect_damage", "skillId": 19030, "tripodSlot": 5, "valueMs": 10000, "targetEffectId": 190330, "valuePercent": 100 }] }
+      ]
+    },
+    {
+      "grade": "relic", "name": "스피드 메이트", "raw_core_id": 673025315, "raw_group_id": 673025313,
+      "options": [
+        { "pointRequirement": 10, "description": "체크메이트 사용 중 피격 이상에 면역이 되고 홀딩 속도가 30% 증가한다.", "rawOptionId": 3198500, "rawAddonOptions": [{ "type": 32, "index": 3198500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_holding_speed", "skillId": 19040, "valuePercent": 30 }] },
+        { "pointRequirement": 14, "description": "이보크의 재사용 대기시간이 10초 증가하지만 마나 중독 피해량이 100% 증가한다.", "rawOptionId": 3198600, "rawAddonOptions": [{ "type": 32, "index": 3198600, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_cooldown_and_effect_damage", "skillId": 19030, "tripodSlot": 5, "valueMs": 10000, "targetEffectId": 190330, "valuePercent": 100 }] },
+        { "pointRequirement": 17, "description": "체크메이트의 피해량이 16% 증가한다.", "rawOptionId": 3198700, "rawAddonOptions": [{ "type": 4, "index": 3198700, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 16 }] },
+        { "pointRequirement": 18, "description": "체크메이트의 피해량이 0.8% 증가한다.", "rawOptionId": 3198900, "rawAddonOptions": [{ "type": 4, "index": 3198900, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }] },
+        { "pointRequirement": 19, "description": "체크메이트의 피해량이 0.8% 증가한다.", "rawOptionId": 3198901, "rawAddonOptions": [{ "type": 4, "index": 3198901, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }] },
+        { "pointRequirement": 20, "description": "체크메이트의 피해량이 0.8% 증가한다.", "rawOptionId": 3198902, "rawAddonOptions": [{ "type": 4, "index": 3198902, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }] }
+      ]
+    },
+    {
+      "grade": "ancient", "name": "스피드 메이트", "raw_core_id": 673025316, "raw_group_id": 673025313,
+      "options": [
+        { "pointRequirement": 10, "description": "체크메이트 사용 중 피격 이상에 면역이 되고 홀딩 속도가 30% 증가한다.", "rawOptionId": 3198500, "rawAddonOptions": [{ "type": 32, "index": 3198500, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_holding_speed", "skillId": 19040, "valuePercent": 30 }] },
+        { "pointRequirement": 14, "description": "이보크의 재사용 대기시간이 10초 증가하지만 마나 중독 피해량이 100% 증가한다.", "rawOptionId": 3198600, "rawAddonOptions": [{ "type": 32, "index": 3198600, "value": 0 }], "runtimeEffects": [{ "kind": "tripod_cooldown_and_effect_damage", "skillId": 19030, "tripodSlot": 5, "valueMs": 10000, "targetEffectId": 190330, "valuePercent": 100 }] },
+        { "pointRequirement": 17, "description": "체크메이트의 피해량이 20% 증가한다.", "rawOptionId": 3198800, "rawAddonOptions": [{ "type": 4, "index": 3198800, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 20 }] },
+        { "pointRequirement": 18, "description": "체크메이트의 피해량이 0.8% 증가한다.", "rawOptionId": 3198900, "rawAddonOptions": [{ "type": 4, "index": 3198900, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }] },
+        { "pointRequirement": 19, "description": "체크메이트의 피해량이 0.8% 증가한다.", "rawOptionId": 3198901, "rawAddonOptions": [{ "type": 4, "index": 3198901, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }] },
+        { "pointRequirement": 20, "description": "체크메이트의 피해량이 0.8% 증가한다.", "rawOptionId": 3198902, "rawAddonOptions": [{ "type": 4, "index": 3198902, "value": 0 }], "runtimeEffects": [{ "kind": "static_skill_damage", "skillId": 19040, "valuePercent": 0.8 }] }
+      ]
+    }
+  ]
+}

@@ -40,8 +40,33 @@ fn apply_effect(
 ) {
     let Some(&val) = effect.values.first() else { return };
 
+    // Older imported saves matched the prefix 치명 before 치명타 피해/적중률.
+    // Recover only these ambiguous labels from their preserved descriptions.
+    let desc = effect.descriptions.join(" ");
+    let name = match effect.name.as_str() {
+        "치명" | "" if desc.starts_with("치명타 피해") && !desc.contains("저항") => {
+            if effect.values.len() > 1 && desc.contains("적중 시") {
+                "치명타 피해 및 적중 시 피해 증가"
+            } else { "치명타 피해" }
+        }
+        "치명" | "" if desc.starts_with("치명타 적중률") => {
+            if effect.values.len() > 1 && desc.contains("적중 시") {
+                "치명타 적중률 및 적중 시 피해 증가"
+            } else { "치명타 적중률" }
+        }
+        "피해 증가" if desc.contains("무력화") && effect.values.len() > 1 =>
+            "피해 증가 및 무력화 시 피해 증가",
+        name => name,
+    };
     // ── name 기반 매칭 ────────────────────────────────────────────────────
-    match effect.name.as_str() {
+    match name {
+
+        "치명" => { stat.add_flat("bracelet:치명", move |s| s.crit += val); return; }
+        "특화" => { stat.add_flat("bracelet:특화", move |s| s.specialization += val); return; }
+        "신속" => { stat.add_flat("bracelet:신속", move |s| s.swiftness += val); return; }
+        "제압" => { stat.add_flat("bracelet:제압", move |s| s.domination += val); return; }
+        "인내" => { stat.add_flat("bracelet:인내", move |s| s.endurance += val); return; }
+        "숙련" => { stat.add_flat("bracelet:숙련", move |s| s.expertise += val); return; }
 
         // ── 기본 효과 ─────────────────────────────────────────────────────
         "힘, 민첩, 지능" => {

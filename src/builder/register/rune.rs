@@ -57,6 +57,9 @@ pub fn register(
                     pipeline.add_trigger(move |profile| {
                         for hit in &mut profile.hits {
                             for trigger in &mut hit.triggers {
+                                if let TriggerEffect::DealDamageByTargetBuffStacks { card_gauge_by_stack, .. } = &mut trigger.effect {
+                                    for amount in card_gauge_by_stack { *amount *= multiplier; }
+                                }
                                 if let TriggerEffect::GainResource { resource, amount } = &mut trigger.effect {
                                     if resource == "CardGauge" {
                                         *amount *= multiplier;
@@ -168,6 +171,7 @@ pub fn register(
                         effect: TriggerEffect::ScheduleDot {
                             dot_id: effect.dot_id.clone(),
                             hit: RuntimeDamageSpec {
+                                destruction: 0,
                                 hit_id: effect.hit_id.clone(),
                                 name: effect.name.clone(),
                                 base_damage: effect.fixed_damage,
@@ -184,6 +188,7 @@ pub fn register(
                             tick_interval_ms: effect.tick_interval_ms,
                             tick_count: effect.tick_count,
                             refresh: true,
+                            independent: true,
                         },
                         chance: 1.0,
                     };

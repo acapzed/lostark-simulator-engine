@@ -3,11 +3,7 @@ use crate::builder::stat::StatBuilder;
 use crate::profile::StatField;
 
 pub fn register(stat: &mut StatBuilder, req: &BuildRequest) {
-    if !req.enable_pet_buff {
-        return;
-    }
-
-    match req.pet_buff_type.as_str() {
+    match if req.enable_pet_buff { req.pet_buff_type.as_str() } else { "" } {
         "치명" => stat.add_flat("pet:버프", |s| s.crit += 160.0),
         "특화" => stat.add_flat("pet:버프", |s| s.specialization += 160.0),
         "신속" => stat.add_flat("pet:버프", |s| s.swiftness += 160.0),

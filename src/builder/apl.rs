@@ -121,7 +121,7 @@ pub fn build(
         let conditions = raw_action
             .conditions
             .iter()
-            .map(|condition| compile_condition(condition, skill_id, &name_to_id, &card_name_to_id, buffs))
+            .map(|condition| compile_condition(condition, Some(skill_id), &name_to_id, &card_name_to_id, buffs))
             .collect::<Result<Vec<_>, _>>()?;
         actions.push(AplAction {
             skill_id,
@@ -143,7 +143,7 @@ pub fn build(
                 conditions: raw_action
                     .conditions
                     .iter()
-                    .map(|condition| compile_condition(condition, 0, &name_to_id, &card_name_to_id, buffs))
+                    .map(|condition| compile_condition(condition, None, &name_to_id, &card_name_to_id, buffs))
                     .collect::<Result<Vec<_>, String>>()?,
             })
         })
@@ -181,7 +181,7 @@ fn names_to_order(names: &[String], name_to_id: &HashMap<&str, u32>) -> Result<V
 
 fn compile_condition(
     raw: &RawCondition,
-    current_skill_id: u32,
+    current_skill_id: Option<u32>,
     name_to_id: &HashMap<&str, u32>,
     card_name_to_id: &HashMap<&str, u32>,
     buffs: &[BuffMetadataInput],
@@ -195,7 +195,10 @@ fn compile_condition(
         }
     };
     Ok(match raw.condition_type.as_str() {
-        "cooldown_ready" => AplCondition::CooldownReady,
+        "cooldown_ready" => {
+            require_current_skill(raw, current_skill_id)?;
+            AplCondition::CooldownReady
+        },
         "skill_cooldown_ready" => name_to_id
             .get(required_field(raw, "skill", &raw.skill)?)
             .copied()
@@ -230,7 +233,7 @@ fn compile_condition(
             operator: op()?,
             value: raw.value,
         },
-        "next_skill" if current_skill_id == 0 => name_to_id
+        "next_skill" if current_skill_id.is_none() => name_to_id
             .get(required_field(raw, "skill", &raw.skill)?)
             .copied()
             .map(AplCondition::NextSkill)
@@ -254,10 +257,13 @@ fn compile_condition(
             operator: op()?,
             value: raw.value,
         },
-        "skill_target_stack_gain" => AplCondition::SkillTargetStackGain {
-            debuff_id: normalize_target_debuff_id(required_field(raw, "debuff", &raw.debuff)?),
-            operator: op()?,
-            value: raw.value,
+        "skill_target_stack_gain" => {
+            require_current_skill(raw, current_skill_id)?;
+            AplCondition::SkillTargetStackGain {
+                debuff_id: normalize_target_debuff_id(required_field(raw, "debuff", &raw.debuff)?),
+                operator: op()?,
+                value: raw.value,
+            }
         },
         "combo_phase" => AplCondition::ComboPhase {
             skill_id: named_skill_or_current(raw, current_skill_id, name_to_id)?,
@@ -290,17 +296,21 @@ fn required_field<'a>(raw: &RawCondition, field: &str, value: &'a str) -> Result
 
 fn named_skill_or_current(
     raw: &RawCondition,
-    current_skill_id: u32,
+    current_skill_id: Option<u32>,
     name_to_id: &HashMap<&str, u32>,
 ) -> Result<u32, String> {
     if raw.skill.is_empty() {
-        Ok(current_skill_id)
+        require_current_skill(raw, current_skill_id)
     } else {
         name_to_id
             .get(raw.skill.as_str())
             .copied()
             .ok_or_else(|| format!("APL에 존재하지 않는 스킬: {}", raw.skill))
     }
+}
+
+fn require_current_skill(raw: &RawCondition, current: Option<u32>) -> Result<u32, String> {
+    current.ok_or_else(|| format!("APL {} 조건은 현재 스킬이 필요합니다", raw.condition_type))
 }
 
 fn seconds_to_ms(value: f64) -> u64 {
@@ -313,7 +323,8 @@ fn normalize_resource(name: &str) -> Result<String, String> {
         "mp" => "Mp",
         other => other,
     };
-    if !matches!(resource, "Hp" | "MaxHp" | "Mp" | "CardGauge" | "UltimatePoint") {
+    if !matches!(resource, "Hp" | "MaxHp" | "Mp" | "CardGauge" | "UltimatePoint"
+        | "ReaperDark" | "ReaperHeat" | "ReaperPersona" | "ReaperChaosRemaining" | "ReaperWeakness" | "ReaperBlade" | "Light" | "LightSword" | "LostLightSword") {
         return Err(format!("APL에 알 수 없는 자원: {name}"));
     }
     Ok(resource.to_string())
@@ -364,13 +375,26 @@ mod tests {
             max_stacks: 1,
             charge_recovery_ms: 0,
             resource_costs: HashMap::new(),
+            free_mana_phases: Vec::new(),
+            source_damage_multiplier: 1.0,
             extra_mp_cost_ratio: 0.0,
             mp_cost_waiver_chance: 0.0,
             resource_gains: HashMap::new(),
             cast_buff_damage_bonuses: Vec::new(),
+            cast_buff_clock_multipliers: Vec::new(),
+        cast_buff_stack_damage_bonuses: Vec::new(),
+            cast_resource_damage_bonuses: Vec::new(),
+            buff_damage_bonuses: Vec::new(),
+            buff_crit_damage_bonuses: Vec::new(),
+            cast_resource_scaled_damage_bonuses: Vec::new(),
             cast_buff_crit_rate_bonuses: Vec::new(),
+            cast_resource_crit_rate_bonuses: Vec::new(),
+            cast_buff_back_attack_id: None,
+            back_attack_variant: None,
             evolution_damage_bonuses: Vec::new(),
             hits: Vec::new(),
+            timed_effects: Vec::new(),
+            on_end_if_hit: Vec::new(),
         }
     }
 
@@ -402,6 +426,17 @@ actions:
             AplCondition::TargetDebuffStacks { debuff_id, value, .. }
                 if debuff_id == "arcana_ruin_stack" && (*value - 4.0).abs() < f64::EPSILON
         ));
+    }
+
+    #[test]
+    fn card_context_does_not_depend_on_skill_zero() {
+        let skills = vec![skill(0, "A")];
+        assert!(build("actions: [{skill: A, conditions: [{type: next_skill, skill: A}]}]", &skills, &[], &[]).is_err());
+        for condition in ["{type: cooldown_ready}", "{type: skill_target_stack_gain, debuff: ruin}", "{type: combo_phase}", "{type: chain_phase}"] {
+            let raw: RawCondition = serde_yaml::from_str(condition).unwrap();
+            assert!(compile_condition(&raw, None, &HashMap::new(), &HashMap::new(), &[]).is_err());
+            assert!(compile_condition(&raw, Some(0), &HashMap::new(), &HashMap::new(), &[]).is_ok());
+        }
     }
 
     #[test]

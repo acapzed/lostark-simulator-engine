@@ -9,3 +9,4 @@ mod snapshot;
 pub use sim::simulate;
 //pub use sim::simulate_one;
 pub use sim::trace_one;
+pub use sim::research_one;

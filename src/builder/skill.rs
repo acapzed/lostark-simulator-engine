@@ -58,6 +58,9 @@ impl SkillPipelineMap {
             let data = data_by_name
                 .get(char_skill.name.as_str())
                 .ok_or_else(|| format!("스킬 데이터 없음: {}", char_skill.name))?;
+            if !data.source_damage_multiplier.is_finite() || data.source_damage_multiplier <= 0.0 {
+                return Err(format!("{}: 원본 피해 배율은 유한한 양수여야 함", char_skill.name));
+            }
             if char_skill.level == 0 {
                 return Err(format!("{}: 스킬 레벨은 1 이상이어야 함", char_skill.name));
             }
@@ -74,7 +77,7 @@ impl SkillPipelineMap {
                 Ok(())
             };
             let check_resource = |field: &str, name: &str| -> Result<(), String> {
-                if !matches!(name, "Mp" | "CardGauge" | "UltimatePoint" | "Hp") {
+                if !matches!(name, "Mp" | "CardGauge" | "UltimatePoint" | "Hp" | "Magic") {
                     return Err(format!("{}: {}의 알 수 없는 자원: {}", char_skill.name, field, name));
                 }
                 Ok(())
@@ -91,6 +94,11 @@ impl SkillPipelineMap {
                 check_resource("스택 보존 자원 획득", &gain.name)?;
             }
             for (index, hit) in data.hits.iter().enumerate() {
+                if let Some(reduction) = &hit.cooldown_reduction_on_hit {
+                    if reduction.amount_ms == 0 || reduction.max_per_cast_ms == 0 {
+                        return Err(format!("{}: 적중 쿨다운 감소량/시전 상한은 양수여야 함", char_skill.name));
+                    }
+                }
                 check_level(&format!("{}타 피해", index + 1), &hit.damage_ratio)?;
                 check_level(&format!("{}타 고정 피해", index + 1), &hit.fixed_damage)?;
                 if let Some(additional) = &hit.additional_damage {
@@ -115,6 +123,14 @@ impl SkillPipelineMap {
                 }
                 if let Some(gain) = &hit.identity_gain {
                     check_resource(&format!("{}타 자원 획득", index + 1), &gain.name)?;
+                }
+            }
+            for timed in &data.timed_dots {
+                check_level("동작 시각 지속 피해", &timed.dot.damage_ratio)?;
+                check_level("동작 시각 지속 고정 피해", &timed.dot.fixed_damage)?;
+                if timed.dot.tick_count == 0 || timed.dot.tick_interval_ms == 0 ||
+                    timed.dot.damage_ratio.is_empty() && timed.dot.fixed_damage.is_empty() {
+                    return Err(format!("{}: 동작 시각 지속 피해의 계수/횟수/간격 필요", char_skill.name));
                 }
             }
             for row in &data.runtime_damage_by_target_buff_stacks {
@@ -142,6 +158,9 @@ impl SkillPipelineMap {
                 }
             }
             for bonus in &data.runtime_target_damage_bonuses {
+                if !bonus.defense_reduction.is_finite() || !(0.0..=1.0).contains(&bonus.defense_reduction) {
+                    return Err(format!("{}: 대상 방어 감소는 0..1 범위여야 합니다", char_skill.name));
+                }
                 if !data.hits.iter().any(|hit| hit.effect_id == bonus.trigger_effect_id) {
                     return Err(format!(
                         "{}: 대상 피해 증가의 발동 Effect {} 없음",
@@ -195,6 +214,7 @@ fn build_base_profile(
     };
 
     let slot = match data.skill_slot.as_str() {
+        "BasicAttack" => SkillSlot::BasicAttack,
         "Awakening" => SkillSlot::Awakening,
         "HyperAwakeningTechniques" => SkillSlot::HyperAwakeningTechniques,
         "SuperAwakening" => SkillSlot::SuperAwakening,
@@ -266,6 +286,19 @@ fn build_base_profile(
                     chance: h.draw_card_chance,
                 });
             }
+            if let Some(debuff) = &h.target_damage_taken_debuff {
+                triggers.push(HitTrigger {
+                    on: HitTriggerOn::OnHit,
+                    effect: TriggerEffect::ApplyTargetBuff(BuffSpec {
+                        id: debuff.buff_id.clone(),
+                        effects: HashMap::from([(StatField::TargetDamageIncrease, debuff.percent / 100.0)]),
+                        max_stacks: 1,
+                        stack_type: StackType::Refresh,
+                        duration_ms: debuff.duration_ms,
+                    }),
+                    chance: 1.0,
+                });
+            }
             if let Some(debuff) = &h.target_crit_rate_debuff {
                 triggers.push(HitTrigger {
                     on: HitTriggerOn::OnHit,
@@ -305,11 +338,37 @@ fn build_base_profile(
                     chance: 1.0,
                 });
             }
+            if let Some(buff) = &h.self_speed_buff {
+                triggers.push(HitTrigger {
+                    on: HitTriggerOn::OnHit,
+                    effect: TriggerEffect::ApplyBuff(BuffSpec {
+                        id: buff.buff_id.clone(),
+                        effects: HashMap::from([
+                            (StatField::AttackSpeed, buff.attack_speed_percent / 100.0),
+                            (StatField::MovementSpeed, buff.move_speed_percent / 100.0),
+                        ]),
+                        max_stacks: 1,
+                        stack_type: StackType::Refresh,
+                        duration_ms: buff.duration_ms,
+                    }),
+                    chance: 1.0,
+                });
+            }
             if h.reset_cooldown_chance > 0.0 {
                 triggers.push(HitTrigger {
                     on: HitTriggerOn::OnHit,
                     effect: TriggerEffect::ResetSkillCooldown,
                     chance: h.reset_cooldown_chance,
+                });
+            }
+            if let Some(reduction) = &h.cooldown_reduction_on_hit {
+                triggers.push(HitTrigger {
+                    on: HitTriggerOn::OnHit,
+                    effect: TriggerEffect::ReduceOwnCooldownOnHit {
+                        amount_ms: reduction.amount_ms as u64,
+                        max_per_cast_ms: reduction.max_per_cast_ms as u64,
+                    },
+                    chance: 1.0,
                 });
             }
             if let Some(stack) = &h.target_buff_stack_gain {
@@ -350,6 +409,7 @@ fn build_base_profile(
                     effect: TriggerEffect::DealDamageAndSetTargetBuffStacks {
                         effect_id: additional.effect_id,
                         hit: RuntimeDamageSpec {
+                            destruction: 0,
                             hit_id: additional.hit_id.clone(),
                             name: additional.name.clone(),
                             base_damage: additional
@@ -388,11 +448,12 @@ fn build_base_profile(
                     effect: TriggerEffect::ScheduleDot {
                         dot_id: dot.dot_id.clone(),
                         hit: RuntimeDamageSpec {
+                            destruction: 0,
                             hit_id: dot.hit_id.clone(),
                             name: dot.name.clone(),
                             base_damage: dot.fixed_damage.get(level_idx).copied().unwrap_or(0.0),
                             skill_modifier: dot.damage_ratio.get(level_idx).copied().unwrap_or(0.0),
-                            damage_increase: 0.0,
+                            damage_increase: dot.damage_increase,
                             crit_chance_bonus: 0.0,
                             crit_damage_bonus: 0.0,
                             random_crit_damage_chance: 0.0,
@@ -403,7 +464,8 @@ fn build_base_profile(
                         first_tick_ms: dot.first_tick_ms,
                         tick_interval_ms: dot.tick_interval_ms,
                         tick_count: dot.tick_count,
-                        refresh: false,
+                        refresh: dot.refresh,
+                        independent: false,
                     },
                     chance: dot.chance,
                 });
@@ -466,10 +528,14 @@ fn build_base_profile(
     }
 
     for bonus in &data.runtime_target_damage_bonuses {
+        let mut effects = HashMap::new();
+        if bonus.defense_reduction > 0.0 {
+            effects.insert(StatField::TargetDefenseReduction, bonus.defense_reduction);
+        }
         let buff = BuffSpec {
             id: bonus.buff_id.clone(),
-            effects: HashMap::new(),
-            max_stacks: 1,
+            effects,
+            max_stacks: bonus.max_stacks.max(1),
             stack_type: StackType::Refresh,
             duration_ms: bonus.duration_ms,
         };
@@ -486,7 +552,11 @@ fn build_base_profile(
                     on: HitTriggerOn::OnHitIf(HitCondition::TargetBuffActive(
                         bonus.buff_id.clone(),
                     )),
-                    effect: TriggerEffect::DamageBonus(bonus.damage_increase),
+                    effect: if bonus.max_stacks > 1 {
+                        TriggerEffect::DamageBonusPerTargetBuffStack {
+                            buff_id: bonus.buff_id.clone(), per_stack: bonus.damage_increase,
+                        }
+                    } else { TriggerEffect::DamageBonus(bonus.damage_increase) },
                     chance: 1.0,
                 });
             }
@@ -505,6 +575,7 @@ fn build_base_profile(
                     buff_id: target_buff_id.clone(),
                     hits_by_stack: runtime_hits.clone(),
                     forced_stacks_while_buff: None,
+                    card_gauge_by_stack: Vec::new(),
                 },
                 chance: 1.0,
             });
@@ -537,6 +608,7 @@ fn build_base_profile(
 
     // 슬롯 기반 기본 태그 — meta phase 클로저로 덮어쓸 수 있다.
     let mut tags = match &slot {
+        SkillSlot::BasicAttack => vec![],
         SkillSlot::Awakening => vec![SkillTag::CategoryAwakening],
         SkillSlot::HyperAwakeningTechniques => vec![SkillTag::CategoryHyper],
         SkillSlot::SuperAwakening => vec![
@@ -582,7 +654,7 @@ fn build_base_profile(
         "헤드 어택" => tags.push(SkillTag::AttackHead),
         _ => {
             tags.push(SkillTag::NonDirectional);
-            if !matches!(slot, SkillSlot::Awakening | SkillSlot::SuperAwakening) {
+            if !matches!(slot, SkillSlot::BasicAttack | SkillSlot::Awakening | SkillSlot::SuperAwakening) {
                 tags.push(SkillTag::NonDirectionalNonAwakening);
             }
         }
@@ -608,6 +680,13 @@ fn build_base_profile(
         _ => {}
     };
 
+    let phase_count = data.max_phase.max(1);
+    if data.free_mana_phases.iter().any(|phase| *phase >= phase_count) {
+        return Err(format!("{name}: 무료 마나 단계가 스킬 단계 범위를 벗어났습니다."));
+    }
+    if data.timed_buffs.iter().any(|buff| buff.phase >= phase_count) {
+        return Err(format!("{name}: 동작 시각 버프가 스킬 단계 범위를 벗어났습니다."));
+    }
     Ok(SkillProfile {
         skill_id,
         name: name.to_string(),
@@ -619,15 +698,49 @@ fn build_base_profile(
         cast_times_ms: data.cast_times_ms.clone(),
         max_uses: data.max_uses,
         max_stacks: data.max_stacks,
-        charge_recovery_ms: 0,
+        charge_recovery_ms: data.charge_recovery_ms,
         resource_costs,
+        free_mana_phases: data.free_mana_phases.clone(),
+        source_damage_multiplier: data.source_damage_multiplier,
         extra_mp_cost_ratio: 0.0,
         mp_cost_waiver_chance: data.mp_cost_waiver_chance,
         resource_gains,
         cast_buff_damage_bonuses: Vec::new(),
+        cast_buff_clock_multipliers: Vec::new(),
+        cast_buff_stack_damage_bonuses: Vec::new(),
+        cast_resource_damage_bonuses: Vec::new(),
+        buff_damage_bonuses: Vec::new(),
+        buff_crit_damage_bonuses: Vec::new(),
+        cast_resource_scaled_damage_bonuses: Vec::new(),
         cast_buff_crit_rate_bonuses: Vec::new(),
+        cast_resource_crit_rate_bonuses: Vec::new(),
+        cast_buff_back_attack_id: None,
+        back_attack_variant: None,
         evolution_damage_bonuses: Vec::new(),
         hits,
+        timed_effects: data.timed_dots.iter().map(|timed| crate::profile::skill::TimedSkillEffect {
+            phase: timed.phase, action_delay_ms: timed.action_delay_ms, until_cast_end: false, action_end_ms: None,
+            effect: TriggerEffect::ScheduleDot {
+                dot_id: timed.dot.dot_id.clone(),
+                hit: RuntimeDamageSpec {
+                    hit_id: timed.dot.hit_id.clone(), name: timed.dot.name.clone(),
+                    base_damage: timed.dot.fixed_damage.get(level_idx).copied().unwrap_or(0.0),
+                    skill_modifier: timed.dot.damage_ratio.get(level_idx).copied().unwrap_or(0.0),
+                    destruction: 0, damage_increase: timed.dot.damage_increase, crit_chance_bonus: 0.0, crit_damage_bonus: 0.0,
+                    random_crit_damage_chance: 0.0, random_crit_damage_bonus: 0.0, defense_ignore: 0.0, defense_ignore_chance: 0.0,
+                },
+                first_tick_ms: timed.dot.first_tick_ms, tick_interval_ms: timed.dot.tick_interval_ms,
+                tick_count: timed.dot.tick_count, refresh: timed.refresh, independent: false,
+            },
+        }).chain(data.timed_buffs.iter().map(|timed| crate::profile::skill::TimedSkillEffect {
+            phase: timed.phase, action_delay_ms: timed.action_delay_ms,
+            until_cast_end: false, action_end_ms: None,
+            effect: TriggerEffect::ApplyBuff(BuffSpec {
+                id: timed.buff_id.clone(), effects: timed.effects.clone(),
+                max_stacks: 1, stack_type: StackType::Refresh, duration_ms: timed.duration_ms,
+            }),
+        })).collect(),
+        on_end_if_hit: Vec::new(),
     })
 }
 
@@ -646,6 +759,7 @@ fn runtime_damage_specs_by_target_buff(
             .push((
                 row.stack,
                 RuntimeDamageSpec {
+                    destruction: 0,
                     hit_id: row.hit_id.clone(),
                     name: row.name.clone(),
                     base_damage: row.fixed_damage.get(level_idx).copied().unwrap_or(0.0),
@@ -668,6 +782,7 @@ fn runtime_damage_specs_by_target_buff(
             let max_stack = specs.iter().map(|(stack, _)| *stack).max().unwrap_or(0) as usize;
             let mut by_stack = vec![
                 RuntimeDamageSpec {
+                    destruction: 0,
                     hit_id: String::new(),
                     name: String::new(),
                     base_damage: 0.0,
@@ -739,8 +854,66 @@ pub fn apply_modifiers(skills: &mut Vec<SkillProfile>, compiled: &CompiledModifi
     }
 }
 
-pub(crate) fn add_hit_damage_increase(skill: &mut SkillProfile, bonus: f64) {
-    update_hit_damage(skill, |value| value + bonus);
+pub(crate) fn multiply_hit_damage(skill: &mut SkillProfile, multiplier: f64) {
+    update_hit_damage(skill, |value| (1.0 + value) * multiplier - 1.0);
+}
+
+/// Only source-declared skill DOTs participate. Scheduler `independent=false`
+/// also occurs on legacy runes, so it is not an inheritance eligibility flag.
+pub(crate) fn multiply_skill_dots(skill: &mut SkillProfile, dot_ids: &[String], multiplier: f64) {
+    fn apply(effect: &mut TriggerEffect, ids: &[String], multiplier: f64) {
+        if let TriggerEffect::ScheduleDot {dot_id, hit, ..} = effect {
+            if ids.contains(dot_id) { hit.damage_increase = (1.0 + hit.damage_increase) * multiplier - 1.0; }
+        }
+    }
+    for hit in &mut skill.hits { for trigger in &mut hit.triggers { apply(&mut trigger.effect, dot_ids, multiplier); } }
+    for timed in &mut skill.timed_effects { apply(&mut timed.effect, dot_ids, multiplier); }
+}
+
+pub(crate) fn apply_skill_dot_modifiers(skills: &mut [SkillProfile], compiled: &CompiledModifiers, req: &super::dto::BuildRequest) {
+    if req.character.class_name == "리퍼" { return; }
+    for skill in skills {
+        let Some(data) = req.skill_data.iter().find(|data|data.name == skill.name) else { continue; };
+        let ids: Vec<String> = data.hits.iter().filter_map(|h|h.dot.as_ref().map(|d|d.dot_id.clone()))
+            .chain(data.timed_dots.iter().map(|t|t.dot.dot_id.clone())).collect();
+        let mut factor = compiled.get_multiplier(&SkillTag::All, "DamageMultiplier");
+        for tag in &skill.tags {
+            if matches!(tag, SkillTag::SkillId(_) | SkillTag::SkillGroup(_) | SkillTag::CategoryNormal
+                | SkillTag::CategoryRuin | SkillTag::CategoryStacked | SkillTag::CategoryAwakening
+                | SkillTag::CategoryHyper | SkillTag::CategorySuperAwakening | SkillTag::Charging
+                | SkillTag::HoldingCasting | SkillTag::UsesMana | SkillTag::NonDirectional
+                | SkillTag::NonDirectionalNonAwakening) {
+                factor *= compiled.get_multiplier(tag, "DamageMultiplier");
+            }
+        }
+        multiply_skill_dots(skill, &ids, factor);
+    }
+}
+
+/// General damage also reaches independent DOTs. Source-declared non-Reaper
+/// skill DOTs already received All in apply_skill_dot_modifiers; skip them.
+pub(crate) fn apply_independent_dot_modifiers(skills: &mut [SkillProfile], globals: &mut [GlobalTrigger], compiled: &CompiledModifiers, req: &super::dto::BuildRequest) {
+    fn apply(effect: &mut TriggerEffect, declared: &[String], factor: f64) {
+        match effect {
+            TriggerEffect::Sequence(effects) | TriggerEffect::RandomChoice(effects) => for e in effects { apply(e,declared,factor); },
+            TriggerEffect::WeightedRandomChoice(effects) => for (_,e) in effects { apply(e,declared,factor); },
+            TriggerEffect::Chance{effect,..} | TriggerEffect::Schedule{effect,..} => apply(effect,declared,factor),
+            TriggerEffect::ScheduleDot{dot_id,hit,..} if !declared.contains(dot_id) => hit.damage_increase=(1.0+hit.damage_increase)*factor-1.0,
+            TriggerEffect::ScheduleTargetStackDot{hit,..} => hit.damage_increase=(1.0+hit.damage_increase)*factor-1.0,
+            _ => {}
+        }
+    }
+    let factor=compiled.get_multiplier(&SkillTag::All,"DamageMultiplier");
+    for skill in skills {
+        let declared: Vec<String> = if req.character.class_name=="리퍼" { Vec::new() } else {
+            req.skill_data.iter().find(|d|d.name==skill.name).into_iter().flat_map(|d|
+                d.hits.iter().filter_map(|h|h.dot.as_ref().map(|dot|dot.dot_id.clone()))
+                    .chain(d.timed_dots.iter().map(|t|t.dot.dot_id.clone()))).collect()
+        };
+        for hit in &mut skill.hits {for trigger in &mut hit.triggers {apply(&mut trigger.effect,&declared,factor);}}
+        for timed in &mut skill.timed_effects {apply(&mut timed.effect,&declared,factor);}
+    }
+    for trigger in globals {apply(&mut trigger.effect,&[],factor);}
 }
 
 fn update_hit_damage(skill: &mut SkillProfile, update: impl Fn(f64) -> f64) {
@@ -864,5 +1037,47 @@ impl SkillPipeline {
             step(skill)?;
         }
         Ok(())
+    }
+}
+
+
+#[cfg(test)]
+mod target_defense_debuff_tests {
+    use super::*;
+
+    fn fixture() -> (SkillDataInput, CharacterSkillInput) {
+        let data = serde_json::from_value(serde_json::json!({
+            "name":"armor", "cooldown":1, "castTimesMs":[1000],
+            "hits":[{"effectId":1,"damageRatio":[100],"fixedDamage":[0],"actionDelayMs":100}],
+            "runtimeTargetDamageBonuses":[{"triggerEffectId":1,"targetEffectIds":[1],"buffId":"armor","durationMs":6000,"damageIncrease":0}]
+        })).unwrap();
+        let chosen = serde_json::from_value(serde_json::json!({"name":"armor","level":1})).unwrap();
+        (data, chosen)
+    }
+
+    #[test]
+    fn optional_defense_debuff_keeps_old_marker_empty_and_builds_target_reduction() {
+        for percent in [0.0, 0.12, 1.0] {
+            let (mut data, chosen) = fixture();
+            data.runtime_target_damage_bonuses[0].defense_reduction = percent;
+            let map = SkillPipelineMap::new(vec!["armor".into()]);
+            let result = map.build_all(&[data], &[chosen]).unwrap();
+            let buff = result[0].hits[0].triggers.iter().find_map(|t| match &t.effect {
+                TriggerEffect::ApplyTargetBuff(spec) => Some(spec), _=>None,
+            }).unwrap();
+            assert_eq!(buff.max_stacks, 1);
+            if percent == 0.0 { assert!(buff.effects.is_empty()); }
+            else { assert_eq!(buff.effects[&StatField::TargetDefenseReduction],percent); }
+        }
+    }
+
+    #[test]
+    fn invalid_defense_reduction_is_rejected_before_building_profile() {
+        for percent in [-0.01, 1.01, f64::INFINITY, f64::NAN] {
+            let (mut data, chosen) = fixture();
+            data.runtime_target_damage_bonuses[0].defense_reduction = percent;
+            let map = SkillPipelineMap::new(vec!["armor".into()]);
+            assert!(map.build_all(&[data], &[chosen]).unwrap_err().contains("대상 방어 감소"));
+        }
     }
 }

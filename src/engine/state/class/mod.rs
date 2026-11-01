@@ -1,5 +1,9 @@
 pub mod arcana;
 pub mod berserker;
+pub mod slayer;
+pub mod reaper;
+pub mod valkyrie;
+pub mod sorceress;
 
 use crate::engine::rng::Rng;
 
@@ -19,6 +23,12 @@ pub trait ClassState: std::fmt::Debug {
 
     /// 자원 최대값 조회 (회복 계산, APL 퍼센트 조건용)
     fn get_resource_max(&self, name: &str) -> f64;
+
+    fn as_reaper(&self) -> Option<&reaper::ReaperState> { None }
+    fn as_reaper_mut(&mut self) -> Option<&mut reaper::ReaperState> { None }
+
+    fn as_valkyrie(&self) -> Option<&valkyrie::ValkyrieState> { None }
+    fn as_valkyrie_mut(&mut self) -> Option<&mut valkyrie::ValkyrieState> { None }
 
     /// 카드 뽑기. 기본 no-op — 아르카나만 오버라이드.
     fn draw_card(&mut self, _rng: &mut Rng) {}

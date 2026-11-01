@@ -60,6 +60,13 @@ impl BuffManager {
             .unwrap_or(false)
     }
 
+    pub fn extend_active(&mut self, id: &str, current_time: u64, amount_ms: u32) -> Option<u64> {
+        let buff = self.buffs.get_mut(id)?;
+        if buff.expire_time <= current_time || amount_ms == 0 { return None; }
+        buff.expire_time = buff.expire_time.saturating_add(amount_ms as u64);
+        Some(buff.expire_time)
+    }
+
     /// 지정 버프가 현재 최대 중첩에 도달해 있는지 확인한다.
     pub fn is_at_max_stacks(&self, id: &str, current_time: u64) -> bool {
         self.buffs
@@ -125,5 +132,11 @@ impl BuffManager {
             .filter(|b| b.expire_time > current_time)
             .map(|b| b.id.clone())
             .collect()
+    }
+
+    pub fn target_movement_speed_reduction(&self, current_time: u64) -> Option<f64> {
+        self.active_buffs(current_time)
+            .filter_map(|(spec, stacks)| spec.effects.get(&crate::profile::StatField::TargetMovementSpeedReduction).map(|value| value * stacks as f64))
+            .reduce(f64::max)
     }
 }

@@ -1,0 +1,35 @@
+name: Engine CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: engine-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exported snapshot
+        run: python tools/sync-from-app.py --check
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - run: cargo check --locked
+      - run: cargo test --locked --lib
+        env:
+          CARGO_PROFILE_TEST_OPT_LEVEL: '1'
+      - name: Check WASM target
+        run: cargo check --locked --target wasm32-unknown-unknown

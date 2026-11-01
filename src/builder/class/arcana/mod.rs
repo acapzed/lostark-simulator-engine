@@ -10,6 +10,81 @@ use crate::profile::{actor::ArcanaCardPoolEntry, GlobalTrigger, SkillCategory, S
 
 pub(super) const ARCANA_RUIN_STACK_BUFF_ID: &str = "arcana_ruin_stack";
 
+/// User-adopted reference totals at specialization 1800, without gauge bonuses.
+/// Other tripods retain their raw hit routing and proportional per-hit distribution.
+pub fn register_identity_reference(pipelines: &mut SkillPipelineMap, req: &BuildRequest) {
+    if req.character.class_name != "아르카나" { return; }
+    let spec_factor = 1.0 + 1800.0 / 699.0 * 0.25;
+    for data in &req.skill_data {
+        // Hand-authored requests with independent gauge units keep their explicit values.
+        if !data.hits.iter().any(|hit| hit.ultimate_point_gain > 0.0) { continue; }
+        let (percent, original) = match data.game_skill_id {
+            19350 => (44.12,6396.0), 19140 => (17.20,1092.0),
+            19160 => (26.85,1716.0), 19310 => (12.81,884.0),
+            19320 => (5.97,676.0), 19150 => (13.20,936.0),
+            19180 => (6.55,416.0), 19190 => (15.56,936.0),
+            19240 => (0.0,1.0), _ => continue,
+        };
+        let seren = data.game_skill_id == 19240;
+        let absolute_hits: Vec<bool> = data.hits.iter().map(|h| h.identity_gain.as_ref().is_some_and(|g| g.is_absolute)).collect();
+        let Some(pipeline) = pipelines.get_mut(&data.name) else { continue; };
+        pipeline.add_trigger(move |profile| {
+            for (index, hit) in profile.hits.iter_mut().enumerate() {
+                let multiplier = if seren {
+                    if hit.phase == 0 { 5.54 * 100.0 / spec_factor / 1456.0 }
+                    else { 4.15 * 100.0 / spec_factor / 1144.0 }
+                } else { percent * 100.0 / spec_factor / original };
+                for trigger in &mut hit.triggers {
+                    match &mut trigger.effect {
+                        TriggerEffect::GainResource { resource, amount } if resource == "CardGauge" && !absolute_hits.get(index).copied().unwrap_or(false) => *amount *= multiplier,
+                        TriggerEffect::ConsumeTargetBuff { preserve_resource_gain: Some((resource,amount)), .. }
+                            if seren && resource == "CardGauge" => *amount *= multiplier,
+                        TriggerEffect::DealDamageByTargetBuffStacks { card_gauge_by_stack, .. } if seren => {
+                            // Only four-stack gain is constrained by the supplied observations.
+                            *card_gauge_by_stack = vec![0.0,0.0,0.0,19.70 * 100.0 / spec_factor];
+                        }
+                        _ => {}
+                    }
+                }
+            }
+            Ok(())
+        });
+    }
+}
+
+#[cfg(test)]
+mod absolute_identity_tests {
+    use super::*;
+
+    #[test]
+    fn absolute_hit_gain_bypasses_reference_totals_and_keeps_bonus_pipeline() {
+        let mut json: serde_json::Value = serde_json::from_str(include_str!("../../../../fixtures/arcana-representative-request.json")).unwrap();
+        let name = json["skillData"].as_array().unwrap().iter().find(|s| s["gameSkillId"] == 19150).unwrap()["name"].as_str().unwrap().to_owned();
+        json["character"]["skills"].as_array_mut().unwrap().retain(|s| s["name"] == name);
+        json["skillData"].as_array_mut().unwrap().retain(|s| s["name"] == name);
+        for value in [0.0, 123.5, 10000.0] {
+            let mut input = json.clone();
+            for hit in input["skillData"][0]["hits"].as_array_mut().unwrap() {
+                hit["identityGain"] = serde_json::json!({"name":"CardGauge","value":value,"isAbsolute":true});
+            }
+            let req: BuildRequest = serde_json::from_value(input).unwrap();
+            let mut pipelines = SkillPipelineMap::new([name.clone()]);
+            register_identity_reference(&mut pipelines, &req);
+            apply_card_gauge_multiplier(&mut pipelines, &req, 20.0);
+            let mut profiles = pipelines.build_all(&req.skill_data, &req.character.skills).unwrap();
+            apply_specialization(&mut profiles, 699.0);
+            for hit in &profiles[0].hits {
+                let amounts: Vec<f64> = hit.triggers.iter().filter_map(|t| match &t.effect {
+                    TriggerEffect::GainResource {resource,amount} if resource == "CardGauge" => Some(*amount),
+                    _ => None,
+                }).collect();
+                if value == 0.0 { assert!(amounts.is_empty()); }
+                else { assert_eq!(amounts.len(), 1); assert!((amounts[0] - value * 1.2 * 1.25).abs() < 1e-8); }
+            }
+        }
+    }
+}
+
 pub fn apply_card_gauge_multiplier(
     skill_pipelines: &mut SkillPipelineMap,
     req: &BuildRequest,
@@ -43,6 +118,9 @@ pub fn apply_card_gauge_multiplier_for_skill_group(
                             *amount *= multiplier;
                         }
                     }
+                    if let TriggerEffect::DealDamageByTargetBuffStacks { card_gauge_by_stack, .. } = &mut trigger.effect {
+                        for amount in card_gauge_by_stack { *amount *= multiplier; }
+                    }
                 }
             }
             Ok(())
@@ -56,6 +134,8 @@ pub fn apply_specialization(skills: &mut [SkillProfile], specialization: f64) {
     let ruin_damage_multiplier = 1.0 + specialization / 699.0 * 0.35;
     let awakening_damage_multiplier = 1.0 + specialization / 699.0 * 0.1528;
     for skill in skills {
+        let is_ruin_skill = skill.category == SkillCategory::Ruin
+            && matches!(skill.slot, SkillSlot::Normal | SkillSlot::HyperAwakeningTechniques);
         if skill.slot == SkillSlot::Awakening {
             for hit in &mut skill.hits {
                 hit.damage_increase =
@@ -66,6 +146,9 @@ pub fn apply_specialization(skills: &mut [SkillProfile], specialization: f64) {
             *amount *= card_gauge_multiplier;
         }
         for hit in &mut skill.hits {
+            if is_ruin_skill {
+                hit.damage_increase = (1.0 + hit.damage_increase) * ruin_damage_multiplier - 1.0;
+            }
             for trigger in &mut hit.triggers {
                 match &mut trigger.effect {
                     TriggerEffect::GainResource { resource, amount }
@@ -79,9 +162,10 @@ pub fn apply_specialization(skills: &mut [SkillProfile], specialization: f64) {
                     } if resource == "CardGauge" => {
                         *amount *= card_gauge_multiplier;
                     }
-                    TriggerEffect::DealDamageByTargetBuffStacks { hits_by_stack, .. }
+                    TriggerEffect::DealDamageByTargetBuffStacks { hits_by_stack, card_gauge_by_stack, .. }
                         if skill.category == SkillCategory::Ruin =>
                     {
+                        for amount in card_gauge_by_stack { *amount *= card_gauge_multiplier; }
                         for runtime_hit in hits_by_stack {
                             runtime_hit.damage_increase =
                                 (1.0 + runtime_hit.damage_increase) * ruin_damage_multiplier - 1.0;

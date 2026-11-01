@@ -194,7 +194,7 @@ fn apply_runtime_class_node(
             add_four_stack_ruin_speed_buff(skill_pipelines, req, value(node, 2), value(node, 3))
         }
         "황후의 연회" => {
-            add_four_stack_ruin_damage_trigger(skill_pipelines, req, first_value(node) / 100.0)
+            scale_four_stack_ruin_damage(skill_pipelines, req, None, first_value(node) / 100.0)
         }
         "잠재력 해방" => {
             add_skill_cooldown(skill_pipelines, req, 19340, value(node, 0));
@@ -220,7 +220,7 @@ fn apply_runtime_class_node(
             add_card_draw_on_effect(skill_pipelines, req, 19340, 193402, value(node, 1) / 100.0)
         }
         "쿼즈" => {
-            add_four_stack_skill_damage_trigger(skill_pipelines, req, 19350, value(node, 1) / 100.0)
+            scale_four_stack_ruin_damage(skill_pipelines, req, Some(19350), value(node, 1) / 100.0)
         }
         _ => {}
     }
@@ -499,81 +499,38 @@ fn set_ruin_stack_preserve_chance(
     });
 }
 
-fn add_four_stack_ruin_damage_trigger(
+// Four-stack bonuses modify the separate ruin row. A parent-hit DamageBonus
+// would affect normal damage only and would be diluted by baked modifiers.
+// Selecting the fourth row also covers Judgment's forced four-stack route.
+fn scale_four_stack_ruin_damage(
     skill_pipelines: &mut SkillPipelineMap,
     req: &BuildRequest,
+    game_skill_id: Option<u32>,
     damage_bonus: f64,
 ) {
-    if damage_bonus == 0.0 {
-        return;
-    }
-
-    for skill in &req.character.skills {
-        if !req
-            .skill_data
-            .iter()
-            .any(|data| data.name == skill.name && data.identity_category == 30)
-        {
-            continue;
-        }
-        let Some(pipeline) = skill_pipelines.get_mut(&skill.name) else {
-            continue;
-        };
+    if damage_bonus == 0.0 { return; }
+    for skill in req.skill_data.iter().filter(|skill| {
+        skill.identity_category == 30
+            && game_skill_id.map_or(true, |id| skill.game_skill_id == id)
+    }) {
+        let Some(pipeline) = skill_pipelines.get_mut(&skill.name) else { continue; };
         pipeline.add_trigger(move |profile| {
-            let index = profile.hits.iter().position(|hit| {
-                hit.triggers.iter().any(|trigger| matches!(
-                    &trigger.effect,
-                    TriggerEffect::ConsumeTargetBuff { buff_id, .. } if buff_id == ARCANA_RUIN_STACK_BUFF_ID
-                ))
-            }).unwrap_or(0);
-            if let Some(hit) = profile.hits.get_mut(index) {
-                hit.triggers.push(HitTrigger {
-                    on: HitTriggerOn::OnHitIf(HitCondition::TargetBuffAtMaxStacks(
-                        ARCANA_RUIN_STACK_BUFF_ID.to_string(),
-                    )),
-                    effect: TriggerEffect::DamageBonus(damage_bonus),
-                    chance: 1.0,
-                });
+            for hit in &mut profile.hits {
+                for trigger in &mut hit.triggers {
+                    if let TriggerEffect::DealDamageByTargetBuffStacks {
+                        buff_id, hits_by_stack, ..
+                    } = &mut trigger.effect {
+                        if buff_id != ARCANA_RUIN_STACK_BUFF_ID { continue; }
+                        if let Some(ruin) = hits_by_stack.get_mut(3) {
+                            ruin.damage_increase = (1.0 + ruin.damage_increase)
+                                * (1.0 + damage_bonus) - 1.0;
+                        }
+                    }
+                }
             }
             Ok(())
         });
     }
-}
-
-fn add_four_stack_skill_damage_trigger(
-    skill_pipelines: &mut SkillPipelineMap,
-    req: &BuildRequest,
-    game_skill_id: u32,
-    damage_bonus: f64,
-) {
-    let Some(skill) = req
-        .skill_data
-        .iter()
-        .find(|skill| skill.game_skill_id == game_skill_id)
-    else {
-        return;
-    };
-    let Some(pipeline) = skill_pipelines.get_mut(&skill.name) else {
-        return;
-    };
-    pipeline.add_trigger(move |profile| {
-        let index = profile.hits.iter().position(|hit| {
-            hit.triggers.iter().any(|trigger| matches!(
-                &trigger.effect,
-                TriggerEffect::ConsumeTargetBuff { buff_id, .. } if buff_id == ARCANA_RUIN_STACK_BUFF_ID
-            ))
-        }).unwrap_or(0);
-        if let Some(hit) = profile.hits.get_mut(index) {
-            hit.triggers.push(HitTrigger {
-                on: HitTriggerOn::OnHitIf(HitCondition::TargetBuffAtMaxStacks(
-                    ARCANA_RUIN_STACK_BUFF_ID.to_string(),
-                )),
-                effect: TriggerEffect::DamageBonus(damage_bonus),
-                chance: 1.0,
-            });
-        }
-        Ok(())
-    });
 }
 
 #[cfg(test)]

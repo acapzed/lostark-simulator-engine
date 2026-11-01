@@ -19,15 +19,20 @@ pub struct ArcanaCardPoolEntry {
 }
 
 /// 시뮬레이션 중 절대 변하지 않는 캐릭터 설계도.
-/// prepare() 완료 후 SharedArrayBuffer에 단 하나만 존재하며
-/// 모든 워커가 복사 없이 동일 주소를 참조한다.
+/// 한 번 합성한 결과를 전송 형식으로 배부하고 각 워커의 독립 메모리에 복원한다.
 ///
 /// CompiledModifiers는 build 과정의 중간 산물이므로 여기에 포함하지 않는다.
 /// 모든 수치는 build 완료 시점에 SkillProfile / StatProfile 안으로 구워진다.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CharacterProfiles {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub reaper_incoming_damage: Vec<crate::profile::reaper::ReaperIncomingDamage>,
     pub name: String,
     pub class_name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none", deserialize_with = "super::reaper::deserialize_compiled_reference")]
+    pub reaper_reference: Option<crate::profile::reaper::ReaperReference>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub valkyrie_identity: Option<crate::profile::valkyrie::ValkyrieIdentity>,
     pub stat: StatProfile,
     pub skills: Vec<SkillProfile>,
     pub max_hp: f64,

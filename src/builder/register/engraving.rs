@@ -16,13 +16,11 @@ fn raw_percent(values: &[f64], index: usize) -> f64 {
     values.get(index).copied().unwrap_or(0.0) / 100.0
 }
 
-fn raw_grade(grade: &str) -> Option<u32> {
+fn legacy_grade(grade: &str) -> Option<u32> {
     match grade {
         "고급" => Some(1),
         "희귀" => Some(2),
         "영웅" => Some(3),
-        "전설" => Some(4),
-        "유물" => Some(5),
         _ => None,
     }
 }
@@ -31,7 +29,20 @@ fn selected_feature(
     engraving: &crate::builder::dto::EngravingInput,
 ) -> Option<&crate::builder::dto::EngravingFeatureRowInput> {
     let data = engraving.feature_data.as_ref()?;
-    if let Some(grade) = raw_grade(&engraving.grade) {
+    if matches!(engraving.grade.as_str(), "전설" | "유물") {
+        if engraving.level > 4 || engraving.ability_level > 4 {
+            return None;
+        }
+        // Ability's 20-row blocks encode stone level, not book rarity.
+        // Stages 1..9 encode legendary 0..4 followed by relic 1..4.
+        let book_offset = if engraving.grade == "유물" { 4 } else { 0 };
+        return data.grades.iter()
+            .find(|row| row.grade == engraving.ability_level + 1)?
+            .stages.iter()
+            .find(|row| row.stage == book_offset + engraving.level + 1);
+    }
+    // Preserve the old pre-T4/unknown-grade input path for existing saves.
+    if let Some(grade) = legacy_grade(&engraving.grade) {
         return data
             .grades
             .iter()
@@ -188,6 +199,7 @@ fn apply_lightning_fury(
             TriggerEffect::ScheduleDot {
                 dot_id: format!("{source}:lightning-explosion"),
                 hit: crate::profile::skill::RuntimeDamageSpec {
+                    destruction: 0,
                     hit_id: "lightning_fury_explosion".to_string(),
                     name: "번개의 분노 폭발".to_string(),
                     base_damage: (damage.value_a + damage.value_b) / 2.0,
@@ -204,6 +216,7 @@ fn apply_lightning_fury(
                 tick_interval_ms: 0,
                 tick_count: 1,
                 refresh: false,
+                independent: true,
             },
             TriggerEffect::ConsumeBuffStacks {
                 buff_id,
@@ -493,6 +506,7 @@ fn apply_necromancy(
         effect: TriggerEffect::ScheduleDot {
             dot_id: format!("{source}:necromancy"),
             hit: crate::profile::skill::RuntimeDamageSpec {
+                destruction: 0,
                 hit_id: "necromancy_explosion".to_string(),
                 name: "강령술 자폭병 폭발".to_string(),
                 base_damage: (damage.value_a + damage.value_b) / 2.0 * coefficient,
@@ -509,6 +523,7 @@ fn apply_necromancy(
             tick_interval_ms: 0,
             tick_count: 1,
             refresh: false,
+            independent: true,
         },
         cooldown_ms: Some(feature.cooldown),
     });
@@ -675,6 +690,11 @@ pub fn register(
     for engraving in &req.character.engravings {
         let source = format!("engraving:{}:L{}", engraving.name, engraving.level);
         if let Some(feature) = selected_feature(engraving) {
+            // The default outgoing-damage model assumes full HP, but the
+            // explicit <=50% assumption cannot also satisfy Stabilized Status.
+            if feature.feature_type == 5 && req.assumed_low_hp {
+                continue;
+            }
             if feature.feature_type == 2
                 && req.target_hp_percent > raw_percent(&feature.values, 0)
             {
@@ -793,6 +813,7 @@ pub fn register(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::builder::dto::EngravingInput;
 
     #[test]
     fn applies_explicit_raw_engraving_feature_values() {
@@ -832,33 +853,89 @@ mod tests {
     }
 
     #[test]
-    fn selects_the_current_raw_grade_and_stage() {
-        let engraving: crate::builder::dto::EngravingInput = serde_json::from_value(
-            serde_json::json!({
-                "name": "원한", "grade": "유물", "level": 4,
-                "featureData": {
-                    "baseLevels": [{"featureType": 10, "values": [400]}],
-                    "grades": [{"grade": 5, "stages": [
-                        {"stage": 4, "featureType": 10, "values": [2325, 2000]}
-                    ]}]
-                }
-            }),
-        ).expect("current raw engraving should deserialize");
-        let feature = selected_feature(&engraving)
-            .expect("relic level 4 should select raw stage 84");
+    fn selects_audited_book_progress_and_stone_rows_from_the_real_catalog() {
+        let catalog: Vec<serde_json::Value> = serde_json::from_str(include_str!(
+            "../../../skill-data/common/backend/engravings.json"
+        )).unwrap();
+        for (name, level, stone, feature_type, values) in [
+            ("원한", 0, 0, 10, vec![1800.0, 2000.0]),
+            ("질량 증가", 0, 0, 339, vec![1000.0, 1600.0]),
+            ("저주받은 인형", 4, 0, 114, vec![2500.0, 1700.0]),
+            ("돌격대장", 1, 3, 121, vec![5520.0, 0.0]),
+            ("아드레날린", 4, 2, 336, vec![27.0, 521753.0]),
+        ] {
+            let data = catalog.iter().find(|row| row["name"] == name).unwrap();
+            let mut engraving: EngravingInput = serde_json::from_value(serde_json::json!({
+                "name": name, "grade": "유물", "level": level,
+                "abilityLevel": stone, "featureData": data
+            })).unwrap();
+            let feature = selected_feature(&engraving).unwrap();
+            assert_eq!(feature.feature_type, feature_type, "{name}");
+            assert_eq!(&feature.values[..2], &values, "{name}");
+            if name == "아드레날린" {
+                assert_eq!(feature.skill_buffs[0].passive_option.value, 150.0);
+                assert_eq!(feature.skill_buffs[1].passive_option.value, 2000.0);
+            }
+            // Legendary 4 and relic 0 describe the same accumulated book effect,
+            // regardless of the selected stone. No input promotion is required.
+            for stone in 0..=4 {
+                engraving.ability_level = stone;
+                engraving.grade = "전설".into();
+                engraving.level = 4;
+                let legendary = selected_feature(&engraving).unwrap().values.clone();
+                engraving.grade = "유물".into();
+                engraving.level = 0;
+                assert_eq!(selected_feature(&engraving).unwrap().values, legendary, "{name}, stone {stone}");
+            }
+        }
+    }
 
-        assert_eq!(feature.feature_type, 10);
-        assert_eq!(feature.values, vec![2325.0, 2000.0]);
+    #[test]
+    fn book_and_stone_selection_matches_all_225_independently_audited_effects() {
+        let catalog: Vec<serde_json::Value> = serde_json::from_str(include_str!(
+            "../../../skill-data/common/backend/engravings.json"
+        )).unwrap();
+        let audit: serde_json::Value = serde_json::from_str(include_str!(
+            "../../../fixtures/app-docs/classes/arcana/arcana-engraving-axes-source-audit.json"
+        )).unwrap();
+        let rows = audit["rows"].as_array().unwrap();
+        assert_eq!(rows.len(), 225);
+        for row in rows {
+            let progress = row["bookProgress"].as_u64().unwrap();
+            let data = catalog.iter().find(|item| item["name"] == row["name"]).unwrap();
+            let engraving: EngravingInput = serde_json::from_value(serde_json::json!({
+                "name": row["name"], "grade": if progress <= 4 { "전설" } else { "유물" },
+                "level": if progress <= 4 { progress } else { progress - 4 },
+                "abilityLevel": row["stoneLevel"], "featureData": data
+            })).unwrap();
+            let feature = selected_feature(&engraving).unwrap();
+            let effect = &row["effect"];
+            if feature.feature_type == 336 {
+                assert_eq!(feature.skill_buffs[0].passive_option.value / 100.0,
+                    effect["attackPerStackPercent"].as_f64().unwrap(), "{row}");
+                assert_eq!(feature.skill_buffs[1].passive_option.value / 100.0,
+                    effect["critPercent"].as_f64().unwrap(), "{row}");
+                assert_eq!(u64::from(feature.skill_buffs[0].overlap),
+                    effect["maxStacks"].as_u64().unwrap(), "{row}");
+            } else {
+                let index = if matches!(feature.feature_type, 114 | 339) { 1 } else { 0 };
+                assert_eq!(feature.values[index] / 100.0,
+                    effect["valuePercent"].as_f64().unwrap(), "{row}");
+            }
+        }
+    }
 
-        let basic: crate::builder::dto::EngravingInput = serde_json::from_value(
-            serde_json::json!({
-                "name": "원한", "grade": "고급", "level": 4,
-                "featureData": {"grades": [{"grade": 1, "stages": [
-                    {"stage": 4, "featureType": 10, "values": [1725, 2000]}
-                ]}]}
-            }),
-        ).expect("basic engraving should deserialize");
-        assert_eq!(selected_feature(&basic).unwrap().values, vec![1725.0, 2000.0]);
+    #[test]
+    fn legacy_grade_and_base_level_inputs_keep_their_selection() {
+        let mut engraving: EngravingInput = serde_json::from_value(serde_json::json!({
+            "name": "원한", "grade": "고급", "level": 4,
+            "featureData": {"baseLevels": [{"featureType": 10, "values": [400]}],
+                "grades": [{"grade": 1, "stages": [{"stage": 4, "featureType": 10, "values": [1725]}]}]}
+        })).unwrap();
+        assert_eq!(selected_feature(&engraving).unwrap().values, vec![1725.0]);
+        engraving.grade = "legacy".into();
+        engraving.level = 1;
+        assert_eq!(selected_feature(&engraving).unwrap().values, vec![400.0]);
     }
 
     #[test]
@@ -870,8 +947,8 @@ mod tests {
                     "bracelet": null, "stone": null, "skills": [],
                     "engravings": [{
                         "name": "달인의 저력", "grade": "유물", "level": 4,
-                        "featureData": {"grades": [{"grade": 5, "stages": [{
-                            "stage": 4, "featureType": 105,
+                        "featureData": {"grades": [{"grade": 1, "stages": [{
+                            "stage": 9, "featureType": 105,
                             "values": [5000, 1925, 520988]
                         }]}]}
                     }],
@@ -910,8 +987,8 @@ mod tests {
                     "bracelet": null, "stone": null, "skills": [],
                     "engravings": [{
                         "name": "condition", "grade": "유물", "level": 4,
-                        "featureData": {"grades": [{"grade": 5, "stages": [{
-                            "stage": 4, "featureType": feature_type, "values": values
+                        "featureData": {"grades": [{"grade": 1, "stages": [{
+                            "stage": 9, "featureType": feature_type, "values": values
                         }]}]}
                     }],
                     "arkPassive": null, "arkGrids": null, "arkPassiveKarma": null

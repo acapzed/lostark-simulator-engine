@@ -1,0 +1,753 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/acapzed/lostark-simulator",
+  "source_revision": "66f86bf051bd008093e26384360a1f6d634482ea",
+  "adaptations": [
+    "crate-relative include paths",
+    "GPL-3.0-only package metadata"
+  ],
+  "files": [
+    {
+      "source_path": "docs/classes/arcana/arcana-engraving-axes-source-audit.json",
+      "source_sha256": "ef18d7918f2ee58a8980577efacd2441c690e7f0ecfa8a539708553e83c0d835",
+      "path": "fixtures/app-docs/classes/arcana/arcana-engraving-axes-source-audit.json",
+      "bytes": 90507,
+      "sha256": "ef18d7918f2ee58a8980577efacd2441c690e7f0ecfa8a539708553e83c0d835"
+    },
+    {
+      "source_path": "simulator/Cargo.lock",
+      "source_sha256": "8813a6ccce74504d6fede1ceb7e2db40a0246caa9a5e0d91b7ca8cb59f060cfe",
+      "path": "Cargo.lock",
+      "bytes": 7846,
+      "sha256": "8813a6ccce74504d6fede1ceb7e2db40a0246caa9a5e0d91b7ca8cb59f060cfe"
+    },
+    {
+      "source_path": "simulator/Cargo.toml",
+      "source_sha256": "f38bc7d48ec401f47efd130bfe3807f097bc9a0f6c48a648f90440eb9b82a9a5",
+      "path": "Cargo.toml",
+      "bytes": 556,
+      "sha256": "4fa6f402f5fb182d840f286304405e177dfd745b23576470e09272d695e5089c"
+    },
+    {
+      "source_path": "simulator/fixtures/arcana-basic-attack-request.json",
+      "source_sha256": "6e6d651a7f7ccdebbc2d2a6ccde4bfdb11662d159ae4039254c344ac2debc688",
+      "path": "fixtures/arcana-basic-attack-request.json",
+      "bytes": 28140,
+      "sha256": "6e6d651a7f7ccdebbc2d2a6ccde4bfdb11662d159ae4039254c344ac2debc688"
+    },
+    {
+      "source_path": "simulator/fixtures/arcana-phase-test-dataset.json",
+      "source_sha256": "0e21a9845e48e2878d1faa73517a44b06c4065291da6efb161d39ec64c0dd4c6",
+      "path": "fixtures/arcana-phase-test-dataset.json",
+      "bytes": 6770,
+      "sha256": "0e21a9845e48e2878d1faa73517a44b06c4065291da6efb161d39ec64c0dd4c6"
+    },
+    {
+      "source_path": "simulator/fixtures/arcana-representative-request.json",
+      "source_sha256": "c0fc40bf1e41eb064e18f825e5e7ae9230e8536f15c0a2b4933e0daf88760a76",
+      "path": "fixtures/arcana-representative-request.json",
+      "bytes": 144663,
+      "sha256": "c0fc40bf1e41eb064e18f825e5e7ae9230e8536f15c0a2b4933e0daf88760a76"
+    },
+    {
+      "source_path": "simulator/fixtures/arcana-sample-request.json",
+      "source_sha256": "701fbb0a19fc39174c7e850cbeee0372a12a4939ffdf31ce7562d8ab25c61f0c",
+      "path": "fixtures/arcana-sample-request.json",
+      "bytes": 127376,
+      "sha256": "701fbb0a19fc39174c7e850cbeee0372a12a4939ffdf31ce7562d8ab25c61f0c"
+    },
+    {
+      "source_path": "simulator/fixtures/reaper-moon-reference-request.json",
+      "source_sha256": "5340d35f9be4f6ab46fb30ef18e9884cdec39ed2d430daeff3870ba55347541e",
+      "path": "fixtures/reaper-moon-reference-request.json",
+      "bytes": 1955,
+      "sha256": "5340d35f9be4f6ab46fb30ef18e9884cdec39ed2d430daeff3870ba55347541e"
+    },
+    {
+      "source_path": "simulator/fixtures/reaper-thirst-reference-request.json",
+      "source_sha256": "d43a46eb114c80428722faf65bb4272c74ce3f44736541100df3a8120339339a",
+      "path": "fixtures/reaper-thirst-reference-request.json",
+      "bytes": 2646,
+      "sha256": "d43a46eb114c80428722faf65bb4272c74ce3f44736541100df3a8120339339a"
+    },
+    {
+      "source_path": "simulator/fixtures/reaper-web-apl/manifest.json",
+      "source_sha256": "ef5e44ce3137ba51a584db1eb692fb1cc5a5ae589b8f1da89d9ebd5df25c433a",
+      "path": "fixtures/reaper-web-apl/manifest.json",
+      "bytes": 7890,
+      "sha256": "ef5e44ce3137ba51a584db1eb692fb1cc5a5ae589b8f1da89d9ebd5df25c433a"
+    },
+    {
+      "source_path": "simulator/fixtures/reaper-web-apl/moon-222.yaml",
+      "source_sha256": "2f47706a47396a6eef2c28dae9cd7e0256eb663f6acdb66092d8097d8fe94df3",
+      "path": "fixtures/reaper-web-apl/moon-222.yaml",
+      "bytes": 2343,
+      "sha256": "2f47706a47396a6eef2c28dae9cd7e0256eb663f6acdb66092d8097d8fe94df3"
+    },
+    {
+      "source_path": "simulator/fixtures/reaper-web-apl/thirst-dagger.yaml",
+      "source_sha256": "39e7761a367dd458acfb5bbea727754b9841423e59da32e186f6dafd58f77189",
+      "path": "fixtures/reaper-web-apl/thirst-dagger.yaml",
+      "bytes": 820,
+      "sha256": "39e7761a367dd458acfb5bbea727754b9841423e59da32e186f6dafd58f77189"
+    },
+    {
+      "source_path": "simulator/fixtures/reaper-web-apl/thirst-paired.yaml",
+      "source_sha256": "9946668722696b9d0baea77b572c4273c5eeb4e6dfcb900ec403bcb9da2b93cc",
+      "path": "fixtures/reaper-web-apl/thirst-paired.yaml",
+      "bytes": 942,
+      "sha256": "9946668722696b9d0baea77b572c4273c5eeb4e6dfcb900ec403bcb9da2b93cc"
+    },
+    {
+      "source_path": "simulator/fixtures/reaper-web-apl/thirst-storm.yaml",
+      "source_sha256": "bb1ee9253bb5cc3e6648a1524338ddb50e7dcf18aed79683c6ab8b7317e52fd2",
+      "path": "fixtures/reaper-web-apl/thirst-storm.yaml",
+      "bytes": 710,
+      "sha256": "bb1ee9253bb5cc3e6648a1524338ddb50e7dcf18aed79683c6ab8b7317e52fd2"
+    },
+    {
+      "source_path": "simulator/src/builder/apl.rs",
+      "source_sha256": "fd60a0fed7a72447dc0bc011b417a17085aacfaf9c4568db69fb53cd827bdc7b",
+      "path": "src/builder/apl.rs",
+      "bytes": 24361,
+      "sha256": "9f2c1fb9fdd70ccb1b407490635d05d52eebb745ca0862ac7282d99d6252ca80"
+    },
+    {
+      "source_path": "simulator/src/builder/berserker_snapshot.rs",
+      "source_sha256": "9318926830e35304b445cbe5c3a569a25db9609bd6f9284ef47e1c69ee99e462",
+      "path": "src/builder/berserker_snapshot.rs",
+      "bytes": 12550,
+      "sha256": "9318926830e35304b445cbe5c3a569a25db9609bd6f9284ef47e1c69ee99e462"
+    },
+    {
+      "source_path": "simulator/src/builder/class/arcana/ark_grid.rs",
+      "source_sha256": "080a99fa596d0cd9092f6e0cdaba155626f7e309f488aea842c13cd8c9865152",
+      "path": "src/builder/class/arcana/ark_grid.rs",
+      "bytes": 36379,
+      "sha256": "080a99fa596d0cd9092f6e0cdaba155626f7e309f488aea842c13cd8c9865152"
+    },
+    {
+      "source_path": "simulator/src/builder/class/arcana/ark_passive.rs",
+      "source_sha256": "c3f6cae96be597bf49bfda7b3a8e7d8c9f93cd7fe01a48ba741c81ac082cce79",
+      "path": "src/builder/class/arcana/ark_passive.rs",
+      "bytes": 20391,
+      "sha256": "c3f6cae96be597bf49bfda7b3a8e7d8c9f93cd7fe01a48ba741c81ac082cce79"
+    },
+    {
+      "source_path": "simulator/src/builder/class/arcana/card.rs",
+      "source_sha256": "5a790a52ce29e3d416a8af7f77bf475f73444c7f26cce1f136f7a6a307beeb1e",
+      "path": "src/builder/class/arcana/card.rs",
+      "bytes": 28043,
+      "sha256": "5a790a52ce29e3d416a8af7f77bf475f73444c7f26cce1f136f7a6a307beeb1e"
+    },
+    {
+      "source_path": "simulator/src/builder/class/arcana/mod.rs",
+      "source_sha256": "f4b508bdaf85ee7be3f6b5c43586efc0909c81b5084980c8577042df35d8d8ae",
+      "path": "src/builder/class/arcana/mod.rs",
+      "bytes": 11561,
+      "sha256": "f4b508bdaf85ee7be3f6b5c43586efc0909c81b5084980c8577042df35d8d8ae"
+    },
+    {
+      "source_path": "simulator/src/builder/class/helpers.rs",
+      "source_sha256": "baa4e163f8babfd8b4b2ae172b79a0cbf476293b43e57c9b904bd87c79f1ab52",
+      "path": "src/builder/class/helpers.rs",
+      "bytes": 2298,
+      "sha256": "baa4e163f8babfd8b4b2ae172b79a0cbf476293b43e57c9b904bd87c79f1ab52"
+    },
+    {
+      "source_path": "simulator/src/builder/class/mod.rs",
+      "source_sha256": "11e83b968561ae32e74ab0d06e49b7c15ced7d67e463c3ef3c1beed70f92d324",
+      "path": "src/builder/class/mod.rs",
+      "bytes": 1641,
+      "sha256": "11e83b968561ae32e74ab0d06e49b7c15ced7d67e463c3ef3c1beed70f92d324"
+    },
+    {
+      "source_path": "simulator/src/builder/dto.rs",
+      "source_sha256": "e403f6259a9acd1f3ac2488bed006aa45909177a0ddd9a51c7e70a82b5d6dfb0",
+      "path": "src/builder/dto.rs",
+      "bytes": 37565,
+      "sha256": "e403f6259a9acd1f3ac2488bed006aa45909177a0ddd9a51c7e70a82b5d6dfb0"
+    },
+    {
+      "source_path": "simulator/src/builder/mod.rs",
+      "source_sha256": "7a9b500a8b8b8bd59827e6378928a8bafb667a98739d9fe65810d76e5188b8ed",
+      "path": "src/builder/mod.rs",
+      "bytes": 15295,
+      "sha256": "7a9b500a8b8b8bd59827e6378928a8bafb667a98739d9fe65810d76e5188b8ed"
+    },
+    {
+      "source_path": "simulator/src/builder/modifier.rs",
+      "source_sha256": "9f33987bb111e4379e4e255228701817f45b0c1e42da2ffa2e12962f1b034dc0",
+      "path": "src/builder/modifier.rs",
+      "bytes": 14489,
+      "sha256": "9f33987bb111e4379e4e255228701817f45b0c1e42da2ffa2e12962f1b034dc0"
+    },
+    {
+      "source_path": "simulator/src/builder/reaper.rs",
+      "source_sha256": "b4035d37501bd8903e3735e5fe67590328fa02020ecd1372a648d94a5e08c59c",
+      "path": "src/builder/reaper.rs",
+      "bytes": 85352,
+      "sha256": "84594422ec102633b121ee881c163a76d211504a0e59a2e298b6fea66f07d441"
+    },
+    {
+      "source_path": "simulator/src/builder/reaper_grid.rs",
+      "source_sha256": "f5b5cb7973de6d13ef9f30f244d385b259e6d502ec4b0ae1b99d735c3b80e1a7",
+      "path": "src/builder/reaper_grid.rs",
+      "bytes": 16247,
+      "sha256": "162ac8a7dd260ea3b05895037a0327cabcca507c6fd3a1625697310ab1db9ee8"
+    },
+    {
+      "source_path": "simulator/src/builder/register/accessory.rs",
+      "source_sha256": "c4f2a7577fdaf7251623eef52fbcf4833d48961ae9039a0687c1f1edb2c27d5c",
+      "path": "src/builder/register/accessory.rs",
+      "bytes": 3000,
+      "sha256": "c4f2a7577fdaf7251623eef52fbcf4833d48961ae9039a0687c1f1edb2c27d5c"
+    },
+    {
+      "source_path": "simulator/src/builder/register/ark_grid.rs",
+      "source_sha256": "2f72a4cd10ad1c4af93dfa9c0b0d158f7c39aac22c577ac3f21404495119db7f",
+      "path": "src/builder/register/ark_grid.rs",
+      "bytes": 2999,
+      "sha256": "2f72a4cd10ad1c4af93dfa9c0b0d158f7c39aac22c577ac3f21404495119db7f"
+    },
+    {
+      "source_path": "simulator/src/builder/register/ark_passive.rs",
+      "source_sha256": "e94b258383d662930ce53f4cf5c2d7b490b0be0d57125b7dceb08b61da7f07d5",
+      "path": "src/builder/register/ark_passive.rs",
+      "bytes": 9009,
+      "sha256": "e94b258383d662930ce53f4cf5c2d7b490b0be0d57125b7dceb08b61da7f07d5"
+    },
+    {
+      "source_path": "simulator/src/builder/register/avatar.rs",
+      "source_sha256": "978d5085d4528c2fdd287864d9765e9ed96145703292dbe3b3f164e4b94af987",
+      "path": "src/builder/register/avatar.rs",
+      "bytes": 309,
+      "sha256": "978d5085d4528c2fdd287864d9765e9ed96145703292dbe3b3f164e4b94af987"
+    },
+    {
+      "source_path": "simulator/src/builder/register/bracelet.rs",
+      "source_sha256": "bfba3f2158fc3b1ed6b2b71c500a7df08a749fb17ce9d4c53cf4c42588c4b0fb",
+      "path": "src/builder/register/bracelet.rs",
+      "bytes": 14315,
+      "sha256": "bfba3f2158fc3b1ed6b2b71c500a7df08a749fb17ce9d4c53cf4c42588c4b0fb"
+    },
+    {
+      "source_path": "simulator/src/builder/register/collection.rs",
+      "source_sha256": "9e2f74fc144862110deba153d2b0058f1d40dff4447145f5416ae0dc1a5dccf8",
+      "path": "src/builder/register/collection.rs",
+      "bytes": 1039,
+      "sha256": "9e2f74fc144862110deba153d2b0058f1d40dff4447145f5416ae0dc1a5dccf8"
+    },
+    {
+      "source_path": "simulator/src/builder/register/consumable.rs",
+      "source_sha256": "1481d1f39e32cdb2c39c3d549b06ae9f7c2eced6f213b935b29492cbe0b3f234",
+      "path": "src/builder/register/consumable.rs",
+      "bytes": 2221,
+      "sha256": "1481d1f39e32cdb2c39c3d549b06ae9f7c2eced6f213b935b29492cbe0b3f234"
+    },
+    {
+      "source_path": "simulator/src/builder/register/engraving.rs",
+      "source_sha256": "3bfd2536d4b645c4c1249ed288137304f632d2822255d0c3baf3af082b8956f9",
+      "path": "src/builder/register/engraving.rs",
+      "bytes": 41034,
+      "sha256": "2e35ac9292d64258003f5778268488726b68666c4d95c79e6b51f81d1fbab929"
+    },
+    {
+      "source_path": "simulator/src/builder/register/equipment.rs",
+      "source_sha256": "12d351658d1889512ba1f49bec3a65e16ce8b3205efe22bb3302d4f4e83ad33f",
+      "path": "src/builder/register/equipment.rs",
+      "bytes": 5870,
+      "sha256": "8a4632074bad780da7455884b1b53e7837be14d94de588aff6f2bc25600f302b"
+    },
+    {
+      "source_path": "simulator/src/builder/register/gem.rs",
+      "source_sha256": "df4bec9ee6bb991fb3eda1bc14fc995b89048c2144afec290539b920f91323a2",
+      "path": "src/builder/register/gem.rs",
+      "bytes": 15923,
+      "sha256": "df4bec9ee6bb991fb3eda1bc14fc995b89048c2144afec290539b920f91323a2"
+    },
+    {
+      "source_path": "simulator/src/builder/register/gem_target.rs",
+      "source_sha256": "6aec228b68a7784f90218dd6e019b5eedba5b154e651db12d621a2d9e7af559d",
+      "path": "src/builder/register/gem_target.rs",
+      "bytes": 3676,
+      "sha256": "cea46b3820d0ecb820fbad4d84406d108b966cdac4b709d96ec9cb956856ad7b"
+    },
+    {
+      "source_path": "simulator/src/builder/register/karma.rs",
+      "source_sha256": "df38e2f5e0d80527d1304fa54aee99d3978afc1850b7020f78dd74539f1e2580",
+      "path": "src/builder/register/karma.rs",
+      "bytes": 1404,
+      "sha256": "df38e2f5e0d80527d1304fa54aee99d3978afc1850b7020f78dd74539f1e2580"
+    },
+    {
+      "source_path": "simulator/src/builder/register/mod.rs",
+      "source_sha256": "a0a0082787f9bc0f023e8a315ca28f2bbeec1d8a7847f95131cf7c63d01f215e",
+      "path": "src/builder/register/mod.rs",
+      "bytes": 277,
+      "sha256": "a0a0082787f9bc0f023e8a315ca28f2bbeec1d8a7847f95131cf7c63d01f215e"
+    },
+    {
+      "source_path": "simulator/src/builder/register/pet.rs",
+      "source_sha256": "e17ec853e2e3c0df2f129cb53f18ba513d46b526296d6cb525380b8947b74152",
+      "path": "src/builder/register/pet.rs",
+      "bytes": 1247,
+      "sha256": "e17ec853e2e3c0df2f129cb53f18ba513d46b526296d6cb525380b8947b74152"
+    },
+    {
+      "source_path": "simulator/src/builder/register/rune.rs",
+      "source_sha256": "b9a9def2ba96d6714c1e36e49b3b80d9aa5710078a8f7cef2787448fe49b9435",
+      "path": "src/builder/register/rune.rs",
+      "bytes": 9568,
+      "sha256": "b9a9def2ba96d6714c1e36e49b3b80d9aa5710078a8f7cef2787448fe49b9435"
+    },
+    {
+      "source_path": "simulator/src/builder/register/sim_effects.rs",
+      "source_sha256": "6b7a3b53b57d7ec6fde807ff2e79dcd8a2965f95539063b18ce70d8ba9378095",
+      "path": "src/builder/register/sim_effects.rs",
+      "bytes": 15755,
+      "sha256": "6b7a3b53b57d7ec6fde807ff2e79dcd8a2965f95539063b18ce70d8ba9378095"
+    },
+    {
+      "source_path": "simulator/src/builder/register/stone.rs",
+      "source_sha256": "c2d37ee70d4d2309c50ecd2599ad3f32fc8622e99afa8711567245b8b3cbcce3",
+      "path": "src/builder/register/stone.rs",
+      "bytes": 996,
+      "sha256": "c2d37ee70d4d2309c50ecd2599ad3f32fc8622e99afa8711567245b8b3cbcce3"
+    },
+    {
+      "source_path": "simulator/src/builder/skill.rs",
+      "source_sha256": "6596aa69250db31f8ea83fabde384958d033df4da8def9941f819e0987220ad0",
+      "path": "src/builder/skill.rs",
+      "bytes": 47667,
+      "sha256": "6596aa69250db31f8ea83fabde384958d033df4da8def9941f819e0987220ad0"
+    },
+    {
+      "source_path": "simulator/src/builder/slayer_snapshot.rs",
+      "source_sha256": "2f23540e7c756c829659c6d8d952d0f5f20f90ed00617be365f7fcf027c95b92",
+      "path": "src/builder/slayer_snapshot.rs",
+      "bytes": 9918,
+      "sha256": "2f23540e7c756c829659c6d8d952d0f5f20f90ed00617be365f7fcf027c95b92"
+    },
+    {
+      "source_path": "simulator/src/builder/sorceress_snapshot.rs",
+      "source_sha256": "61c6e4c6c55787c792739ab1d44aeb785e39000865f44aa6af0c304acd667114",
+      "path": "src/builder/sorceress_snapshot.rs",
+      "bytes": 7084,
+      "sha256": "61c6e4c6c55787c792739ab1d44aeb785e39000865f44aa6af0c304acd667114"
+    },
+    {
+      "source_path": "simulator/src/builder/stat.rs",
+      "source_sha256": "0db4a233ca368bd148f5c8a6854e2e608a31bc078fcfae9cce5e3f423d5aa0de",
+      "path": "src/builder/stat.rs",
+      "bytes": 5018,
+      "sha256": "0db4a233ca368bd148f5c8a6854e2e608a31bc078fcfae9cce5e3f423d5aa0de"
+    },
+    {
+      "source_path": "simulator/src/builder/valkyrie.rs",
+      "source_sha256": "7d0d0d13bd79472229f6835b4a09f7b9fbfd80c90665cb8f3f8f0037f3a7eecf",
+      "path": "src/builder/valkyrie.rs",
+      "bytes": 3981,
+      "sha256": "7d0d0d13bd79472229f6835b4a09f7b9fbfd80c90665cb8f3f8f0037f3a7eecf"
+    },
+    {
+      "source_path": "simulator/src/builder/valkyrie_build.rs",
+      "source_sha256": "aa6a20f87d50c15477d7bcd9f488eb4a714cfc561aed17646b3bd6dabbf9bdcb",
+      "path": "src/builder/valkyrie_build.rs",
+      "bytes": 33092,
+      "sha256": "d208f5110e39c62ca50a192eab15f3ac2b8c148e7c3a52ad370e62345d08b6a5"
+    },
+    {
+      "source_path": "simulator/src/constants.rs",
+      "source_sha256": "2f34023d6f0bb9302d2d357ba32f9db8da29d5154b9065db4231b8d81cc95c83",
+      "path": "src/constants.rs",
+      "bytes": 9705,
+      "sha256": "2f34023d6f0bb9302d2d357ba32f9db8da29d5154b9065db4231b8d81cc95c83"
+    },
+    {
+      "source_path": "simulator/src/engine/events.rs",
+      "source_sha256": "d488c9db2d6bc3303d3792e2110e16f478183c6fdc2081c0164a83f1479e18be",
+      "path": "src/engine/events.rs",
+      "bytes": 6798,
+      "sha256": "d488c9db2d6bc3303d3792e2110e16f478183c6fdc2081c0164a83f1479e18be"
+    },
+    {
+      "source_path": "simulator/src/engine/mechanics/cooldown.rs",
+      "source_sha256": "9b0ed9332e0a397227dce7d10578565f452eabb1fe529e4147795af496e7f4e0",
+      "path": "src/engine/mechanics/cooldown.rs",
+      "bytes": 5733,
+      "sha256": "9b0ed9332e0a397227dce7d10578565f452eabb1fe529e4147795af496e7f4e0"
+    },
+    {
+      "source_path": "simulator/src/engine/mechanics/damage.rs",
+      "source_sha256": "b8341f07f36767cac5003037397e9d2c6886bf776bbb87aadbabf821380baf68",
+      "path": "src/engine/mechanics/damage.rs",
+      "bytes": 13831,
+      "sha256": "b8341f07f36767cac5003037397e9d2c6886bf776bbb87aadbabf821380baf68"
+    },
+    {
+      "source_path": "simulator/src/engine/mechanics/mod.rs",
+      "source_sha256": "d29fee48ac4de3a5ab36469fe3ad205d530af86c489aea25a6ca8d8048109ee5",
+      "path": "src/engine/mechanics/mod.rs",
+      "bytes": 34,
+      "sha256": "d29fee48ac4de3a5ab36469fe3ad205d530af86c489aea25a6ca8d8048109ee5"
+    },
+    {
+      "source_path": "simulator/src/engine/mod.rs",
+      "source_sha256": "a617c43987c516f0dbd5a14b0e73d683ad2932a66357da16db3c25673a50e8d2",
+      "path": "src/engine/mod.rs",
+      "bytes": 179,
+      "sha256": "a617c43987c516f0dbd5a14b0e73d683ad2932a66357da16db3c25673a50e8d2"
+    },
+    {
+      "source_path": "simulator/src/engine/rng.rs",
+      "source_sha256": "6c25f3d1d2498327cdd90f90737b94e0ba21077a3515c8b3f08d40598285160b",
+      "path": "src/engine/rng.rs",
+      "bytes": 1376,
+      "sha256": "6c25f3d1d2498327cdd90f90737b94e0ba21077a3515c8b3f08d40598285160b"
+    },
+    {
+      "source_path": "simulator/src/engine/sim.rs",
+      "source_sha256": "68faf99b8f51de5ef68cf5af7d52465a49116d0be61492c26538b8c4200ad781",
+      "path": "src/engine/sim.rs",
+      "bytes": 133718,
+      "sha256": "68faf99b8f51de5ef68cf5af7d52465a49116d0be61492c26538b8c4200ad781"
+    },
+    {
+      "source_path": "simulator/src/engine/snapshot.rs",
+      "source_sha256": "8c7faead4f560abd0470cc5535c3223c2bf8797fe7c237b33ed8354d89262a26",
+      "path": "src/engine/snapshot.rs",
+      "bytes": 41732,
+      "sha256": "8c7faead4f560abd0470cc5535c3223c2bf8797fe7c237b33ed8354d89262a26"
+    },
+    {
+      "source_path": "simulator/src/engine/state/actor.rs",
+      "source_sha256": "581811fcd7f2273ef5fc532850492c4f8cf518864e453f9a2b29c9da52d62721",
+      "path": "src/engine/state/actor.rs",
+      "bytes": 4503,
+      "sha256": "581811fcd7f2273ef5fc532850492c4f8cf518864e453f9a2b29c9da52d62721"
+    },
+    {
+      "source_path": "simulator/src/engine/state/buff.rs",
+      "source_sha256": "f40007d199603554c7dd59c24a4a5f9c6d524d373a633db2e1d4024ea39c81f2",
+      "path": "src/engine/state/buff.rs",
+      "bytes": 4870,
+      "sha256": "f40007d199603554c7dd59c24a4a5f9c6d524d373a633db2e1d4024ea39c81f2"
+    },
+    {
+      "source_path": "simulator/src/engine/state/class/arcana.rs",
+      "source_sha256": "3e79c85853765e3275f7920cad1ff5a48c2d1605e1e64982257cde0f0d413c83",
+      "path": "src/engine/state/class/arcana.rs",
+      "bytes": 6275,
+      "sha256": "3e79c85853765e3275f7920cad1ff5a48c2d1605e1e64982257cde0f0d413c83"
+    },
+    {
+      "source_path": "simulator/src/engine/state/class/berserker.rs",
+      "source_sha256": "e584339ef5a6fc9f8b324c4cc3bb2cfdb30b789ab058bfc6cbc36d3dcd5956a8",
+      "path": "src/engine/state/class/berserker.rs",
+      "bytes": 2248,
+      "sha256": "e584339ef5a6fc9f8b324c4cc3bb2cfdb30b789ab058bfc6cbc36d3dcd5956a8"
+    },
+    {
+      "source_path": "simulator/src/engine/state/class/mod.rs",
+      "source_sha256": "4ed2afa6abf15ed9bfb3cdb880ad6c71c2a26cf20492aeadc80da3e4eff9deed",
+      "path": "src/engine/state/class/mod.rs",
+      "bytes": 1781,
+      "sha256": "4ed2afa6abf15ed9bfb3cdb880ad6c71c2a26cf20492aeadc80da3e4eff9deed"
+    },
+    {
+      "source_path": "simulator/src/engine/state/class/reaper.rs",
+      "source_sha256": "91064d4e50b6d3e47acef40ae9c728e1859c0421d7cb4e2be2ebf41f980ab0ff",
+      "path": "src/engine/state/class/reaper.rs",
+      "bytes": 20479,
+      "sha256": "91064d4e50b6d3e47acef40ae9c728e1859c0421d7cb4e2be2ebf41f980ab0ff"
+    },
+    {
+      "source_path": "simulator/src/engine/state/class/slayer.rs",
+      "source_sha256": "c8b21137bf469ca873440c4406caa3e22a789361eb936ec7986cd0727d5258f0",
+      "path": "src/engine/state/class/slayer.rs",
+      "bytes": 8555,
+      "sha256": "c8b21137bf469ca873440c4406caa3e22a789361eb936ec7986cd0727d5258f0"
+    },
+    {
+      "source_path": "simulator/src/engine/state/class/sorceress.rs",
+      "source_sha256": "44c807d55060cd07f1c6b120e7b7aab942e7f7a5985b9ddb7b3dad5085ccaf8a",
+      "path": "src/engine/state/class/sorceress.rs",
+      "bytes": 6247,
+      "sha256": "44c807d55060cd07f1c6b120e7b7aab942e7f7a5985b9ddb7b3dad5085ccaf8a"
+    },
+    {
+      "source_path": "simulator/src/engine/state/class/valkyrie.rs",
+      "source_sha256": "1fb9e3b481a7827bf4891844023d75738803b6cb3d7444e296f8ff362e0b23a5",
+      "path": "src/engine/state/class/valkyrie.rs",
+      "bytes": 15714,
+      "sha256": "1fb9e3b481a7827bf4891844023d75738803b6cb3d7444e296f8ff362e0b23a5"
+    },
+    {
+      "source_path": "simulator/src/engine/state/mod.rs",
+      "source_sha256": "5af2b963ad8481f3db4161f6950b8f8034a39540e5664d0936ee1e70ad0d35b5",
+      "path": "src/engine/state/mod.rs",
+      "bytes": 204,
+      "sha256": "5af2b963ad8481f3db4161f6950b8f8034a39540e5664d0936ee1e70ad0d35b5"
+    },
+    {
+      "source_path": "simulator/src/lib.rs",
+      "source_sha256": "64f7b5784d079b8a260d2d535195fdde4afaa07723a209af1d881398f992626d",
+      "path": "src/lib.rs",
+      "bytes": 354268,
+      "sha256": "3b7a56b0154994a6e19cd1fc068bde6a24220465f922c10f653d1d8855a20112"
+    },
+    {
+      "source_path": "simulator/src/profile/actor.rs",
+      "source_sha256": "38d5f78fd91b8c529b5eba9f7eb7e04f04d7e0674fdbcd3ac9b2fc32342ab8fc",
+      "path": "src/profile/actor.rs",
+      "bytes": 2812,
+      "sha256": "38d5f78fd91b8c529b5eba9f7eb7e04f04d7e0674fdbcd3ac9b2fc32342ab8fc"
+    },
+    {
+      "source_path": "simulator/src/profile/apl.rs",
+      "source_sha256": "2b3a3d3a543b43abe1486ab890d948503086f7828d8a0c21bc5244dbabf341a1",
+      "path": "src/profile/apl.rs",
+      "bytes": 2413,
+      "sha256": "2b3a3d3a543b43abe1486ab890d948503086f7828d8a0c21bc5244dbabf341a1"
+    },
+    {
+      "source_path": "simulator/src/profile/mod.rs",
+      "source_sha256": "393b98caa139cc7d80edd5d1508e911493215ead18cb0830a1ed6b9bd0f41a53",
+      "path": "src/profile/mod.rs",
+      "bytes": 508,
+      "sha256": "393b98caa139cc7d80edd5d1508e911493215ead18cb0830a1ed6b9bd0f41a53"
+    },
+    {
+      "source_path": "simulator/src/profile/reaper.rs",
+      "source_sha256": "edecff8d54e7a1fc53d163a0677b02ad8195431c8d47230355db12b8b331c590",
+      "path": "src/profile/reaper.rs",
+      "bytes": 2731,
+      "sha256": "edecff8d54e7a1fc53d163a0677b02ad8195431c8d47230355db12b8b331c590"
+    },
+    {
+      "source_path": "simulator/src/profile/skill.rs",
+      "source_sha256": "2bd1851bbb8b647e91dfc2762c29c6405ce5354cd4a1f2d45332f2e9f3609030",
+      "path": "src/profile/skill.rs",
+      "bytes": 19208,
+      "sha256": "2bd1851bbb8b647e91dfc2762c29c6405ce5354cd4a1f2d45332f2e9f3609030"
+    },
+    {
+      "source_path": "simulator/src/profile/stat.rs",
+      "source_sha256": "7b866675d9a556b632dca4e248ea9e6a82d32c7ebcfa0498442e1ad6e3063fd0",
+      "path": "src/profile/stat.rs",
+      "bytes": 14749,
+      "sha256": "7b866675d9a556b632dca4e248ea9e6a82d32c7ebcfa0498442e1ad6e3063fd0"
+    },
+    {
+      "source_path": "simulator/src/profile/valkyrie.rs",
+      "source_sha256": "f227c15af79a99f30a01ac50208a1a74302b392d406b61b74b2e2045623b73a8",
+      "path": "src/profile/valkyrie.rs",
+      "bytes": 5089,
+      "sha256": "f227c15af79a99f30a01ac50208a1a74302b392d406b61b74b2e2045623b73a8"
+    },
+    {
+      "source_path": "simulator/src/profile/valkyrie_cores.rs",
+      "source_sha256": "26bc1d156b4d11bb81ec1b3d314cd81ff36e11a9b541a0269dcb4863dbe7cf0a",
+      "path": "src/profile/valkyrie_cores.rs",
+      "bytes": 7046,
+      "sha256": "64e8dae5a1229353f13ef512a18d52fe5268c68e15e202d8060742d96180ec37"
+    },
+    {
+      "source_path": "simulator/src/profile_transfer.rs",
+      "source_sha256": "db5358197b28bc91b1377de2664b1b33ad88eb34e04f54c2a47aa03d2cafda4c",
+      "path": "src/profile_transfer.rs",
+      "bytes": 3867,
+      "sha256": "db5358197b28bc91b1377de2664b1b33ad88eb34e04f54c2a47aa03d2cafda4c"
+    },
+    {
+      "source_path": "simulator/src/reaper_tests.rs",
+      "source_sha256": "3e85860f9b855413ef991750c91874569f004daa066a76e3dd71f3d9203db6b9",
+      "path": "src/reaper_tests.rs",
+      "bytes": 418131,
+      "sha256": "cc5c43ae978010e6d8e94a57af68798fba1402cf6ec3bef20bfd11a284e6fa18"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/apl/BluntThornStream.yaml",
+      "source_sha256": "5106c15a2c610c5802c8fc359618bf1149e48f3f795a1596424149a01c6bac4c",
+      "path": "skill-data/arcana/backend/apl/BluntThornStream.yaml",
+      "bytes": 7448,
+      "sha256": "5106c15a2c610c5802c8fc359618bf1149e48f3f795a1596424149a01c6bac4c"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/apl/BluntThornStreamInpulma.yaml",
+      "source_sha256": "4997e6d68d90b23c2a7f4946fd2ad318c58372baa34ffb2cbc515882224451f5",
+      "path": "skill-data/arcana/backend/apl/BluntThornStreamInpulma.yaml",
+      "bytes": 6714,
+      "sha256": "4997e6d68d90b23c2a7f4946fd2ad318c58372baa34ffb2cbc515882224451f5"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/apl/EmperorShuffleDance.yaml",
+      "source_sha256": "e5ec8260ac3561b7482827e5dc210d2d02e3819646d3b74bcbbd6941f147f2e2",
+      "path": "skill-data/arcana/backend/apl/EmperorShuffleDance.yaml",
+      "bytes": 3785,
+      "sha256": "e5ec8260ac3561b7482827e5dc210d2d02e3819646d3b74bcbbd6941f147f2e2"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/apl/TestNoCond.yaml",
+      "source_sha256": "de831e4b490b67f13ee9d135fcc3857303774395239ade22ad6faacab54839d1",
+      "path": "skill-data/arcana/backend/apl/TestNoCond.yaml",
+      "bytes": 1416,
+      "sha256": "de831e4b490b67f13ee9d135fcc3857303774395239ade22ad6faacab54839d1"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/ark-grid.json",
+      "source_sha256": "b4c492fba6d0dbf29fab3dab1854223dfb8c78fdbde97f9b05f1330dece9fb7a",
+      "path": "skill-data/arcana/backend/ark-grid.json",
+      "bytes": 112114,
+      "sha256": "b4c492fba6d0dbf29fab3dab1854223dfb8c78fdbde97f9b05f1330dece9fb7a"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/buffs.json",
+      "source_sha256": "cc96daba4a96c3392b8c6bd2ba57fc448e563a583f3f1a848507aec89bc10ee8",
+      "path": "skill-data/arcana/backend/buffs.json",
+      "bytes": 72990,
+      "sha256": "cc96daba4a96c3392b8c6bd2ba57fc448e563a583f3f1a848507aec89bc10ee8"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/cards.json",
+      "source_sha256": "845497d4acdf754400c174b8410e0093016c0a7903cd2c1860dce6a9deb34043",
+      "path": "skill-data/arcana/backend/cards.json",
+      "bytes": 7154,
+      "sha256": "845497d4acdf754400c174b8410e0093016c0a7903cd2c1860dce6a9deb34043"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/equipment.json",
+      "source_sha256": "f6390c4fa43f034b1ba90a90233a14b81e554a408edf32b28d291c9c85d108e9",
+      "path": "skill-data/arcana/backend/equipment.json",
+      "bytes": 553316,
+      "sha256": "f6390c4fa43f034b1ba90a90233a14b81e554a408edf32b28d291c9c85d108e9"
+    },
+    {
+      "source_path": "skill-data/arcana/backend/skills.json",
+      "source_sha256": "e565bf315e5003cbb74cea61f2d202f75651d9e0efd05f385ad95e4ce714d2e7",
+      "path": "skill-data/arcana/backend/skills.json",
+      "bytes": 186630,
+      "sha256": "e565bf315e5003cbb74cea61f2d202f75651d9e0efd05f385ad95e4ce714d2e7"
+    },
+    {
+      "source_path": "skill-data/common/backend/ark-grid-gems.json",
+      "source_sha256": "9dc173812d7a0d3f2a7aafbcb045f3c1d81cf075f78719e726bc5ad9aa37fed6",
+      "path": "skill-data/common/backend/ark-grid-gems.json",
+      "bytes": 2110,
+      "sha256": "9dc173812d7a0d3f2a7aafbcb045f3c1d81cf075f78719e726bc5ad9aa37fed6"
+    },
+    {
+      "source_path": "skill-data/common/backend/ark-passives.json",
+      "source_sha256": "753bd6ccd77080eb541df85176d799f4de9ab587510639f40e605900dbcecf9b",
+      "path": "skill-data/common/backend/ark-passives.json",
+      "bytes": 50795,
+      "sha256": "753bd6ccd77080eb541df85176d799f4de9ab587510639f40e605900dbcecf9b"
+    },
+    {
+      "source_path": "skill-data/common/backend/engravings.json",
+      "source_sha256": "339ee071e9aa508457861fa3bddde26e6c9eba1e1dd584eaaa236fcb0a0cc732",
+      "path": "skill-data/common/backend/engravings.json",
+      "bytes": 2633507,
+      "sha256": "339ee071e9aa508457861fa3bddde26e6c9eba1e1dd584eaaa236fcb0a0cc732"
+    },
+    {
+      "source_path": "skill-data/common/backend/equipment-honing.json",
+      "source_sha256": "9e7c93ffb0a965e881733fd94a92951790a3c864c465e081309d874378474d33",
+      "path": "skill-data/common/backend/equipment-honing.json",
+      "bytes": 3024,
+      "sha256": "9e7c93ffb0a965e881733fd94a92951790a3c864c465e081309d874378474d33"
+    },
+    {
+      "source_path": "skill-data/common/backend/gem-target-eligibility.json",
+      "source_sha256": "0166ea64b551f89f50904fd65d964f4a1288e07e91b27cff4034a30948bccef8",
+      "path": "skill-data/common/backend/gem-target-eligibility.json",
+      "bytes": 60519,
+      "sha256": "0166ea64b551f89f50904fd65d964f4a1288e07e91b27cff4034a30948bccef8"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/ark-grid-gem-effects.json",
+      "source_sha256": "5bd56ce195e908e8d04273ba4d8befed8133a6caf5d0141128b28e860553f7e8",
+      "path": "skill-data/reaper/backend/ark-grid-gem-effects.json",
+      "bytes": 18044,
+      "sha256": "5bd56ce195e908e8d04273ba4d8befed8133a6caf5d0141128b28e860553f7e8"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/ark-grid.json",
+      "source_sha256": "5c4f1eb0824edc43e3af4e90657549d7ce46247c5d887d98908d4ab6f1d5c792",
+      "path": "skill-data/reaper/backend/ark-grid.json",
+      "bytes": 454521,
+      "sha256": "5c4f1eb0824edc43e3af4e90657549d7ce46247c5d887d98908d4ab6f1d5c792"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/call-control-rules.json",
+      "source_sha256": "173459fa5a6342890886b46a616b020a293c15a7fe342ea6a39f77786e0a359b",
+      "path": "skill-data/reaper/backend/call-control-rules.json",
+      "bytes": 781,
+      "sha256": "173459fa5a6342890886b46a616b020a293c15a7fe342ea6a39f77786e0a359b"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/destruction-rules.json",
+      "source_sha256": "4c8792282656ef0f18ecb07589004faef48ed8adfadb08325a82b1cca2ba52c7",
+      "path": "skill-data/reaper/backend/destruction-rules.json",
+      "bytes": 547,
+      "sha256": "4c8792282656ef0f18ecb07589004faef48ed8adfadb08325a82b1cca2ba52c7"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/passive-catalog.json",
+      "source_sha256": "ee6a1293497342bd95ce9af5f05bbe6096f920d807734d3a2e0c9be320ca12e9",
+      "path": "skill-data/reaper/backend/passive-catalog.json",
+      "bytes": 15808,
+      "sha256": "ee6a1293497342bd95ce9af5f05bbe6096f920d807734d3a2e0c9be320ca12e9"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/research/community-identity.json",
+      "source_sha256": "d65aaa305ef0b8226ba007e4eee4307f787e8614b7fbd1178eb141eecf945921",
+      "path": "skill-data/reaper/backend/research/community-identity.json",
+      "bytes": 10064,
+      "sha256": "d65aaa305ef0b8226ba007e4eee4307f787e8614b7fbd1178eb141eecf945921"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/research/graffiti-destiny-source-audit.json",
+      "source_sha256": "03a895a71447371704cf15a3b8a918dec8fdab44c890d29cb821df653858cf17",
+      "path": "skill-data/reaper/backend/research/graffiti-destiny-source-audit.json",
+      "bytes": 30052,
+      "sha256": "03a895a71447371704cf15a3b8a918dec8fdab44c890d29cb821df653858cf17"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/simulation-data.json",
+      "source_sha256": "cb6273a25eb087feef5a253ba152634c8a4e9b7343bec78b9803baa9c1e2a3ac",
+      "path": "skill-data/reaper/backend/simulation-data.json",
+      "bytes": 2146982,
+      "sha256": "cb6273a25eb087feef5a253ba152634c8a4e9b7343bec78b9803baa9c1e2a3ac"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/stagger-rules.json",
+      "source_sha256": "b2d39294055fb606f47a27484519276dabc52a71538873c0302624044a224153",
+      "path": "skill-data/reaper/backend/stagger-rules.json",
+      "bytes": 6584,
+      "sha256": "b2d39294055fb606f47a27484519276dabc52a71538873c0302624044a224153"
+    },
+    {
+      "source_path": "skill-data/reaper/backend/tripod-catalog.json",
+      "source_sha256": "b195ba13300bc6bc50f45d2ed48f5b9c362f36088cc6154c44103bff5ed51433",
+      "path": "skill-data/reaper/backend/tripod-catalog.json",
+      "bytes": 1314369,
+      "sha256": "b195ba13300bc6bc50f45d2ed48f5b9c362f36088cc6154c44103bff5ed51433"
+    },
+    {
+      "source_path": "skill-data/valkyrie/backend/build-runtime.json",
+      "source_sha256": "16a755a857818d04a8c3b18534ba6f0eaea44c91057d20c91cb6d47f447b93a3",
+      "path": "skill-data/valkyrie/backend/build-runtime.json",
+      "bytes": 3548231,
+      "sha256": "16a755a857818d04a8c3b18534ba6f0eaea44c91057d20c91cb6d47f447b93a3"
+    },
+    {
+      "source_path": "skill-data/valkyrie/backend/cores-runtime.json",
+      "source_sha256": "2b7afef1b76b978f41f009a20d52dfcf38c67168679c1a0b9ae9d52987d9335e",
+      "path": "skill-data/valkyrie/backend/cores-runtime.json",
+      "bytes": 17167,
+      "sha256": "2b7afef1b76b978f41f009a20d52dfcf38c67168679c1a0b9ae9d52987d9335e"
+    }
+  ]
+}

@@ -105,7 +105,7 @@ impl ModifierManager {
 
     /// 로아 공식 순서로 모든 Modifier를 일괄 계산하여 `CompiledModifiers`를 생성한다.
     ///
-    /// ## 연산 순서 (docs/damage-formula.md)
+    /// ## 연산 순서 (docs/reference/damage-formula.md)
     ///
     /// 동일 `(target_tag, stat_name)` 그룹에서:
     ///
@@ -206,7 +206,7 @@ mod tests {
             .unwrap_or(f64::NAN)
     }
 
-    /// docs/damage-formula.md 예시:
+    /// docs/reference/damage-formula.md 예시:
     /// ArkPassive OpMultiply(0.15) × ArkGrid OpMultiply(0.10)
     /// → 1.15 × 1.10 = 1.265
     #[test]

@@ -1,0 +1,751 @@
+[
+  {
+    "id": 2260000,
+    "name": "달의 소리",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_1.png",
+    "tier": 1,
+    "tree": 0,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "페르소나 급습 피해 +{value}%, 공속 +10% · 임시 실행 모델",
+    "effects": [
+      [
+        30
+      ],
+      [
+        60
+      ],
+      [
+        90
+      ]
+    ],
+    "runtimeKey": "persona_damage",
+    "exclusiveId": 2260000,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2260100,
+    "name": "유령 무희",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_37.png",
+    "tier": 2,
+    "tree": 0,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "페르소나 치명타 적중률 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        3
+      ],
+      [
+        6
+      ],
+      [
+        10
+      ]
+    ],
+    "runtimeKey": "persona_crit",
+    "exclusiveId": 0,
+    "prerequisiteId": 2260000,
+    "prerequisiteLevel": 3,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2260200,
+    "name": "곡예사",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_2.png",
+    "tier": 3,
+    "tree": 0,
+    "activatePoint": 2,
+    "maxLevel": 5,
+    "description": "페르소나 급습 치명타 피해 +{value}% (돌진 거리는 미계산) · 임시 실행 모델",
+    "effects": [
+      [
+        3
+      ],
+      [
+        6
+      ],
+      [
+        9
+      ],
+      [
+        12
+      ],
+      [
+        15
+      ]
+    ],
+    "runtimeKey": "persona_crit_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2260300,
+    "name": "그림자 밟기",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_10.png",
+    "tier": 3,
+    "tree": 0,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "페르소나 급습 피해 증가를 {value}%로 대체 (이동 스킬 초기화는 미계산) · 임시 실행 모델",
+    "effects": [
+      [
+        138
+      ],
+      [
+        153
+      ],
+      [
+        169
+      ]
+    ],
+    "runtimeKey": "persona_damage_override",
+    "exclusiveId": 0,
+    "prerequisiteId": 2260100,
+    "prerequisiteLevel": 3,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2260400,
+    "name": "잠행",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_3.png",
+    "tier": 4,
+    "tree": 0,
+    "activatePoint": 2,
+    "maxLevel": 5,
+    "description": "페르소나 급습 피해 +{value}%, 페르소나 밖 급습 피해 -50% · 임시 실행 모델",
+    "effects": [
+      [
+        3
+      ],
+      [
+        4
+      ],
+      [
+        5
+      ],
+      [
+        6
+      ],
+      [
+        7
+      ]
+    ],
+    "runtimeKey": "persona_extra_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2260500,
+    "name": "급소 확보",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_4.png",
+    "tier": 4,
+    "tree": 0,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "페르소나 급습 3회 사용 후 다음 급습 백어택 피해 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        41
+      ],
+      [
+        82
+      ],
+      [
+        125
+      ]
+    ],
+    "runtimeKey": "blade_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 2260300,
+    "prerequisiteLevel": 3,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2260600,
+    "name": "피냄새",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_5.png",
+    "tier": 1,
+    "tree": 1,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "혼돈 치명타 적중률을 {value}%로 대체 · 임시 실행 모델",
+    "effects": [
+      [
+        18
+      ],
+      [
+        20
+      ],
+      [
+        23
+      ]
+    ],
+    "runtimeKey": "chaos_crit",
+    "exclusiveId": 2260000,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2260700,
+    "name": "굶주림",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_52.png",
+    "tier": 2,
+    "tree": 1,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "혼돈 게이지 획득량 +{value}% (기본 획득량은 미확정) · 임시 실행 모델",
+    "effects": [
+      [
+        17
+      ],
+      [
+        33
+      ],
+      [
+        50
+      ]
+    ],
+    "runtimeKey": "heat_gain",
+    "exclusiveId": 0,
+    "prerequisiteId": 2260600,
+    "prerequisiteLevel": 3,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2260800,
+    "name": "갈증",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_16.png",
+    "tier": 3,
+    "tree": 1,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "혼돈 공격력 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        14
+      ],
+      [
+        26
+      ],
+      [
+        38
+      ]
+    ],
+    "runtimeKey": "chaos_attack_power",
+    "exclusiveId": 0,
+    "prerequisiteId": 2260700,
+    "prerequisiteLevel": 3,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2260900,
+    "name": "암살자의 손놀림",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_44.png",
+    "tier": 3,
+    "tree": 1,
+    "activatePoint": 2,
+    "maxLevel": 5,
+    "description": "적중 공속 +1%, 최대5중첩/6초; 페르소나·혼돈 피해 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        0.8
+      ],
+      [
+        1.6
+      ],
+      [
+        2.4
+      ],
+      [
+        3.2
+      ],
+      [
+        4
+      ]
+    ],
+    "runtimeKey": "handwork_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 24,
+    "hitSkillIds": [
+      26050,
+      26060,
+      26070,
+      26080,
+      26110,
+      26120,
+      26140,
+      26150,
+      26310,
+      26320,
+      26330,
+      26340,
+      26500,
+      26510,
+      26511,
+      26520,
+      26530,
+      26540,
+      26610,
+      26620,
+      26550,
+      26560,
+      26570,
+      26590,
+      26600,
+      26800,
+      26810,
+      26820,
+      26830,
+      26960,
+      26970
+    ],
+    "damageSkillIds": [
+      26000,
+      26010,
+      26090,
+      26100,
+      26050,
+      26060,
+      26070,
+      26080,
+      26110,
+      26120,
+      26140,
+      26150,
+      26200,
+      26210,
+      26220,
+      26230,
+      26240,
+      26250,
+      26260,
+      26270,
+      26280,
+      26290,
+      26310,
+      26320,
+      26330,
+      26340,
+      26500,
+      26510,
+      26511,
+      26520,
+      26530,
+      26540,
+      26610,
+      26620,
+      26550,
+      26560,
+      26570,
+      26590,
+      26600,
+      26800,
+      26810,
+      26820,
+      26830,
+      26900,
+      26910,
+      26920,
+      26930,
+      26960,
+      26970,
+      26980
+    ]
+  },
+  {
+    "id": 2261000,
+    "name": "살인귀",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_6.png",
+    "tier": 4,
+    "tree": 1,
+    "activatePoint": 8,
+    "maxLevel": 3,
+    "description": "페르소나 금지; 혼돈 페이탈 스텝 후10초 피해 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        20
+      ],
+      [
+        40
+      ],
+      [
+        60
+      ]
+    ],
+    "runtimeKey": "fatal_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 2260800,
+    "prerequisiteLevel": 3,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2261100,
+    "name": "혼돈 강화",
+    "className": "리퍼",
+    "type": "깨달음",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_7.png",
+    "tier": 4,
+    "tree": 1,
+    "activatePoint": 2,
+    "maxLevel": 5,
+    "description": "혼돈 급습 사용 시 남은 시간 -2초, 피해 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        1.2
+      ],
+      [
+        2.4
+      ],
+      [
+        3.6
+      ],
+      [
+        4.8
+      ],
+      [
+        6
+      ]
+    ],
+    "runtimeKey": "chaos_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 24
+  },
+  {
+    "id": 2265000,
+    "name": "초월적인 힘",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_02/ark_passive_02_3.png",
+    "tier": 1,
+    "tree": 1,
+    "activatePoint": 4,
+    "maxLevel": 5,
+    "description": "초각성기 피해 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        10
+      ],
+      [
+        20
+      ],
+      [
+        30
+      ],
+      [
+        40
+      ],
+      [
+        50
+      ]
+    ],
+    "runtimeKey": "super_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2265100,
+    "name": "충전된 분노",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_02/ark_passive_02_1.png",
+    "tier": 1,
+    "tree": 1,
+    "activatePoint": 4,
+    "maxLevel": 5,
+    "description": "초각성기 만충 감지 시 각성기 남은 쿨다운 -{value}% (첫 적중에서 검사) · 임시 실행 모델",
+    "effects": [
+      [
+        10
+      ],
+      [
+        20
+      ],
+      [
+        30
+      ],
+      [
+        40
+      ],
+      [
+        50
+      ]
+    ],
+    "runtimeKey": "charged_fury",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2265200,
+    "name": "각성 증폭기",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_54.png",
+    "tier": 1,
+    "tree": 1,
+    "activatePoint": 2,
+    "maxLevel": 3,
+    "description": "각성기 사용 가능 횟수 +{value}회 · 임시 실행 모델",
+    "effects": [
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "runtimeKey": "awakening_uses",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2265300,
+    "name": "풀려난 힘",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_02/ark_passive_02_2.png",
+    "tier": 1,
+    "tree": 1,
+    "activatePoint": 4,
+    "maxLevel": 5,
+    "description": "T스킬 피해 +{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        3
+      ],
+      [
+        6
+      ],
+      [
+        9
+      ],
+      [
+        12
+      ],
+      [
+        15
+      ]
+    ],
+    "runtimeKey": "technique_damage",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2265400,
+    "name": "잠재력 해방",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_01/ark_passive_01_10.png",
+    "tier": 1,
+    "tree": 1,
+    "activatePoint": 4,
+    "maxLevel": 5,
+    "description": "T스킬 기본 쿨다운 -{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        2
+      ],
+      [
+        4
+      ],
+      [
+        6
+      ],
+      [
+        8
+      ],
+      [
+        10
+      ]
+    ],
+    "runtimeKey": "technique_cooldown",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2265500,
+    "name": "즉각적인 주문",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_02/ark_passive_02_5.png",
+    "tier": 1,
+    "tree": 1,
+    "activatePoint": 2,
+    "maxLevel": 3,
+    "description": "T스킬 시전 속도 +{value}% (무력화는 미계산) · 임시 실행 모델",
+    "effects": [
+      [
+        4
+      ],
+      [
+        8
+      ],
+      [
+        12
+      ]
+    ],
+    "runtimeKey": "technique_speed",
+    "exclusiveId": 0,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 0
+  },
+  {
+    "id": 2265600,
+    "name": "비열한 칼날",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_8.png",
+    "tier": 2,
+    "tree": 1,
+    "activatePoint": 10,
+    "maxLevel": 3,
+    "description": "쉐도우 나이프 치적 +20%, 어둠 획득 -90%, 기본 쿨다운 -{value}% · 임시 실행 모델",
+    "effects": [
+      [
+        12
+      ],
+      [
+        24
+      ],
+      [
+        36
+      ]
+    ],
+    "runtimeKey": "knife_cooldown",
+    "exclusiveId": 2265600,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 40
+  },
+  {
+    "id": 2265700,
+    "name": "잔혹한 칼날",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_9.png",
+    "tier": 2,
+    "tree": 1,
+    "activatePoint": 10,
+    "maxLevel": 3,
+    "description": "쉐도우 나이프 피해 +{value}%, 어둠 획득 +100% · 임시 실행 모델",
+    "effects": [
+      [
+        20
+      ],
+      [
+        40
+      ],
+      [
+        60
+      ]
+    ],
+    "runtimeKey": "knife_damage",
+    "exclusiveId": 2265600,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 40
+  },
+  {
+    "id": 2265800,
+    "name": "암살자의 발자취",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_10.png",
+    "tier": 2,
+    "tree": 1,
+    "activatePoint": 10,
+    "maxLevel": 3,
+    "description": "혼돈 피니쉬 스텝 피해 +{value}% (백어택 치적10/15/20%) · 임시 실행 모델",
+    "effects": [
+      [
+        9
+      ],
+      [
+        18
+      ],
+      [
+        28
+      ]
+    ],
+    "runtimeKey": "finish_chaos_damage",
+    "exclusiveId": 2265600,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 40
+  },
+  {
+    "id": 2265900,
+    "name": "그림자 맹수",
+    "className": "리퍼",
+    "type": "도약",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_rp/ark_passive_rp_11.png",
+    "tier": 2,
+    "tree": 1,
+    "activatePoint": 10,
+    "maxLevel": 3,
+    "description": "피니쉬 스텝 치적 +{value}% (페르소나 치명타 피해5/10/15%) · 임시 실행 모델",
+    "effects": [
+      [
+        10
+      ],
+      [
+        20
+      ],
+      [
+        30
+      ]
+    ],
+    "runtimeKey": "finish_crit",
+    "exclusiveId": 2265600,
+    "prerequisiteId": 0,
+    "prerequisiteLevel": 0,
+    "precedingTierPoints": 40
+  }
+]

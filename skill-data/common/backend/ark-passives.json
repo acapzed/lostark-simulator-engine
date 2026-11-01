@@ -1,1 +1,2743 @@
-[{"type":"진화","tier":5,"name":"음속 돌파","description":"공격 적중 시, 공격 속도 및 이동 속도 증가량의 10.0% 만큼 진화형 피해가 증가합니다. 공격 및 이동 속도가 모두 상한을 초과했다면, 진화형 피해가 추가로 8.0% 증가하며, 상한을 초과한 속도 증가량의 30.0%만큼 적중 시 진화형 피해가 증가합니다. 이 노드에 의한 진화형 피해는 최대 24.0%까지 적용됩니다.","imageLink":"https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_21.png","maxLevel":2,"activatePoint":15,"className":null,"effects":[[],[]],"simEffects":[[{"kind":"speed_evolution","value":5},{"kind":"speed_overcap_evolution","value":4},{"kind":"speed_overcap_coefficient","value":15},{"kind":"speed_evolution_cap","value":12}],[{"kind":"speed_evolution","value":10},{"kind":"speed_overcap_evolution","value":8},{"kind":"speed_overcap_coefficient","value":30},{"kind":"speed_evolution_cap","value":24}]]}]
+[
+  {
+    "type": "진화",
+    "tier": 1,
+    "name": "치명",
+    "description": "치명이 {value} 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_1.png",
+    "maxLevel": 30,
+    "activatePoint": 1,
+    "className": null,
+    "effects": [
+      [
+        50
+      ],
+      [
+        100
+      ],
+      [
+        150
+      ],
+      [
+        200
+      ],
+      [
+        250
+      ],
+      [
+        300
+      ],
+      [
+        350
+      ],
+      [
+        400
+      ],
+      [
+        450
+      ],
+      [
+        500
+      ],
+      [
+        550
+      ],
+      [
+        600
+      ],
+      [
+        650
+      ],
+      [
+        700
+      ],
+      [
+        750
+      ],
+      [
+        800
+      ],
+      [
+        850
+      ],
+      [
+        900
+      ],
+      [
+        950
+      ],
+      [
+        1000
+      ],
+      [
+        1050
+      ],
+      [
+        1100
+      ],
+      [
+        1150
+      ],
+      [
+        1200
+      ],
+      [
+        1250
+      ],
+      [
+        1300
+      ],
+      [
+        1350
+      ],
+      [
+        1400
+      ],
+      [
+        1450
+      ],
+      [
+        1500
+      ]
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 50
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 500
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 550
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 600
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 650
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 700
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 750
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 800
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 850
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 900
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 950
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1000
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1050
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "crit",
+          "value": 1500
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 1,
+    "name": "특화",
+    "description": "특화가 {value} 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_2.png",
+    "maxLevel": 30,
+    "activatePoint": 1,
+    "className": null,
+    "effects": [
+      [
+        50
+      ],
+      [
+        100
+      ],
+      [
+        150
+      ],
+      [
+        200
+      ],
+      [
+        250
+      ],
+      [
+        300
+      ],
+      [
+        350
+      ],
+      [
+        400
+      ],
+      [
+        450
+      ],
+      [
+        500
+      ],
+      [
+        550
+      ],
+      [
+        600
+      ],
+      [
+        650
+      ],
+      [
+        700
+      ],
+      [
+        750
+      ],
+      [
+        800
+      ],
+      [
+        850
+      ],
+      [
+        900
+      ],
+      [
+        950
+      ],
+      [
+        1000
+      ],
+      [
+        1050
+      ],
+      [
+        1100
+      ],
+      [
+        1150
+      ],
+      [
+        1200
+      ],
+      [
+        1250
+      ],
+      [
+        1300
+      ],
+      [
+        1350
+      ],
+      [
+        1400
+      ],
+      [
+        1450
+      ],
+      [
+        1500
+      ]
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 50
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 500
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 550
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 600
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 650
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 700
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 750
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 800
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 850
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 900
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 950
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1000
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1050
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "specialization",
+          "value": 1500
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 1,
+    "name": "제압",
+    "description": "제압이 {value} 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_3.png",
+    "maxLevel": 30,
+    "activatePoint": 1,
+    "className": null,
+    "effects": [
+      [
+        50
+      ],
+      [
+        100
+      ],
+      [
+        150
+      ],
+      [
+        200
+      ],
+      [
+        250
+      ],
+      [
+        300
+      ],
+      [
+        350
+      ],
+      [
+        400
+      ],
+      [
+        450
+      ],
+      [
+        500
+      ],
+      [
+        550
+      ],
+      [
+        600
+      ],
+      [
+        650
+      ],
+      [
+        700
+      ],
+      [
+        750
+      ],
+      [
+        800
+      ],
+      [
+        850
+      ],
+      [
+        900
+      ],
+      [
+        950
+      ],
+      [
+        1000
+      ],
+      [
+        1050
+      ],
+      [
+        1100
+      ],
+      [
+        1150
+      ],
+      [
+        1200
+      ],
+      [
+        1250
+      ],
+      [
+        1300
+      ],
+      [
+        1350
+      ],
+      [
+        1400
+      ],
+      [
+        1450
+      ],
+      [
+        1500
+      ]
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 50
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 500
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 550
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 600
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 650
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 700
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 750
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 800
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 850
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 900
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 950
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1000
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1050
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "domination",
+          "value": 1500
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 1,
+    "name": "신속",
+    "description": "신속이 {value} 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_4.png",
+    "maxLevel": 30,
+    "activatePoint": 1,
+    "className": null,
+    "effects": [
+      [
+        50
+      ],
+      [
+        100
+      ],
+      [
+        150
+      ],
+      [
+        200
+      ],
+      [
+        250
+      ],
+      [
+        300
+      ],
+      [
+        350
+      ],
+      [
+        400
+      ],
+      [
+        450
+      ],
+      [
+        500
+      ],
+      [
+        550
+      ],
+      [
+        600
+      ],
+      [
+        650
+      ],
+      [
+        700
+      ],
+      [
+        750
+      ],
+      [
+        800
+      ],
+      [
+        850
+      ],
+      [
+        900
+      ],
+      [
+        950
+      ],
+      [
+        1000
+      ],
+      [
+        1050
+      ],
+      [
+        1100
+      ],
+      [
+        1150
+      ],
+      [
+        1200
+      ],
+      [
+        1250
+      ],
+      [
+        1300
+      ],
+      [
+        1350
+      ],
+      [
+        1400
+      ],
+      [
+        1450
+      ],
+      [
+        1500
+      ]
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 50
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 500
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 550
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 600
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 650
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 700
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 750
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 800
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 850
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 900
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 950
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1000
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1050
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "swiftness",
+          "value": 1500
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 1,
+    "name": "인내",
+    "description": "인내가 {value} 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_5.png",
+    "maxLevel": 30,
+    "activatePoint": 1,
+    "className": null,
+    "effects": [
+      [
+        50
+      ],
+      [
+        100
+      ],
+      [
+        150
+      ],
+      [
+        200
+      ],
+      [
+        250
+      ],
+      [
+        300
+      ],
+      [
+        350
+      ],
+      [
+        400
+      ],
+      [
+        450
+      ],
+      [
+        500
+      ],
+      [
+        550
+      ],
+      [
+        600
+      ],
+      [
+        650
+      ],
+      [
+        700
+      ],
+      [
+        750
+      ],
+      [
+        800
+      ],
+      [
+        850
+      ],
+      [
+        900
+      ],
+      [
+        950
+      ],
+      [
+        1000
+      ],
+      [
+        1050
+      ],
+      [
+        1100
+      ],
+      [
+        1150
+      ],
+      [
+        1200
+      ],
+      [
+        1250
+      ],
+      [
+        1300
+      ],
+      [
+        1350
+      ],
+      [
+        1400
+      ],
+      [
+        1450
+      ],
+      [
+        1500
+      ]
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 50
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 500
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 550
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 600
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 650
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 700
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 750
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 800
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 850
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 900
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 950
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1000
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1050
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "endurance",
+          "value": 1500
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 1,
+    "name": "숙련",
+    "description": "숙련이 {value} 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_6.png",
+    "maxLevel": 30,
+    "activatePoint": 1,
+    "className": null,
+    "effects": [
+      [
+        50
+      ],
+      [
+        100
+      ],
+      [
+        150
+      ],
+      [
+        200
+      ],
+      [
+        250
+      ],
+      [
+        300
+      ],
+      [
+        350
+      ],
+      [
+        400
+      ],
+      [
+        450
+      ],
+      [
+        500
+      ],
+      [
+        550
+      ],
+      [
+        600
+      ],
+      [
+        650
+      ],
+      [
+        700
+      ],
+      [
+        750
+      ],
+      [
+        800
+      ],
+      [
+        850
+      ],
+      [
+        900
+      ],
+      [
+        950
+      ],
+      [
+        1000
+      ],
+      [
+        1050
+      ],
+      [
+        1100
+      ],
+      [
+        1150
+      ],
+      [
+        1200
+      ],
+      [
+        1250
+      ],
+      [
+        1300
+      ],
+      [
+        1350
+      ],
+      [
+        1400
+      ],
+      [
+        1450
+      ],
+      [
+        1500
+      ]
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 50
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 500
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 550
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 600
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 650
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 700
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 750
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 800
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 850
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 900
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 950
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1000
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1050
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1100
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1150
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1200
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1250
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1300
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1350
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1400
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1450
+        }
+      ],
+      [
+        {
+          "kind": "flat",
+          "field": "expertise",
+          "value": 1500
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 2,
+    "name": "끝없는 마나",
+    "description": "마나 사용 스킬의 재사용 대기시간이 14.0% 감소하고, 마나 소모량이 20.0% 감소합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_16.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "mana_skill_cooldown_reduction",
+          "value": 7
+        },
+        {
+          "kind": "mana_cost_reduction",
+          "value": 10
+        }
+      ],
+      [
+        {
+          "kind": "mana_skill_cooldown_reduction",
+          "value": 14
+        },
+        {
+          "kind": "mana_cost_reduction",
+          "value": 20
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 2,
+    "name": "금단의 주문",
+    "description": "진화형 피해가 10.0% 증가, 마나 스킬의 진화형 피해는 10.0% 더 증가하고, 마나 소모량이 12.0% 감소합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_12.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 5
+        },
+        {
+          "kind": "mana_skill_evolution_damage",
+          "value": 5
+        },
+        {
+          "kind": "mana_cost_reduction",
+          "value": 6
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 10
+        },
+        {
+          "kind": "mana_skill_evolution_damage",
+          "value": 10
+        },
+        {
+          "kind": "mana_cost_reduction",
+          "value": 12
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 2,
+    "name": "예리한 감각",
+    "description": "치명타 적중률이 8.0% 증가하고, 진화형 피해가 10.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_29.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "crit_rate",
+          "value": 4
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 5
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "crit_rate",
+          "value": 8
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 10
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 2,
+    "name": "한계 돌파",
+    "description": "진화형 피해가 30.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_34.png",
+    "maxLevel": 3,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 10
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 20
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 30
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 2,
+    "name": "최적화 훈련",
+    "description": "각성기, 이동 및 기상기를 제외한 스킬의 재사용 대기시간이 8.0% 감소하고, 진화형 피해 10.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_22.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "non_awakening_skill_cooldown_reduction",
+          "value": 4
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 5
+        }
+      ],
+      [
+        {
+          "kind": "non_awakening_skill_cooldown_reduction",
+          "value": 8
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 10
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 2,
+    "name": "축복의 여신",
+    "description": "전투 중 자신 및 주변 파티원에게 '전투 축복 III' 효과를 적용합니다.(20초 지속, 매 초마다 갱신) 전투 축복 III : 공격 및 이동 속도 9.0% 증가",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_19.png",
+    "maxLevel": 3,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "attack_speed",
+          "value": 3
+        },
+        {
+          "kind": "stat",
+          "field": "movement_speed",
+          "value": 3
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "attack_speed",
+          "value": 6
+        },
+        {
+          "kind": "stat",
+          "field": "movement_speed",
+          "value": 6
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "attack_speed",
+          "value": 9
+        },
+        {
+          "kind": "stat",
+          "field": "movement_speed",
+          "value": 9
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 3,
+    "name": "무한한 마력",
+    "description": "진화형 피해가 16.0% 증가하고, 마나 스킬의 재사용 대기시간이 14.0% 감소, 마나 소모량이 16.0% 감소합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_14.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 8
+        },
+        {
+          "kind": "mana_skill_cooldown_reduction",
+          "value": 7
+        },
+        {
+          "kind": "mana_cost_reduction",
+          "value": 8
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 16
+        },
+        {
+          "kind": "mana_skill_cooldown_reduction",
+          "value": 14
+        },
+        {
+          "kind": "mana_cost_reduction",
+          "value": 16
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 3,
+    "name": "혼신의 강타",
+    "description": "치명타 적중률이 24.0% 증가하고, 진화형 피해가 4.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_27.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "crit_rate",
+          "value": 12
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 2
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "crit_rate",
+          "value": 24
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 4
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 3,
+    "name": "일격",
+    "description": "치명타 적중률이 20.0% 증가하고, 방향성 공격 스킬의 치명타 피해가 32.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_32.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "crit_rate",
+          "value": 10
+        },
+        {
+          "kind": "directional_crit_damage",
+          "value": 16
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "crit_rate",
+          "value": 20
+        },
+        {
+          "kind": "directional_crit_damage",
+          "value": 32
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 3,
+    "name": "파괴 전차",
+    "description": "진화형 피해가 24.0% 증가하고, 공격 속도가 8.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_35.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 12
+        },
+        {
+          "kind": "stat",
+          "field": "attack_speed",
+          "value": 4
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 24
+        },
+        {
+          "kind": "stat",
+          "field": "attack_speed",
+          "value": 8
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 3,
+    "name": "타이밍 지배",
+    "description": "각성기, 이동 및 기상기를 제외한 스킬의 재사용 대기시간이 10.0% 감소하고, 진화형 피해가 16.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_23.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "normal_skill_cooldown_reduction",
+          "value": 5
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 8
+        }
+      ],
+      [
+        {
+          "kind": "normal_skill_cooldown_reduction",
+          "value": 10
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 16
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 3,
+    "name": "정열의 춤사위",
+    "description": "적중 시 아이덴티티 게이지 획득량이 20.0% 증가합니다. 전투 중 자신 및 주변 파티원에게 '정열의 춤 II' 효과를 적용합니다.(20초 지속, 매 초마다 갱신) 정열의 춤 II : 진화형 피해 14.0% 증가",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_33.png",
+    "maxLevel": 2,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "identity_gain_multiplier",
+          "value": 10
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 7
+        }
+      ],
+      [
+        {
+          "kind": "identity_gain_multiplier",
+          "value": 20
+        },
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 14
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 4,
+    "name": "회심",
+    "description": "공격이 치명타로 적중 시 적에게 주는 피해가 12.0% 증가하며, 받는 피해가 4.0% 감소합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_40.png",
+    "maxLevel": 1,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "on_crit_damage_bonus",
+          "value": 12
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 4,
+    "name": "달인",
+    "description": "받는 피해가 4.0% 감소하며, 이동기 및 기상기를 제외한 스킬 사용시 10초간 '달인' 효과를 얻습니다. 달인 : 치명타 적중률 +1.4% / 추가 피해 +1.7%, 최대 5중첩",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_41.png",
+    "maxLevel": 1,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stack_trigger",
+          "triggerEvent": "on_cast",
+          "maxStacks": 5,
+          "stackDuration": 10,
+          "perStack": [
+            {
+              "kind": "stat",
+              "field": "crit_rate",
+              "value": 1.4
+            },
+            {
+              "kind": "stat",
+              "field": "additional_damage",
+              "value": 1.7
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 4,
+    "name": "분쇄",
+    "description": "진화형 피해가 20.0% 증가하며, 받는 피해가 4.0% 감소합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_44.png",
+    "maxLevel": 1,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 20
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 4,
+    "name": "선각자",
+    "description": "최대 생명력이 6.0% 증가합니다. 이동기 및 기상기를 제외한 스킬 사용시 10초간 '통찰' 효과를 얻습니다. '통찰' 중첩이 최대에 도달하면 아군 공격력 강화 효과가 추가로 11.0% 증가하고, 기상기 및 각성기를 제외한 스킬의 재사용 대기시간이 5.0% 감소합니다. 통찰 : 아군 공격력 강화 효과 +2.2%, 최대 5중첩",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_42.png",
+    "maxLevel": 1,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      []
+    ],
+    "simEffects": [
+      []
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 4,
+    "name": "진군",
+    "description": "최대 생명력이 6.0% 증가합니다. 아군에게 보호 효과 사용 시 자신의 5m 이내에 '진군 에테르'를 생성합니다. (발동 재사용 대기시간 7초) 진군 에테르 : 15초간 아군 공격력 강화 효과 +24.0% / 공격속도 +4.0% / 이동속도 +4.0%",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_43.png",
+    "maxLevel": 1,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      []
+    ],
+    "simEffects": [
+      []
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 4,
+    "name": "기원",
+    "description": "최대 생명력이 6.0% 증가합니다. 아군 공격력 강화 효과가 22.0% 증가하고, 낙인력이 4.0% 증가합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_45.png",
+    "maxLevel": 1,
+    "activatePoint": 10,
+    "className": null,
+    "effects": [
+      []
+    ],
+    "simEffects": [
+      []
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 5,
+    "name": "뭉툭한 가시",
+    "description": "진화형 피해가 15.0% 증가합니다. 치명타가 발생할 확률이 최대 80.0% 로 제한됩니다. 공격 시, 초과한 모든 치명타가 발생할 확률의 150.0%가 진화형 피해로 전환됩니다. 이 노드에 의한 진화형 피해는 최대 75.0%까지 적용됩니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_20.png",
+    "maxLevel": 2,
+    "activatePoint": 15,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 7.5
+        },
+        {
+          "kind": "crit_rate_cap",
+          "value": 80
+        },
+        {
+          "kind": "excess_crit_evolution",
+          "value": 125
+        },
+        {
+          "kind": "excess_crit_evolution_cap",
+          "value": 45
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 15
+        },
+        {
+          "kind": "crit_rate_cap",
+          "value": 80
+        },
+        {
+          "kind": "excess_crit_evolution",
+          "value": 150
+        },
+        {
+          "kind": "excess_crit_evolution_cap",
+          "value": 60
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 5,
+    "name": "음속 돌파",
+    "description": "공격 적중 시, 공격 속도 및 이동 속도 증가량의 10.0% 만큼 진화형 피해가 증가합니다. 공격 및 이동 속도가 모두 상한을 초과했다면, 진화형 피해가 추가로 8.0% 증가하며, 상한을 초과한 속도 증가량의 30.0%만큼 적중 시 진화형 피해가 증가합니다. 이 노드에 의한 진화형 피해는 최대 24.0%까지 적용됩니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_21.png",
+    "maxLevel": 2,
+    "activatePoint": 15,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "speed_evolution",
+          "value": 5
+        },
+        {
+          "kind": "speed_overcap_evolution",
+          "value": 4
+        },
+        {
+          "kind": "speed_overcap_coefficient",
+          "value": 15
+        },
+        {
+          "kind": "speed_evolution_cap",
+          "value": 12
+        }
+      ],
+      [
+        {
+          "kind": "speed_evolution",
+          "value": 10
+        },
+        {
+          "kind": "speed_overcap_evolution",
+          "value": 8
+        },
+        {
+          "kind": "speed_overcap_coefficient",
+          "value": 30
+        },
+        {
+          "kind": "speed_evolution_cap",
+          "value": 24
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 5,
+    "name": "인파이팅",
+    "description": "공격 적중 시, '정면 승부 II' 효과를 얻습니다. (10초 지속, 재사용 대기시간 5초) 정면 승부 II : 진화형 피해 +18%",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_38.png",
+    "maxLevel": 2,
+    "activatePoint": 15,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "on_hit_evolution_buff",
+          "value": 9,
+          "durationMs": 10000,
+          "cooldownMs": 5000
+        }
+      ],
+      [
+        {
+          "kind": "on_hit_evolution_buff",
+          "value": 18,
+          "durationMs": 10000,
+          "cooldownMs": 5000
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 5,
+    "name": "입식 타격가",
+    "description": "진화형 피해가 12.0%, 낙인력이 8.0% 증가합니다. 전투 시작 후, '입식 타격 II' 효과를 최대로 얻습니다. 피격 이상 시 중첩을 3회 잃습니다. 이후 2초가 지날 때마다 효과를 1중첩 회복합니다. 입식 타격 II : 진화형 피해 +1.5% / 낙인력 +2.0% , 최대 6중첩",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_18.png",
+    "maxLevel": 2,
+    "activatePoint": 15,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 10.5
+        }
+      ],
+      [
+        {
+          "kind": "stat",
+          "field": "evolution_damage",
+          "value": 21
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 5,
+    "name": "마나 용광로",
+    "description": "낙인력이 20.0% 증가합니다. 마나를 소모하는 스킬 사용 시, 최대 마나의 2.0%가 추가로 소모됩니다. 해당 스킬로 피해를 줄 경우, 스킬의 증감 전 기본 마나 소모량에 비례하여 진화형 피해가 증가합니다. (기본 마나 소모량 10 당, 진화형 피해 0.5% 증가, 최대 24.0%)",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_24.png",
+    "maxLevel": 2,
+    "activatePoint": 15,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "extra_max_mana_cost",
+          "value": 2
+        },
+        {
+          "kind": "mana_furnace",
+          "value": 0.25
+        },
+        {
+          "kind": "mana_furnace_cap",
+          "value": 12
+        }
+      ],
+      [
+        {
+          "kind": "extra_max_mana_cost",
+          "value": 2
+        },
+        {
+          "kind": "mana_furnace",
+          "value": 0.5
+        },
+        {
+          "kind": "mana_furnace_cap",
+          "value": 24
+        }
+      ]
+    ]
+  },
+  {
+    "type": "진화",
+    "tier": 5,
+    "name": "안정된 관리자",
+    "description": "낙인력이 20.0% 증가하지만, 아이덴티티 게이지 획득량이 6.0% 감소합니다.",
+    "imageLink": "https://cdn-lostark.game.onstove.com/efui_iconatlas/ark_passive_evolution/ark_passive_evolution_25.png",
+    "maxLevel": 2,
+    "activatePoint": 15,
+    "className": null,
+    "effects": [
+      [],
+      []
+    ],
+    "simEffects": [
+      [
+        {
+          "kind": "identity_gain_multiplier",
+          "value": -3
+        }
+      ],
+      [
+        {
+          "kind": "identity_gain_multiplier",
+          "value": -6
+        }
+      ]
+    ]
+  }
+]

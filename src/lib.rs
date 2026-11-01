@@ -4,8 +4,14 @@ mod builder;
 mod constants;
 mod engine;
 mod profile;
+mod profile_transfer;
+#[cfg(test)]
+mod reaper_tests;
 
 use profile::CharacterProfiles;
+
+#[wasm_bindgen]
+pub fn supports_absolute_identity_gain() -> bool { true }
 
 #[wasm_bindgen(start)]
 pub fn start() {
@@ -15,12 +21,50 @@ pub fn start() {
 
 /// CharacterProfiles를 빌드하고 힙에 올린 뒤 raw 포인터를 반환한다.
 ///
-/// SharedArrayBuffer 기반 WASM 메모리를 사용하면 이 포인터를
-/// 모든 Worker가 복사 없이 공유할 수 있다.
+/// 포인터는 이를 만든 WASM 인스턴스의 메모리 안에서만 사용한다.
 /// 시뮬레이션 완료 후 반드시 free_profiles()로 해제해야 한다.
 #[wasm_bindgen]
 pub fn prepare(json: &str) -> Result<u32, JsValue> {
-    builder::build(json)
+    builder::build_raid(json)
+        .map(|profiles| Box::into_raw(Box::new(profiles)) as u32)
+        .map_err(|e| JsValue::from_str(&e))
+}
+
+/// Explicit prepared Slayer research snapshot through the common gear/APL builder.
+/// Does not enable ordinary Slayer prepare or automatic Fury rotations.
+#[wasm_bindgen]
+pub fn prepare_slayer_snapshot(json: &str) -> Result<u32, JsValue> {
+    builder::slayer_snapshot::build(json)
+        .map(|profiles| Box::into_raw(Box::new(profiles)) as u32)
+        .map_err(|e| JsValue::from_str(&e))
+}
+
+/// Explicit Berserker fixed-state research; ordinary prepare stays rejected.
+#[wasm_bindgen]
+pub fn prepare_berserker_snapshot(json: &str) -> Result<u32, JsValue> {
+    builder::berserker_snapshot::build(json)
+        .map(|profiles| Box::into_raw(Box::new(profiles)) as u32)
+        .map_err(|e| JsValue::from_str(&e))
+}
+
+#[wasm_bindgen]
+pub fn prepare_sorceress_snapshot(json: &str) -> Result<u32, JsValue> {
+    builder::sorceress_snapshot::build(json)
+        .map(|profiles| Box::into_raw(Box::new(profiles)) as u32)
+        .map_err(|e| JsValue::from_str(&e))
+}
+
+/// Export one compiled profile without running a combat simulation.
+#[wasm_bindgen]
+pub fn export_profiles(ptr: u32) -> Result<String, JsValue> {
+    let profiles = unsafe { &*(ptr as *const CharacterProfiles) };
+    profile_transfer::encode(profiles).map_err(|e| JsValue::from_str(&e))
+}
+
+/// Restore compiled data into this instance; never invoke a build/registration path.
+#[wasm_bindgen]
+pub fn restore_profiles(json: &str) -> Result<u32, JsValue> {
+    profile_transfer::decode(json)
         .map(|profiles| Box::into_raw(Box::new(profiles)) as u32)
         .map_err(|e| JsValue::from_str(&e))
 }
@@ -44,26 +88,44 @@ pub fn simulate(
 }
 
 /// 지정한 시드로 단 1회 시뮬레이션을 trace 모드로 실행해
-/// 1 iter의 SimResult + cast 이벤트 시퀀스를 JSON으로 반환한다.
-/// 형식: `{ "result": SimResult, "castSequence": [CastEvent...] }`
+/// 실행에 사용한 빌드 프로필, 1 iter의 SimResult 및 이벤트를 JSON으로 반환한다.
+/// 프로필은 대표 trace에서 한 번만 직렬화하며 반복 시뮬레이션에는 포함하지 않는다.
 ///
 /// # Safety
 /// ptr은 prepare()가 반환한 유효한 CharacterProfiles 포인터여야 한다.
 #[wasm_bindgen]
 pub fn trace(ptr: u32, seed: u32, duration_ms: u32) -> String {
     let profiles = unsafe { &*(ptr as *const CharacterProfiles) };
+    serde_json::to_string(&trace_payload(profiles, seed, duration_ms))
+        .unwrap_or_else(|e| format!(r#"{{"error":"{}"}}"#, e))
+}
+
+fn trace_payload(profiles: &CharacterProfiles, seed: u32, duration_ms: u32) -> serde_json::Value {
     let (result, trace) = engine::trace_one(profiles, seed as u64, duration_ms);
-    let payload = serde_json::json!({
+    let mut payload=serde_json::json!({
+        "builtProfile": profiles,
         "result": result,
         "castSequence": trace.casts,
         "cardUses": trace.card_uses,
         "damageEvents": trace.damage_events,
+        "classEvents": trace.class_events,
     });
-    serde_json::to_string(&payload).unwrap_or_else(|e| format!(r#"{{"error":"{}"}}"#, e))
+    if !trace.incoming_damage_events.is_empty() {payload["incomingDamageEvents"]=serde_json::json!(trace.incoming_damage_events);}
+    if profiles.valkyrie_identity.is_some() {payload["valkyrieEvents"]=serde_json::json!(trace.valkyrie_events);}
+    if let Some(model)=profiles.buff_metadata.get("slayer_snapshot:model") {
+        if let Ok(metadata)=serde_json::from_str::<serde_json::Value>(&model.source) {payload["executionModel"]=metadata;}
+    }
+    if let Some(model)=profiles.buff_metadata.get("berserker_snapshot:model") {
+        if let Ok(metadata)=serde_json::from_str::<serde_json::Value>(&model.source) {payload["executionModel"]=metadata;}
+    }
+    if let Some(model)=profiles.buff_metadata.get("sorceress_snapshot:model") {
+        if let Ok(metadata)=serde_json::from_str::<serde_json::Value>(&model.source) {payload["executionModel"]=metadata;}
+    }
+    payload
 }
 
 /// prepare()로 할당된 CharacterProfiles를 해제한다.
-/// 모든 Worker의 시뮬레이션이 완료된 후 한 번만 호출해야 한다.
+/// 이 포인터를 소유한 인스턴스에서 사용을 마친 후 한 번만 호출한다.
 ///
 /// # Safety
 /// ptr은 prepare()가 반환한 유효한 포인터여야 하며,
@@ -127,6 +189,193 @@ mod tests {
                 ]
             }}"#
         )
+    }
+
+    #[test]
+    fn source_chain_free_mana_phase_requires_the_full_first_cost_and_preserves_extra_mp_tax() {
+        let mut request: serde_json::Value = serde_json::from_str(&arcana_single_hit_skill_request("chain probe")).unwrap();
+        let data=&mut request["skillData"][0];
+        data["skillControlType"]=serde_json::json!("Chain");
+        data["maxPhase"]=serde_json::json!(2);
+        data["castTimesMs"]=serde_json::json!([100,200]);
+        data["freeManaPhases"]=serde_json::json!([1]);
+        data["resourceCost"]=serde_json::json!({"name":"Mp","cost":[100.0]});
+        data["hits"]=serde_json::json!([
+            {"damageRatio":[0.0],"fixedDamage":[10.0],"phase":0},
+            {"damageRatio":[0.0],"fixedDamage":[20.0],"phase":1}
+        ]);
+        let mut profiles=builder::build(&request.to_string()).unwrap();
+        profiles.class_name="버서커".into();
+        for (mp,expected) in [(99.0,0),(100.0,2),(200.0,4)] {
+            profiles.max_mp=mp;
+            let (result,trace)=engine::trace_one(&profiles,42,2000);
+            assert_eq!(trace.casts.len(),expected);
+            if expected>0 {assert_eq!(trace.casts[1].time,0.1);}
+            assert_eq!(engine::simulate(&profiles,1,2000,42,None).total_damage,result.total_damage);
+        }
+        profiles.max_mp=250.0;
+        profiles.skills[0].extra_mp_cost_ratio=0.1;
+        assert_eq!(engine::trace_one(&profiles,42,2000).1.casts.len(),2);
+        profiles.skills[0].extra_mp_cost_ratio=0.0;
+        profiles.skills[0].free_mana_phases.clear();
+        profiles.max_mp=100.0;
+        assert_eq!(engine::trace_one(&profiles,42,2000).1.casts.len(),1);
+        assert!(serde_json::to_value(&profiles.skills[0]).unwrap().get("free_mana_phases").is_none());
+        request["skillData"][0]["freeManaPhases"]=serde_json::json!([2]);
+        assert!(builder::build(&request.to_string()).unwrap_err().contains("무료 마나 단계"));
+    }
+
+    #[test]
+    fn independent_rune_receives_general_damage_without_owner_skill_overlays() {
+        use crate::profile;
+        let mut request: serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+        request["skillData"][0]["identityCategory"]=serde_json::json!(28);
+        request["skillData"][0]["cooldown"]=serde_json::json!(10.0);
+        request["character"]["skills"][0]["rune"]=serde_json::json!({"name":"출혈","grade":"전설","effects":[{"kind":"on_hit_dot","dotId":"independent_probe","hitId":"independent_probe","fixedDamage":10.0,"damageRatio":0.2,"firstTickMs":500,"tickIntervalMs":1000,"tickCount":3}]});
+        let base=builder::build(&request.to_string()).unwrap();let reference=engine::trace_one(&base,42,4000).1;
+        request["character"]["arkPassive"]=serde_json::json!({"commonNodes":[{"name":"general probe","level":1,"effectsByLevel":[[{"kind":"stat","field":"damage_increase","tag":"All","value":20.0}]]}],"classNodes":[]});
+        let mut boosted=builder::build(&request.to_string()).unwrap();
+        let normal=engine::trace_one(&boosted,42,4000).1;
+        for(a,b)in normal.damage_events.iter().zip(&reference.damage_events){assert!((a.result_damage/b.result_damage-1.2).abs()<1e-12,"general {}",a.damage_source);}
+        let skill=&mut boosted.skills[0];skill.source_damage_multiplier=1.7;
+        skill.cast_buff_stack_damage_bonuses.push(("scoped".into(),0.3));
+        skill.buff_damage_bonuses.push(("scoped".into(),0.4));
+        skill.buff_crit_damage_bonuses.push(("scoped".into(),1.0));
+        skill.timed_effects.push(profile::skill::TimedSkillEffect{phase:0,action_delay_ms:0,until_cast_end:false,action_end_ms:None,effect:profile::TriggerEffect::ApplyBuff(profile::BuffSpec{id:"scoped".into(),effects:HashMap::new(),max_stacks:1,stack_type:profile::StackType::Refresh,duration_ms:1000})});
+        let trace=engine::trace_one(&boosted,42,4000).1;
+        let dots:Vec<_>=trace.damage_events.iter().filter(|h|h.damage_source=="dot:independent_probe").collect();
+        assert_eq!(dots.iter().map(|h|h.time).collect::<Vec<_>>(),vec![0.5,1.5,2.5]);
+        for h in dots {let prior=normal.damage_events.iter().find(|b|b.time==h.time&&b.damage_source==h.damage_source).unwrap();assert_eq!(h.result_damage,prior.result_damage,"owner overlays must not enter independent rune");}
+    }
+
+    #[test]
+    fn whole_skill_modifiers_reach_skill_dots_without_back_attack_bonus() {
+        let mut request: serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+        request["skillData"][0]["identityCategory"]=serde_json::json!(28);
+        request["skillData"][0]["cooldown"]=serde_json::json!(10.0);
+        request["skillData"][0]["hits"][0]["dot"]=serde_json::json!({"dotId":"modifier_probe","chance":1.0,"damageRatio":[0.2],"fixedDamage":[10.0],"firstTickMs":500,"tickIntervalMs":1000,"tickCount":3});
+        let baseline=engine::trace_one(&builder::build(&request.to_string()).unwrap(),42,4000).1;
+        for tag in ["All","CategoryNormal"] {
+            request["character"]["arkPassive"]=serde_json::json!({"commonNodes":[{"name":"whole skill probe","level":1,"effectsByLevel":[[{"kind":"stat","field":"damage_increase","tag":tag,"value":20.0}]]}],"classNodes":[]});
+            for back in [false,true] {
+                request["skillData"][0]["properties"]["attackType"]=serde_json::json!(if back {"백 어택"} else {""});
+                let p=builder::build(&request.to_string()).unwrap();let trace=engine::trace_one(&p,42,4000).1;
+                for (a,b) in trace.damage_events.iter().zip(&baseline.damage_events) {
+                    let expected=1.2*if back&&a.damage_source=="skill_hit" {1.05} else {1.0};
+                    assert!((a.result_damage/b.result_damage-expected).abs()<1e-12,"{tag}/{back}/{}",a.damage_source);
+                }
+            }
+            request["skillData"][0]["properties"]["attackType"]=serde_json::json!("");
+        }
+    }
+
+    #[test]
+    fn skill_gems_scale_hit_and_timed_skill_dots_but_not_rune_dots() {
+        let mut request: serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+        let dot=serde_json::json!({"dotId":"skill_probe","hitId":"skill_dot","chance":1.0,"damageRatio":[0.2],"fixedDamage":[10.0],"firstTickMs":500,"tickIntervalMs":1000,"tickCount":3});
+        request["skillData"][0]["cooldown"]=serde_json::json!(10.0);
+        request["skillData"][0]["hits"][0]["dot"]=dot.clone();
+        let mut timed=dot;timed["dotId"]=serde_json::json!("timed_probe");timed["hitId"]=serde_json::json!("timed_dot");
+        request["skillData"][0]["timedDots"]=serde_json::json!([{"phase":0,"actionDelayMs":250,"dot":timed}]);
+        request["character"]["skills"][0]["rune"]=serde_json::json!({"name":"출혈","grade":"전설","effects":[{"kind":"on_hit_dot","dotId":"rune_probe","hitId":"rune_dot","fixedDamage":10.0,"damageRatio":0.2,"firstTickMs":500,"tickIntervalMs":1000,"tickCount":3}]});
+        let off=builder::build(&request.to_string()).unwrap();let reference=engine::trace_one(&off,42,4000).1;
+        assert_eq!(reference.damage_events.len(),10);
+        for (kind,level,factor) in [("멸화",10,1.4),("겁화",8,1.36),("겁화",10,1.44)] {
+            request["character"]["gems"]=serde_json::json!([{"skillName":"셀레스티얼 레인","type":kind,"level":level,"skillEffect":"피해 증가"}]);
+            let profile=builder::build(&request.to_string()).unwrap();let (result,trace)=engine::trace_one(&profile,42,4000);
+            assert_eq!(trace.damage_events.len(),reference.damage_events.len());
+            for (on,off) in trace.damage_events.iter().zip(&reference.damage_events) {
+                assert_eq!((on.time,&on.damage_source,on.is_crit),(off.time,&off.damage_source,off.is_crit));
+                let expected=if on.damage_source=="dot:rune_probe" {1.0} else {factor};
+                assert!((on.result_damage/off.result_damage*off.formula.base_term/on.formula.base_term-expected).abs()<1e-12,"{kind}/{level}/{}",on.damage_source);
+            }
+            assert_eq!(result.total_damage,engine::simulate(&profile,1,4000,42,None).total_damage);
+        }
+    }
+
+    #[test]
+    fn hit_dot_refresh_is_opt_in_and_keeps_real_cast_ownership() {
+        let mut request: serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+        let dot=serde_json::json!({"dotId":"refresh_probe","chance":1.0,"damageRatio":[0.0],"fixedDamage":[10.0],"firstTickMs":500,"tickIntervalMs":1000,"tickCount":3});
+        request["skillData"][0]["cooldown"]=serde_json::json!(10.0);
+        request["skillData"][0]["hits"]=serde_json::json!([
+            {"damageRatio":[0.0],"fixedDamage":[1.0],"phase":0,"actionDelayMs":0,"dot":dot.clone()},
+            {"damageRatio":[0.0],"fixedDamage":[1.0],"phase":0,"actionDelayMs":250,"dot":dot}
+        ]);
+        let legacy=builder::build(&request.to_string()).unwrap();
+        let before=engine::trace_one(&legacy,42,3000).1;
+        assert_eq!(before.damage_events.iter().filter(|e|e.damage_source=="dot:refresh_probe").count(),6);
+        for hit in request["skillData"][0]["hits"].as_array_mut().unwrap(){hit["dot"]["refresh"]=serde_json::json!(true);}
+        let refreshed=builder::build(&request.to_string()).unwrap();
+        let (result,trace)=engine::trace_one(&refreshed,42,3000);
+        let dots:Vec<_>=trace.damage_events.iter().filter(|e|e.damage_source=="dot:refresh_probe").collect();
+        assert_eq!(dots.iter().map(|e|e.time).collect::<Vec<_>>(),vec![0.75,1.75,2.75]);
+        assert!(dots.iter().all(|e|e.cast_id==Some(trace.casts[0].cast_id)));
+        assert_eq!(engine::simulate(&refreshed,1,3000,42,None).total_damage,result.total_damage);
+        for hit in request["skillData"][0]["hits"].as_array_mut().unwrap(){hit["dot"]["refresh"]=serde_json::json!(false);}
+        let unchanged=builder::build(&request.to_string()).unwrap();
+        assert_eq!(serde_json::to_value(&unchanged).unwrap(),serde_json::to_value(&legacy).unwrap());
+    }
+
+    #[test]
+    fn target_damage_taken_on_hit_benefits_later_hits_and_dots_until_refresh_expires() {
+        let mut request:serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+        request["skillData"][0]["cooldown"]=serde_json::json!(10.0);
+        let dot=serde_json::json!({"dotId":"target_debuff_dot","chance":1.0,"damageRatio":[0.0],"fixedDamage":[10.0],"firstTickMs":500,"tickIntervalMs":1000,"tickCount":3,"refresh":true});
+        request["skillData"][0]["hits"]=serde_json::json!([
+            {"damageRatio":[0.0],"fixedDamage":[100.0],"phase":0,"actionDelayMs":0,"dot":dot.clone()},
+            {"damageRatio":[0.0],"fixedDamage":[100.0],"phase":0,"actionDelayMs":250,"dot":dot}
+        ]);
+        let legacy=builder::build(&request.to_string()).unwrap();
+        let before=engine::trace_one(&legacy,42,3000).1;
+        for hit in request["skillData"][0]["hits"].as_array_mut().unwrap(){
+            hit["targetDamageTakenDebuff"]=serde_json::json!({"buffId":"own_target_debuff","percent":6.0,"durationMs":1000});
+        }
+        let profile=builder::build(&request.to_string()).unwrap();
+        let (result,trace)=engine::trace_one(&profile,42,3000);
+        assert_eq!(trace.damage_events.len(),5);
+        for (new,old) in trace.damage_events.iter().zip(&before.damage_events){
+            let factor=if new.time>0.0 && new.time<1.25 {1.06}else{1.0};
+            assert_eq!(new.is_crit,old.is_crit);
+            assert!((new.result_damage-old.result_damage*factor).abs()<1e-9);
+        }
+        assert_eq!(engine::simulate(&profile,1,3000,42,None).total_damage,result.total_damage);
+        for hit in request["skillData"][0]["hits"].as_array_mut().unwrap(){hit.as_object_mut().unwrap().remove("targetDamageTakenDebuff");}
+        assert_eq!(serde_json::to_value(builder::build(&request.to_string()).unwrap()).unwrap(),serde_json::to_value(legacy).unwrap());
+    }
+
+    #[test]
+    fn timed_source_buff_starts_after_its_notify_and_expires_for_direct_and_dot_damage() {
+        let mut request:serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+        request["skillData"][0]["cooldown"]=serde_json::json!(10.0);
+        request["skillData"][0]["hits"]=serde_json::json!([
+            {"damageRatio":[1.0],"fixedDamage":[0.0],"actionDelayMs":50,"dot":{"dotId":"timed_buff_dot","chance":1.0,"damageRatio":[1.0],"fixedDamage":[0.0],"firstTickMs":300,"tickIntervalMs":500,"tickCount":3}},
+            {"damageRatio":[1.0],"fixedDamage":[0.0],"actionDelayMs":200},
+            {"damageRatio":[1.0],"fixedDamage":[0.0],"actionDelayMs":700}
+        ]);
+        let mut legacy=builder::build(&request.to_string()).unwrap();
+        legacy.stat.base_attack_power=10000.0;legacy.stat.attack_power_mul.clear();
+        let before=engine::trace_one(&legacy,42,1500).1;
+        request["skillData"][0]["timedBuffs"]=serde_json::json!([
+            {"phase":0,"actionDelayMs":100,"buffId":"source_timed_power","durationMs":500,"effects":{"AttackPowerMul":0.06}}
+        ]);
+        let mut profile=builder::build(&request.to_string()).unwrap();
+        profile.stat.base_attack_power=10000.0;profile.stat.attack_power_mul.clear();
+        let (result,trace)=engine::trace_one(&profile,42,1500);
+        assert_eq!(trace.damage_events.len(),6);
+        for (new,old) in trace.damage_events.iter().zip(&before.damage_events){
+            let factor=if new.time>=0.1 && new.time<0.6 {1.06}else{1.0};
+            assert_eq!(new.is_crit,old.is_crit);
+            assert!((new.formula.attack_power-10000.0*factor).abs()<1e-9);
+            assert!((new.result_damage-old.result_damage*factor).abs()<1e-9);
+        }
+        assert_eq!(engine::simulate(&profile,1,1500,42,None).total_damage,result.total_damage);
+        request["skillData"][0]["timedBuffs"][0]["phase"]=serde_json::json!(1);
+        assert!(builder::build(&request.to_string()).unwrap_err().contains("동작 시각 버프"));
+        request["skillData"][0]["timedBuffs"]=serde_json::json!([]);
+        let mut restored=builder::build(&request.to_string()).unwrap();
+        restored.stat.base_attack_power=10000.0;restored.stat.attack_power_mul.clear();
+        assert_eq!(serde_json::to_value(restored).unwrap(),serde_json::to_value(legacy).unwrap());
     }
 
     #[test]
@@ -318,6 +567,21 @@ mod tests {
         );
     }
 
+    #[test]
+    fn trace_payload_preserves_the_exact_built_profile() {
+        let profiles = builder::build(&base_arcana_request("[]", "null", "null")).unwrap();
+        let before = serde_json::to_value(&profiles).unwrap();
+        let payload = super::trace_payload(&profiles, 7, 1000);
+        assert_eq!(payload["builtProfile"], before);
+        assert_eq!(serde_json::to_value(&profiles).unwrap(), before);
+        let restored: crate::profile::CharacterProfiles =
+            serde_json::from_value(payload["builtProfile"].clone()).unwrap();
+        let (expected, _) = engine::trace_one(&profiles, 7, 1000);
+        let (actual, _) = engine::trace_one(&restored, 7, 1000);
+        assert_eq!(serde_json::to_value(expected).unwrap(), payload["result"]);
+        assert_eq!(serde_json::to_value(actual).unwrap(), payload["result"]);
+    }
+
     fn arcana_quadra_request() -> String {
         r#"{
             "character": {
@@ -502,20 +766,20 @@ mod tests {
         request["character"]["engravings"] = serde_json::json!([
             {
                 "name": "저주받은 인형", "grade": "유물", "level": 4,
-                "featureData": {"grades": [{"grade": 5, "stages": [
-                    {"stage": 4, "featureType": 114, "values": [2500, 1925]}
+                "featureData": {"grades": [{"grade": 1, "stages": [
+                    {"stage": 9, "featureType": 114, "values": [2500, 1925]}
                 ]}]}
             },
             {
                 "name": "질량 증가", "grade": "유물", "level": 4,
-                "featureData": {"grades": [{"grade": 5, "stages": [
-                    {"stage": 4, "featureType": 339, "values": [1000, 2125]}
+                "featureData": {"grades": [{"grade": 1, "stages": [
+                    {"stage": 9, "featureType": 339, "values": [1000, 2125]}
                 ]}]}
             },
             {
                 "name": "정밀 단도", "grade": "유물", "level": 4,
-                "featureData": {"grades": [{"grade": 5, "stages": [
-                    {"stage": 4, "featureType": 334, "values": [2325, 600]}
+                "featureData": {"grades": [{"grade": 1, "stages": [
+                    {"stage": 9, "featureType": 334, "values": [2325, 600]}
                 ]}]}
             }
         ]);
@@ -530,20 +794,20 @@ mod tests {
     }
 
     #[test]
-    fn ability_stone_level_selects_the_combined_raw_engraving_stage() {
+    fn ability_stone_level_selects_a_separate_raw_engraving_block() {
         let mut request: serde_json::Value =
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "원한", "grade": "유물", "level": 4, "abilityLevel": 3,
-            "featureData": {"grades": [{"grade": 5, "stages": [
-                {"stage": 4, "featureType": 10, "values": [2325, 2000]},
-                {"stage": 7, "featureType": 10, "values": [2550, 2000]}
+            "featureData": {"grades": [{"grade": 4, "stages": [
+                {"stage": 6, "featureType": 10, "values": [2325, 2000]},
+                {"stage": 9, "featureType": 10, "values": [2625, 2000]}
             ]}]}
         }]);
 
         let profiles = builder::build(&request.to_string()).unwrap();
 
-        assert!((profiles.stat.sum(StatField::TargetDamageIncrease) - 0.255).abs() < 1e-9);
+        assert!((profiles.stat.sum(StatField::TargetDamageIncrease) - 0.2625).abs() < 1e-9);
     }
 
     #[test]
@@ -583,8 +847,8 @@ mod tests {
         ]);
         request["character"]["engravings"] = serde_json::json!([{
             "name": "번개의 분노", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 113, "values": [10000, 502100], "cooldown": 1000,
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 113, "values": [10000, 502100], "cooldown": 1000,
                 "skillBuff": {"id": 502100, "duration": 40000, "overlap": 5},
                 "skillEffects": [
                     {"id": 100500008, "key": 12},
@@ -613,8 +877,8 @@ mod tests {
         request["sightFocusSkillName"] = serde_json::json!("운명의 부름");
         request["character"]["engravings"] = serde_json::json!([{
             "name": "시선 집중", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 335,
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 335,
                 "values": [521588, 28, 3175, 30, 521600], "cooldown": 30000,
                 "skillBuffs": [
                     {"id": 521588, "duration": 6000},
@@ -640,8 +904,8 @@ mod tests {
         request["skillData"][0]["hits"][0]["counterAttack"] = serde_json::json!(true);
         request["character"]["engravings"] = serde_json::json!([{
             "name": "분쇄의 주먹", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 103, "values": [521288, 521388],
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 103, "values": [521288, 521388],
                 "skillBuffs": [
                     {"id": 521288, "duration": 3000,
                      "passiveOption": {"type": 2, "keyStat": 49, "value": 1650}},
@@ -680,8 +944,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "구슬동자", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 22, "baseRatio": 20, "cooldown": 11500,
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 22, "baseRatio": 20, "cooldown": 11500,
                 "dropEthers": [
                     {"id": 70188, "audience": "self", "delayTime": 1000,
                      "effect": {"key": 18, "valueB": 1240}},
@@ -726,8 +990,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "에테르 포식자", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 4, "values": [2000, 72188, 72088, 250],
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 4, "values": [2000, 72188, 72088, 250],
                 "cooldown": 5500,
                 "dropEthers": [
                     {"id": 72188, "delayTime": 1000,
@@ -773,8 +1037,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "강령술", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 110, "cooldown": 10000,
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 110, "cooldown": 10000,
                 "summonNpc": {"id": 900511, "coefficient": 100, "skills": [{
                     "id": 401701, "probability": 100, "actionEffects": [
                         {"timeMs": 463, "id": 40170100, "key": 1,
@@ -806,8 +1070,8 @@ mod tests {
         request["skillData"][0]["castTimesMs"] = serde_json::json!([1000]);
         request["character"]["engravings"] = serde_json::json!([{
             "name": "속전속결", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [
-                {"stage": 4, "featureType": 340, "values": [1900, 2350]}
+            "featureData": {"grades": [{"grade": 1, "stages": [
+                {"stage": 9, "featureType": 340, "values": [1900, 2350]}
             ]}]}
         }]);
 
@@ -825,8 +1089,8 @@ mod tests {
         request["skillData"][0]["castTimesMs"] = serde_json::json!([1000]);
         request["character"]["engravings"] = serde_json::json!([{
             "name": "슈퍼 차지", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [
-                {"stage": 4, "featureType": 12, "values": [3800, 2350]}
+            "featureData": {"grades": [{"grade": 1, "stages": [
+                {"stage": 9, "featureType": 12, "values": [3800, 2350]}
             ]}]}
         }]);
 
@@ -842,8 +1106,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "예리한 둔기", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [
-                {"stage": 4, "featureType": 27, "values": [1000, 2000, 5700]}
+            "featureData": {"grades": [{"grade": 1, "stages": [
+                {"stage": 9, "featureType": 27, "values": [1000, 2000, 5700]}
             ]}]}
         }]);
 
@@ -860,8 +1124,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "타격의 대가", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [
-                {"stage": 4, "featureType": 333, "values": [1925]}
+            "featureData": {"grades": [{"grade": 1, "stages": [
+                {"stage": 9, "featureType": 333, "values": [1925]}
             ]}]}
         }]);
         request["character"]["skills"].as_array_mut().unwrap().push(serde_json::json!({
@@ -890,8 +1154,8 @@ mod tests {
                 serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
             request["character"]["engravings"] = serde_json::json!([{
                 "name": name, "grade": "유물", "level": 4,
-                "featureData": {"grades": [{"grade": 5, "stages": [{
-                    "stage": 4, "featureType": feature_type, "values": [1425],
+                "featureData": {"grades": [{"grade": 1, "stages": [{
+                    "stage": 9, "featureType": feature_type, "values": [1425],
                     "combatEffect": {
                         "id": combat_effect_id, "actionType": 1, "actionActor": 2,
                         "args": [1000, 0, 0, 0, 0, 0]
@@ -913,8 +1177,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "안정된 상태", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 5, "values": [521988],
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 5, "values": [521988],
                 "combatEffect": {
                     "id": 20521988, "actionType": 1, "actionActor": 2,
                     "args": [1925, 0, 0, 0, 0, 0]
@@ -929,6 +1193,14 @@ mod tests {
     }
 
     #[test]
+    fn stabilized_status_is_inactive_under_explicit_low_hp_assumption() {
+        let mut r:serde_json::Value=serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
+        r["assumedLowHp"]=serde_json::json!(true);
+        r["character"]["engravings"]=serde_json::json!([{"name":"안정된 상태","grade":"유물","level":0,"featureData":{"grades":[{"grade":1,"stages":[{"stage":5,"featureType":5,"values":[521909],"skillBuff":{"visibleFilterType":1,"visibleFilterValue":65},"combatEffect":{"id":20521909,"actionType":1,"actionActor":2,"args":[1400]}}]}]}}]);
+        let p=builder::build(&r.to_string()).unwrap();assert_eq!(p.skills[0].hits[0].damage_increase,0.,"HP<=50 cannot also meet HP>=65");
+    }
+
+    #[test]
     fn raid_captain_uses_move_speed_at_each_cast() {
         let mut request: serde_json::Value =
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
@@ -937,8 +1209,8 @@ mod tests {
         );
         request["character"]["engravings"] = serde_json::json!([{
             "name": "돌격대장", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [
-                {"stage": 4, "featureType": 121, "values": [5300]}
+            "featureData": {"grades": [{"grade": 1, "stages": [
+                {"stage": 9, "featureType": 121, "values": [5300]}
             ]}]}
         }]);
         request["cardData"] = serde_json::json!([{
@@ -969,8 +1241,8 @@ mod tests {
         request["character"]["engravings"] = serde_json::json!([{
             "name": "아드레날린", "grade": "유물", "level": 4,
             "icon": "https://example.com/adrenaline.png",
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 336, "values": [27, 521788],
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 336, "values": [27, 521788],
                 "skillBuffs": [{
                     "id": 521788, "duration": 6000, "overlap": 6,
                     "passiveOption": {"type": 2, "keyStat": 49, "value": 185}
@@ -1020,8 +1292,8 @@ mod tests {
         request["enableAwakeningPotion"] = serde_json::json!(true);
         request["character"]["engravings"] = serde_json::json!([{
             "name": "아드레날린", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 336, "values": [27, 521788],
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 336, "values": [27, 521788],
                 "skillBuffs": [{
                     "id": 521788, "duration": 6000, "overlap": 6,
                     "passiveOption": {"type": 2, "keyStat": 49, "value": 185}
@@ -1048,8 +1320,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "마나 효율 증가", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 279, "values": [10000002, 1850]
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 279, "values": [10000002, 1850]
             }]}]}
         }]);
         request["skillData"][0]["resourceCost"] =
@@ -1076,8 +1348,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "최대 마나 증가", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "optionType": 2, "optionKeyStat": 32,
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "optionType": 2, "optionKeyStat": 32,
                 "optionKeyIndex": 0, "optionValue": 3500
             }]}]}
         }]);
@@ -1091,8 +1363,8 @@ mod tests {
             serde_json::from_str(&arcana_single_hit_skill_request("프리즈매틱 미러")).unwrap();
         request["character"]["engravings"] = serde_json::json!([{
             "name": "각성", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 122, "values": [5600, 4]
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 122, "values": [5600, 4]
             }]}]}
         }]);
         request["skillData"][0]["skillSlot"] = serde_json::json!("Awakening");
@@ -1122,8 +1394,8 @@ mod tests {
         request["skillData"][0]["castTimesMs"] = serde_json::json!([100]);
         request["character"]["engravings"] = serde_json::json!([{
             "name": "마나의 흐름", "grade": "유물", "level": 4,
-            "featureData": {"grades": [{"grade": 5, "stages": [{
-                "stage": 4, "featureType": 118, "values": [27, 522788],
+            "featureData": {"grades": [{"grade": 1, "stages": [{
+                "stage": 9, "featureType": 118, "values": [27, 522788],
                 "skillBuffs": [{
                     "id": 522788, "duration": 10000, "overlap": 10,
                     "passiveOption": {"type": 2, "keyStat": 39, "value": 320}
@@ -1191,6 +1463,99 @@ mod tests {
             Some(TriggerEffect::Sequence(effects))
                 if effects.len() == 2 && effects.iter().all(|effect| matches!(effect, TriggerEffect::DrawCard))
         ));
+    }
+
+    #[test]
+    fn raw_basic_attack_combo_splits_third_stage_and_keeps_stance_phase() {
+        use crate::profile;
+        let mut request: serde_json::Value = serde_json::from_str(include_str!(
+            "../fixtures/arcana-basic-attack-request.json"
+        )).unwrap();
+        let snake = request["cardData"].as_array().unwrap().iter()
+            .find(|card| card["skillId"] == 19097).unwrap().clone();
+        request["cardData"] = serde_json::json!([snake]);
+        let mut profiles = builder::build(&request.to_string()).unwrap();
+        profiles.stat = profile::StatProfile::default();
+        profiles.initial_card_draws = 0;
+        assert!(profiles.skills.iter().all(|skill|
+            !skill.tags.contains(&SkillTag::CategoryNormal)
+            && !skill.tags.contains(&SkillTag::NonDirectionalNonAwakening)));
+        let normal = engine::trace_one(&profiles, 1, 2300).1;
+        assert_eq!(normal.casts.len(), 3);
+        assert_eq!(normal.damage_events.len(), 5);
+        assert_eq!(normal.damage_events.iter().map(|hit| (hit.time * 1000.0).round() as u64)
+            .collect::<Vec<_>>(), vec![153, 767, 1649, 1949, 2249]);
+        assert!((normal.damage_events[2..].iter().map(|hit| hit.formula.skill_modifier)
+            .sum::<f64>() - 1.281).abs() < 1e-9);
+        assert!((normal.damage_events[2..].iter().map(|hit| hit.formula.base_damage)
+            .sum::<f64>() - 193.5).abs() < 1e-9);
+        assert!(normal.casts.iter().all(|cast| cast.target_debuff_details_after_hit.is_empty()));
+
+        profiles.initial_card_draws = 1;
+        let variant = engine::trace_one(&profiles, 1, 2300).1;
+        assert_eq!(variant.card_uses.len(), 1);
+        assert_eq!(variant.damage_events.len(), 5);
+        assert!(variant.casts.iter().all(|cast| cast.skill_name == "삼두사 기본 공격"));
+        assert!((variant.damage_events[2..].iter().map(|hit| hit.formula.skill_modifier)
+            .sum::<f64>() - 2.588).abs() < 1e-9);
+        assert!((variant.damage_events[2..].iter().map(|hit| hit.formula.base_damage)
+            .sum::<f64>() - 388.0).abs() < 1e-9);
+        for (duration, stacks) in [(1700, 3), (2000, 4), (2300, 4)] {
+            let trace = engine::trace_one(&profiles, 1, duration).1;
+            assert_eq!(trace.casts[2].target_debuff_details_after_hit[0].stacks, stacks);
+        }
+
+        // 카드를 1단 적중으로 획득하면 2단부터 삼두사형으로 이어진다.
+        request["skillData"][0]["hits"][0]["drawCardCount"] = serde_json::json!(1);
+        request["skillData"][0]["hits"][0]["drawCardChance"] = serde_json::json!(1.0);
+        profiles = builder::build(&request.to_string()).unwrap();
+        profiles.stat = profile::StatProfile::default();
+        profiles.initial_card_draws = 0;
+        let activation = engine::trace_one(&profiles, 1, 2300).1;
+        assert_eq!(activation.damage_events[0].hit_index, 0);
+        assert_eq!(activation.damage_events[1].skill_name, "삼두사 기본 공격");
+        assert_eq!(activation.damage_events[1].hit_index, 1);
+
+        // 짧은 테스트 Buff가 2단 뒤 종료돼도 일반형 3단을 실행한다.
+        request["cardData"][0]["runtimeEffects"][0]["durationMs"] = serde_json::json!(950);
+        request["skillData"][0]["hits"][0]["drawCardCount"] = serde_json::json!(0);
+        profiles = builder::build(&request.to_string()).unwrap();
+        profiles.stat = profile::StatProfile::default();
+        profiles.initial_card_draws = 1;
+        let expiry = engine::trace_one(&profiles, 1, 2300).1;
+        assert_eq!(expiry.casts[2].skill_name, "기본 공격");
+        assert_eq!(expiry.damage_events[2].hit_index, 2);
+
+        // 공속은 생성까지에만 적용하며 내부 300ms 간격은 유지한다.
+        profiles.stat.attack_speed.insert("test".into(), 0.4);
+        let faster = engine::trace_one(&profiles, 1, 1900).1;
+        let third = faster.damage_events.iter().filter(|hit| hit.cast_id == Some(3)).collect::<Vec<_>>();
+        assert_eq!(third.len(), 3);
+        assert!((third[1].time - third[0].time - 0.3).abs() < 1e-9);
+        assert!((third[2].time - third[1].time - 0.3).abs() < 1e-9);
+        assert!(third[0].time < 1.649);
+    }
+
+    #[test]
+    fn basic_attacks_do_not_trigger_skill_cast_buffs() {
+        use crate::profile;
+        let mut request: serde_json::Value = serde_json::from_str(include_str!(
+            "../fixtures/arcana-basic-attack-request.json"
+        )).unwrap();
+        request["aplConfig"] = serde_json::json!("skills:\n  - 기본 공격");
+        let mut profiles = builder::build(&request.to_string()).unwrap();
+        profiles.initial_card_draws = 0;
+        profiles.global_triggers.push(profile::GlobalTrigger {
+            filter: profile::TriggerFilter::SkillCast,
+            condition: profile::TriggerCondition::Always,
+            effect: profile::TriggerEffect::ApplyBuff(profile::BuffSpec {
+                id: "skill_cast_only".into(), effects: hashbrown::HashMap::new(),
+                max_stacks: 6, stack_type: profile::StackType::Refresh, duration_ms: 6000,
+            }), cooldown_ms: None,
+        });
+        let trace = engine::trace_one(&profiles, 1, 7000).1;
+        assert!(trace.casts.len() > 6);
+        assert!(trace.casts.iter().all(|cast| !cast.active_buffs.contains(&"skill_cast_only".into())));
     }
 
     #[test]
@@ -1413,6 +1778,32 @@ mod tests {
     }
 
     #[test]
+    fn direct_cards_receive_general_and_own_direction_modifiers() {
+        for (id,name) in [(19282,"황제"),(19288,"황후의 기사")] {
+            let mut r:serde_json::Value=serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
+            r["aplConfig"]=serde_json::json!(format!("skills:\n - 운명의 부름\ncard_actions:\n - card: {name}"));
+            r["cardData"]=serde_json::json!([{"skillId":id,"name":name,"autoLearn":true,"runtimeEffects":[{"kind":"direct_damage","hitId":"scope_card","fixedDamage":1000}]}]);
+            r["skillData"][0]["hits"][0]["drawCardCount"]=serde_json::json!(1);r["skillData"][0]["hits"][0]["drawCardChance"]=serde_json::json!(1.);
+            for (tag,expected) in [("All",1.2),("NonDirectionalNonAwakening",1.14),("CategoryNormal",1.)] {
+                r["character"]["arkPassive"]=serde_json::json!({"commonNodes":[{"name":"card scope probe","level":1,"effectsByLevel":[[{"kind":"stat","field":"damage_increase","tag":tag,"value":20}]]}],"classNodes":[]});
+                r["character"]["engravings"]=serde_json::json!([]);
+                if tag=="NonDirectionalNonAwakening" {r["character"]["arkPassive"]["commonNodes"]=serde_json::json!([]);r["character"]["engravings"]=serde_json::json!([{"name":"타격의 대가","grade":"유물","level":0,"featureData":{"grades":[{"grade":1,"stages":[{"stage":5,"featureType":333,"values":[1400]}]}]}}]);}
+                let p=builder::build(&r.to_string()).unwrap();let t=engine::trace_one(&p,1,1000).1;
+                let h=t.damage_events.iter().find(|h|h.damage_source==format!("card:{id}")).unwrap();assert!((h.result_damage-1000.*expected).abs()<1e-9,"{name}/{tag}:{}",h.result_damage);
+            }
+        }
+    }
+    #[test]
+    fn direct_card_does_not_inherit_first_skill_source_and_mana_evolution() {
+        let mut r:serde_json::Value=serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
+        r["aplConfig"]=serde_json::json!("skills:\n - 운명의 부름\ncard_actions:\n - card: 황제");
+        r["cardData"]=serde_json::json!([{"skillId":19282,"name":"황제","autoLearn":true,"runtimeEffects":[{"kind":"direct_damage","hitId":"scope_card","fixedDamage":1000}]}]);
+        r["skillData"][0]["hits"][0]["drawCardCount"]=serde_json::json!(1);r["skillData"][0]["hits"][0]["drawCardChance"]=serde_json::json!(1.);
+        let mut p=builder::build(&r.to_string()).unwrap();p.skills[0].source_damage_multiplier=1.7;p.skills[0].evolution_damage_bonuses=vec![("owner mana evolution".into(),0.4)];
+        let t=engine::trace_one(&p,1,1000).1;let h=t.damage_events.iter().find(|h|h.damage_source=="card:19282").unwrap();assert!((h.result_damage-1000.).abs()<1e-9,"owner scope leaked:{}",h.result_damage);
+    }
+
+    #[test]
     fn emperor_card_deals_raw_direct_damage() {
         let mut request: serde_json::Value =
             serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
@@ -1458,6 +1849,49 @@ mod tests {
                 .find(|event| event.damage_source == "card:19282").unwrap();
             assert!((gem_damage.result_damage - 7791.0 * 1.44).abs() < 1e-6);
         }
+    }
+
+    #[test]
+    fn another_emperor_proc_deals_damage_under_emperor_without_using_held_card() {
+        let mut request: serde_json::Value =
+            serde_json::from_str(&arcana_single_hit_skill_request("운명의 부름")).unwrap();
+        request["aplConfig"] = serde_json::json!(
+            "skills:\n  - 운명의 부름\ncard_actions:\n  - card: 로열"
+        );
+        request["character"]["arkPassive"] = serde_json::json!({
+            "commonNodes": [], "classNodes": [
+                {"name":"황제의 칙령", "level":3, "values":[80]},
+                {"name":"또 다른 황제", "level":3, "values":[0,100,40]}
+            ]
+        });
+        request["cardData"] = serde_json::json!([
+            {"skillId":19282,"name":"황제","autoLearn":false,"runtimeEffects":[{
+                "kind":"direct_damage","hitId":"emperor_card_damage",
+                "name":"황제 카드 피해","fixedDamage":1000
+            }]},
+            {"skillId":19280,"name":"로열","autoLearn":true,"runtimeEffects":[]}
+        ]);
+        request["skillData"][0]["hits"][0]["drawCardCount"] = serde_json::json!(1);
+        request["skillData"][0]["hits"][0]["drawCardChance"] = serde_json::json!(1.0);
+        let mut profiles = builder::build(&request.to_string()).unwrap();
+        profiles.arcana_card_pool.retain(|card| card.skill_id == 19280);
+        let (result, trace) = engine::trace_one(&profiles, 57906, 500);
+        assert_eq!(trace.card_uses.len(), 1);
+        assert_eq!(trace.card_uses[0].card_id, 19280);
+        let hit = trace.damage_events.iter().find(|hit| hit.hit_id == "emperor_card_damage")
+            .expect("다른 카드의 확률 효과도 실제 황제 피해를 발생시켜야 한다");
+        assert_eq!(hit.skill_id, 19282);
+        assert_eq!(hit.skill_name, "황제");
+        assert_eq!(hit.damage_source, "card:19282");
+        assert!((hit.result_damage - 2200.0).abs() < 1e-9);
+        assert_eq!(result.skill_stats[&19282].hit_count, 1);
+        assert_eq!(engine::simulate(&profiles, 1, 500, 57906, None).total_damage, result.total_damage);
+
+        request["character"]["arkPassive"]["classNodes"][1]["values"][1] = serde_json::json!(0);
+        let mut baseline = builder::build(&request.to_string()).unwrap();
+        baseline.arcana_card_pool.retain(|card| card.skill_id == 19280);
+        let baseline = engine::trace_one(&baseline, 57906, 500).0;
+        assert!((result.total_damage - baseline.total_damage - 2200.0).abs() < 1e-9);
     }
 
     #[test]
@@ -1936,6 +2370,29 @@ mod tests {
     }
 
     #[test]
+    fn weapon_quality_zero_unknown_and_empty_slot_have_distinct_bonus_sources() {
+        for (name,quality,bonus) in [("test",0,0.1),("test",-1,0.),("test",1,0.10002),("test",100,0.3),("",100,0.),(" ",0,0.)] {
+            let mut request:serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+            request["character"]["equipments"]=serde_json::json!([{"type":"무기","setName":name,"quality":quality,"itemLevel":1660,"refinementLevel":0,"advancedRefinementLevel":0}]);
+            request["equipmentTables"]=serde_json::json!({"test":{"무기":[{"itemLevel":1660,"weaponAttack":100000}]}});
+            let p=builder::build(&request.to_string()).unwrap();
+            assert!((p.stat.sum(StatField::AdditionalDamage)-bonus).abs()<1e-12,"{name}/{quality}");
+        }
+    }
+
+    #[test]
+    fn known_equipment_honing_eligibility_prevents_a_shared_slot_bonus_leak() {
+        for (name,expected) in [("세피로트 도체",1000.),("운명의 전율 마법 덱",1000.),("세피로트 넬라",1050.)] {
+            let mut request:serde_json::Value=serde_json::from_str(&base_arcana_request("[]","null","null")).unwrap();
+            request["character"]["equipments"]=serde_json::json!([{"type":"무기","setName":name,"quality":100,"itemLevel":1800,"refinementLevel":8,"advancedRefinementLevel":40}]);
+            request["equipmentTables"]=serde_json::json!({name:{"무기":[{"itemLevel":1800,"weaponAttack":1000}]}});
+            request["advancedHoningTables"]=serde_json::json!({"무기":[{"stage":30,"stageBonusStatRate":200},{"stage":40,"stageBonusStatRate":300}]});
+            let p=builder::build(&request.to_string()).unwrap();
+            assert_eq!(p.stat.sum(StatField::WeaponAttackPower),expected,"{name}");
+        }
+    }
+
+    #[test]
     fn esther_weapon_uses_only_its_raw_stage_stats() {
         let mut request: serde_json::Value =
             serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
@@ -2072,6 +2529,38 @@ mod tests {
         let profiles = builder::build(&request.to_string()).expect("build should succeed");
 
         assert_eq!(profiles.stat.main_stat_mul, 1.055);
+    }
+
+    #[test]
+    fn legacy_imported_bracelet_labels_keep_critical_effects_separate_from_stats() {
+        for (name, desc, values, crit, rate, damage) in [
+            ("치명", "치명 +{value}", vec![100.0], 100.0, 0.0, 0.0),
+            ("치명", "치명타 피해가 {value}% 증가한다.", vec![6.8], 0.0, 0.0, 6.8),
+            ("치명", "치명타 적중률이 {value}% 증가한다.", vec![3.4], 0.0, 3.4, 0.0),
+            ("치명타 피해", "", vec![6.8], 0.0, 0.0, 6.8),
+            ("치명", "치명타 피해가 {value}% 증가한다. 적중 시 피해가 증가한다.", vec![6.8, 1.5], 0.0, 0.0, 6.8),
+        ] {
+            let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+            request["character"]["bracelet"] = serde_json::json!({ "lockedEffects": [], "changeableEffects": [
+                { "name": name, "descriptions": [desc], "values": values }
+            ] });
+            let profile = builder::build(&request.to_string()).unwrap();
+            assert_eq!(profile.stat.crit, crit);
+            assert_eq!(profile.stat.sum(StatField::CritRate), rate);
+            assert_eq!(profile.stat.sum(StatField::CritDmg), damage);
+            assert_eq!(profile.stat.on_crit_damage_bonus, if values.len() > 1 { 0.015 } else { 0.0 });
+        }
+    }
+
+    #[test]
+    fn legacy_imported_bracelet_stagger_description_recovers_second_effect() {
+        let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+        request["character"]["bracelet"] = serde_json::json!({"lockedEffects": [], "changeableEffects": [
+            {"name": "피해 증가", "descriptions": ["적에게 주는 피해가 {value}% 증가하며, 무력화 상태의 적에게 주는 피해가 {value}% 증가한다."], "values": [2.5, 4.5]}
+        ]});
+        assert_eq!(builder::build(&request.to_string()).unwrap().stat.sum(StatField::DamageIncrease), 0.025);
+        request["assumedTargetStaggered"] = serde_json::json!(true);
+        assert!((builder::build(&request.to_string()).unwrap().stat.sum(StatField::DamageIncrease) - 0.07).abs() < 1e-12);
     }
 
     #[test]
@@ -2457,7 +2946,7 @@ mod tests {
         )));
         assert!(triggers.iter().any(|trigger| matches!(
             &trigger.effect,
-            TriggerEffect::ScheduleDot { dot_id, hit, first_tick_ms: 500, tick_interval_ms: 1000, tick_count: 6, refresh: true }
+            TriggerEffect::ScheduleDot { dot_id, hit, first_tick_ms: 500, tick_interval_ms: 1000, tick_count: 6, refresh: true, independent: true }
                 if dot_id == "70000140"
                     && hit.hit_id == "rune_bleed_tick"
                     && (hit.skill_modifier - 2.906).abs() < 1e-9
@@ -2769,7 +3258,7 @@ mod tests {
             - 11.5 * specialization_multiplier).abs() < 1e-9);
         assert!((trace.damage_events[0].resource_gains[0].amount
             - 5.75 * specialization_multiplier).abs() < 1e-9);
-        assert_eq!(profiles.skills[0].hits[0].damage_increase, 0.0);
+        assert!((profiles.skills[0].hits[0].damage_increase - (ruin_damage_multiplier - 1.0)).abs() < 1e-9);
         let ruin_damage_increases = profiles.skills[0].hits[0]
             .triggers
             .iter()
@@ -3021,6 +3510,75 @@ mod tests {
                 && spec.duration_ms == 8_000
                 && (spec.effects[&StatField::AttackSpeed] - 0.08).abs() < 1e-9
         )));
+    }
+
+    #[test]
+    fn arcana_charge_stream_preserves_first_timer_and_scales_recovery_and_use_interval() {
+        let grid: serde_json::Value = serde_json::from_str(include_str!("../skill-data/arcana/backend/ark-grid.json")).unwrap();
+        for core in grid["cores"].as_array().unwrap().iter().filter(|c| c["name"] == "스트림 오브 엣지") {
+            for points in [9, 10] {
+                for (gem, swift) in [(false, 0.), (true, 0.), (false, 1000.), (true, 1000.)] {
+                    let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+                    request["skillData"][0]["gameSkillId"] = serde_json::json!(19150);
+                    request["skillData"][0]["cooldown"] = serde_json::json!(24);
+                    request["skillData"][0]["maxStacks"] = serde_json::json!(1);
+                    request["skillData"][0]["castTimesMs"] = serde_json::json!([0]);
+                    let mut selected = core.clone(); selected["points"] = serde_json::json!(points);
+                    request["character"]["arkGrids"] = serde_json::json!({"gems":[],"commonCores":[],"classCores":[selected]});
+                    if gem { request["character"]["gems"] = serde_json::json!([{"type":"작열","level":10,"skillName":"셀레스티얼 레인","skillEffect":""}]); }
+                    let mut profiles = builder::build(&request.to_string()).unwrap();
+                    profiles.stat.swiftness = swift;
+                    let skill = &profiles.skills[0];
+                    let gem_rate = if gem {0.76} else {1.};
+                    let swift_rate = 1. - swift * crate::constants::SWIFTNESS_COOLDOWN_REDUCTION;
+                    assert_eq!(skill.max_stacks, if points == 10 {2} else {1});
+                    assert_eq!(skill.cooldown_ms, ((if points == 10 {1000.} else {24000.}) * gem_rate) as u32);
+                    assert_eq!(skill.charge_recovery_ms, if points == 10 {(24000. * gem_rate) as u32} else {0});
+                    let (_, trace) = engine::trace_one(&profiles, 42, 75000);
+                    let times: Vec<_> = trace.casts.iter().map(|c|(c.time * 1000.).round() as u64).collect();
+                    let recovery = (24000. * gem_rate * swift_rate) as u64;
+                    if points == 10 {
+                        assert_eq!(times[..5], [0, (1000. * gem_rate * swift_rate) as u64, recovery, 2*recovery, 3*recovery]);
+                        assert!(trace.casts[1].active_buffs.iter().any(|b| b == "arcana_ark_grid_3196000_speed"));
+                    } else { assert_eq!(times[..3], [0, recovery, 2*recovery]); }
+                    let (_, again) = engine::trace_one(&profiles, 42, 75000);
+                    assert_eq!(again.casts.iter().map(|c|(c.time*1000.).round() as u64).collect::<Vec<_>>(), times);
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn arcana_charge_skill_input_recovers_both_tripods_after_initial_two_uses() {
+        for (name, id, recovery) in [("신비한 쇄도",19210,14000), ("백 플러쉬",19230,10000)] {
+            let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+            request["character"]["skills"][0]["name"] = serde_json::json!(name);
+            request["skillData"][0]["name"] = serde_json::json!(name);
+            request["skillData"][0]["gameSkillId"] = serde_json::json!(id);
+            request["skillData"][0]["cooldown"] = serde_json::json!(1);
+            request["skillData"][0]["maxStacks"] = serde_json::json!(2);
+            request["skillData"][0]["chargeRecoveryMs"] = serde_json::json!(recovery);
+            request["skillData"][0]["castTimesMs"] = serde_json::json!([0]);
+            let profiles = builder::build(&request.to_string()).unwrap();
+            let trace = engine::trace_one(&profiles,42,recovery*3+1).1;
+            assert_eq!(trace.casts.iter().take(5).map(|c|(c.time*1000.).round() as u64).collect::<Vec<_>>(), [0,1000,recovery as u64,2*recovery as u64,3*recovery as u64]);
+        }
+    }
+
+    #[test]
+    fn arcana_charge_later_cooldown_buff_keeps_running_timer_and_scales_next_recovery() {
+        let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+        request["skillData"][0]["cooldown"] = serde_json::json!(1);
+        request["skillData"][0]["maxStacks"] = serde_json::json!(2);
+        request["skillData"][0]["chargeRecoveryMs"] = serde_json::json!(24000);
+        request["skillData"][0]["castTimesMs"] = serde_json::json!([0]);
+        let mut profiles = builder::build(&request.to_string()).unwrap();
+        profiles.global_triggers.push(crate::profile::GlobalTrigger {
+            filter:crate::profile::TriggerFilter::SkillCastId(0),condition:crate::profile::TriggerCondition::Always,
+            effect:TriggerEffect::ApplyBuff(crate::profile::BuffSpec{id:"charge_cooldown".into(),effects:HashMap::from([(StatField::CooldownReduction,0.5)]),duration_ms:100000,max_stacks:1,stack_type:crate::profile::StackType::Refresh}),cooldown_ms:None,
+        });
+        let trace = engine::trace_one(&profiles,42,60001).1;
+        assert_eq!(trace.casts.iter().map(|c|(c.time*1000.).round() as u64).collect::<Vec<_>>(), [0,1000,24000,36000,48000,60000]);
     }
 
     #[test]
@@ -3310,34 +3868,32 @@ mod tests {
     }
 
     #[test]
-    fn arcana_empress_festival_reaches_four_stack_runtime_trigger() {
-        let json = base_arcana_request(
-            "[]",
-            r#"{
-                        "commonNodes": [],
-                        "classNodes": [
-                            {"name": "황후의 연회", "level": 3, "values": [22.0]}
-                        ]
-                    }"#,
-            "null",
-        );
-
-        let profiles = builder::build(&json).expect("build should succeed");
-        let celestial = profiles
-            .skills
-            .iter()
-            .find(|skill| skill.name == "셀레스티얼 레인")
-            .expect("Celestial Rain profile should exist");
-
-        assert!(celestial.hits[0].triggers.iter().any(|trigger| {
-            matches!(
-                (&trigger.on, &trigger.effect),
-                (
-                    HitTriggerOn::OnHitIf(HitCondition::TargetBuffAtMaxStacks(buff_id)),
-                    TriggerEffect::DamageBonus(value)
-                ) if buff_id == "arcana_ruin_stack" && (*value - 0.22).abs() < 1e-9
-            )
-        }));
+    fn arcana_empress_festival_scales_only_the_four_stack_ruin_row() {
+        let mut request: serde_json::Value = serde_json::from_str(include_str!(
+            "../fixtures/arcana-representative-request.json"
+        )).unwrap();
+        request["character"]["arkPassive"] = serde_json::json!({"commonNodes": [], "classNodes": []});
+        let before = builder::build(&request.to_string()).unwrap();
+        request["character"]["arkPassive"]["classNodes"] = serde_json::json!([
+            {"name": "황후의 연회", "level": 3, "values": [26.0]}
+        ]);
+        let after = builder::build(&request.to_string()).unwrap();
+        let a_skill = after.skills.iter().find(|skill| skill.name == "셀레스티얼 레인").unwrap();
+        let b_skill = before.skills.iter().find(|skill| skill.name == "셀레스티얼 레인").unwrap();
+        for (a, b) in a_skill.hits.iter().zip(&b_skill.hits) {
+            assert_eq!(a.damage_increase, b.damage_increase, "normal hit is unchanged");
+            let rows = |hit: &crate::profile::SkillHit| hit.triggers.iter().find_map(|trigger| {
+                if let TriggerEffect::DealDamageByTargetBuffStacks { hits_by_stack, .. } = &trigger.effect {
+                    Some(hits_by_stack.iter().map(|row| row.damage_increase).collect::<Vec<_>>())
+                } else { None }
+            }).unwrap();
+            let ar = rows(a); let br = rows(b);
+            for stack in 0..4 {
+                let expected = (1.0 + br[stack]) * if stack == 3 { 1.26 } else { 1.0 };
+                assert!((1.0 + ar[stack] - expected).abs() < 1e-9);
+            }
+            assert!(!a.triggers.iter().any(|trigger| matches!(trigger.effect, TriggerEffect::DamageBonus(_))));
+        }
     }
 
     #[test]
@@ -3366,14 +3922,14 @@ mod tests {
         let hit = &profiles.skills[0].hits[0];
 
         assert!((hit.damage_increase - 0.272).abs() < 1e-9);
+        let four_stack = hit.triggers.iter().find_map(|trigger| {
+            if let TriggerEffect::DealDamageByTargetBuffStacks { hits_by_stack, .. } = &trigger.effect {
+                hits_by_stack.get(3)
+            } else { None }
+        }).unwrap();
+        assert!((four_stack.damage_increase - 0.5264).abs() < 1e-9);
         assert!((hit.crit_chance_bonus - 0.30).abs() < 1e-9);
-        assert!(hit.triggers.iter().any(|trigger| matches!(
-            (&trigger.on, &trigger.effect),
-            (
-                HitTriggerOn::OnHitIf(HitCondition::TargetBuffAtMaxStacks(buff_id)),
-                TriggerEffect::DamageBonus(value)
-            ) if buff_id == "arcana_ruin_stack" && (*value - 0.20).abs() < 1e-9
-        )));
+        assert!(!hit.triggers.iter().any(|trigger| matches!(trigger.effect, TriggerEffect::DamageBonus(_))));
         assert!(hit.triggers.iter().any(|trigger| matches!(
             &trigger.effect,
             TriggerEffect::ConsumeTargetBuff {
@@ -3383,6 +3939,52 @@ mod tests {
                 ..
             } if buff_id == "arcana_ruin_stack" && (*preserve_chance - 0.40).abs() < 1e-9
         )));
+    }
+
+    #[test]
+    fn sun_cooldown_applies_raw_optimization_mana_leap_and_swiftness() {
+        let raw: serde_json::Value = serde_json::from_str(include_str!(
+            "../skill-data/common/backend/ark-passives.json"
+        )).unwrap();
+        let node = |name: &str, level: u32| {
+            let data = raw.as_array().unwrap().iter().find(|node| node["name"] == name).unwrap();
+            serde_json::json!({"name":name,"level":level,"effectsByLevel":data["simEffects"]})
+        };
+        let mut request: serde_json::Value =
+            serde_json::from_str(&arcana_single_hit_skill_request("더 썬")).unwrap();
+        request["skillData"][0]["gameSkillId"] = serde_json::json!(19340);
+        request["skillData"][0]["skillSlot"] = serde_json::json!("HyperAwakeningTechniques");
+        request["skillData"][0]["cooldown"] = serde_json::json!(80);
+        request["skillData"][0]["resourceCost"] = serde_json::json!({"name":"Mp","cost":[915]});
+        request["character"]["arkPassive"] = serde_json::json!({
+            "commonNodes":[node("끝없는 마나",2)],
+            "classNodes":[{"name":"잠재력 해방","level":4,"values":[8]}]
+        });
+        let baseline = builder::build(&request.to_string()).unwrap();
+        assert_eq!(baseline.skills[0].cooldown_ms, 63_296);
+        assert!((baseline.skills[0].resource_costs["Mp"] - 732.0).abs() < 1e-9);
+        for (level, multiplier) in [(1,0.96),(2,0.92)] {
+            request["character"]["arkPassive"]["commonNodes"] =
+                serde_json::json!([node("끝없는 마나",2), node("최적화 훈련",level)]);
+            let mut profiles = builder::build(&request.to_string()).unwrap();
+            // 최적화만 추가한 동일 조건에서 실제 다음 시전까지 확인한다.
+            let expected_ms = ((80_000.0 * 0.86 * multiplier) as u32 as f64 * 0.92) as u32;
+            assert_eq!(profiles.skills[0].cooldown_ms, expected_ms);
+            profiles.stat.swiftness = 1800.0;
+            profiles.skills[0].resource_costs.clear(); // 실제 UI처럼 MP 제약을 제외한다.
+            let trace = engine::trace_one(&profiles, 57906, 90_000).1;
+            let expected_actual = (expected_ms as f64
+                * (1.0 - 1800.0 * crate::constants::SWIFTNESS_COOLDOWN_REDUCTION)) as u32;
+            assert!((trace.casts[1].time * 1000.0 - expected_actual as f64).abs() < 1e-6);
+            println!("최적화 L{level}: 더 썬 다음 시전 {}ms", expected_actual);
+        }
+        for slot in ["Awakening","SuperAwakening","BasicAttack"] {
+            request["skillData"][0]["skillSlot"] = serde_json::json!(slot);
+            request["character"]["arkPassive"] = serde_json::json!({
+                "commonNodes":[node("최적화 훈련",2)], "classNodes":[]
+            });
+            assert_eq!(builder::build(&request.to_string()).unwrap().skills[0].cooldown_ms,80_000);
+        }
     }
 
     #[test]
@@ -3475,9 +4077,7 @@ mod tests {
         assert!(matches!(royal, TriggerEffect::Sequence(effects) if matches!(
             &effects[0], TriggerEffect::Chance { chance, effect }
                 if (*chance - 0.20).abs() < 1e-9 && matches!(
-                    effect.as_ref(), TriggerEffect::Sequence(inner) if matches!(
-                        &inner[0], TriggerEffect::DealRuntimeDamage(hit) if (hit.base_damage - 220.0).abs() < 1e-9
-                    )
+                    effect.as_ref(), TriggerEffect::ActivateCardEffect(19282)
                 )
         )));
     }
@@ -3667,19 +4267,26 @@ mod tests {
     }
 
     #[test]
-    fn arcana_spiral_edge_ruthless_shot_increases_damage_and_ruin_stacks() {
+    fn arcana_spiral_edge_ruthless_shot_uses_two_reduced_hits_and_preserves_stacks() {
         let mut request: serde_json::Value =
             serde_json::from_str(&arcana_spiral_edge_request()).expect("request should be valid");
         request["character"]["skills"][0]["tripods"] =
             serde_json::json!([{"name": "무자비한 사격", "values": []}]);
-        for hit in request["skillData"][0]["hits"]
-            .as_array_mut()
+        let original_hits = request["skillData"][0]["hits"]
+            .as_array()
             .expect("Spiral Edge hits should be an array")
-        {
-            hit["damageRatio"] = serde_json::json!([2.54]);
-            hit["fixedDamage"] = serde_json::json!([25.4]);
-            hit["targetBuffStackGain"]["stacks"] = serde_json::json!(2);
+            .clone();
+        let mut hits = vec![];
+        for mut hit in original_hits {
+            hit["damageRatio"] = serde_json::json!([0.73]);
+            hit["fixedDamage"] = serde_json::json!([7.3]);
+            let mut second = hit.clone();
+            hit["targetBuffStackGain"] = serde_json::Value::Null;
+            second["actionDelayMs"] = serde_json::json!(1);
+            second["targetBuffStackGain"]["stacks"] = serde_json::json!(2);
+            hits.extend([hit, second]);
         }
+        request["skillData"][0]["hits"] = serde_json::json!(hits);
         request["aplConfig"] = serde_json::json!(
             "actions:\n  - skill: 스파이럴 엣지\n    conditions:\n      - type: combo_phase\n        skill: 스파이럴 엣지\n        operator: \">=\"\n        value: 1\n  - skill: 스파이럴 엣지\n"
         );
@@ -3691,15 +4298,18 @@ mod tests {
             .find(|skill| skill.name == "스파이럴 엣지")
             .expect("Spiral Edge profile should exist");
 
-        assert_eq!(spiral.hits.len(), 2);
+        assert_eq!(spiral.hits.len(), 4);
         for hit in &spiral.hits {
-            assert!((hit.skill_modifier - 2.54).abs() < 1e-9);
-            assert!((hit.base_damage - 25.4).abs() < 1e-9);
-            assert!(matches!(
+            assert!((hit.skill_modifier - 0.73).abs() < 1e-9);
+            assert!((hit.base_damage - 7.3).abs() < 1e-9);
+        }
+        for phase in [0, 1] {
+            assert!((spiral.hits.iter().filter(|hit| hit.phase == phase).map(|hit| hit.skill_modifier).sum::<f64>() - 1.46).abs() < 1e-9);
+            assert_eq!(spiral.hits.iter().filter(|hit| hit.phase == phase && matches!(
                 hit.triggers.first().map(|trigger| &trigger.effect),
                 Some(TriggerEffect::ApplyTargetBuffStacks { spec, stacks })
                     if spec.id == "arcana_ruin_stack" && *stacks == 2
-            ));
+            )).count(), 1);
         }
 
         let (_result, trace) = engine::trace_one(&profiles, 1, 1_250);
@@ -4334,8 +4944,8 @@ mod tests {
                 "equipments": [], "accessories": [], "bracelet": null, "stone": null,
                 "gems": [], "engravings": [{
                     "name": "돌격대장", "grade": "유물", "level": 4,
-                    "featureData": {"grades": [{"grade": 5, "stages": [
-                        {"stage": 4, "featureType": 121, "values": [5300]}
+                    "featureData": {"grades": [{"grade": 1, "stages": [
+                        {"stage": 9, "featureType": 121, "values": [5300]}
                     ]}]}
                 }], "arkPassive": null, "arkGrids": null,
                 "arkPassiveKarma": null
@@ -4628,12 +5238,25 @@ mod tests {
             max_stacks: 1,
             charge_recovery_ms: 0,
             resource_costs: HashMap::new(),
+            free_mana_phases: Vec::new(),
+            source_damage_multiplier: 1.0,
             extra_mp_cost_ratio: 0.0,
             mp_cost_waiver_chance: 0.0,
             resource_gains: HashMap::new(),
             cast_buff_damage_bonuses: Vec::new(),
+            cast_buff_clock_multipliers: Vec::new(),
+        cast_buff_stack_damage_bonuses: Vec::new(),
+            cast_resource_damage_bonuses: Vec::new(),
+            buff_damage_bonuses: Vec::new(),
+            buff_crit_damage_bonuses: Vec::new(),
+            cast_resource_scaled_damage_bonuses: Vec::new(),
             cast_buff_crit_rate_bonuses: Vec::new(),
+            cast_resource_crit_rate_bonuses: Vec::new(),
+            cast_buff_back_attack_id: None,
+            back_attack_variant: None,
             evolution_damage_bonuses: Vec::new(),
+            timed_effects: Vec::new(),
+            on_end_if_hit: Vec::new(),
             hits: vec![SkillHit {
                 effect_id: 0,
                 hit_id: "stack_hit".to_string(),
@@ -4675,12 +5298,25 @@ mod tests {
             max_stacks: 1,
             charge_recovery_ms: 0,
             resource_costs: HashMap::new(),
+            free_mana_phases: Vec::new(),
+            source_damage_multiplier: 1.0,
             extra_mp_cost_ratio: 0.0,
             mp_cost_waiver_chance: 0.0,
             resource_gains: HashMap::new(),
             cast_buff_damage_bonuses: Vec::new(),
+            cast_buff_clock_multipliers: Vec::new(),
+        cast_buff_stack_damage_bonuses: Vec::new(),
+            cast_resource_damage_bonuses: Vec::new(),
+            buff_damage_bonuses: Vec::new(),
+            buff_crit_damage_bonuses: Vec::new(),
+            cast_resource_scaled_damage_bonuses: Vec::new(),
             cast_buff_crit_rate_bonuses: Vec::new(),
+            cast_resource_crit_rate_bonuses: Vec::new(),
+            cast_buff_back_attack_id: None,
+            back_attack_variant: None,
             evolution_damage_bonuses: Vec::new(),
+            timed_effects: Vec::new(),
+            on_end_if_hit: Vec::new(),
             hits: vec![SkillHit {
                 effect_id: 0,
                 hit_id: "ruin_trigger".to_string(),
@@ -4705,6 +5341,7 @@ mod tests {
                         buff_id: "arcana_ruin_stack".to_string(),
                         hits_by_stack: vec![
                             RuntimeDamageSpec {
+                                destruction: 0,
                                 hit_id: "ruin_damage_stack_1".to_string(),
                                 name: "루인 피해 (1스택)".to_string(),
                                 base_damage: 100.0,
@@ -4718,6 +5355,7 @@ mod tests {
                                 defense_ignore_chance: 0.0,
                             },
                             RuntimeDamageSpec {
+                                destruction: 0,
                                 hit_id: "ruin_damage_stack_2".to_string(),
                                 name: "루인 피해 (2스택)".to_string(),
                                 base_damage: 250.0,
@@ -4732,14 +5370,18 @@ mod tests {
                             },
                         ],
                         forced_stacks_while_buff: None,
+                        card_gauge_by_stack: Vec::new(),
                     },
                     chance: 1.0,
                 }],
             }],
         };
         let profiles = CharacterProfiles {
+            reaper_incoming_damage: vec![],
             name: "runtime_damage_test".to_string(),
             class_name: "아르카나".to_string(),
+            reaper_reference: None,
+            valkyrie_identity: None,
             stat: StatProfile::default(),
             skills: vec![stack_skill, ruin_skill],
             max_hp: 1000.0,
@@ -4857,16 +5499,43 @@ mod tests {
     }
 
     #[test]
+    fn damage_gem_is_independent_of_tripod_representation_and_ruin_rows() {
+        let mut results = Vec::new();
+        for folded_into_coefficient in [false, true] {
+            let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+            request["skillData"][0]["hits"][0]["fixedDamage"] = serde_json::json!([if folded_into_coefficient { 200.0 } else { 100.0 }]);
+            request["skillData"][0]["hits"][0]["damageRatio"] = serde_json::json!([0.0]);
+            request["skillData"][0]["hits"][0]["damageIncrease"] = serde_json::json!(if folded_into_coefficient { 0.0 } else { 1.0 });
+            request["skillData"][0]["ruinTriggerEffectIds"] = serde_json::json!([0]);
+            request["skillData"][0]["runtimeDamageByTargetBuffStacks"] = serde_json::json!((1..=4).map(|stack| serde_json::json!({
+                "stack":stack, "targetBuffId":"arcana_ruin_stack", "damageRatio":[0.0], "fixedDamage":[100.0], "damageIncrease":1.0
+            })).collect::<Vec<_>>());
+            let without = builder::build(&request.to_string()).unwrap();
+            request["character"]["gems"] = serde_json::json!([{"type":"멸화","level":10,"skillName":"셀레스티얼 레인","skillEffect":"피해 40% 증가"}]);
+            let with = builder::build(&request.to_string()).unwrap();
+            let before = engine::trace_one(&without, 1, 1000).1.damage_events[0].result_damage;
+            let after = engine::trace_one(&with, 1, 1000).1.damage_events[0].result_damage;
+            assert!((after / before - 1.4).abs() < 1e-12);
+            let rows = with.skills[0].hits[0].triggers.iter().find_map(|t| match &t.effect {
+                TriggerEffect::DealDamageByTargetBuffStacks { hits_by_stack, .. } => Some(hits_by_stack), _ => None,
+            }).unwrap();
+            assert!(rows.iter().all(|r| (1.0 + r.damage_increase - 2.8).abs() < 1e-12));
+            results.push(after);
+        }
+        assert!((results[0] - results[1]).abs() < 1e-12);
+    }
+
+    #[test]
     fn frontend_arcana_sample_request_has_a_fixed_seed_baseline() {
         let request = include_str!("../fixtures/arcana-sample-request.json");
         let profiles = builder::build(request).expect("UI sample request should build");
         assert_eq!(profiles.skills.len(), 9);
         assert_eq!(profiles.arcana_card_pool.len(), 14);
         let (result, trace) = engine::trace_one(&profiles, 1, 180_000);
-        assert!((result.total_damage - 584424637.9674553).abs() < 1e-4);
-        assert_eq!(trace.casts.len(), 114);
-        assert_eq!(trace.damage_events.len(), 477);
-        assert_eq!(trace.card_uses.len(), 8);
+        assert!((result.total_damage - 575563125.9060318).abs() < 1e-4);
+        assert_eq!(trace.casts.len(), 116);
+        assert_eq!(trace.damage_events.len(), 470);
+        assert_eq!(trace.card_uses.len(), 5);
     }
 
     #[test]
@@ -4875,10 +5544,11 @@ mod tests {
         let profiles = builder::build(request).expect("selected raw build should prepare");
         let (result, trace) = engine::trace_one(&profiles, 1, 180_000);
         assert_eq!(profiles.skills.len(), 9);
-        assert!((result.total_damage - 1167859652.4882312).abs() < 1e-4);
-        assert_eq!(trace.casts.len(), 124);
-        assert_eq!(trace.damage_events.len(), 436);
-        assert_eq!(trace.card_uses.len(), 10);
+        assert!((profiles.stat.sum(StatField::TargetDamageIncrease) - 0.2225).abs() < 1e-9);
+        assert!((result.total_damage - 857820854.4680473).abs() < 1e-4);
+        assert_eq!(trace.casts.len(), 128);
+        assert_eq!(trace.damage_events.len(), 457);
+        assert_eq!(trace.card_uses.len(), 8);
     }
 
     #[test]
@@ -4915,7 +5585,7 @@ mod tests {
         assert!(
             (selected.stat.sum(StatField::TargetDamageIncrease)
                 - no_engraving.stat.sum(StatField::TargetDamageIncrease)
-                - 0.225)
+                - 0.2025)
                 .abs()
                 < 1e-9
         );
@@ -6022,6 +6692,107 @@ mod tests {
     }
 
     #[test]
+    fn on_hit_speed_buff_refreshes_following_casts_and_expires_before_later_casts() {
+        let mut request: serde_json::Value = serde_json::from_str(
+            &base_arcana_request("[]", "null", "null"),
+        ).unwrap();
+        request["skillData"][0]["cooldown"] = serde_json::json!(0.1);
+        request["skillData"][0]["hits"] = serde_json::json!([{
+            "effectId": 1, "damageRatio": [0.0], "fixedDamage": [100.0],
+            "actionDelayMs": 500, "fixedDelayMs": 100,
+            "selfSpeedBuff": { "buffId": "speed-on-hit", "durationMs": 900,
+                "attackSpeedPercent": 30.0, "moveSpeedPercent": 25.0 }
+        }]);
+        let profiles = builder::build(&request.to_string()).unwrap();
+        assert!(profiles.skills[0].hits[0].triggers.iter().any(|trigger| matches!(
+            &trigger.effect, TriggerEffect::ApplyBuff(spec)
+                if spec.id == "speed-on-hit" && spec.duration_ms == 900 && spec.max_stacks == 1
+                    && (spec.effects[&StatField::AttackSpeed] - 0.3).abs() < 1e-12
+                    && (spec.effects[&StatField::MovementSpeed] - 0.25).abs() < 1e-12
+        )));
+        let trace = engine::trace_one(&profiles, 1, 3000).1;
+        assert_eq!(trace.casts.iter().map(|c| c.time).collect::<Vec<_>>(), vec![0.0, 1.0, 1.769, 2.538]);
+        assert_eq!(trace.damage_events[0].time, 0.6);
+        assert!(trace.damage_events.iter().all(|e| (e.result_damage - 100.0).abs() < 1e-9));
+        request["skillData"][0]["hits"][0]["selfSpeedBuff"]["durationMs"] = serde_json::json!(300);
+        let expired = builder::build(&request.to_string()).unwrap();
+        let trace = engine::trace_one(&expired, 1, 3000).1;
+        assert_eq!(trace.casts.iter().map(|c| c.time).collect::<Vec<_>>(), vec![0.0, 1.0, 2.0, 3.0]);
+    }
+
+    #[test]
+    fn on_hit_cooldown_reduction_caps_per_cast_and_resets_without_reducing_base_cooldown() {
+        let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+        request["skillData"][0]["cooldown"] = serde_json::json!(10.0);
+        request["skillData"][0]["hits"] = serde_json::json!((1..=10).map(|n| serde_json::json!({
+            "effectId": n, "damageRatio": [0.0], "fixedDamage": [100.0], "fixedDelayMs": n * 100,
+            "cooldownReductionOnHit": { "amountMs": 1000, "maxPerCastMs": 7000 }
+        })).collect::<Vec<_>>());
+        let profiles = builder::build(&request.to_string()).unwrap();
+        assert_eq!(profiles.skills[0].cooldown_ms, 10000);
+        let (result, trace) = engine::trace_one(&profiles, 42, 9000);
+        assert_eq!(trace.casts.iter().map(|c| c.time).collect::<Vec<_>>(), vec![0.0, 3.0, 6.0, 9.0]);
+        assert_eq!(result.total_damage, 3000.0);
+        for hit in request["skillData"][0]["hits"].as_array_mut().unwrap() {
+            hit["cooldownReductionOnHit"]["maxPerCastMs"] = serde_json::json!(2500);
+        }
+        let partial = builder::build(&request.to_string()).unwrap();
+        let trace = engine::trace_one(&partial, 42, 9000).1;
+        assert_eq!(trace.casts.iter().map(|c| c.time).collect::<Vec<_>>(), vec![0.0, 7.5]);
+        for hit in request["skillData"][0]["hits"].as_array_mut().unwrap() {
+            hit.as_object_mut().unwrap().remove("cooldownReductionOnHit");
+        }
+        let absent = builder::build(&request.to_string()).unwrap();
+        assert_eq!(engine::trace_one(&absent, 42, 9000).1.casts.len(), 1);
+        request["skillData"][0]["hits"][0]["cooldownReductionOnHit"] = serde_json::json!({"amountMs":0,"maxPerCastMs":7000});
+        assert!(builder::build(&request.to_string()).unwrap_err().contains("적중 쿨다운 감소량/시전 상한은 양수"));
+    }
+
+    #[test]
+    fn timed_self_aura_starts_at_notify_and_refreshes_without_a_fake_damage_hit() {
+        let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+        request["skillData"][0]["cooldown"] = serde_json::json!(2.0);
+        request["skillData"][0]["castTimesMs"] = serde_json::json!([1000]);
+        request["skillData"][0]["hits"] = serde_json::json!([]);
+        request["skillData"][0]["timedDots"] = serde_json::json!([{
+            "actionDelayMs": 400, "refresh": true, "dot": { "dotId": "self-aura", "hitId": "aura-tick", "name": "aura",
+                "chance": 1.0, "damageRatio": [0.0], "fixedDamage": [100.0], "firstTickMs": 500, "tickIntervalMs": 1000, "tickCount": 5 }
+        }]);
+        let profiles = builder::build(&request.to_string()).unwrap();
+        assert!(profiles.skills[0].hits.is_empty());
+        let (result, trace) = engine::trace_one(&profiles, 42, 5000);
+        assert_eq!(trace.damage_events.iter().map(|e|e.time).collect::<Vec<_>>(),vec![0.9,1.9,2.9,3.9,4.9]);
+        assert_eq!(result.total_damage,500.0);
+        assert!(trace.damage_events.iter().all(|e|e.damage_source=="dot:self-aura" && e.hit_id=="aura-tick" && e.cast_id.is_none()));
+        request["skillData"][0]["cooldown"] = serde_json::json!(10.0);
+        let single = builder::build(&request.to_string()).unwrap();
+        assert_eq!(engine::trace_one(&single,42,10000).1.damage_events.iter().map(|e|e.time).collect::<Vec<_>>(),vec![0.9,1.9,2.9,3.9,4.9]);
+    }
+
+    #[test]
+    fn target_damage_stacks_apply_after_hit_cap_refresh_and_expire() {
+        let mut request: serde_json::Value = serde_json::from_str(&base_arcana_request("[]", "null", "null")).unwrap();
+        request["skillData"][0]["cooldown"] = serde_json::json!(30.0);
+        request["skillData"][0]["castTimesMs"] = serde_json::json!([10000]);
+        request["skillData"][0]["hits"] = serde_json::json!([0,500,1000,1500,2000,2500,3000,5500,6000].iter().enumerate().map(|(i,at)|serde_json::json!({
+            "effectId":if i==7 {2}else{1},"damageRatio":[0.0],"fixedDamage":[100.0],"fixedDelayMs":at
+        })).collect::<Vec<_>>());
+        request["skillData"][0]["runtimeTargetDamageBonuses"] = serde_json::json!([{
+            "triggerEffectId":1,"targetEffectIds":[1,2],"buffId":"melting","durationMs":3000,"maxStacks":5,"damageIncrease":0.18
+        }]);
+        let profile=builder::build(&request.to_string()).unwrap();
+        let trace=engine::trace_one(&profile,42,10000).1;
+        let expected=[100.0,118.0,136.0,154.0,172.0,190.0,190.0,190.0,100.0];
+        for (event,expected) in trace.damage_events.iter().zip(expected) { assert!((event.result_damage-expected).abs()<1e-9); }
+        assert_eq!(trace.damage_events.len(),expected.len());
+        request["skillData"][0]["runtimeTargetDamageBonuses"][0].as_object_mut().unwrap().remove("maxStacks");
+        let legacy=builder::build(&request.to_string()).unwrap();
+        let trace=engine::trace_one(&legacy,42,10000).1;
+        assert!((trace.damage_events[5].result_damage-118.0).abs()<1e-9);
+        assert_eq!(trace.damage_events[8].result_damage,100.0);
+    }
+
+    #[test]
     fn skill_data_cooldown_reset_allows_the_next_cast() {
         let mut request: serde_json::Value = serde_json::from_str(
             &base_arcana_request("[]", "null", "null"),
@@ -6286,7 +7057,7 @@ mod tests {
     }
 
     #[test]
-    fn disabling_pet_turns_off_the_buff_and_talents_together() {
+    fn disabling_pet_only_turns_off_the_summoned_stat_buff() {
         let request = |enabled| {
             serde_json::json!({
                 "character": {
@@ -6307,14 +7078,59 @@ mod tests {
         let disabled = builder::build(&request(false).to_string()).expect("build should succeed");
         assert_eq!(disabled.stat.crit, 0.0);
         assert_eq!(disabled.stat.base_main_stat, 0.0);
-        assert_eq!(disabled.stat.main_stat_mul, 1.0);
-        assert!(disabled.stat.additional_damage.is_empty());
-        assert!(disabled.stat.type_damage.is_empty());
+        assert!((disabled.stat.main_stat_mul - 1.04).abs() < 1e-9);
+        assert_eq!(disabled.stat.additional_damage["pet:추가피해"], 0.02);
+        assert_eq!(disabled.stat.type_damage["pet:계열피해"], 0.03);
 
         let enabled = builder::build(&request(true).to_string()).expect("build should succeed");
         assert_eq!(enabled.stat.crit, 160.0);
         assert!((enabled.stat.main_stat_mul - 1.04).abs() < 1e-9);
         assert_eq!(enabled.stat.additional_damage["pet:추가피해"], 0.02);
         assert_eq!(enabled.stat.type_damage["pet:계열피해"], 0.03);
+    }
+
+    #[test]
+    fn collection_combat_stats_add_once_and_remain_separate_from_main_stat_and_pet() {
+        let mut request = serde_json::json!({
+            "character": { "name": "test", "className": "아르카나", "stats": { "crit": 691, "swiftness": 1692 } },
+            "CollectionStats": 870
+        });
+        let before = builder::build(&request.to_string()).unwrap();
+        request["collectionCombatStats"] = serde_json::json!({
+            "crit": 76, "specialization": 75, "swiftness": 77,
+            "domination": 79, "endurance": 71, "expertise": 75
+        });
+        let after = builder::build(&request.to_string()).unwrap();
+        assert_eq!(before.stat.crit, 0.0);
+        assert_eq!(before.stat.swiftness, 0.0);
+        assert_eq!(after.stat.crit, 76.0);
+        assert_eq!(after.stat.specialization, 75.0);
+        assert_eq!(after.stat.swiftness, 77.0);
+        assert_eq!(after.stat.domination, 79.0);
+        assert_eq!(after.stat.endurance, 71.0);
+        assert_eq!(after.stat.expertise, 75.0);
+        assert_eq!(after.stat.base_main_stat, before.stat.base_main_stat);
+        request["enablePetBuff"] = serde_json::json!(true);
+        request["petBuffType"] = serde_json::json!("치명");
+        let with_pet = builder::build(&request.to_string()).unwrap();
+        assert_eq!(with_pet.stat.crit, 236.0);
+        assert_eq!(with_pet.stat.swiftness, 77.0);
+        request["collectionCombatStats"]["crit"] = serde_json::json!(-1);
+        assert!(builder::build(&request.to_string()).is_err());
+    }
+
+    #[test]
+    fn collection_species_damage_has_its_own_source_and_rejects_negative_values() {
+        let mut request = serde_json::json!({
+            "character": { "name": "test", "className": "아르카나", "stats": {} },
+            "collectionTypeDamage": 5,
+            "enablePetBuff": false,
+            "petTalents": { "typeDamage": 0.5 }
+        });
+        let built = builder::build(&request.to_string()).unwrap();
+        assert_eq!(built.stat.type_damage["collection:카드도감계열피해"], 0.05);
+        assert_eq!(built.stat.type_damage["pet:계열피해"], 0.005);
+        request["collectionTypeDamage"] = serde_json::json!(-1);
+        assert!(builder::build(&request.to_string()).is_err());
     }
 }

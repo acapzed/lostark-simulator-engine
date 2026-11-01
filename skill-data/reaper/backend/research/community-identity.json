@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "authored_at": "2026-10-05",
+  "authorization": "커뮤니티 조사본으로 임시 처리",
+  "document": "community-identity.md",
+  "generated_from_raw": false,
+  "import_ready": false,
+  "runtime_implemented": true,
+  "runtime_scope": "opt-in 고정 참고 입력·직접 타격·CLI/WASM/참고 웹; 정식 캐릭터/DB 시드 제외",
+  "runtime_guide": "../../../../docs/classes/reaper/reaper-reference-testing.md",
+  "direct_game_observations_completed": 0,
+  "direct_game_observations_planned": 24,
+  "raw_game_build": null,
+  "sources": [
+    {"id": "RC01", "kind": "community_report", "title": "리퍼 스킬별 아덴 수급 순위", "author": "차단용차단용", "published_at": "2022-04-26T16:28:00+09:00", "revised_date": null, "accessed_date": "2026-10-05", "url": "https://www.inven.co.kr/board/lostark/5647/71710", "locator": "풍요 없음/특화600/공속140%와 만충 사용 횟수 본문"},
+    {"id": "RC02", "kind": "community_guide", "title": "아크패시브 달소 리퍼 공략 (2024.10.22 수정)", "author": "노덴", "published_at": "2024-09-06T12:12:00+09:00", "revised_date": "2024-10-22", "accessed_date": "2026-10-05", "url": "https://www.inven.co.kr/board/lostark/5647/115249", "locator": "4. 스킬트리 / 5. 딜 사이클 및 운영법"},
+    {"id": "RC03", "kind": "community_guide", "title": "갈증 리퍼 개론 [211126 개정]", "author": "lovemsy", "published_at": "2021-07-01T17:58:00+09:00", "revised_date": "2021-11-26", "accessed_date": "2026-10-05", "url": "https://www.inven.co.kr/board/lostark/5647/30467", "locator": "1-2 리퍼의 아이덴디티 / 1-3 혼돈유지"},
+    {"id": "RC04", "kind": "community_guide", "title": "26.01.05 - 달소 입문부터 심화까지 통합 가이드", "author": "지켜주세요", "published_at": "2025-05-07T19:20:00+09:00", "revised_date": "2026-01-05", "accessed_date": "2026-10-05", "url": "https://www.inven.co.kr/board/lostark/5647/121448", "locator": "이미지 페르소나/급소 확보/6 딜 사이클 기초/7 숙련", "video_measured": false},
+    {"id": "RC05", "kind": "community_guide", "title": "25.12.28 - 갈증 입문부터 심화까지 통합 가이드", "author": "지켜주세요", "published_at": "2024-11-23T13:08:00+09:00", "revised_date": "2025-12-28", "accessed_date": "2026-10-05", "url": "https://www.inven.co.kr/board/lostark/5647/118131", "locator": "이미지 1-2 갈증의 아이덴티티 혼돈", "video_measured": false},
+    {"id": "ROF01", "kind": "official_patch", "title": "7월 22일(수) 업데이트 내역 안내", "author": "스마일게이트", "published_at": "2026-07-22", "revised_date": null, "accessed_date": "2026-10-05", "url": "https://lostark.game.onstove.com/News/Notice/Views/13496", "locator": "리퍼 / 아크 패시브 / 급소 확보·갈증"}
+  ],
+  "reference_environment": {
+    "source_ids": ["RC01"],
+    "specialization": 600,
+    "attack_speed_percent": 140,
+    "wealth_rune": "none",
+    "skill_level": null,
+    "starting_gauge_measured": null,
+    "natural_gain_controlled": null,
+    "all_tripods_known": false,
+    "current_patch_equivalence_verified": false,
+    "automatic_extrapolation_enabled": false
+  },
+  "reported_fill_counts": [
+    {"skill": "쉐도우 닷", "variant": "미명시", "casts": 9, "basic_attacks": 0, "model_full_cast_fraction": {"numerator": 1, "denominator": 9}, "source_ids": ["RC01"]},
+    {"skill": "나이트메어", "variant": "배후 제외 조건이 아닌 보고", "casts": 5, "basic_attacks": 0, "model_full_cast_fraction": {"numerator": 1, "denominator": 5}, "source_ids": ["RC01"]},
+    {"skill": "스피닝 대거", "variant": "잔상 제외 조건이 아닌 보고", "casts": 4, "basic_attacks": 0, "model_full_cast_fraction": {"numerator": 1, "denominator": 4}, "source_ids": ["RC01"]},
+    {"skill": "쉐도우 스톰", "variant": "그림자 충전 없음", "casts": 3, "basic_attacks": 0, "model_full_cast_fraction": {"numerator": 1, "denominator": 3}, "source_ids": ["RC01"]},
+    {"skill": "쉐도우 스톰", "variant": "그림자 충전5", "casts": 2, "basic_attacks": 0, "model_full_cast_fraction": {"numerator": 1, "denominator": 2}, "source_ids": ["RC01"]},
+    {"skill": "블링크", "variant": "그림자 충전1/소용돌이 표창", "casts": 3, "basic_attacks": 0, "model_full_cast_fraction": {"numerator": 1, "denominator": 3}, "source_ids": ["RC01"]},
+    {"skill": "디스토션", "variant": "미명시", "casts": 7, "basic_attacks": 1, "model_full_cast_fraction": null, "source_ids": ["RC01"]},
+    {"skill": "쉐도우 트랩", "variant": "미명시", "casts": 5, "basic_attacks": 5, "model_full_cast_fraction": null, "source_ids": ["RC01"]}
+  ],
+  "reported_combo_candidates": [
+    {"parts": [{"skill": "블랙 미스트", "ticks": 6}], "source_ids": ["RC02"], "numeric_hit_gain_inferred": false},
+    {"parts": [{"skill": "블랙 미스트", "ticks": 4}, {"skill": "쉐도우 닷", "casts": 1}], "source_ids": ["RC02"], "numeric_hit_gain_inferred": false},
+    {"parts": [{"skill": "쉐도우 스톰", "casts": 1}], "source_ids": ["RC02"], "numeric_hit_gain_inferred": false}
+  ],
+  "model_assumptions": [
+    {"id": "RA01", "policy": "normalize_each_meter_to_0_1", "is_game_verified": false, "source_ids": [], "raw_absolute_caps_claimed": false},
+    {"id": "RA02", "policy": "legacy_fill_count_net_average", "is_game_verified": false, "source_ids": ["RC01"], "natural_gain_included_in_report_possible": true},
+    {"id": "RA03", "policy": "shadow_dot_two_direct_hits_equal_share", "is_game_verified": false, "source_ids": ["RC01"], "per_hit_fraction": {"numerator": 1, "denominator": 18}, "miss_gain": 0, "dot_gain_enabled": false},
+    {"id": "RA04", "policy": "omit_unknown_continuous_changes_in_reference_scenarios", "is_game_verified": false, "source_ids": ["RC03"], "actual_dark_gain_per_second": null, "actual_persona_drain_per_second": null, "actual_heat_decay_per_second": null},
+    {"id": "RA05", "policy": "route_by_pre_hit_dark_fullness_and_discard_overflow", "is_game_verified": false, "source_ids": ["RC03"], "heat_hit_gain": null, "copy_dark_gain_to_heat": false},
+    {"id": "RA06", "policy": "persona_then_swoop_without_intentional_wait_exit_to_dark_0", "is_game_verified": false, "source_ids": ["RC04"]},
+    {"id": "RA07", "policy": "snapshot_class_boost_before_successful_cast_consume_once_per_cast", "is_game_verified": false, "source_ids": ["RC02", "ROF01"], "blade_consumed_on_miss_or_front_hit": true, "blade_damage_requires_persona_snapshot_and_actual_back_hit": true, "new_blade_available_on_next_cast": true, "weakness_counter_paused_while_existing_blade_consumed": true, "rejected_input_consumes": false, "post_acceptance_cancel_refunds": false, "global_equipment_dot_summon_snapshot_claimed": false},
+    {"id": "RA08", "policy": "chaos_swoop_capture_class_boost_then_subtract_2_seconds", "is_game_verified": false, "source_ids": [], "expire_at_or_below_zero": true, "captured_direct_hits_keep_class_boost": true},
+    {"id": "RA09", "policy": "fatal_boost_before_hit_reservation_includes_self_first_hit", "is_game_verified": false, "source_ids": ["RC05"], "duration_seconds": 10},
+    {"id": "RA10", "policy": "expire_before_cast_at_equal_timestamp_direct_hits_only_refresh", "is_game_verified": false, "source_ids": [], "dot_refresh_enabled": false}
+  ],
+  "raw_and_official_rules": {
+    "local_evidence": ["identity.md", "build-passives.md", "shadow-dot.md", "official-history.md"],
+    "chaos_base_duration_seconds": 15,
+    "chaos_refresh_on_shadow": "successful_cast",
+    "chaos_refresh_on_dagger_or_nightmare": "hit",
+    "chaos_exit_dark_fraction": 1,
+    "chaos_exit_heat_fraction": 0,
+    "weakness_stack_trigger": "persona_swoop_successful_cast",
+    "weakness_stacks_to_blade": 3,
+    "blade_damage_condition": "persona_swoop_back_hit",
+    "blade_damage_increase_percent_by_level": [41, 82, 125],
+    "thirst_attack_power_increase_percent_by_level": [14, 26, 38],
+    "official_source_ids": ["ROF01"],
+    "force_back_attack": false,
+    "chaos_strength_time_cost_seconds_per_swoop_cast": 2
+  },
+  "reference_scenarios": [
+    {"id": "dark_shadow_dot_legacy", "initial_state": "normal", "initial_dark_fraction": 0, "initial_heat_fraction": 0, "environment": "reference_environment", "adopted_assumption_ids": ["RA01", "RA02", "RA03", "RA04", "RA05", "RA06", "RA07"], "excluded": ["current_high_specialization_full_rotation", "wealth_extrapolation", "long_persona_wait", "chaos_opening_gain", "summon_inheritance"]},
+    {"id": "thirst_chaos_sustain", "initial_state": "chaos", "initial_dark_fraction": 1, "initial_heat_fraction": 1, "initial_remaining_seconds": 15, "adopted_assumption_ids": ["RA01", "RA04", "RA08", "RA09", "RA10"], "stop_on_chaos_exit": true, "excluded": ["combat_opening", "heat_accumulation", "heat_decay", "chaos_reentry", "summon_inheritance"]}
+  ],
+  "model_expectation_ids": ["RP01", "RP02", "RP03", "RP04", "RP05", "RP06", "RP07", "RP08", "RP09", "RP10", "RP11", "RP12"],
+  "model_expectations_runtime_tested": true,
+  "runtime_tested_expectation_ids": ["RP01", "RP02", "RP03", "RP04", "RP05", "RP06", "RP07", "RP08", "RP09", "RP10", "RP11", "RP12"],
+  "runtime_partial_expectation_ids": [],
+  "runtime_unimplemented_expectation_ids": [],
+  "runtime_verification_note": "RP04/05는 명시적 gaugeTest 합성0.06 입력으로 실제 직접 타격 사건/수급 trace를 검사. 게임 수급량 교정이나 혼돈 진입 검증은 아님. 12개 모델 기대값은 상태/엔진 회귀 통과.",
+  "required_result_metadata": ["status", "reference_scenario_id", "adopted_assumption_ids", "initial_state", "excluded_scope", "source_ids"],
+  "rejected_legacy_rules": ["chaos_duration_9_seconds", "weakness_stack_requires_back_hit", "blade_forces_back_attack", "blade_damage_80_percent", "weakness_duration_30_seconds"],
+  "promotion": "원본/공식/커뮤니티 보고/임시 가정을 구분하여 구현. 현재 게임 증거 확보 시 해당 RA와 RP를 함께 교체. RO 관측 상태는 별도 유지."
+}

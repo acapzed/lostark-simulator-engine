@@ -8,6 +8,7 @@ pub mod consumable;
 pub mod engraving;
 pub mod equipment;
 pub mod gem;
+mod gem_target;
 pub mod karma;
 pub mod pet;
 pub mod sim_effects;

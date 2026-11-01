@@ -1,0 +1,74 @@
+[
+    {
+        "name": "안정",
+        "gemType": "질서",
+        "willpowerRequirement": 8,
+        "possibleEffects": [
+            "공격력",
+            "추가 피해",
+            "낙인력",
+            "아군 피해 강화"
+        ],
+        "icon": "https://cdn-lostark.game.onstove.com/efui_iconatlas/use/use_13_202.png"
+    },
+    {
+        "name": "견고",
+        "gemType": "질서",
+        "willpowerRequirement": 9,
+        "possibleEffects": [
+            "공격력",
+            "보스 피해",
+            "아군 피해 강화",
+            "아군 공격 강화"
+        ],
+        "icon": "https://cdn-lostark.game.onstove.com/efui_iconatlas/use/use_13_203.png"
+    },
+    {
+        "name": "불변",
+        "gemType": "질서",
+        "willpowerRequirement": 10,
+        "possibleEffects": [
+            "추가 피해",
+            "보스 피해",
+            "낙인력",
+            "아군 공격 강화"
+        ],
+        "icon": "https://cdn-lostark.game.onstove.com/efui_iconatlas/use/use_13_204.png"
+    },
+    {
+        "name": "침식",
+        "gemType": "혼돈",
+        "willpowerRequirement": 8,
+        "possibleEffects": [
+            "공격력",
+            "추가 피해",
+            "낙인력",
+            "아군 피해 강화"
+        ],
+        "icon": "https://cdn-lostark.game.onstove.com/efui_iconatlas/use/use_13_205.png"
+    },
+    {
+        "name": "왜곡",
+        "gemType": "혼돈",
+        "willpowerRequirement": 9,
+        "possibleEffects": [
+            "공격력",
+            "보스 피해",
+            "아군 피해 강화",
+            "아군 공격 강화"
+        ],
+        "icon": "https://cdn-lostark.game.onstove.com/efui_iconatlas/use/use_13_206.png"
+    },
+    {
+        "name": "붕괴",
+        "gemType": "혼돈",
+        "willpowerRequirement": 10,
+        "possibleEffects": [
+            "추가 피해",
+            "보스 피해",
+            "낙인력",
+            "아군 공격 강화"
+        ],
+        "icon": "https://cdn-lostark.game.onstove.com/efui_iconatlas/use/use_13_207.png"
+    }
+]

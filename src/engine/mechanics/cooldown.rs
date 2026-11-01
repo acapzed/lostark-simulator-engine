@@ -44,15 +44,16 @@ pub fn available_time(skill: &SkillProfile, state: &ActorState, current_time: u6
 
     // 충전형 스킬: 충전이 남아있으면 사용 가능
     if skill.max_stacks > 1 {
+        let use_end = state.skill_cooldowns.get(&skill_id).copied().unwrap_or(0);
         let charges = state.skill_charges.get(&skill_id).copied().unwrap_or(skill.max_stacks);
         if charges > 0 {
-            return current_time;
+            return current_time.max(use_end);
         }
         return state
             .charge_recovery_times
             .get(&skill_id)
             .copied()
-            .unwrap_or(current_time + 1);
+            .unwrap_or(current_time + 1).max(use_end);
     }
 
     // 일반 쿨타임
@@ -103,6 +104,7 @@ pub fn consume(
 
     // 충전형 스킬
     if skill.max_stacks > 1 {
+        state.skill_cooldowns.insert(skill_id, current_time + actual_cooldown_ms as u64);
         let charges = state.skill_charges.entry(skill_id).or_insert(skill.max_stacks);
         if *charges > 0 {
             *charges -= 1;
@@ -144,8 +146,7 @@ pub fn next_available_time(
         }
 
         let cd_end = if skill.max_stacks > 1 {
-            // 충전형: 다음 회복 시각
-            state.charge_recovery_times.get(&skill_id).copied().unwrap_or(0)
+            available_time(skill, state, current_time)
         } else {
             state.skill_cooldowns.get(&skill_id).copied().unwrap_or(0)
         };

@@ -1,0 +1,4071 @@
+{
+  "sourceSha256": "29b0abe603d88998405bd67fa005c54ffeae359869af5f199edb599fab7a484f",
+  "rawFiles": {
+    "AbilitySpecification": "0f47e1d8261327777f0c2fde916efd0e6848844eb10c45560379c110f8b42ad7",
+    "Ability": "8eb6fbbddd38698e72c713b9299e012c16c470cfeced8d8d6722a84303d8b2da",
+    "AbilityFeature": "e917d527f7e17cd7e0da8deb6fcbf6740c2478e62169a6adf6ec24b64408eb73",
+    "SkillBuff": "3e5c3787999ff8b5c64d87ab4934e8b0f52261002981bb9a802d47b5c22e0c87"
+  },
+  "contract": {
+    "bookProgress": "legendary level; relic level + 4",
+    "catalogGrade": "stone level + 1",
+    "catalogStage": "book progress + 1"
+  },
+  "verifiedRows": 225,
+  "selections": [
+    {
+      "input": {
+        "name": "원한",
+        "grade": "유물",
+        "level": 0,
+        "abilityLevel": 0
+      },
+      "correctedSource": {
+        "name": "원한",
+        "stoneLevel": 0,
+        "bookProgress": 4,
+        "rawAbility": {
+          "PrimaryKey": 1118,
+          "SecondaryKey": 5,
+          "OptionKeyIndex00": 1118,
+          "OptionValue00": 9,
+          "SourceRow": 1966
+        },
+        "catalogGrade": 1,
+        "catalogStage": 5,
+        "effect": {
+          "valuePercent": 18.0
+        }
+      },
+      "oldCatalogGrade": 5,
+      "oldCatalogStage": 0
+    },
+    {
+      "input": {
+        "name": "질량 증가",
+        "grade": "유물",
+        "level": 0,
+        "abilityLevel": 0
+      },
+      "correctedSource": {
+        "name": "질량 증가",
+        "stoneLevel": 0,
+        "bookProgress": 4,
+        "rawAbility": {
+          "PrimaryKey": 1295,
+          "SecondaryKey": 5,
+          "OptionKeyIndex00": 1295,
+          "OptionValue00": 9,
+          "SourceRow": 2421
+        },
+        "catalogGrade": 1,
+        "catalogStage": 5,
+        "effect": {
+          "valuePercent": 16.0
+        }
+      },
+      "oldCatalogGrade": 5,
+      "oldCatalogStage": 0
+    },
+    {
+      "input": {
+        "name": "저주받은 인형",
+        "grade": "유물",
+        "level": 4,
+        "abilityLevel": 0
+      },
+      "correctedSource": {
+        "name": "저주받은 인형",
+        "stoneLevel": 0,
+        "bookProgress": 8,
+        "rawAbility": {
+          "PrimaryKey": 1247,
+          "SecondaryKey": 9,
+          "OptionKeyIndex00": 1247,
+          "OptionValue00": 13,
+          "SourceRow": 2100
+        },
+        "catalogGrade": 1,
+        "catalogStage": 9,
+        "effect": {
+          "valuePercent": 17.0
+        }
+      },
+      "oldCatalogGrade": 5,
+      "oldCatalogStage": 4
+    },
+    {
+      "input": {
+        "name": "돌격대장",
+        "grade": "유물",
+        "level": 1,
+        "abilityLevel": 3
+      },
+      "correctedSource": {
+        "name": "돌격대장",
+        "stoneLevel": 3,
+        "bookProgress": 5,
+        "rawAbility": {
+          "PrimaryKey": 1254,
+          "SecondaryKey": 66,
+          "OptionKeyIndex00": 1254,
+          "OptionValue00": 70,
+          "SourceRow": 706
+        },
+        "catalogGrade": 4,
+        "catalogStage": 6,
+        "effect": {
+          "valuePercent": 55.2
+        }
+      },
+      "oldCatalogGrade": 5,
+      "oldCatalogStage": 4
+    },
+    {
+      "input": {
+        "name": "아드레날린",
+        "grade": "유물",
+        "level": 4,
+        "abilityLevel": 2
+      },
+      "correctedSource": {
+        "name": "아드레날린",
+        "stoneLevel": 2,
+        "bookProgress": 8,
+        "rawAbility": {
+          "PrimaryKey": 1299,
+          "SecondaryKey": 49,
+          "OptionKeyIndex00": 1299,
+          "OptionValue00": 53,
+          "SourceRow": 1606
+        },
+        "catalogGrade": 3,
+        "catalogStage": 9,
+        "effect": {
+          "attackPerStackPercent": 1.5,
+          "critPercent": 20.0,
+          "maxStacks": 6
+        }
+      },
+      "oldCatalogGrade": 5,
+      "oldCatalogStage": 6
+    }
+  ],
+  "rows": [
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 1,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 5,
+        "SourceRow": 1962
+      },
+      "catalogGrade": 1,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 15.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 2,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 6,
+        "SourceRow": 1963
+      },
+      "catalogGrade": 1,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 15.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 3,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 7,
+        "SourceRow": 1964
+      },
+      "catalogGrade": 1,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 16.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 4,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 8,
+        "SourceRow": 1965
+      },
+      "catalogGrade": 1,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 17.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 5,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 9,
+        "SourceRow": 1966
+      },
+      "catalogGrade": 1,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 18.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 6,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 10,
+        "SourceRow": 1967
+      },
+      "catalogGrade": 1,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 18.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 7,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 11,
+        "SourceRow": 1968
+      },
+      "catalogGrade": 1,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 19.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 8,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 12,
+        "SourceRow": 1969
+      },
+      "catalogGrade": 1,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 20.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 0,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 9,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 13,
+        "SourceRow": 1970
+      },
+      "catalogGrade": 1,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 21.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 21,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 25,
+        "SourceRow": 1975
+      },
+      "catalogGrade": 2,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 18.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 22,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 26,
+        "SourceRow": 1976
+      },
+      "catalogGrade": 2,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 18.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 23,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 27,
+        "SourceRow": 1977
+      },
+      "catalogGrade": 2,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 19.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 24,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 28,
+        "SourceRow": 1978
+      },
+      "catalogGrade": 2,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 20.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 25,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 29,
+        "SourceRow": 1979
+      },
+      "catalogGrade": 2,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 21.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 26,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 30,
+        "SourceRow": 1980
+      },
+      "catalogGrade": 2,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 21.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 27,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 31,
+        "SourceRow": 1981
+      },
+      "catalogGrade": 2,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 22.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 28,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 32,
+        "SourceRow": 1982
+      },
+      "catalogGrade": 2,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 23.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 1,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 29,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 33,
+        "SourceRow": 1983
+      },
+      "catalogGrade": 2,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 24.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 41,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 45,
+        "SourceRow": 1988
+      },
+      "catalogGrade": 3,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 18.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 42,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 46,
+        "SourceRow": 1989
+      },
+      "catalogGrade": 3,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 19.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 43,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 47,
+        "SourceRow": 1990
+      },
+      "catalogGrade": 3,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 20.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 44,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 48,
+        "SourceRow": 1991
+      },
+      "catalogGrade": 3,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 21.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 45,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 49,
+        "SourceRow": 1992
+      },
+      "catalogGrade": 3,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 21.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 46,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 50,
+        "SourceRow": 1993
+      },
+      "catalogGrade": 3,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 22.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 47,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 51,
+        "SourceRow": 1994
+      },
+      "catalogGrade": 3,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 23.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 48,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 52,
+        "SourceRow": 1995
+      },
+      "catalogGrade": 3,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 24.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 2,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 49,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 53,
+        "SourceRow": 1996
+      },
+      "catalogGrade": 3,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 24.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 61,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 65,
+        "SourceRow": 2001
+      },
+      "catalogGrade": 4,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 20.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 62,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 66,
+        "SourceRow": 2002
+      },
+      "catalogGrade": 4,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 21.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 63,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 67,
+        "SourceRow": 2003
+      },
+      "catalogGrade": 4,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 21.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 64,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 68,
+        "SourceRow": 2004
+      },
+      "catalogGrade": 4,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 22.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 65,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 69,
+        "SourceRow": 2005
+      },
+      "catalogGrade": 4,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 23.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 66,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 70,
+        "SourceRow": 2006
+      },
+      "catalogGrade": 4,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 24.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 67,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 71,
+        "SourceRow": 2007
+      },
+      "catalogGrade": 4,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 24.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 68,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 72,
+        "SourceRow": 2008
+      },
+      "catalogGrade": 4,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 25.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 3,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 69,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 73,
+        "SourceRow": 2009
+      },
+      "catalogGrade": 4,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 26.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 81,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 85,
+        "SourceRow": 2014
+      },
+      "catalogGrade": 5,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 21.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 82,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 86,
+        "SourceRow": 2015
+      },
+      "catalogGrade": 5,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 21.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 83,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 87,
+        "SourceRow": 2016
+      },
+      "catalogGrade": 5,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 22.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 84,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 88,
+        "SourceRow": 2017
+      },
+      "catalogGrade": 5,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 23.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 85,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 89,
+        "SourceRow": 2018
+      },
+      "catalogGrade": 5,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 24.0
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 86,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 90,
+        "SourceRow": 2019
+      },
+      "catalogGrade": 5,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 24.75
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 87,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 91,
+        "SourceRow": 2020
+      },
+      "catalogGrade": 5,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 25.5
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 88,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 92,
+        "SourceRow": 2021
+      },
+      "catalogGrade": 5,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 26.25
+      }
+    },
+    {
+      "name": "원한",
+      "stoneLevel": 4,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1118,
+        "SecondaryKey": 89,
+        "OptionKeyIndex00": 1118,
+        "OptionValue00": 93,
+        "SourceRow": 2022
+      },
+      "catalogGrade": 5,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 27.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 1,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 5,
+        "SourceRow": 2417
+      },
+      "catalogGrade": 1,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 13.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 2,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 6,
+        "SourceRow": 2418
+      },
+      "catalogGrade": 1,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 13.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 3,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 7,
+        "SourceRow": 2419
+      },
+      "catalogGrade": 1,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 14.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 4,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 8,
+        "SourceRow": 2420
+      },
+      "catalogGrade": 1,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 15.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 5,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 9,
+        "SourceRow": 2421
+      },
+      "catalogGrade": 1,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 16.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 6,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 10,
+        "SourceRow": 2422
+      },
+      "catalogGrade": 1,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 16.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 7,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 11,
+        "SourceRow": 2423
+      },
+      "catalogGrade": 1,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 17.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 8,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 12,
+        "SourceRow": 2424
+      },
+      "catalogGrade": 1,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 18.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 0,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 9,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 13,
+        "SourceRow": 2425
+      },
+      "catalogGrade": 1,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 19.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 21,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 25,
+        "SourceRow": 2430
+      },
+      "catalogGrade": 2,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 16.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 22,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 26,
+        "SourceRow": 2431
+      },
+      "catalogGrade": 2,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 16.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 23,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 27,
+        "SourceRow": 2432
+      },
+      "catalogGrade": 2,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 17.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 24,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 28,
+        "SourceRow": 2433
+      },
+      "catalogGrade": 2,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 18.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 25,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 29,
+        "SourceRow": 2434
+      },
+      "catalogGrade": 2,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 19.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 26,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 30,
+        "SourceRow": 2435
+      },
+      "catalogGrade": 2,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 19.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 27,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 31,
+        "SourceRow": 2436
+      },
+      "catalogGrade": 2,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 20.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 28,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 32,
+        "SourceRow": 2437
+      },
+      "catalogGrade": 2,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 21.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 1,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 29,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 33,
+        "SourceRow": 2438
+      },
+      "catalogGrade": 2,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 22.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 41,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 45,
+        "SourceRow": 2443
+      },
+      "catalogGrade": 3,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 16.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 42,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 46,
+        "SourceRow": 2444
+      },
+      "catalogGrade": 3,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 17.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 43,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 47,
+        "SourceRow": 2445
+      },
+      "catalogGrade": 3,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 18.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 44,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 48,
+        "SourceRow": 2446
+      },
+      "catalogGrade": 3,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 19.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 45,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 49,
+        "SourceRow": 2447
+      },
+      "catalogGrade": 3,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 19.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 46,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 50,
+        "SourceRow": 2448
+      },
+      "catalogGrade": 3,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 20.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 47,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 51,
+        "SourceRow": 2449
+      },
+      "catalogGrade": 3,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 21.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 48,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 52,
+        "SourceRow": 2450
+      },
+      "catalogGrade": 3,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 22.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 2,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 49,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 53,
+        "SourceRow": 2451
+      },
+      "catalogGrade": 3,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 22.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 61,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 65,
+        "SourceRow": 2456
+      },
+      "catalogGrade": 4,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 18.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 62,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 66,
+        "SourceRow": 2457
+      },
+      "catalogGrade": 4,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 19.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 63,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 67,
+        "SourceRow": 2458
+      },
+      "catalogGrade": 4,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 19.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 64,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 68,
+        "SourceRow": 2459
+      },
+      "catalogGrade": 4,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 20.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 65,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 69,
+        "SourceRow": 2460
+      },
+      "catalogGrade": 4,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 21.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 66,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 70,
+        "SourceRow": 2461
+      },
+      "catalogGrade": 4,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 22.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 67,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 71,
+        "SourceRow": 2462
+      },
+      "catalogGrade": 4,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 22.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 68,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 72,
+        "SourceRow": 2463
+      },
+      "catalogGrade": 4,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 23.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 3,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 69,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 73,
+        "SourceRow": 2464
+      },
+      "catalogGrade": 4,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 24.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 81,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 85,
+        "SourceRow": 2469
+      },
+      "catalogGrade": 5,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 19.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 82,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 86,
+        "SourceRow": 2470
+      },
+      "catalogGrade": 5,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 19.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 83,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 87,
+        "SourceRow": 2471
+      },
+      "catalogGrade": 5,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 20.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 84,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 88,
+        "SourceRow": 2472
+      },
+      "catalogGrade": 5,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 21.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 85,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 89,
+        "SourceRow": 2473
+      },
+      "catalogGrade": 5,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 22.0
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 86,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 90,
+        "SourceRow": 2474
+      },
+      "catalogGrade": 5,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 22.75
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 87,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 91,
+        "SourceRow": 2475
+      },
+      "catalogGrade": 5,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 23.5
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 88,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 92,
+        "SourceRow": 2476
+      },
+      "catalogGrade": 5,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 24.25
+      }
+    },
+    {
+      "name": "질량 증가",
+      "stoneLevel": 4,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1295,
+        "SecondaryKey": 89,
+        "OptionKeyIndex00": 1295,
+        "OptionValue00": 93,
+        "SourceRow": 2477
+      },
+      "catalogGrade": 5,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 25.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 1,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 5,
+        "SourceRow": 2092
+      },
+      "catalogGrade": 1,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 11.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 2,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 6,
+        "SourceRow": 2093
+      },
+      "catalogGrade": 1,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 11.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 3,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 7,
+        "SourceRow": 2094
+      },
+      "catalogGrade": 1,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 12.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 4,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 8,
+        "SourceRow": 2095
+      },
+      "catalogGrade": 1,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 13.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 5,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 9,
+        "SourceRow": 2096
+      },
+      "catalogGrade": 1,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 14.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 6,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 10,
+        "SourceRow": 2097
+      },
+      "catalogGrade": 1,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 14.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 7,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 11,
+        "SourceRow": 2098
+      },
+      "catalogGrade": 1,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 15.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 8,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 12,
+        "SourceRow": 2099
+      },
+      "catalogGrade": 1,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 16.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 0,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 9,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 13,
+        "SourceRow": 2100
+      },
+      "catalogGrade": 1,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 17.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 21,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 25,
+        "SourceRow": 2105
+      },
+      "catalogGrade": 2,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 14.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 22,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 26,
+        "SourceRow": 2106
+      },
+      "catalogGrade": 2,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 14.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 23,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 27,
+        "SourceRow": 2107
+      },
+      "catalogGrade": 2,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 15.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 24,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 28,
+        "SourceRow": 2108
+      },
+      "catalogGrade": 2,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 16.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 25,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 29,
+        "SourceRow": 2109
+      },
+      "catalogGrade": 2,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 17.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 26,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 30,
+        "SourceRow": 2110
+      },
+      "catalogGrade": 2,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 17.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 27,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 31,
+        "SourceRow": 2111
+      },
+      "catalogGrade": 2,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 18.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 28,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 32,
+        "SourceRow": 2112
+      },
+      "catalogGrade": 2,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 19.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 1,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 29,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 33,
+        "SourceRow": 2113
+      },
+      "catalogGrade": 2,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 20.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 41,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 45,
+        "SourceRow": 2118
+      },
+      "catalogGrade": 3,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 14.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 42,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 46,
+        "SourceRow": 2119
+      },
+      "catalogGrade": 3,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 15.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 43,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 47,
+        "SourceRow": 2120
+      },
+      "catalogGrade": 3,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 16.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 44,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 48,
+        "SourceRow": 2121
+      },
+      "catalogGrade": 3,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 17.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 45,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 49,
+        "SourceRow": 2122
+      },
+      "catalogGrade": 3,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 17.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 46,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 50,
+        "SourceRow": 2123
+      },
+      "catalogGrade": 3,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 18.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 47,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 51,
+        "SourceRow": 2124
+      },
+      "catalogGrade": 3,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 19.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 48,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 52,
+        "SourceRow": 2125
+      },
+      "catalogGrade": 3,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 20.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 2,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 49,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 53,
+        "SourceRow": 2126
+      },
+      "catalogGrade": 3,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 20.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 61,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 65,
+        "SourceRow": 2131
+      },
+      "catalogGrade": 4,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 16.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 62,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 66,
+        "SourceRow": 2132
+      },
+      "catalogGrade": 4,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 17.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 63,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 67,
+        "SourceRow": 2133
+      },
+      "catalogGrade": 4,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 17.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 64,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 68,
+        "SourceRow": 2134
+      },
+      "catalogGrade": 4,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 18.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 65,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 69,
+        "SourceRow": 2135
+      },
+      "catalogGrade": 4,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 19.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 66,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 70,
+        "SourceRow": 2136
+      },
+      "catalogGrade": 4,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 20.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 67,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 71,
+        "SourceRow": 2137
+      },
+      "catalogGrade": 4,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 20.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 68,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 72,
+        "SourceRow": 2138
+      },
+      "catalogGrade": 4,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 21.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 3,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 69,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 73,
+        "SourceRow": 2139
+      },
+      "catalogGrade": 4,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 22.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 81,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 85,
+        "SourceRow": 2144
+      },
+      "catalogGrade": 5,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 17.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 82,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 86,
+        "SourceRow": 2145
+      },
+      "catalogGrade": 5,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 17.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 83,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 87,
+        "SourceRow": 2146
+      },
+      "catalogGrade": 5,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 18.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 84,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 88,
+        "SourceRow": 2147
+      },
+      "catalogGrade": 5,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 19.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 85,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 89,
+        "SourceRow": 2148
+      },
+      "catalogGrade": 5,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 20.0
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 86,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 90,
+        "SourceRow": 2149
+      },
+      "catalogGrade": 5,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 20.75
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 87,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 91,
+        "SourceRow": 2150
+      },
+      "catalogGrade": 5,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 21.5
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 88,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 92,
+        "SourceRow": 2151
+      },
+      "catalogGrade": 5,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 22.25
+      }
+    },
+    {
+      "name": "저주받은 인형",
+      "stoneLevel": 4,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1247,
+        "SecondaryKey": 89,
+        "OptionKeyIndex00": 1247,
+        "OptionValue00": 93,
+        "SourceRow": 2152
+      },
+      "catalogGrade": 5,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 23.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 1,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 5,
+        "SourceRow": 662
+      },
+      "catalogGrade": 1,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 32.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 2,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 6,
+        "SourceRow": 663
+      },
+      "catalogGrade": 1,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 34.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 3,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 7,
+        "SourceRow": 664
+      },
+      "catalogGrade": 1,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 36.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 4,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 8,
+        "SourceRow": 665
+      },
+      "catalogGrade": 1,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 38.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 5,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 9,
+        "SourceRow": 666
+      },
+      "catalogGrade": 1,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 40.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 6,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 10,
+        "SourceRow": 667
+      },
+      "catalogGrade": 1,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 42.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 7,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 11,
+        "SourceRow": 668
+      },
+      "catalogGrade": 1,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 44.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 8,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 12,
+        "SourceRow": 669
+      },
+      "catalogGrade": 1,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 46.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 0,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 9,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 13,
+        "SourceRow": 670
+      },
+      "catalogGrade": 1,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 48.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 21,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 25,
+        "SourceRow": 675
+      },
+      "catalogGrade": 2,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 39.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 22,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 26,
+        "SourceRow": 676
+      },
+      "catalogGrade": 2,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 41.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 23,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 27,
+        "SourceRow": 677
+      },
+      "catalogGrade": 2,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 43.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 24,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 28,
+        "SourceRow": 678
+      },
+      "catalogGrade": 2,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 45.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 25,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 29,
+        "SourceRow": 679
+      },
+      "catalogGrade": 2,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 47.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 26,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 30,
+        "SourceRow": 680
+      },
+      "catalogGrade": 2,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 49.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 27,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 31,
+        "SourceRow": 681
+      },
+      "catalogGrade": 2,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 51.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 28,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 32,
+        "SourceRow": 682
+      },
+      "catalogGrade": 2,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 53.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 1,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 29,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 33,
+        "SourceRow": 683
+      },
+      "catalogGrade": 2,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 55.5
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 41,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 45,
+        "SourceRow": 688
+      },
+      "catalogGrade": 3,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 41.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 42,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 46,
+        "SourceRow": 689
+      },
+      "catalogGrade": 3,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 43.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 43,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 47,
+        "SourceRow": 690
+      },
+      "catalogGrade": 3,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 45.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 44,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 48,
+        "SourceRow": 691
+      },
+      "catalogGrade": 3,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 47.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 45,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 49,
+        "SourceRow": 692
+      },
+      "catalogGrade": 3,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 49.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 46,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 50,
+        "SourceRow": 693
+      },
+      "catalogGrade": 3,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 51.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 47,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 51,
+        "SourceRow": 694
+      },
+      "catalogGrade": 3,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 53.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 48,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 52,
+        "SourceRow": 695
+      },
+      "catalogGrade": 3,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 55.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 2,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 49,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 53,
+        "SourceRow": 696
+      },
+      "catalogGrade": 3,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 57.4
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 61,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 65,
+        "SourceRow": 701
+      },
+      "catalogGrade": 4,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 45.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 62,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 66,
+        "SourceRow": 702
+      },
+      "catalogGrade": 4,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 47.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 63,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 67,
+        "SourceRow": 703
+      },
+      "catalogGrade": 4,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 49.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 64,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 68,
+        "SourceRow": 704
+      },
+      "catalogGrade": 4,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 51.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 65,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 69,
+        "SourceRow": 705
+      },
+      "catalogGrade": 4,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 53.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 66,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 70,
+        "SourceRow": 706
+      },
+      "catalogGrade": 4,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 55.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 67,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 71,
+        "SourceRow": 707
+      },
+      "catalogGrade": 4,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 57.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 68,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 72,
+        "SourceRow": 708
+      },
+      "catalogGrade": 4,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 59.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 3,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 69,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 73,
+        "SourceRow": 709
+      },
+      "catalogGrade": 4,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 61.2
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 81,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 85,
+        "SourceRow": 714
+      },
+      "catalogGrade": 5,
+      "catalogStage": 1,
+      "effect": {
+        "valuePercent": 47.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 82,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 86,
+        "SourceRow": 715
+      },
+      "catalogGrade": 5,
+      "catalogStage": 2,
+      "effect": {
+        "valuePercent": 49.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 83,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 87,
+        "SourceRow": 716
+      },
+      "catalogGrade": 5,
+      "catalogStage": 3,
+      "effect": {
+        "valuePercent": 51.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 84,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 88,
+        "SourceRow": 717
+      },
+      "catalogGrade": 5,
+      "catalogStage": 4,
+      "effect": {
+        "valuePercent": 53.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 85,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 89,
+        "SourceRow": 718
+      },
+      "catalogGrade": 5,
+      "catalogStage": 5,
+      "effect": {
+        "valuePercent": 55.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 86,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 90,
+        "SourceRow": 719
+      },
+      "catalogGrade": 5,
+      "catalogStage": 6,
+      "effect": {
+        "valuePercent": 57.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 87,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 91,
+        "SourceRow": 720
+      },
+      "catalogGrade": 5,
+      "catalogStage": 7,
+      "effect": {
+        "valuePercent": 59.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 88,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 92,
+        "SourceRow": 721
+      },
+      "catalogGrade": 5,
+      "catalogStage": 8,
+      "effect": {
+        "valuePercent": 61.0
+      }
+    },
+    {
+      "name": "돌격대장",
+      "stoneLevel": 4,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1254,
+        "SecondaryKey": 89,
+        "OptionKeyIndex00": 1254,
+        "OptionValue00": 93,
+        "SourceRow": 722
+      },
+      "catalogGrade": 5,
+      "catalogStage": 9,
+      "effect": {
+        "valuePercent": 63.0
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 1,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 5,
+        "SourceRow": 1572
+      },
+      "catalogGrade": 1,
+      "catalogStage": 1,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 8.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 2,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 6,
+        "SourceRow": 1573
+      },
+      "catalogGrade": 1,
+      "catalogStage": 2,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 9.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 3,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 7,
+        "SourceRow": 1574
+      },
+      "catalogGrade": 1,
+      "catalogStage": 3,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 11.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 4,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 8,
+        "SourceRow": 1575
+      },
+      "catalogGrade": 1,
+      "catalogStage": 4,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 12.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 5,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 9,
+        "SourceRow": 1576
+      },
+      "catalogGrade": 1,
+      "catalogStage": 5,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 14.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 6,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 10,
+        "SourceRow": 1577
+      },
+      "catalogGrade": 1,
+      "catalogStage": 6,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 15.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 7,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 11,
+        "SourceRow": 1578
+      },
+      "catalogGrade": 1,
+      "catalogStage": 7,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 17.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 8,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 12,
+        "SourceRow": 1579
+      },
+      "catalogGrade": 1,
+      "catalogStage": 8,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 18.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 0,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 9,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 13,
+        "SourceRow": 1580
+      },
+      "catalogGrade": 1,
+      "catalogStage": 9,
+      "effect": {
+        "attackPerStackPercent": 0.9,
+        "critPercent": 20.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 21,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 25,
+        "SourceRow": 1585
+      },
+      "catalogGrade": 2,
+      "catalogStage": 1,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 8.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 22,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 26,
+        "SourceRow": 1586
+      },
+      "catalogGrade": 2,
+      "catalogStage": 2,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 9.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 23,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 27,
+        "SourceRow": 1587
+      },
+      "catalogGrade": 2,
+      "catalogStage": 3,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 11.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 24,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 28,
+        "SourceRow": 1588
+      },
+      "catalogGrade": 2,
+      "catalogStage": 4,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 12.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 25,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 29,
+        "SourceRow": 1589
+      },
+      "catalogGrade": 2,
+      "catalogStage": 5,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 14.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 26,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 30,
+        "SourceRow": 1590
+      },
+      "catalogGrade": 2,
+      "catalogStage": 6,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 15.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 27,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 31,
+        "SourceRow": 1591
+      },
+      "catalogGrade": 2,
+      "catalogStage": 7,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 17.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 28,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 32,
+        "SourceRow": 1592
+      },
+      "catalogGrade": 2,
+      "catalogStage": 8,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 18.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 1,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 29,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 33,
+        "SourceRow": 1593
+      },
+      "catalogGrade": 2,
+      "catalogStage": 9,
+      "effect": {
+        "attackPerStackPercent": 1.38,
+        "critPercent": 20.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 41,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 45,
+        "SourceRow": 1598
+      },
+      "catalogGrade": 3,
+      "catalogStage": 1,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 8.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 42,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 46,
+        "SourceRow": 1599
+      },
+      "catalogGrade": 3,
+      "catalogStage": 2,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 9.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 43,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 47,
+        "SourceRow": 1600
+      },
+      "catalogGrade": 3,
+      "catalogStage": 3,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 11.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 44,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 48,
+        "SourceRow": 1601
+      },
+      "catalogGrade": 3,
+      "catalogStage": 4,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 12.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 45,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 49,
+        "SourceRow": 1602
+      },
+      "catalogGrade": 3,
+      "catalogStage": 5,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 14.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 46,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 50,
+        "SourceRow": 1603
+      },
+      "catalogGrade": 3,
+      "catalogStage": 6,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 15.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 47,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 51,
+        "SourceRow": 1604
+      },
+      "catalogGrade": 3,
+      "catalogStage": 7,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 17.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 48,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 52,
+        "SourceRow": 1605
+      },
+      "catalogGrade": 3,
+      "catalogStage": 8,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 18.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 2,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 49,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 53,
+        "SourceRow": 1606
+      },
+      "catalogGrade": 3,
+      "catalogStage": 9,
+      "effect": {
+        "attackPerStackPercent": 1.5,
+        "critPercent": 20.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 61,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 65,
+        "SourceRow": 1611
+      },
+      "catalogGrade": 4,
+      "catalogStage": 1,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 8.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 62,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 66,
+        "SourceRow": 1612
+      },
+      "catalogGrade": 4,
+      "catalogStage": 2,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 9.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 63,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 67,
+        "SourceRow": 1613
+      },
+      "catalogGrade": 4,
+      "catalogStage": 3,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 11.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 64,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 68,
+        "SourceRow": 1614
+      },
+      "catalogGrade": 4,
+      "catalogStage": 4,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 12.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 65,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 69,
+        "SourceRow": 1615
+      },
+      "catalogGrade": 4,
+      "catalogStage": 5,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 14.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 66,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 70,
+        "SourceRow": 1616
+      },
+      "catalogGrade": 4,
+      "catalogStage": 6,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 15.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 67,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 71,
+        "SourceRow": 1617
+      },
+      "catalogGrade": 4,
+      "catalogStage": 7,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 17.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 68,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 72,
+        "SourceRow": 1618
+      },
+      "catalogGrade": 4,
+      "catalogStage": 8,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 18.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 3,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 69,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 73,
+        "SourceRow": 1619
+      },
+      "catalogGrade": 4,
+      "catalogStage": 9,
+      "effect": {
+        "attackPerStackPercent": 1.73,
+        "critPercent": 20.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 0,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 81,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 85,
+        "SourceRow": 1624
+      },
+      "catalogGrade": 5,
+      "catalogStage": 1,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 8.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 1,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 82,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 86,
+        "SourceRow": 1625
+      },
+      "catalogGrade": 5,
+      "catalogStage": 2,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 9.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 2,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 83,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 87,
+        "SourceRow": 1626
+      },
+      "catalogGrade": 5,
+      "catalogStage": 3,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 11.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 3,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 84,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 88,
+        "SourceRow": 1627
+      },
+      "catalogGrade": 5,
+      "catalogStage": 4,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 12.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 4,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 85,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 89,
+        "SourceRow": 1628
+      },
+      "catalogGrade": 5,
+      "catalogStage": 5,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 14.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 5,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 86,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 90,
+        "SourceRow": 1629
+      },
+      "catalogGrade": 5,
+      "catalogStage": 6,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 15.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 6,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 87,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 91,
+        "SourceRow": 1630
+      },
+      "catalogGrade": 5,
+      "catalogStage": 7,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 17.0,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 7,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 88,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 92,
+        "SourceRow": 1631
+      },
+      "catalogGrade": 5,
+      "catalogStage": 8,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 18.5,
+        "maxStacks": 6
+      }
+    },
+    {
+      "name": "아드레날린",
+      "stoneLevel": 4,
+      "bookProgress": 8,
+      "rawAbility": {
+        "PrimaryKey": 1299,
+        "SecondaryKey": 89,
+        "OptionKeyIndex00": 1299,
+        "OptionValue00": 93,
+        "SourceRow": 1632
+      },
+      "catalogGrade": 5,
+      "catalogStage": 9,
+      "effect": {
+        "attackPerStackPercent": 1.85,
+        "critPercent": 20.0,
+        "maxStacks": 6
+      }
+    }
+  ]
+}

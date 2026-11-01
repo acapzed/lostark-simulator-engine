@@ -56,25 +56,24 @@ pub fn apply(
     apply_destiny(global_triggers, skill_pipelines, req, &active_effects);
 }
 
-fn apply_destiny(
+fn matches_destiny_group(skill: &crate::builder::dto::SkillDataInput, effect: &crate::builder::dto::ArkGridClassCoreRuntimeEffect) -> bool {
+    if effect.skill_ids.is_empty() { skill.properties.skill_group_ids.contains(&effect.skill_group_id) }
+    else { effect.skill_ids.contains(&skill.game_skill_id) }
+}
+
+pub(crate) fn apply_destiny(
     global_triggers: &mut Vec<GlobalTrigger>,
     skill_pipelines: &mut SkillPipelineMap,
     req: &BuildRequest,
     effects: &[&crate::builder::dto::ArkGridClassCoreRuntimeEffect],
 ) {
-    let edge = effects
-        .iter()
-        .copied()
-        .filter(|effect| effect.kind == "on_destiny_ruin_consumable_damage")
-        .max_by(|a, b| a.value_percent.total_cmp(&b.value_percent));
     let mut destiny_effects = Vec::new();
-    if let Some(edge) = edge {
+    for kind in ["on_destiny_ruin_consumable_damage", "on_destiny_skill_consumable_crit_back"] {
+        let Some(edge) = effects.iter().copied().filter(|effect| effect.kind == kind)
+            .max_by(|a, b| a.value_percent.total_cmp(&b.value_percent)) else { continue; };
         let buff_id = edge.buff_id.to_string();
         for skill in req.skill_data.iter().filter(|skill| {
-            skill
-                .properties
-                .skill_group_ids
-                .contains(&edge.skill_group_id)
+            matches_destiny_group(skill, edge)
         }) {
             let Some(pipeline) = skill_pipelines.get_mut(&skill.name) else {
                 continue;
@@ -82,9 +81,12 @@ fn apply_destiny(
             let cast_buff_id = buff_id.clone();
             let damage_bonus = edge.value_percent / 100.0;
             pipeline.add_stats(move |profile| {
-                profile
-                    .cast_buff_damage_bonuses
-                    .push((cast_buff_id.clone(), damage_bonus));
+                if kind == "on_destiny_skill_consumable_crit_back" {
+                    profile.cast_buff_crit_rate_bonuses.push((cast_buff_id.clone(), damage_bonus));
+                    profile.cast_buff_back_attack_id = Some(cast_buff_id.clone());
+                } else {
+                    profile.cast_buff_damage_bonuses.push((cast_buff_id.clone(), damage_bonus));
+                }
                 Ok(())
             });
             if let Some(skill_id) = req
@@ -131,10 +133,7 @@ fn apply_destiny(
     for effect in group_buffs.into_values() {
         let buff_id = effect.buff_id.to_string();
         for skill in req.skill_data.iter().filter(|skill| {
-            skill
-                .properties
-                .skill_group_ids
-                .contains(&effect.skill_group_id)
+            matches_destiny_group(skill, effect)
         }) {
             let Some(pipeline) = skill_pipelines.get_mut(&skill.name) else {
                 continue;
@@ -230,6 +229,18 @@ fn apply_destiny(
             duration_ms: effect.duration_ms,
         }));
     }
+    let mut stackable_buff_ids = Vec::new();
+    for effect in effects.iter().copied().filter(|effect| effect.kind == "on_destiny_damage_buff_stackable") {
+        if stackable_buff_ids.contains(&effect.buff_id) { continue; }
+        stackable_buff_ids.push(effect.buff_id);
+        destiny_effects.push(TriggerEffect::ApplyBuff(BuffSpec {
+            id: effect.buff_id.to_string(),
+            effects: HashMap::from([(StatField::DamageIncrease, effect.value_percent / 100.0)]),
+            max_stacks: 1,
+            stack_type: StackType::Refresh,
+            duration_ms: effect.duration_ms,
+        }));
+    }
 
     if let Some(effect) = effects
         .iter()
@@ -240,10 +251,7 @@ fn apply_destiny(
             .skill_data
             .iter()
             .filter(|skill| {
-                skill
-                    .properties
-                    .skill_group_ids
-                    .contains(&effect.skill_group_id)
+                matches_destiny_group(skill, effect)
             })
             .filter_map(|skill| {
                 req.character
@@ -259,6 +267,41 @@ fn apply_destiny(
         });
     }
 
+    for effect in effects.iter().copied().filter(|effect| effect.kind == "on_destiny_skill_group_cooldown_reduction_flat") {
+        let skill_ids = req.skill_data.iter()
+            .filter(|skill| matches_destiny_group(skill, effect))
+            .filter_map(|skill| req.character.skills.iter().position(|selected| selected.name == skill.name).map(|id| id as u32))
+            .collect();
+        destiny_effects.push(TriggerEffect::ReduceCooldownsFlat {
+            skill_ids,
+            amount_ms: effect.cooldown_reduction_ms as u64,
+        });
+    }
+    for effect in effects.iter().copied().filter(|effect| effect.kind == "on_destiny_blood_explosion") {
+        destiny_effects.push(TriggerEffect::ScheduleDot {
+            dot_id: "reaper:destiny:blood_explosion".into(),
+            hit: crate::profile::RuntimeDamageSpec {
+                destruction: 0,
+                hit_id: "reaper:destiny:blood_explosion".into(),
+                name: "혈액폭발".into(),
+                base_damage: effect.fixed_damage,
+                skill_modifier: effect.damage_ratio,
+                damage_increase: 0.0,
+                crit_chance_bonus: 0.0,
+                crit_damage_bonus: 0.0,
+                random_crit_damage_chance: 0.0,
+                random_crit_damage_bonus: 0.0,
+                defense_ignore: 0.0,
+                defense_ignore_chance: 0.0,
+            },
+            first_tick_ms: 0,
+            tick_interval_ms: 1000,
+            tick_count: 1,
+            refresh: true,
+            independent: true,
+        });
+    }
+
     let cards = effects
         .iter()
         .copied()
@@ -268,10 +311,24 @@ fn apply_destiny(
         .unwrap_or(0);
     destiny_effects.extend((0..cards).map(|_| TriggerEffect::DrawCard));
 
-    if destiny_effects.is_empty() {
+    if destiny_effects.is_empty() && !effects.iter().any(|effect| effect.kind == "destiny_after_skill_group_casts") {
         return;
     }
     let destiny_effect = TriggerEffect::Sequence(destiny_effects);
+    for source in effects.iter().copied().filter(|effect| effect.kind == "destiny_after_skill_group_casts" && effect.hit_count > 0) {
+        let counter_id=source.buff_id.to_string();
+        for skill in req.skill_data.iter().filter(|skill| matches_destiny_group(skill, source)) {
+            let Some(skill_id)=req.character.skills.iter().position(|selected| selected.name==skill.name) else {continue;};
+            let filter=TriggerFilter::SkillCastId(skill_id as u32);
+            global_triggers.push(GlobalTrigger {filter:filter.clone(),condition:TriggerCondition::Always,
+                effect:TriggerEffect::ApplyBuff(BuffSpec {id:counter_id.clone(),effects:HashMap::new(),
+                    max_stacks:source.max_stacks,stack_type:StackType::Refresh,duration_ms:u32::MAX}),cooldown_ms:None});
+            global_triggers.push(GlobalTrigger {filter,
+                condition:TriggerCondition::BuffStacksAtLeast {buff_id:counter_id.clone(),stacks:source.hit_count},
+                // shortcut: Consume five after cast; server order and overflow policy still need game observation.
+                effect:TriggerEffect::Sequence(vec![TriggerEffect::ConsumeBuffStacks {buff_id:counter_id.clone(),stacks:source.hit_count},destiny_effect.clone()]),cooldown_ms:None});
+        }
+    }
     if let Some(source) = effects
         .iter()
         .copied()
@@ -350,13 +407,10 @@ fn apply_destiny(
     for source in effects
         .iter()
         .copied()
-        .filter(|effect| effect.kind == "destiny_on_skill_group_cast")
+        .filter(|effect| effect.kind == "destiny_on_skill_group_cast" || effect.kind == "destiny_on_persona_skill_group_cast")
     {
         for skill in req.skill_data.iter().filter(|skill| {
-            skill
-                .properties
-                .skill_group_ids
-                .contains(&source.skill_group_id)
+            matches_destiny_group(skill, source)
         }) {
             let Some(skill_id) = req
                 .character
@@ -366,13 +420,30 @@ fn apply_destiny(
             else {
                 continue;
             };
+            let persona = source.kind == "destiny_on_persona_skill_group_cast";
+            let marker = format!("reaper_destiny_persona_cast_{skill_id}");
+            if persona {
+                // Rush clears Persona during use; qualify before it and grant destiny after it.
+                global_triggers.push(GlobalTrigger {
+                    filter: TriggerFilter::BeforeSkillCastId(skill_id as u32),
+                    condition: TriggerCondition::ResourceAbove { resource: "ReaperPersona".into(), threshold: 1.0 },
+                    effect: TriggerEffect::ApplyBuffStacks {
+                        spec: BuffSpec { id: marker.clone(), effects: HashMap::new(), max_stacks: 1,
+                            stack_type: StackType::Refresh, duration_ms: u32::MAX },
+                        stacks: 1,
+                    },
+                    cooldown_ms: None,
+                });
+            }
             global_triggers.push(GlobalTrigger {
                 filter: TriggerFilter::SkillCastId(skill_id as u32),
-                condition: TriggerCondition::Always,
-                effect: TriggerEffect::Chance {
+                condition: if persona { TriggerCondition::BuffActive(marker.clone()) } else { TriggerCondition::Always },
+                effect: if persona {
+                    TriggerEffect::Sequence(vec![TriggerEffect::ConsumeBuffStacks { buff_id: marker, stacks: 1 },destiny_effect.clone()])
+                } else { TriggerEffect::Chance {
                     chance: source.chance_percent / 100.0,
                     effect: Box::new(destiny_effect.clone()),
-                },
+                } },
                 cooldown_ms: None,
             });
         }
@@ -580,9 +651,12 @@ fn apply_charge_and_speed_buff(
     };
     let max_charges = effect.max_charges;
     let recharge_ms = effect.recharge_ms;
-    pipeline.add_stats(move |profile| {
+    let cooldown_delta_ms = effect.value_ms;
+    // Set charge structure before gem/passive stat modifiers scale both timers.
+    pipeline.add_structure(move |profile| {
         profile.max_stacks = max_charges;
         profile.charge_recovery_ms = recharge_ms;
+        profile.cooldown_ms = profile.cooldown_ms.saturating_add_signed(cooldown_delta_ms);
         Ok(())
     });
 
@@ -771,6 +845,7 @@ mod tests {
             raw_option_id,
             runtime_effects: vec![crate::builder::dto::ArkGridClassCoreRuntimeEffect {
                 kind: "static_skill_group_damage".to_string(),
+                skill_ids: Vec::new(),
                 card_id: 0,
                 skill_group_id,
                 skill_id: 0,
@@ -787,12 +862,15 @@ mod tests {
                 cards: 0,
                 chance_percent: 0.0,
                 cooldown_reduction_percent: 0.0,
+                cooldown_reduction_ms: 0,
                 max_charges: 0,
                 recharge_ms: 0,
                 duration_ms: 0,
                 delay_ms: 0,
                 value_ms: 0,
                 value_percent,
+                fixed_damage: 0.0,
+                damage_ratio: 0.0,
             }],
         }
     }

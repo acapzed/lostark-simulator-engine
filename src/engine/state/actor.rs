@@ -26,6 +26,10 @@ pub struct ActorState {
     pub charge_recovery_times: HashMap<u32, u64>,
     /// skill_id → 전투 중 사용 횟수
     pub skill_use_counts: HashMap<u32, u32>,
+    /// 종료 효과가 있는 시전의 고정 대상 적중 여부. 종료 시 제거한다.
+    pub cast_landings: HashMap<u32, bool>,
+    /// (skill_id, cast_id) → 해당 시전의 적중 쿨다운 누적 감소량(ms).
+    pub cast_cooldown_reductions: HashMap<(u32, u32), u64>,
 
     // 콤보/체인 단계
     /// skill_id → 현재 콤보 페이즈 (0-indexed)
@@ -58,6 +62,8 @@ impl ActorState {
             skill_charges: HashMap::new(),
             charge_recovery_times: HashMap::new(),
             skill_use_counts: HashMap::new(),
+            cast_landings: HashMap::new(),
+            cast_cooldown_reductions: HashMap::new(),
             combo_phases: HashMap::new(),
             combo_timeouts: HashMap::new(),
             chain_phases: HashMap::new(),
@@ -75,6 +81,14 @@ impl ActorState {
             "Hp"    => self.hp,
             "MaxHp" => self.max_hp,
             _ => self.class_state.get_resource(name),
+        }
+    }
+
+    /// 직업 자원과 공통 체력의 최대값 조회.
+    pub fn get_resource_max(&self, name: &str) -> f64 {
+        match name {
+            "Hp" => self.max_hp,
+            _ => self.class_state.get_resource_max(name),
         }
     }
 

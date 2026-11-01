@@ -290,6 +290,7 @@ pub fn build_effects(
                 }
                 "direct_damage" => {
                     effects.push(TriggerEffect::DealRuntimeDamage(RuntimeDamageSpec {
+                        destruction: 0,
                         hit_id: effect.hit_id.clone(),
                         name: effect.name.clone(),
                         base_damage: effect.fixed_damage,
@@ -329,6 +330,31 @@ pub fn build_effects(
     Ok((arcana_card_effects, arcana_card_blocking_buffs))
 }
 
+/// Card attacks have their own classification, rather than the first equipped
+/// skill's normal/stack/ruin, direction, element or mana-use tags.
+pub fn apply_damage_modifiers(effects: &mut HashMap<u32, TriggerEffect>, compiled: &crate::builder::modifier::CompiledModifiers) {
+    fn apply(effect: &mut TriggerEffect, factor: f64) {
+        match effect {
+            TriggerEffect::Sequence(effects) | TriggerEffect::RandomChoice(effects) => for e in effects { apply(e,factor); },
+            TriggerEffect::WeightedRandomChoice(effects) => for (_,e) in effects { apply(e,factor); },
+            TriggerEffect::Chance {effect,..} | TriggerEffect::Schedule {effect,..} => apply(effect,factor),
+            TriggerEffect::DealRuntimeDamage(hit) => hit.damage_increase=(1.0+hit.damage_increase)*factor-1.0,
+            _ => {}
+        }
+    }
+    for (&id,effect) in effects {
+        let mut factor=compiled.get_multiplier(&SkillTag::All,"DamageMultiplier")
+            *compiled.get_multiplier(&SkillTag::SkillId(id),"DamageMultiplier");
+        // Current direct cards: source Skill IdentityCategory31/IsIdentitySkill1,
+        // BackAttackTooltipType0; neither normal skills nor awakenings.
+        if matches!(id,19282|19288) {
+            factor*=compiled.get_multiplier(&SkillTag::NonDirectional,"DamageMultiplier")
+                *compiled.get_multiplier(&SkillTag::NonDirectionalNonAwakening,"DamageMultiplier");
+        }
+        apply(effect,factor);
+    }
+}
+
 pub fn apply_arcana_card_ark_passives(
     req: &BuildRequest,
     effects_by_card: &mut HashMap<u32, TriggerEffect>,
@@ -354,11 +380,14 @@ pub fn apply_arcana_card_ark_passives(
     extend_card_buff(effects_by_card.get_mut(&19098), value("황후의 계략", 1));
 
     if value("또 다른 황제", 1) > 0.0 {
-        let Some(emperor) = effects_by_card.get(&19282).cloned() else { return };
+        if !effects_by_card.contains_key(&19282) { return; }
         let chance = value("또 다른 황제", 1) / 100.0;
         for card in &req.card_data {
             if card.skill_id == 19282 { continue; }
-            let proc = TriggerEffect::Chance { chance, effect: Box::new(emperor.clone()) };
+            let proc = TriggerEffect::Chance {
+                chance,
+                effect: Box::new(TriggerEffect::ActivateCardEffect(19282)),
+            };
             match effects_by_card.entry(card.skill_id).or_insert_with(|| TriggerEffect::Sequence(Vec::new())) {
                 TriggerEffect::Sequence(effects) => effects.push(proc),
                 effect => *effect = TriggerEffect::Sequence(vec![effect.clone(), proc]),

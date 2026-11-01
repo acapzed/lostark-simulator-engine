@@ -1,0 +1,96 @@
+# WEB-MOON-222 / WEB-MOON-PRIORITY: 2급습, 수급 후 페르소나.
+# 충전 2스택 조회 조건은 현재 APL에 없어 스택 우선 최적화는 생략한다.
+name: "웹 참고 달소 222 회귀 APL"
+class: "reaper"
+build: "moon"
+actions:
+  - skill: "라스트 그래피티"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 1
+      - type: resource
+        name: ReaperBlade
+        operator: "=="
+        value: 1
+  - skill: "사일런트 스매셔"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 1
+  - skill: "라스트 그래피티"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 1
+  - skill: "페르소나"
+    conditions:
+      - type: skill_cooldown_ready
+        skill: "사일런트 스매셔"
+  - skill: "페르소나"
+    conditions:
+      - type: skill_cooldown_ready
+        skill: "라스트 그래피티"
+  - skill: "쉐도우 닷"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 0
+      - type: resource
+        name: ReaperDark
+        operator: "<"
+        value: 1
+  - skill: "블랙 미스트"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 0
+      - type: resource
+        name: ReaperDark
+        operator: "<"
+        value: 1
+  - skill: "쉐도우 스톰"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 0
+      - type: resource
+        name: ReaperDark
+        operator: "<"
+        value: 1
+  - skill: "쉐도우 트랩"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 0
+      - type: resource
+        name: ReaperDark
+        operator: "<"
+        value: 1
+  - skill: "콜 오브 나이프"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 0
+      - type: resource
+        name: ReaperDark
+        operator: "<"
+        value: 1
+  - skill: "스피닝 대거"
+    conditions:
+      - type: resource
+        name: ReaperPersona
+        operator: "=="
+        value: 0
+      - type: resource
+        name: ReaperDark
+        operator: "<"
+        value: 1

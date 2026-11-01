@@ -24,6 +24,8 @@ pub enum StatField {
     CritRate,
     /// 치명타 피해 % 합산 (base 0.0)
     CritDmg,
+    /// 치명타로 받는 피해 증가 비율. 일반 치명타 피해 스탯과 별도 곱산.
+    OnCritDamageTaken,
     /// 공격력 배율 delta 합산 (1.0 + sum → 최종 배율)
     AttackPowerMul,
     /// 추가 피해 delta 합산 (1.0 + sum → 최종 배율)
@@ -38,6 +40,12 @@ pub enum StatField {
     AttackSpeed,
     /// 이동 속도 추가 보너스 합산 (0.20 = 20%).
     MovementSpeed,
+    /// 같은 비교 그룹에서는 활성 효과 중 최댓값만 적용한다.
+    MovementSpeedMax,
+    /// 고정 대상의 감속 상태. 자기 이동속도와 피해 계산에는 사용하지 않는다.
+    TargetMovementSpeedReduction,
+    /// 시전 중 자기 회피율 상태(0.20 = 20%). 적 공격/회피 난수는 미모델링.
+    DodgeRate,
     /// 재사용 대기시간 감소율 합산 (0.15 = 15%)
     CooldownReduction,
     /// 대상 방어력 감소율 합산 (0.01 = 1%)
@@ -61,6 +69,10 @@ pub enum StatField {
 /// snapshot에서 `1.0 + sum()` 또는 `sum()` 형태로 소비.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StatProfile {
+    /// Immutable compiled transport preserves the builder's original sum order.
+    /// Cleared by field_mut; not part of public profile/save JSON.
+    #[serde(skip)]
+    pub(crate) compiled_sums: Option<[f64; 18]>,
     // -----------------------------------------------------------------------
     // flat — 전투 특성
     // -----------------------------------------------------------------------
@@ -133,6 +145,8 @@ pub struct StatProfile {
     pub weapon_attack_power:    HashMap<String, f64>, // sum → 무기 공격력 합산값
     pub crit_rate:              HashMap<String, f64>, // sum → 치적률 % 합산 (÷100 후 비율)
     pub crit_dmg:               HashMap<String, f64>, // sum → 치적배 % 합산
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub on_crit_damage_taken:   HashMap<String, f64>,
     pub attack_power_mul:       HashMap<String, f64>, // 1.0 + sum → 공격력 배율
     pub additional_damage:      HashMap<String, f64>, // 1.0 + sum → 추가 피해 배율
     pub evolution_damage:       HashMap<String, f64>, // 1.0 + sum → 진화형 피해 배율
@@ -140,6 +154,12 @@ pub struct StatProfile {
     pub target_damage_increase: HashMap<String, f64>, // 1.0 + sum → 적주피 배율
     pub attack_speed:           HashMap<String, f64>, // sum → 추가 공격 속도 (버프 전용)
     pub movement_speed:         HashMap<String, f64>, // sum → 추가 이동 속도
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub movement_speed_max:     HashMap<String, f64>, // max → 비교형 이동 버프
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub target_movement_speed_reduction: HashMap<String, f64>,
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub dodge_rate: HashMap<String, f64>,
     pub cooldown_reduction:     HashMap<String, f64>, // sum → 추가 재사용 대기시간 감소
     pub target_defense_reduction: HashMap<String, f64>, // sum → 대상 방어력 감소율
     pub type_damage:            HashMap<String, f64>, // 1.0 + sum → 계열(종족) 피해 배율
@@ -155,6 +175,7 @@ pub struct StatProfile {
 impl Default for StatProfile {
     fn default() -> Self {
         Self {
+            compiled_sums: None,
             crit: 0.0, specialization: 0.0, swiftness: 0.0,
             domination: 0.0, endurance: 0.0, expertise: 0.0,
             base_main_stat: 0.0, base_vitality: 0.0,
@@ -177,6 +198,7 @@ impl Default for StatProfile {
             weapon_attack_power:    HashMap::new(),
             crit_rate:              HashMap::new(),
             crit_dmg:               HashMap::new(),
+            on_crit_damage_taken:   HashMap::new(),
             attack_power_mul:       HashMap::new(),
             additional_damage:      HashMap::new(),
             evolution_damage:       HashMap::new(),
@@ -184,6 +206,9 @@ impl Default for StatProfile {
             target_damage_increase: HashMap::new(),
             attack_speed:           HashMap::new(),
             movement_speed:         HashMap::new(),
+            movement_speed_max:     HashMap::new(),
+            target_movement_speed_reduction: HashMap::new(),
+            dodge_rate: HashMap::new(),
             cooldown_reduction:     HashMap::new(),
             target_defense_reduction: HashMap::new(),
             type_damage:            HashMap::new(),
@@ -204,14 +229,18 @@ impl StatProfile {
     /// 해당 버킷의 모든 delta 합산값을 반환한다.
     #[inline]
     pub fn sum(&self, field: StatField) -> f64 {
+        if let Some(sums) = &self.compiled_sums { return sums[field as usize]; }
+        if field == StatField::MovementSpeedMax { return self.movement_speed_max.values().copied().fold(0.0_f64,f64::max); }
         self.field_ref(field).values().copied().sum()
     }
 
     pub fn field_mut(&mut self, field: StatField) -> &mut HashMap<String, f64> {
+        self.compiled_sums = None;
         match field {
             StatField::WeaponAttackPower    => &mut self.weapon_attack_power,
             StatField::CritRate             => &mut self.crit_rate,
             StatField::CritDmg              => &mut self.crit_dmg,
+            StatField::OnCritDamageTaken    => &mut self.on_crit_damage_taken,
             StatField::AttackPowerMul       => &mut self.attack_power_mul,
             StatField::AdditionalDamage     => &mut self.additional_damage,
             StatField::EvolutionDamage      => &mut self.evolution_damage,
@@ -219,6 +248,9 @@ impl StatProfile {
             StatField::TargetDamageIncrease => &mut self.target_damage_increase,
             StatField::AttackSpeed          => &mut self.attack_speed,
             StatField::MovementSpeed        => &mut self.movement_speed,
+            StatField::MovementSpeedMax     => &mut self.movement_speed_max,
+            StatField::TargetMovementSpeedReduction => &mut self.target_movement_speed_reduction,
+            StatField::DodgeRate => &mut self.dodge_rate,
             StatField::CooldownReduction    => &mut self.cooldown_reduction,
             StatField::TargetDefenseReduction => &mut self.target_defense_reduction,
             StatField::TypeDamage           => &mut self.type_damage,
@@ -231,6 +263,7 @@ impl StatProfile {
             StatField::WeaponAttackPower    => &self.weapon_attack_power,
             StatField::CritRate             => &self.crit_rate,
             StatField::CritDmg              => &self.crit_dmg,
+            StatField::OnCritDamageTaken    => &self.on_crit_damage_taken,
             StatField::AttackPowerMul       => &self.attack_power_mul,
             StatField::AdditionalDamage     => &self.additional_damage,
             StatField::EvolutionDamage      => &self.evolution_damage,
@@ -238,6 +271,9 @@ impl StatProfile {
             StatField::TargetDamageIncrease => &self.target_damage_increase,
             StatField::AttackSpeed          => &self.attack_speed,
             StatField::MovementSpeed        => &self.movement_speed,
+            StatField::MovementSpeedMax     => &self.movement_speed_max,
+            StatField::TargetMovementSpeedReduction => &self.target_movement_speed_reduction,
+            StatField::DodgeRate => &self.dodge_rate,
             StatField::CooldownReduction    => &self.cooldown_reduction,
             StatField::TargetDefenseReduction => &self.target_defense_reduction,
             StatField::TypeDamage           => &self.type_damage,

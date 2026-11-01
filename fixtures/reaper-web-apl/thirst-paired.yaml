@@ -1,0 +1,29 @@
+# WEB-THIRST-PAIRED: 페이탈과 쉐도우 나이프를 묶는 운용을 우선순위로 옮긴다.
+# 원문의 고정 스킬열 재생이나 9급습 달성을 보장하는 APL은 아니다.
+name: "웹 참고 갈증 페이탈 나이프 연계 회귀 APL"
+class: "reaper"
+build: "thirst"
+actions:
+  - skill: "디스토션"
+    conditions:
+      - type: resource
+        name: ReaperChaosRemaining
+        operator: "<="
+        value: 3
+  - skill: "페이탈 스텝"
+    conditions:
+      - type: skill_cooldown_ready
+        skill: "쉐도우 나이프"
+  - skill: "쉐도우 나이프"
+    conditions:
+      - type: skill_cooldown_remaining
+        skill: "페이탈 스텝"
+        operator: ">"
+        value: 0
+  - skill: "쉐도우 닷"
+  - skill: "레이지 스피어"
+  - skill: "라스트 그래피티"
+  - skill: "댄싱 오브 퓨리"
+  - skill: "사일런트 스매셔"
+  - skill: "쉐도우 스톰"
+  - skill: "쉐도우 트랩"

@@ -1,0 +1,13 @@
+{
+  "sourceArtifact": "research/destruction-source-audit.json",
+  "scope": "silent_fury_landed_level_histogram",
+  "baseLevels": {
+    "268200": 0,
+    "268210": 0,
+    "268220": 0,
+    "268301": 1,
+    "268371": 1,
+    "268381": 1
+  },
+  "policy": "Candidate final levels on exact Silent/Fury direct effect IDs only. Count landed hits by level; exclude misses, clones, preceding hits and poison. No points conversion, target part/window/threshold/eligibility/completion, cancellation or game calibration. Call extra30 args remain unsupported."
+}

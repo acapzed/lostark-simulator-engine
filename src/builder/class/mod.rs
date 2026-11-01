@@ -19,6 +19,7 @@ pub fn register_ark_passive(
 ) {
     match req.character.class_name.as_str() {
         "아르카나" => arcana::apply_ark_passive(stat, modifier, global_triggers, skill_pipelines, class_nodes, req),
+        "발키리" => super::valkyrie_build::register_leap(stat, modifier, global_triggers, skill_pipelines, class_nodes, req),
         _ => {}
     }
 }

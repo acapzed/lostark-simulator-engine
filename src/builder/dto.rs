@@ -8,7 +8,17 @@ use std::collections::HashMap;
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BuildRequest {
+    #[serde(default)]
+    pub reaper_hp_baseline: Option<f64>,
+    #[serde(default)]
+    pub reaper_incoming_damage: Vec<crate::profile::reaper::ReaperIncomingDamage>,
     pub character: CharacterInput,
+    #[serde(default)]
+    pub reaper_reference: Option<crate::profile::reaper::ReaperReference>,
+    #[serde(default)]
+    pub reaper_build: Option<crate::profile::reaper::ReaperScenario>,
+    #[serde(default)]
+    pub reaper_identity_model: Option<crate::profile::reaper::ReaperIdentityModel>,
     #[serde(default)]
     pub apl_config: String,
     // HP 상태 가정 플래그 (달인의 저력 / 안정된 상태 등 조건부 각인 활성화 여부)
@@ -21,6 +31,16 @@ pub struct BuildRequest {
     pub target_hp_percent: f64,
     #[serde(default)]
     pub assumed_target_staggered: bool,
+    #[serde(default)]
+    pub assumed_target_seed_or_lower: bool,
+    #[serde(default)]
+    pub assumed_target_abnormal_move_immune: bool,
+    #[serde(default)]
+    pub assumed_target_nerve_vulnerable: bool,
+    #[serde(default)]
+    pub assumed_target_slow_vulnerable: bool,
+    #[serde(default)]
+    pub assumed_target_mist_centre: bool,
     #[serde(default)]
     pub assumed_shield_active: bool,
     #[serde(default)]
@@ -41,9 +61,14 @@ pub struct BuildRequest {
     #[serde(default, rename = "CollectionStats")]
     pub collection_stats: f64,
     #[serde(default)]
+    pub collection_combat_stats: CollectionCombatStats,
+    #[serde(default)]
     pub avatar_main_stat_percent: f64,
     #[serde(default)]
     pub card_damage_bonus: f64,
+    /// 현재 대상에 해당하는 카드 도감 계열 피해 합계 (%).
+    #[serde(default)]
+    pub collection_type_damage: f64,
     #[serde(default)]
     pub pet_buff_type: String,
     #[serde(default)]
@@ -83,6 +108,17 @@ pub struct BuffMetadataInput {
     pub icon: String,
     #[serde(default)]
     pub source: String,
+}
+
+#[derive(Debug, Deserialize, Default, Clone, Copy)]
+#[serde(default)]
+pub struct CollectionCombatStats {
+    pub crit: u32,
+    pub specialization: u32,
+    pub swiftness: u32,
+    pub domination: u32,
+    pub endurance: u32,
+    pub expertise: u32,
 }
 
 fn default_target_hp_percent() -> f64 {
@@ -294,6 +330,8 @@ pub struct CharacterSkillInput {
 #[serde(rename_all = "camelCase")]
 pub struct TripodChoiceInput {
     pub name: String,
+    #[serde(default)]
+    pub level: Option<u32>,
     /// Backend 게임 DB에서 조회한 트라이포드 수치값 배열.
     /// Frontend가 캐릭터 데이터와 게임 DB를 합쳐서 전달한다.
     #[serde(default)]
@@ -360,6 +398,10 @@ pub struct SimEffect {
     pub tick_interval_ms: u32,
     #[serde(default)]
     pub tick_count: u32,
+    #[serde(default)]
+    pub independent: bool,
+    #[serde(default)]
+    pub destruction: u32,
     // "stack_trigger" 전용
     #[serde(default)]
     pub trigger_event: Option<String>,
@@ -547,7 +589,9 @@ pub struct EngravingPassiveOptionInput {
 #[derive(Debug, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct EngravingGradeInput {
+    /// Legacy wire name: raw Ability block = ability stone level + 1 (1..5).
     pub grade: u32,
+    /// Raw book progress 1..9: legendary 0..4, then relic 1..4.
     #[serde(default)]
     pub stages: Vec<EngravingFeatureRowInput>,
 }
@@ -598,6 +642,9 @@ pub struct ArkPassiveClassNodeInput {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArkGridInput {
+    /// Reaper uses equipped selections and resolves effects from the checked-in source catalog.
+    #[serde(default)]
+    pub reaper_slots: Vec<ReaperGridSlotInput>,
     #[serde(default)]
     pub gems: Vec<ArkGridGemInput>,
     #[serde(default)]
@@ -605,6 +652,30 @@ pub struct ArkGridInput {
     #[serde(default)]
     pub class_cores: Vec<ArkGridClassCoreInput>,
 }
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ReaperGridSlotInput {
+    pub name: String,
+    pub grade: String,
+    pub core_alignment: String,
+    pub core_symbol: String,
+    #[serde(default)]
+    pub gems: Vec<ReaperGridGemInput>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ReaperGridGemInput {
+    pub name: String,
+    pub gem_point: u32,
+    pub willpower_efficiency: u32,
+    #[serde(default)]
+    pub effects: Vec<ReaperGridGemEffectInput>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct ReaperGridGemEffectInput { pub name: String, pub level: u32 }
 
 /// 혼돈 코어 — 데이터 드리븐 (simEffects)
 #[derive(Debug, Deserialize)]
@@ -737,6 +808,8 @@ pub struct ArcanaCardRuntimeEffect {
 pub struct ArkGridClassCoreRuntimeEffect {
     pub kind: String,
     #[serde(default)]
+    pub skill_ids: Vec<u32>,
+    #[serde(default)]
     pub card_id: u32,
     #[serde(default)]
     pub skill_group_id: u32,
@@ -769,6 +842,8 @@ pub struct ArkGridClassCoreRuntimeEffect {
     #[serde(default)]
     pub cooldown_reduction_percent: f64,
     #[serde(default)]
+    pub cooldown_reduction_ms: u32,
+    #[serde(default)]
     pub max_charges: u32,
     #[serde(default)]
     pub recharge_ms: u32,
@@ -780,6 +855,10 @@ pub struct ArkGridClassCoreRuntimeEffect {
     pub value_ms: i32,
     #[serde(default)]
     pub value_percent: f64,
+    #[serde(default)]
+    pub fixed_damage: f64,
+    #[serde(default)]
+    pub damage_ratio: f64,
 }
 
 #[derive(Debug, Deserialize)]
@@ -844,6 +923,8 @@ pub struct PetTalents {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SkillDataInput {
+    #[serde(default = "source_damage_default")]
+    pub source_damage_multiplier: f64,
     pub name: String,
     #[serde(default)]
     pub game_skill_id: u32,
@@ -860,6 +941,9 @@ pub struct SkillDataInput {
     pub max_stacks: u32,
     #[serde(default)]
     pub max_phase: u32,
+    /// 충전형 스킬의 1회 회복 시간. 사용 간격(cooldown)과 별개다.
+    #[serde(default)]
+    pub charge_recovery_ms: u32,
     #[serde(default)]
     pub phase_timeout_ms: u32,
     /// 쿨타임 (초 단위)
@@ -878,8 +962,14 @@ pub struct SkillDataInput {
     pub runtime_skill_damage_stacks: Vec<RuntimeSkillDamageStackInput>,
     #[serde(default)]
     pub runtime_target_damage_bonuses: Vec<RuntimeTargetDamageBonusInput>,
-    pub self_speed_buff_on_cast: Option<SelfSpeedBuffOnCastInput>,
+    pub self_speed_buff_on_cast: Option<SelfSpeedBuffInput>,
+    #[serde(default)]
+    pub timed_dots: Vec<TimedDotInput>,
+    #[serde(default)]
+    pub timed_buffs: Vec<TimedBuffInput>,
     pub resource_cost: Option<ResourceCostInput>,
+    #[serde(default)]
+    pub free_mana_phases: Vec<u32>,
     /// 증감 전 기본 마나 소모량. 마나 무시 모드에서도 피해식에 사용한다.
     #[serde(default)]
     pub base_mana_cost: f64,
@@ -889,6 +979,8 @@ pub struct SkillDataInput {
     #[serde(default)]
     pub properties: SkillPropertiesInput,
 }
+
+fn source_damage_default() -> f64 { 1.0 }
 
 #[derive(Debug, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
@@ -921,7 +1013,7 @@ pub struct RuntimeDamageByTargetBuffStackInput {
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SelfSpeedBuffOnCastInput {
+pub struct SelfSpeedBuffInput {
     pub buff_id: String,
     pub duration_ms: u32,
     pub attack_speed_percent: f64,
@@ -972,9 +1064,12 @@ pub struct HitDataInput {
     pub draw_card_chance: f64,
     pub target_buff_stack_gain: Option<TargetBuffStackInput>,
     pub target_buff_stack_set: Option<TargetBuffStackInput>,
-    pub target_crit_rate_debuff: Option<TargetCritRateDebuffInput>,
+    pub target_crit_rate_debuff: Option<TargetDebuffInput>,
+    pub target_damage_taken_debuff: Option<TargetDebuffInput>,
     pub self_crit_rate_stack: Option<SelfCritRateStackInput>,
     pub self_crit_damage_buff: Option<SelfCritDamageBuffInput>,
+    pub self_speed_buff: Option<SelfSpeedBuffInput>,
+    pub cooldown_reduction_on_hit: Option<CooldownReductionOnHitInput>,
     #[serde(default)]
     pub reset_cooldown_chance: f64,
     pub additional_damage: Option<AdditionalDamageInput>,
@@ -1027,8 +1122,40 @@ pub struct AdditionalDamageInput {
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
+pub struct CooldownReductionOnHitInput {
+    pub amount_ms: u32,
+    pub max_per_cast_ms: u32,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TimedBuffInput {
+    #[serde(default)]
+    pub phase: u32,
+    pub action_delay_ms: u32,
+    pub buff_id: String,
+    pub duration_ms: u32,
+    pub effects: hashbrown::HashMap<crate::profile::stat::StatField, f64>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TimedDotInput {
+    #[serde(default)]
+    pub phase: u32,
+    pub action_delay_ms: u32,
+    #[serde(default)]
+    pub refresh: bool,
+    pub dot: DotInput,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DotInput {
     pub dot_id: String,
+    /// Whole-skill source modifiers; raw Buff coefficients remain independent.
+    #[serde(default)]
+    pub damage_increase: f64,
     #[serde(default)]
     pub hit_id: String,
     #[serde(default)]
@@ -1041,11 +1168,14 @@ pub struct DotInput {
     pub first_tick_ms: u32,
     pub tick_interval_ms: u32,
     pub tick_count: u32,
+    /// Opt-in replacement of the same active DOT; legacy input keeps stacking.
+    #[serde(default)]
+    pub refresh: bool,
 }
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct TargetCritRateDebuffInput {
+pub struct TargetDebuffInput {
     pub buff_id: String,
     pub percent: f64,
     pub duration_ms: u32,
@@ -1089,6 +1219,11 @@ pub struct RuntimeTargetDamageBonusInput {
     pub buff_id: String,
     pub duration_ms: u32,
     pub damage_increase: f64,
+    #[serde(default)]
+    pub max_stacks: u32,
+    /// Target-wide defense reduction applied after the triggering hit.
+    #[serde(default)]
+    pub defense_reduction: f64,
 }
 
 #[derive(Debug, Deserialize)]
@@ -1105,6 +1240,9 @@ pub struct ResourceCostInput {
 pub struct IdentityGainInput {
     pub name: String,
     pub value: f64,
+    /// Explicit base gauge amount, independent of the provisional Arcana totals.
+    #[serde(default)]
+    pub is_absolute: bool,
 }
 
 #[derive(Debug, Deserialize, Default)]

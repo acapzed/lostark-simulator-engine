@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Preserve the canonical APL input's existing final blank line byte-for-byte.
+skill-data/arcana/backend/apl/BluntThornStream.yaml whitespace=-blank-at-eof

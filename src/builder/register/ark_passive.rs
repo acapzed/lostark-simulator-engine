@@ -54,6 +54,13 @@ pub fn register(
                         }
                     })
                 }
+                "non_awakening_skill_cooldown_reduction" => {
+                    for_each_skill(skill_pipelines, req, move |skill| {
+                        if matches!(skill.slot, SkillSlot::Normal | SkillSlot::HyperAwakeningTechniques) {
+                            reduce_cooldown(skill, value);
+                        }
+                    })
+                }
                 "mana_skill_evolution_damage" => {
                     let source = source.clone();
                     for_each_skill(skill_pipelines, req, move |skill| {
